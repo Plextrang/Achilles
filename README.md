@@ -1,1 +1,1 @@
-# COSC-3380-Point-of-Sale-
+# COSC 3380: Point of Sale 
