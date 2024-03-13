@@ -1,0 +1,12 @@
+.nav-container {
+    background-color: white;
+    height: 50px;
+    margin: 0;
+    width: 100%;
+}
+
+.left-side {
+    margin: 0;
+    margin-left: 10px;
+    display: flex;
+}
