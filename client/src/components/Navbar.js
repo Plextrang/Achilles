@@ -8,7 +8,9 @@ export default function Navbar() {
         <div className="nav-container">
             <div className="left-side">
                 <div id="logo-space">
-                    <img src={achillesLogo}></img>    
+                    <Link to="/Home">
+                        <button id="logo-button"><img src={achillesLogo} alt="Achilles Logo" /></button>  
+                    </Link>
                 </div>        
             </div>
             <div className='right-side'>
