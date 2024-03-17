@@ -1,4 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Gothic&family=Noto+Sans+Lao+Looped&display=swap');
+
 body {
+    font-family: "Noto Sans Gothic", sans-serif;
     height: 100%;
     background: linear-gradient(#FF575D, #FFAEB9); 
     background-repeat: no-repeat;

@@ -1,12 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Gothic&family=Noto+Sans+Lao+Looped&display=swap');
+
 .nav-container {
     background-color: white;
     height: 50px;
     margin: 0;
     width: 100%;
+    border-bottom: 2px solid rgb(64, 64, 64);
+    display: flex; 
+    justify-content: space-between;
+    align-items: center;
 }
 
 .left-side {
-    margin: 0;
-    margin-left: 10px;
-    display: flex;
+    margin-left: 3px;
+    margin-bottom: 2px;
+}
+
+#logo-space {
+    width: 180px;
+    height: 40px;
+}
+
+.right-side {
+    margin-right: 10px;
+}
+
+.nav-button {
+    font-family: "Noto Sans Gothic", sans-serif;
+    font-size: larger;
+    font-weight: lighter;
+    color: white;
+    width: 90px;
+    height: 35px;
+    margin: 0px 5px;
+    border: 0px solid;
+    border-radius: 6px;
+}
+
+#login-button {
+    background-color: #494949;
+}
+
+#login-button:hover {
+    background-color: #656565;
+}
+
+#register-button {
+    background-color: #FFAEB9;
+}
+
+#register-button:hover {
+    background-color: #ffc0c8;
 }
