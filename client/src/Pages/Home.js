@@ -8,7 +8,8 @@ export default function Home() {
     <div className="home-container">
       <img src ={walking} alt="Background with Shoes on Display" />
         <h1>Achilles</h1>
-        <p>Step with Style</p>
+        <button class = "shop"> Shop Now</button>
+        <h2>Step with Style</h2>
     </div> 
   )
 }
