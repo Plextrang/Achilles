@@ -6,7 +6,7 @@ import "./Home.css"
 export default function Home() {
   return (
     <div className="home-container">
-      <img src ={walking}/>
+      <img src ={walking} alt="Background with Shoes on Display" />
         <h1>Achilles</h1>
         <p>Step with Style</p>
     </div> 
