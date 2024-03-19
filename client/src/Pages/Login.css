@@ -22,7 +22,7 @@
     margin-bottom: 30px;
 }
 
-#username::placeholder {
+#email::placeholder, #password::placeholder {
   opacity: .6;
 }
 

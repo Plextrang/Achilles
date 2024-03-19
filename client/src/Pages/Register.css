@@ -1,0 +1,57 @@
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: #f0f0f0;
+}
+  
+.register-form {
+    margin: 50px 0px;
+    background-color: white;
+    padding: 40px;
+    border: none;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2), 0 0 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 16px;
+}
+
+#register-header {
+  margin-bottom: 40px;
+}
+
+.input-group {
+    margin-bottom: 30px;
+}
+
+#fname::placeholder, #lname::placeholder, #email::placeholder, #password::placeholder {
+  opacity: .6;
+}
+
+input[type='text'],
+input[type='password'] {
+    width: 92%;
+    padding: 10px 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.register-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #FFAEB9;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.register-container button:hover {
+    background-color: #ffc0c8;
+}
+
+#account-exist {
+  display: flex;
+  justify-content: right;
+  margin: 5px 0px;
+  font-size: small;
+}
