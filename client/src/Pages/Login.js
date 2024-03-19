@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {Link} from 'react-router-dom'
 import './Login.css';
 
 export default function Login() {
@@ -14,29 +15,29 @@ export default function Login() {
 
 	return (
 		<div className="login-container">
-		<form onSubmit={handleLogin} className="login-form">
-			<h2>Login</h2>
-			<div className="input-group">
-			<label htmlFor="username">Username:</label>
-			<input type="text"
-				id="username"
-				value={username}
-				onChange={(e) => setUsername(e.target.value)}
-				required
-			/>
-			</div>
-			<div className="input-group">
-			<label htmlFor="password">Password:</label>
-			<input
-				type="password"
-				id="password"
-				value={password}
-				onChange={(e) => setPassword(e.target.value)}
-				required
-			/>
-			</div>
-			<button type="submit">Login</button>
-		</form>
+			<form onSubmit={handleLogin} className="login-form">
+				<center><h2 id="login-header">ACHILLES | Sign In</h2></center>
+				<div className="input-group">
+					<label htmlFor="username">Username:</label>
+					<input type="text" id="username"
+						value={username}
+						onChange={(e) => setUsername(e.target.value)}
+						required
+					/>
+				</div>
+				<div className="input-group">
+					<label htmlFor="password">Password:</label>
+					<input
+						type="password"
+						id="password"
+						value={password}
+						onChange={(e) => setPassword(e.target.value)}
+						required
+					/>
+				</div>
+				<button type="submit">Login</button>
+				<Link id="no-account" to="/Register">Don't have an account?</Link>
+			</form>
 		</div>
 	);
 }
