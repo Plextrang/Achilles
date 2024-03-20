@@ -6,8 +6,8 @@ import white_converse from "../images/white_converse.jpg"
 export default function Products(){
     return(
         <div className = 'product-container'>
-            <header>
-                <h1>shop now.</h1>
+            <header className = "title">
+                <h1 className = "shop-now-container">shop now.</h1>
                 <nav className='filters'>
                 <a href='#' className = "active">All</a>
                 <a href = '#'>Womens</a>
