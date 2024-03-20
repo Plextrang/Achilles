@@ -11,6 +11,7 @@
 
 
 #title {
+    color: black;
     font-weight: 500;
     font-size: xx-large;
     text-align: left;
@@ -48,6 +49,7 @@
     border: 2px solid rgb(150, 150, 150);
     height: 35px;
     font-size: 15px;
+    width: 100%;
 }
 
 .text::placeholder {
@@ -57,13 +59,6 @@
 .input {
     display: flex;
     flex-direction: column;
-    margin: 1%;
-}
-
-.input-city {
-    display: flex;
-    flex-direction: column;
-    width: 45%;
     margin: 1%;
 }
 
@@ -88,5 +83,5 @@
 }
 
 .submit-button:hover {
-    background-color: #1f70b3;
+    background-color: #ffc0c8;
 }

@@ -39,6 +39,9 @@ export default function DataEntry() {
                     <label className="text-label">Product Description <span className="required">&#42;</span></label>
                     <input className="text" type="text" name="Product Description" placeholder="Describe the Product Here" maxlength="255" required/>
                 </div>
+                <div className='button-wrapper'>
+                    <button className="submit-button" type="submit" >List Item</button>
+                </div>
             </div>
         </form>
         </div>
