@@ -71,26 +71,37 @@ const server = http.createServer((req, res) => {
   }
 
   // Handle POST /addUser endpoint
-  else if (req.url === '/addUser' && req.method === 'POST') {
-      let body = '';
-      req.on('data', chunk => {
-          body += chunk.toString(); // convert Buffer to string
-      });
+  else if (req.url === '/newUser' && req.method === 'POST') {
+    let body = '';
+    req.on('data', chunk => {
+        body += chunk.toString(); // convert Buffer to string
+    });
 
-      req.on('end', () => {
-          const user = querystring.parse(body);
-          const { email, password } = user;
+    req.on('end', () => {
+        const userData = querystring.parse(body);
+        const { email, password, firstName, lastName, phoneNumber, dateOfBirth, address } = userData;
 
-          // Example: Insert new user into the database
-          const insertSql = `INSERT INTO USER (email, password) VALUES ('${email}', '${password}')`;
-          db.query(insertSql, (err, result) => {
-              if (err) {
-                  res.end(JSON.stringify({ error: 'Internal Server Error' }));
-                  return;
-              }
-              res.end(JSON.stringify({ message: 'User added successfully' }));
-          });
-      });
+        // Insert email and password into the 'credentials' table
+        const insertCredentialsSql = `INSERT INTO credentials (email, password) VALUES ('${email}', '${password}')`;
+        db.query(insertCredentialsSql, (err, credentialsResult) => {
+            if (err) {
+                res.end(JSON.stringify({ error: 'Internal Server Error' }));
+                return;
+            }
+
+            // Extract the inserted credentials ID
+
+            // Insert the rest of the user details into the 'users' table
+            const insertUserSql = `INSERT INTO users (email, first_name, last_name, phone_number, date_of_birth, address) VALUES (${email}, '${firstName}', '${lastName}', '${phoneNumber}', '${dateOfBirth}', '${address}')`;
+            db.query(insertUserSql, (err, userResult) => {
+                if (err) {
+                    res.end(JSON.stringify({ error: 'Internal Server Error' }));
+                    return;
+                }
+                res.end(JSON.stringify({ message: 'User added successfully' }));
+            });
+        });
+    });
   }
 
   // Handle other endpoints
