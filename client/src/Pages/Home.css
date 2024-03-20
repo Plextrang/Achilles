@@ -1,4 +1,6 @@
-img {
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Madimi+One&display=swap');
+
+.home-container img {
     object-fit: fill;
     width: 100%;
     position: absolute;
@@ -14,6 +16,9 @@ img {
     align-items: center;
     box-shadow: inset 0 0 0 1000px rgba(0,0,0, 0.2);
     object-fit: contain;
+    font-family: "Bangers", systems-ui;
+    font-weight: 400;
+    font-style: normal;
 }
 .home-container > h1 {
     color: #630707;
@@ -21,10 +26,35 @@ img {
     /* font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; */
 
 }
-.home-container > p{
+.home-container > h2{
     color: #4f0a0a;
     font-size: 32px;
 
+}
+.button{
+    border: 4f0a0a;
+    color: transparent;
+    padding: 15px 32 px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+.shop{
+    background-color: transparent;
+    color: #4f0a0a;
+    border: 4px solid #4f0a0a;
+    width: 200px;
+    height: 300;
+    font-size: 30px;
+    font-family: "Bangers", system-ui;
+}
+.shop:hover{
+    background-color: #4f0a0a;
+    color: white;
 }
 @media screen and (max-width: 960px){
     .home-container > h1{
