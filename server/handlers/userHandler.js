@@ -13,7 +13,7 @@ function newUser(req, db, res){
         console.log('Received data:', body);
         const userData = JSON.parse(body);
         console.log('Parsed user data:', userData);
-        const { email, password, firstName, lastName, phoneNumber, dateOfBirth } = userData;
+        const { email, password, first_name, middle_initial, last_name, phone_number, date_of_birth, address, apt_num, city, state, zip_code } = userData;
 
         const insertCredentialsSql = `INSERT INTO LOGIN (email, password) VALUES (?, ?)`;
         db.query(insertCredentialsSql, [email, password], (err, credentialsResult) => {
@@ -24,8 +24,8 @@ function newUser(req, db, res){
             }
 
             // Ensure phoneNumber is treated as a string
-            const insertUserSql = `INSERT INTO USER (email, first_name, last_name, phone_number, date_of_birth) VALUES (?, ?, ?, ?, ?)`;
-            db.query(insertUserSql, [email, firstName, lastName, phoneNumber.toString(), dateOfBirth], (err, userResult) => {
+            const insertUserSql = `INSERT INTO USER (email, first_name, middle_initial, last_name, phone_number, date_of_birth, address, apt_num, city, state, zip_code) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+            db.query(insertUserSql, [email, first_name, middle_initial, last_name, phone_number, date_of_birth, address, apt_num, city, state, zip_code], (err, userResult) => {
                 if (err) {
                     console.error(err);
                     res.end(JSON.stringify({ error: 'Internal Server Error' }));
