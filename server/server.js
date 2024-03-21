@@ -71,10 +71,10 @@ const server = http.createServer((req, res) => {
     });
   }
 
-  // Handle POST /addUser endpoint
+  // Handle POST /newUser endpoint
   else if (req.url === '/newUser' && req.method === 'POST') {
     
-    userHandlers.newUser(req);
+    userHandlers.newUser(req, db, res);
     
 
     // req.on('end', () => {
