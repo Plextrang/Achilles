@@ -14,10 +14,13 @@ export default function Home() {
         <button class = "shop"> Shop Now</button>
         </Link>
         <Link to="/EntryForm">
-          <button class = "shop"> Temporary Data Entry Button</button>
+          <button class = "shop"> Temp Data Entry Button</button>
         </Link>
         <Link to="/ProfileForm">
-          <button class = "shop"> Temporary Profile Button</button>
+          <button class = "shop"> Temp Profile Button</button>
+        </Link>
+        <Link to="/Cart">
+          <button class = "shop"> Temp Shopping Cart</button>
         </Link>
     </div> 
   )
