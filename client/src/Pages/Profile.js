@@ -42,34 +42,33 @@ export default function Profile() {
             <h1 id="title">Profile Customization</h1>
             <div className="location-container">
                 <div className="input-name">
-                    <label className="text-label">First Name <span className="required">&#42;</span></label>
-                    <input className="text" type="text" name="Fname" placeholder="John" maxlength="20" required/>
+                    <label className="text-label">First Name</label>
+                    <input className="text" type="text" name="Fname" placeholder="John" maxlength="20" />
                 </div>
             
                 <div className="input-mname">
-                    <label className="text-label">Middle Initial <span className="required">&#42;</span></label>
-                    <input className="text" id="stateInput" type="text" name="Middle Initial" placeholder="P" maxlength="1" required/>
+                    <label className="text-label">Middle Initial</label>
+                    <input className="text" id="stateInput" type="text" name="Middle Initial" placeholder="P" maxlength="1"/>
                 </div>
                 <div className="input-name">
-                    <label className="text-label">Last Name <span className="required">&#42;</span></label>
-                    <input className="text" type="text" name="Last Name" placeholder="Doe" maxlength="20" required/>
+                    <label className="text-label">Last Name</label>
+                    <input className="text" type="text" name="Last Name" placeholder="Doe" maxlength="20" />
                 </div>
             </div>
             <div className="details-container">
                 <div className="input">
-                    <label className="text-label">Phone Number <span className="required">&#42;</span></label>
-                    <input className="text" type="text" name="Pnum" placeholder="000-000-0000" maxlength="20" required/>
+                    <label className="text-label">Phone Number</label>
+                    <input className="text" type="text" name="Pnum" placeholder="000-000-0000" maxlength="20" />
                 </div>
                 <div className="input-dob">
-                    <label className="text-label">Date of Birth <span className="required">&#42;</span></label>
+                    <label className="text-label">Date of Birth </label>
                     <input className="text" type="date" name="Date of Birth" min="1950-01-01" max="2024-3-17"
-                        pattern="\d{4}-\d{2}-\d{2}" title="Format is Year-Month-Day" 
-                        required />
+                        pattern="\d{4}-\d{2}-\d{2}" title="Format is Year-Month-Day" />
                 </div>
             </div>
             <div className="input">
-                <label className="text-label">Address 1 <span className="required">&#42;</span></label>
-                <input className="text" type="text" name="Address 1" placeholder="Street Name/Address" maxlength="50" required/>
+                <label className="text-label">Address 1 </label>
+                <input className="text" type="text" name="Address 1" placeholder="Street Name/Address" maxlength="50"/>
             </div>
             <div className="input">
                 <label className="text-label">Address 2</label>
@@ -77,17 +76,17 @@ export default function Profile() {
             </div>
             <div className="location-container">
                 <div className="input-city">
-                    <label className="text-label">City <span className="required">&#42;</span></label>
-                    <input className="text" type="text" name="City" placeholder="City" maxlength="20" required/>
+                    <label className="text-label">City </label>
+                    <input className="text" type="text" name="City" placeholder="City" maxlength="20" />
                 </div>
                 <div className="input">
-                    <label className="text-label">State <span className="required">&#42;</span></label>
-                    <input className="text" id="stateInput" type="text" name="State" placeholder="State" maxlength="15" required/>
+                    <label className="text-label">State </label>
+                    <input className="text" id="stateInput" type="text" name="State" placeholder="State" maxlength="15" />
                     <span id="stateValidationMessage" style={{ color: 'red' }}></span>
                 </div>
                 <div className="input">
-                    <label className="text-label">Zip Code <span className="required">&#42;</span></label>
-                    <input className="text" type="text" name="Zip Code" placeholder="Zip Code (5 digits)" pattern="[0-9]{5}" maxlength="7" required/>
+                    <label className="text-label">Zip Code</label>
+                    <input className="text" type="text" name="Zip Code" placeholder="Zip Code (5 digits)" pattern="[0-9]{5}" maxlength="7" />
                 </div>
             </div>
             <div className="button-wrapper">
