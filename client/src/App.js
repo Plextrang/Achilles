@@ -5,6 +5,8 @@ import Login from "./Pages/Login"
 import Register from "./Pages/Register"
 import DataEntry from "./Pages/DataEntry";
 import Products from "./Pages/Products"
+import Profile from "./Pages/Profile"
+import Cart from "./Pages/Cart"
 import './App.css';
 
 function App() {
@@ -18,6 +20,8 @@ function App() {
 				<Route path="/Register" element={<Register />}></Route>
 				<Route path="/EntryForm" element={<DataEntry />}></Route>
 				<Route path="/Products" element={<Products/>}></Route>
+				<Route path="/ProfileForm" element={<Profile/>}></Route>
+				<Route path="/Cart" element={<Cart/>}></Route>
 			</Routes>
     	</div>
   	);
