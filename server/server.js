@@ -29,79 +29,53 @@ const server = http.createServer((req, res) => {
   // Write the response content
   res.write('<h1>Hello, Node.js HTTP Server!</h1>');
   
-  // Handle /users endpoint
-  if (req.url === '/users' && req.method === 'GET') {
-    const sql = "SELECT * FROM USER";
-    db.query(sql, (err, data) => {
-      if (err) {
-        res.end(JSON.stringify({ error: 'Internal Server Error' }));
-        return;
-      }
-      res.end(JSON.stringify(data));
-    });
-  }
+  // // Handle /users endpoint
+  // if (req.url === '/users' && req.method === 'GET') {
+  //   const sql = "SELECT * FROM USER";
+  //   db.query(sql, (err, data) => {
+  //     if (err) {
+  //       res.end(JSON.stringify({ error: 'Internal Server Error' }));
+  //       return;
+  //     }
+  //     res.end(JSON.stringify(data));
+  //   });
+  // }
 
-  // Handle /inventory endpoint
-  else if (req.url === '/inventory' && req.method === 'GET') {
-      // Example: Fetch products from the database
-      const sql = "SELECT * FROM INVENTORY";
-      db.query(sql, (err, data) => {
-          if (err) {
-              res.end(JSON.stringify({ error: 'Internal Server Error' }));
-              return;
-          }
-          res.end(JSON.stringify(data));
-      });
-  }
+  // // Handle /inventory endpoint
+  // else if (req.url === '/inventory' && req.method === 'GET') {
+  //     // Example: Fetch products from the database
+  //     const sql = "SELECT * FROM INVENTORY";
+  //     db.query(sql, (err, data) => {
+  //         if (err) {
+  //             res.end(JSON.stringify({ error: 'Internal Server Error' }));
+  //             return;
+  //         }
+  //         res.end(JSON.stringify(data));
+  //     });
+  // }
 
-  // Handle PUT /updateUser endpoint
-  else if (req.url.startsWith('/updateUser') && req.method === 'PUT') {
-    // Extract user ID from URL query parameters
-    const parsedUrl = url.parse(req.url, true);
-    const userId = parsedUrl.query.id;
+  // // Handle PUT /updateUser endpoint
+  // else if (req.url.startsWith('/updateUser') && req.method === 'PUT') {
+  //   // Extract user ID from URL query parameters
+  //   const parsedUrl = url.parse(req.url, true);
+  //   const userId = parsedUrl.query.id;
 
-    // Example: Update user in the database
-    const updateSql = `UPDATE USER SET name = 'Updated Name' WHERE id = ${userId}`;
-    db.query(updateSql, (err, result) => {
-        if (err) {
-            res.end(JSON.stringify({ error: 'Internal Server Error' }));
-            return;
-        }
-        res.end(JSON.stringify({ message: 'User updated successfully' }));
-    });
-  }
+  //   // Example: Update user in the database
+  //   const updateSql = `UPDATE USER SET name = 'Updated Name' WHERE id = ${userId}`;
+  //   db.query(updateSql, (err, result) => {
+  //       if (err) {
+  //           res.end(JSON.stringify({ error: 'Internal Server Error' }));
+  //           return;
+  //       }
+  //       res.end(JSON.stringify({ message: 'User updated successfully' }));
+  //   });
+  // }
 
   // Handle POST /newUser endpoint
-  else if (req.url === '/newUser' && req.method === 'POST') {
+  if (req.url === '/newUser' && req.method === 'POST') {
     
     userHandlers.newUser(req, db, res);
     
-
-    // req.on('end', () => {
-    //     const userData = querystring.parse(body);
-    //     const { email, password, firstName, lastName, phoneNumber, dateOfBirth, address } = userData;
-
-    //     // Insert email and password into the 'credentials' table
-    //     const insertCredentialsSql = `INSERT INTO credentials (email, password) VALUES ('${email}', '${password}')`;
-    //     db.query(insertCredentialsSql, (err, credentialsResult) => {
-    //         if (err) {
-    //             res.end(JSON.stringify({ error: 'Internal Server Error' }));
-    //             return;
-    //         }
-
-    //         // Extract the inserted credentials ID
-
-    //         // Insert the rest of the user details into the 'users' table
-    //         const insertUserSql = `INSERT INTO users (email, first_name, last_name, phone_number, date_of_birth, address) VALUES (${email}, '${firstName}', '${lastName}', '${phoneNumber}', '${dateOfBirth}', '${address}')`;
-    //         db.query(insertUserSql, (err, userResult) => {
-    //             if (err) {
-    //                 res.end(JSON.stringify({ error: 'Internal Server Error' }));
-    //                 return;
-    //             }
-    //             res.end(JSON.stringify({ message: 'User added successfully' }));
-    //         });
-    //     });
-    // });
   }
 
   // Handle other endpoints
