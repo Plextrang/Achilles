@@ -16,14 +16,13 @@ function newUser(req, db, res){
         const { email, password, first_name, middle_initial, last_name, phone_number, date_of_birth, address, apt_num, city, state, zip_code } = userData;
 
         const insertCredentialsSql = `INSERT INTO LOGIN (email, password) VALUES (?, ?)`;
-        db.query(insertCredentialsSql, [email, password], (err, credentialsResult) => {
+        db.query(insertCredentialsSql, [email, password], (err, loginResult) => {
             if (err) {
                 console.error(err);
                 res.end(JSON.stringify({ error: 'Internal Server Error' }));
                 return;
             }
 
-            // Ensure phoneNumber is treated as a string
             const insertUserSql = `INSERT INTO USER (email, first_name, middle_initial, last_name, phone_number, date_of_birth, address, apt_num, city, state, zip_code) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
             db.query(insertUserSql, [email, first_name, middle_initial, last_name, phone_number, date_of_birth, address, apt_num, city, state, zip_code], (err, userResult) => {
                 if (err) {
