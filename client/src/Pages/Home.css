@@ -32,14 +32,13 @@
 
 }
 .button{
-    border: 4f0a0a;
+    border: #4f0a0a;
     color: transparent;
     padding: 15px 32 px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 4px 2px;
     transition-duration: 0.4s;
     cursor: pointer;
 }
@@ -50,6 +49,7 @@
     width: 200px;
     height: 300;
     font-size: 30px;
+    margin: 20px 0px;
     font-family: "Bangers", system-ui;
 }
 .shop:hover{
