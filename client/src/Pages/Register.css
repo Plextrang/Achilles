@@ -2,12 +2,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 100%;
     background-color: #c0c0c0;
 }
   
 .register-form {
-    margin: 50px 0px;
+    width: 40rem;
+    margin: 70px 0px;
     background-color: white;
     padding: 40px;
     border: none;
@@ -19,17 +20,59 @@
   margin-bottom: 40px;
 }
 
-.input-group {
-    margin-bottom: 30px;
+.multi-container {
+    display: flex;
+    justify-content: left;
 }
 
-#fname::placeholder, #lname::placeholder, #email::placeholder, #password::placeholder {
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin: 1%;
+}
+
+.input-name {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-initial {
+    display: flex;
+    flex-direction: column;
+    margin: 1%;
+}
+
+.input-dob {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-city {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+}
+
+.name-box::placeholder, .phone-box::placeholder, #mname::placeholder, .text-box::placeholder {
   opacity: .6;
 }
 
-input[type='text'],
+.name-box {
+    width: 100%;
+    padding: 10px 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.text-box {
+  width: 100%;
+  padding: 10px 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
 input[type='password'] {
-    width: 92%;
+    width: 95%;
     padding: 10px 5px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -37,6 +80,7 @@ input[type='password'] {
 
 .register-container button {
     width: 100%;
+    margin-top: 10px;
     padding: 10px;
     background-color: #FFAEB9;
     color: #fff;
@@ -54,4 +98,8 @@ input[type='password'] {
   justify-content: right;
   margin: 5px 0px;
   font-size: small;
+}
+
+.required {
+  color: red;
 }
