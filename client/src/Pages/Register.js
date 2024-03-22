@@ -44,15 +44,15 @@ export default function Register() {
 			first_name: document.getElementById('fname').value,
 			middle_initial: document.getElementById('mname').value,
 			last_name: document.getElementById('lname').value,
-			phone_number: document.querySelector('.phone-box').value,
-			date_of_birth: document.querySelector('.text-box[type="date"]').value,
-			address: document.getElementsByName('Address 1')[0].value,
-			apt_num: document.getElementsByName('Address 2')[0].value,
-			city: document.getElementsByName('City')[0].value,
-			state: document.getElementsByName('State')[0].value,
-			zip_code: document.getElementsByName('Zip Code')[0].value
+			phone_number: document.getElementById('phone-number').value,
+			date_of_birth: document.getElementById('dob-box').value,
+			address: document.getElementById('add-1').value,
+			apt_num: document.getElementById('add-2').value,
+			city: document.getElementById('city').value,
+			state: document.getElementById('stateInput').value,
+			zip_code: document.getElementById('zip').value
 		};
-	
+		
 		try {
 			const response = await fetch('http://localhost:12358/newUser', {
 				method: 'POST',
@@ -82,7 +82,7 @@ export default function Register() {
 				<div className="multi-container">
 					<div className="input-name">
 						<label htmlFor="fname">First Name: <span className="required">&#42;</span></label>
-						<input type="text" className='name-box' placeholder='John' required />
+						<input type="text" id="fname" className='name-box' placeholder='John' required />
 					</div>
 					<div className="input-initial">
 						<label htmlFor="mname">Middle Inital: <span className="required">&#42;</span></label>
@@ -96,35 +96,35 @@ export default function Register() {
 				<div className='multi-container'>
 					<div className="input-group">
 						<label>Phone Number: <span className="required">&#42;</span></label>
-						<input type="text" className="phone-box" placeholder='000-000-0000' required/>
+						<input type="text" className="phone-box" id="phone-number" placeholder='000-000-0000' required/>
 					</div>
 					<div className='input-group'>
 						<label>Date of Birth: <span className="required">&#42;</span></label>
-						<input className="text-box" type="date" name="Date of Birth" min="1950-01-01" max="2024-3-17"
+						<input className="text-box" id='dob-box' type="date" name="Date of Birth" min="1950-01-01" max="2024-3-17"
 							   pattern="\d{4}-\d{2}-\d{2}" title="Format is Year-Month-Day" />
 					</div>
 				</div>
 				<div className='input-group'>
 					<label>Address 1: <span className="required">&#42;</span></label>
-					<input className="text-box" type="text" name="Address 1" placeholder="Street Name/Address" maxlength="50"/>
+					<input className="text-box" id="add-1" type="text" name="Address 1" placeholder="Street Name/Address" maxLength="50"/>
 				</div>
 				<div className='input-group'>
 					<label>Address 2: </label>
-					<input className="text-box" type="text" name="Address 2" placeholder="Apartment #" maxlength="50"/>
+					<input className="text-box" id="add-2" type="text" name="Address 2" placeholder="Apartment #" maxLength="50"/>
 				</div>
 				<div className='multi-container'>
 					<div className="input-city">
 						<label>City: <span className="required">&#42;</span></label>
-						<input className="text-box" type="text" name="City" placeholder="City" maxlength="20" />
+						<input className="text-box" id="city" type="text" name="City" placeholder="City" maxLength="20" />
 					</div>
 					<div className="input-group">
 						<label>State: <span className="required">&#42;</span></label>
-						<input className="text-box" id="stateInput" type="text" name="State" placeholder="State" maxlength="15" />
+						<input className="text-box" id="stateInput" type="text" name="State" placeholder="State" maxLength="15" />
 						<span id="stateValidationMessage" style={{ color: 'red' }}></span>
 					</div>
 					<div className="input-group">
 						<label>Zip Code: <span className="required">&#42;</span></label>
-						<input className="text-box" type="text" name="Zip Code" placeholder="Zip Code (5 digits)" pattern="[0-9]{5}" maxlength="7" />
+						<input className="text-box" id="zip" type="text" name="Zip Code" placeholder="Zip Code (5 digits)" pattern="[0-9]{5}" maxLength="7" />
 					</div>
 				</div>
 				<div className="input-group">
