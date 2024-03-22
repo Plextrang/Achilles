@@ -22,6 +22,9 @@ export default function Home() {
         <Link to="/Cart">
           <button class = "shop"> Temp Shopping Cart</button>
         </Link>
+        <Link to="/Admin">
+          <button class = "shop"> Temp Admin Portal</button>
+        </Link>
     </div> 
   )
 }

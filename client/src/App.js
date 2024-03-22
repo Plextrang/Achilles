@@ -7,6 +7,7 @@ import DataEntry from "./Pages/DataEntry";
 import Products from "./Pages/Products"
 import Profile from "./Pages/Profile"
 import Cart from "./Pages/Cart"
+import Admin from "./Pages/Admin"
 import './App.css';
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
 				<Route path="/Products" element={<Products/>}></Route>
 				<Route path="/ProfileForm" element={<Profile/>}></Route>
 				<Route path="/Cart" element={<Cart/>}></Route>
+				<Route path = "/Admin" element={<Admin/>}></Route>
 			</Routes>
     	</div>
   	);
