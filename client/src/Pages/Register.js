@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import {Link} from 'react-router-dom'
 import './Register.css';
 
@@ -34,15 +34,45 @@ export default function Register() {
           inputElement.removeEventListener("input", handleInput);
         };
     }, []);
-	
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
 
-	const handleregister = (e) => {
+	const handleregister = async (e) => {
 		e.preventDefault();
-		// TODO: Replace console.log statements with actual logic
-		console.log('email:', email);
-		console.log('Password:', password);
+	
+		const userData = {
+			email: document.getElementById('email').value,
+			password: document.getElementById('password').value,
+			first_name: document.getElementById('fname').value,
+			middle_initial: document.getElementById('mname').value,
+			last_name: document.getElementById('lname').value,
+			phone_number: document.querySelector('.phone-box').value,
+			date_of_birth: document.querySelector('.text-box[type="date"]').value,
+			address: document.getElementsByName('Address 1')[0].value,
+			apt_num: document.getElementsByName('Address 2')[0].value,
+			city: document.getElementsByName('City')[0].value,
+			state: document.getElementsByName('State')[0].value,
+			zip_code: document.getElementsByName('Zip Code')[0].value
+		};
+	
+		try {
+			const response = await fetch('http://localhost:12358/register', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(userData)
+			});
+	
+			if (!response.ok) {
+				throw new Error('Network response was not ok');
+			}
+	
+			const data = await response.json();
+			console.log(data);
+			// Handle success, maybe redirect user to login page or show a success message
+		} catch (error) {
+			console.error('There was a problem with your fetch operation:', error);
+			// Handle error, maybe show an error message to the user
+		}
 	};
 
 	return (
@@ -97,6 +127,18 @@ export default function Register() {
 						<input className="text-box" type="text" name="Zip Code" placeholder="Zip Code (5 digits)" pattern="[0-9]{5}" maxlength="7" />
 					</div>
 				</div>
+				<div className="input-group">
+						<label htmlFor="email">Email:</label>
+						<input type="text" id="email" placeholder='example@domain.com'
+							pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" title="Format is example@domain.com"
+							required
+						/>
+					</div>
+					<div className="input-group">
+						<label htmlFor="password">Password:</label>
+						<input
+							type="password" id="password" placeholder='Required (8 characters minimum)' required/>
+					</div>
 				<button type="submit">Register</button>
 				<Link id="account-exist" to="/Login">Already have an account?</Link>
 			</form>
