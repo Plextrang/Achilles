@@ -33,20 +33,19 @@ export default function Admin() {
               <FaStar />
               <span className="total-reviews">4 Reviews</span>
             </section>
-            <div className="bag">
-              <FaShoppingBag /> 
-              <div className="price">$80</div>
-            </div>
+              <div className="bag">
+                <FaShoppingBag /> 
+                <div className="price">$80</div>
+              </div>
             <div className = "stock">
-            <MdOutlineProductionQuantityLimits />
-            <div className = "quantity"> Stock: 45</div> 
-            {/* put a link to the manage page here 
-                todo: move the manage button up a little more and copy to other cards
-            */}
-            <button className = "edit"> Manage </button>
+              <MdOutlineProductionQuantityLimits />
+              <div className = "quantity"> Stock: 45</div> 
             </div>
-          </div>
+          <div className = "edit-container">
+          <button className = "edit"> Manage </button>
         </div>
+      </div>
+      </div>
 
         <div className="card">
           <img src={white_converse} alt="White Converse" />
@@ -62,9 +61,12 @@ export default function Admin() {
             </div>
             <div className = "stock">
             <MdOutlineProductionQuantityLimits />
-            <div className = "quantity"> Stock: 25</div>
+            <div className = "quantity"> Stock: 25</div>            
             </div>
+            <div className = "edit-container">
+          <button className = "edit"> Manage </button>            
           </div>
+        </div>
         </div>
 
         <div className="card">
@@ -79,12 +81,16 @@ export default function Admin() {
               <FaShoppingBag /> 
               <div className="price">$80</div>
             </div>
-            <div className = "stock">
-            <MdOutlineProductionQuantityLimits />
-            <div className = "quantity"> Stock: 85</div>
+            <div className="stock">
+              <MdOutlineProductionQuantityLimits />
+              <div className="quantity">Stock: 85</div>
             </div>
+            <div className = "edit-container">
+          <button className = "edit"> Manage </button>
+          </div>
           </div>
         </div>
+
 
         <div className="card">
           <img src={white_converse} alt="White Converse" />
@@ -102,6 +108,9 @@ export default function Admin() {
             <MdOutlineProductionQuantityLimits />
             <div className = "quantity"> Stock: 15</div>
             </div>
+            <div className = "edit-container">
+          <button className = "edit"> Manage </button>
+          </div>
           </div>
         </div>
 
@@ -121,6 +130,9 @@ export default function Admin() {
             <MdOutlineProductionQuantityLimits />
             <div className = "quantity"> Stock: 35</div>
             </div>
+            <div className = "edit-container">
+          <button className = "edit"> Manage </button>
+          </div>
           </div>
         </div>
 
@@ -140,6 +152,9 @@ export default function Admin() {
             <MdOutlineProductionQuantityLimits />
             <div className = "quantity"> Stock: 55</div>
             </div>
+            <div className = "edit-container">
+          <button className = "edit"> Manage </button>
+          </div>
           </div>
         </div>
         

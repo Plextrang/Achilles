@@ -70,10 +70,11 @@
     margin-bottom: 25px;
     border: 2px solid #4f0a0a;
     cursor: pointer;
+    position: relative;
   }
   
   .card img {
-    padding: 20px;
+    padding: 10px;
     display: block;
     margin: 0 auto;
     max-width: 100%;
@@ -110,26 +111,40 @@
     align-items: center;
   }
   .quantity{
-    margin-left:5px;
+    margin-right:5px;
   }
   .stock{
+    margin-right: auto;
     margin-top: 5px;
     display: flex;
     align-items: center;
+
   }
-  .edit{
+
+  .edit-container {
+    position: absolute;
+    bottom: -5px;
+    right: 15px;
+    margin-bottom: 10px; 
+    margin-right: 10px; 
+  }
+  .edit {
     font-family: "Noto Sans Gothic", sans-serif;
     font-size: larger;
     color: #4f0a0a;
-    border: #4f0a0a;
+    border: 0; 
     width: 90px;
-    height: 35px;
-    margin: 0px 5px;
-    border: 0px solid;
+    padding: 5px 0;
+    position: relative;
+    top: -10px;
+    border: 2px solid #4f0a0a; 
     border-radius: 6px;
-    margin-left: 350px;
-    margin-bottom: 0px;
-
+    margin-left: 10px;
+    margin-bottom: 0;
+  }
+  .edit:hover{
+    background: #4f0a0a;
+    color: #f9f9f9;
   }
 
      /* border: #4f0a0a;
