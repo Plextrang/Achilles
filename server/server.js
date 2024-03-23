@@ -4,6 +4,7 @@ const cors = require('cors');
 const querystring = require('querystring');
 const userHandlers = require("./handlers/userHandler")
 const productHandlers = require("./handlers/productHandler")
+const historyHandlers = require("./handlers/historyHandler")
 
 const db = mysql.createConnection({
     host: "cosc3380.c5iqeciq8qjg.us-east-2.rds.amazonaws.com",
@@ -87,6 +88,10 @@ const server = http.createServer((req, res) => {
 
   if (req.url == '/getProducts' && req.method === 'GET') {
     productHandlers.getProducts(req, res, db);
+  }
+
+  if (req.url == '/getSales' && req.method === 'GET') {
+    historyHandlers.getSales(req, res, db);
   }
 
   // Handle other endpoints
