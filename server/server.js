@@ -80,6 +80,12 @@ const server = http.createServer((req, res) => {
     
   }
 
+  if (req.url === '/newProduct' && req.method === 'POST') {
+    
+    productHandlers.newProduct(req, db, res);
+    
+  }
+
   if (req.url === '/returningUser' && req.method === 'POST') {
     
     userHandlers.returningUser(req, db, res);
