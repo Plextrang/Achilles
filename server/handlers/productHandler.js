@@ -3,6 +3,60 @@ const mysql = require('mysql');
 const cors = require('cors');
 const querystring = require('querystring');
 
+function newProduct(req, db, res) {
+    let body = "";
+
+    req.on('data', chunk => {
+        body += chunk.toString(); 
+    });
+
+    req.on('end', async () => {
+        console.log('Received product data:', body);
+        const productData = JSON.parse(body);
+        console.log('Parsed product data:', productData);
+        const { item_name, description, price, color_option, size, stock } = productData;
+
+        // Generate a random product ID
+        const generateRandomProductId = () => {
+            return Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000; // four digits for now
+        };
+
+        // check if a product ID already exists 
+        const isProductIdExists = async (db, productId) => {
+            return new Promise((resolve, reject) => {
+                const sql = "SELECT COUNT(*) AS count FROM SHOE_PRODUCT WHERE product_id = ?";
+                db.query(sql, [productId], (err, result) => {
+                    if (err) {
+                        reject(err);
+                        return;
+                    }
+                    resolve(result[0].count > 0);
+                });
+            });
+        };
+
+        // Generate a unique product_id
+        let productId = generateRandomProductId();
+        while (await isProductIdExists(db, productId)) {
+            productId = generateRandomProductId();
+        }
+
+        // Insert the new product with the generated product_id
+        const insertProductSql = `INSERT INTO SHOE_PRODUCT (product_id, item_name, description, price, color_option, size, stock) VALUES (?, ?, ?, ?, ?, ?, ?)`;
+        db.query(insertProductSql, [productId, item_name, description, price, color_option, size, stock], (err, result) => {
+            if (err) {
+                console.error(err);
+                res.statusCode = 500;
+                res.end(JSON.stringify({ error: 'Internal Server Error' }));
+                return;
+            }
+
+            res.statusCode = 200;
+            res.end(JSON.stringify({ message: 'Product added successfully' }));
+        });
+    });
+}
+
 // Function to handle GET request for fetching product data
 // req = request
 // res = response
@@ -28,4 +82,4 @@ function getProducts(req, res, db) {
     });
   }
 
-module.exports = {getProducts}
+module.exports = {getProducts, newProduct,}
