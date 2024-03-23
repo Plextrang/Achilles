@@ -8,6 +8,9 @@ import Products from "./Pages/Products"
 import Profile from "./Pages/Profile"
 import Cart from "./Pages/Cart"
 import Admin from "./Pages/Admin"
+import AddShoe from "./Pages/AddShoe"
+import AddEmployee from "./Pages/AddEmployee";
+import AddSupplier from "./Pages/AddSupplier";
 import './App.css';
 
 function App() {
@@ -24,6 +27,9 @@ function App() {
 				<Route path="/ProfileForm" element={<Profile/>}></Route>
 				<Route path="/Cart" element={<Cart/>}></Route>
 				<Route path = "/Admin" element={<Admin/>}></Route>
+				<Route path = "/AddShoe" element={<AddShoe/>}></Route>
+				<Route path = "/AddEmployee" element={<AddEmployee/>}></Route>
+				<Route path = "/AddSupplier" element={<AddSupplier/>}></Route>
 			</Routes>
     	</div>
   	);

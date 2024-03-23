@@ -12,13 +12,19 @@ export default function Admin() {
       <header className="title">
         <h1 className="shop-now-container">Current Inventory</h1>
         <div className = "add-new">
+          <Link to= "/AddShoe">
           <button>Add Shoe</button>
+          </Link>
         </div>
         <div className = "add-new">
+          <Link to = "/AddEmployee">
           <button>Add Employee </button>
+          </Link>
         </div>
         <div className = "add-new">
+        <Link to = "/AddSupplier">
           <button>Add Supplier </button>
+          </Link>
         </div>
         <div className="search-bar">
           <input type="text" placeholder="Search..." />
