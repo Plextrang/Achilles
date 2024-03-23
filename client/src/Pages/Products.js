@@ -6,7 +6,7 @@ export default function Products() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:30000/Products')
+    fetch('http://localhost:12358/getProducts')
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -38,10 +38,10 @@ export default function Products() {
           <a href="#">Kids</a>
         </nav>
       </header>
-      {products.length === 0 ? (
-        <div className="empty-products-message"> {/* Display a dummy page if products array is empty */}
-          <div className="card-container">
-            {/* Dummy product cards */}
+      <div className="card-container">
+        {/* Map through the fetched products and render each product */}
+        {products.length === 0 ? (
+          <div className="empty-products-message"> {/* Display a dummy page if products array is empty */}
             <div className="card">
               <img src={white_converse} alt="White Converse" />
               <div className="card-details">
@@ -58,18 +58,16 @@ export default function Products() {
             </div>
             {/* Add more dummy product cards */}
           </div>
-        </div>
-      ) : (
-        <div className="card-container">
-          {/* Map through the fetched products and render each product */}
-          {products.map(product => (
-            <div key={product.id} className="card">
-              <img src={product.image_filepath} alt={product.name} />
+        ) : (
+          // Map through the fetched products and render each product card
+          products.map(product => (
+            <div key={product.product_id} className="card">
+              <img src={product.image_filename} alt={product.item_name} />
               <div className="card-details">
-                <h3 className="card-title">{product.name}</h3>
+                <h3 className="card-title">{product.item_name}</h3>
                 <section className="card-reviews">
                   <FaStar />
-                  <span className="total-reviews">{product.reviews} Reviews</span>
+                  <span className="total-reviews">4 Reviews</span> {/* Assuming this is a placeholder, you can replace it with product.reviews */}
                 </section>
                 <div className="bag">
                   <FaShoppingBag />
@@ -77,9 +75,9 @@ export default function Products() {
                 </div>
               </div>
             </div>
-          ))}
-        </div>
-      )}
+          ))
+        )}
+      </div>
     </div>
   );
 }
