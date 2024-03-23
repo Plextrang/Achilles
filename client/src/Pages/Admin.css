@@ -146,6 +146,16 @@
     background: #4f0a0a;
     color: #f9f9f9;
   }
+  .add-new button{
+    font-size: 20px;
+    margin-left: 20px;
+    padding: 10px 16px;
+    border-radius: 5px;
+    background-color: #4f0a0a;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
 
      /* border: #4f0a0a;
     color: transparent;

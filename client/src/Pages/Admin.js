@@ -11,10 +11,22 @@ export default function Admin() {
     <div className="admin-container">
       <header className="title">
         <h1 className="shop-now-container">Current Inventory</h1>
+        <div className = "add-new">
+          <button>Add Shoe</button>
+        </div>
+        <div className = "add-new">
+          <button>Add Employee </button>
+        </div>
+        <div className = "add-new">
+          <button>Add Supplier </button>
+        </div>
         <div className="search-bar">
           <input type="text" placeholder="Search..." />
           <button>Search</button>
         </div>
+        {/* <div className = "add-new">
+          <button>Add New</button>
+        </div> */}
         <nav className="filters">
           <a href="#" className="active">
             Inventory
