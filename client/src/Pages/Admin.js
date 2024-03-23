@@ -12,7 +12,7 @@ export default function Admin() {
       <header className="title">
         <h1 className="shop-now-container">Current Inventory</h1>
         <div className = "add-new">
-          <Link to= "/AddShoe">
+          <Link to= "/EntryForm">
           <button>Add Shoe</button>
           </Link>
         </div>
