@@ -14,6 +14,7 @@ function newUser(req, db, res){
         const userData = JSON.parse(body);
         console.log('Parsed user data:', userData);
         const { email, password, first_name, middle_initial, last_name, phone_number, date_of_birth, address, apt_num, city, state, zip_code } = userData;
+        const type = 'Customer'
 
         const insertCredentialsSql = `INSERT INTO LOGIN (email, password) VALUES (?, ?)`;
         db.query(insertCredentialsSql, [email, password], (err, loginResult) => {
@@ -23,8 +24,8 @@ function newUser(req, db, res){
                 return;
             }
 
-            const insertUserSql = `INSERT INTO USER (email, first_name, middle_initial, last_name, phone_number, date_of_birth, address, apt_num, city, state, zip_code) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-            db.query(insertUserSql, [email, first_name, middle_initial, last_name, phone_number, date_of_birth, address, apt_num, city, state, zip_code], (err, userResult) => {
+            const insertUserSql = `INSERT INTO USER (email, first_name, middle_initial, last_name, phone_number, date_of_birth, address, apt_num, city, state, zip_code, user_type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+            db.query(insertUserSql, [email, first_name, middle_initial, last_name, phone_number, date_of_birth, address, apt_num, city, state, zip_code, type], (err, userResult) => {
                 if (err) {
                     console.error(err);
                     res.end(JSON.stringify({ error: 'Internal Server Error' }));
@@ -74,5 +75,76 @@ function returningUser(req, db, res) {
     });
 }
 
+function newEmployee(req, db, res){
+    body = ""
+    req.on('data', chunk => {
+        body += chunk.toString(); // convert Buffer to string
+    });
+    
+    req.on('end', () => {
+        console.log('Received data:', body);
+        const userData = JSON.parse(body);
+        console.log('Parsed user data:', userData);
+        const { email, password, first_name, middle_initial, last_name, phone_number, date_of_birth, address, apt_num, city, state, zip_code } = userData;
+        const type = 'Employee'
+
+        const insertCredentialsSql = `INSERT INTO LOGIN (email, password) VALUES (?, ?)`;
+        db.query(insertCredentialsSql, [email, password], (err, loginResult) => {
+            if (err) {
+                console.error(err);
+                res.end(JSON.stringify({ error: 'Internal Server Error' }));
+                return;
+            }
+
+            const insertUserSql = `INSERT INTO USER (email, first_name, middle_initial, last_name, phone_number, date_of_birth, address, apt_num, city, state, zip_code, user_type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+            db.query(insertUserSql, [email, first_name, middle_initial, last_name, phone_number, date_of_birth, address, apt_num, city, state, zip_code, type], (err, userResult) => {
+                if (err) {
+                    console.error(err);
+                    res.end(JSON.stringify({ error: 'Internal Server Error' }));
+                    return;
+                }
+                res.end(JSON.stringify({ message: 'User added successfully' }));
+            });
+        });
+    });
+}
+
+function newManager(req, db, res){
+    body = ""
+    req.on('data', chunk => {
+        body += chunk.toString(); // convert Buffer to string
+    });
+    
+    req.on('end', () => {
+        console.log('Received data:', body);
+        const userData = JSON.parse(body);
+        console.log('Parsed user data:', userData);
+        const { email, password, first_name, middle_initial, last_name, phone_number, date_of_birth, address, apt_num, city, state, zip_code } = userData;
+        const type = 'Manager'
+
+        const insertCredentialsSql = `INSERT INTO LOGIN (email, password) VALUES (?, ?)`;
+        db.query(insertCredentialsSql, [email, password], (err, loginResult) => {
+            if (err) {
+                console.error(err);
+                res.end(JSON.stringify({ error: 'Internal Server Error' }));
+                return;
+            }
+
+            const insertUserSql = `INSERT INTO USER (email, first_name, middle_initial, last_name, phone_number, date_of_birth, address, apt_num, city, state, zip_code, user_type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+            db.query(insertUserSql, [email, first_name, middle_initial, last_name, phone_number, date_of_birth, address, apt_num, city, state, zip_code, type], (err, userResult) => {
+                if (err) {
+                    console.error(err);
+                    res.end(JSON.stringify({ error: 'Internal Server Error' }));
+                    return;
+                }
+                res.end(JSON.stringify({ message: 'User added successfully' }));
+            });
+        });
+    });
+}
+
 module.exports = {
-    newUser, returningUser,}
+    newUser, 
+    returningUser,
+    newEmployee,
+    newManager,}
