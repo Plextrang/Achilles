@@ -78,6 +78,12 @@ const server = http.createServer((req, res) => {
     
   }
 
+  if (req.url === '/returningUser' && req.method === 'POST') {
+    
+    userHandlers.returningUser(req, db, res);
+    
+  }
+
   // Handle other endpoints
   else {
       res.end(JSON.stringify({ error: 'Not Found' }));
