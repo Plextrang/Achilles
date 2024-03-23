@@ -15,11 +15,11 @@ export default function Navbar() {
             </div>
             <div className='right-side'>
                 <Link to="/Login">
-                    <button class="nav-button" id="login-button" >Login</button>
+                    <button className="nav-button" id="login-button" >Login</button>
                 </Link>
 
                 <Link to="/Register">
-                    <button class="nav-button" id="register-button">Register</button>
+                    <button className="nav-button" id="register-button">Register</button>
                 </Link>
             </div>
 

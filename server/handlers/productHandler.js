@@ -72,12 +72,13 @@ function getProducts(req, res, db) {
       if (err) {
         console.error('Error fetching products:', err);
         // Logs error to the console (500)
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.end(JSON.stringify({ error: 'Internal Server Error' }));
       } else {
         console.log('Fetched products: ', results);
+        //console.log("../images/${results.image_filename}.jpg")
         // 200 means data is successfully being sent back
         // json(results) serializes the retrieved data (results) into JSON format before sending it back to the client
-        res.status(200).json(results);
+        res.end(JSON.stringify(results));
       }
     });
   }

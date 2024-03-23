@@ -62,7 +62,7 @@ export default function Products() {
           // Map through the fetched products and render each product card
           products.map(product => (
             <div key={product.product_id} className="card">
-              <img src={product.image_filename} alt={product.item_name} />
+              <img src="./images/${product.image_filename}.jpg" alt={product.item_name} />
               <div className="card-details">
                 <h3 className="card-title">{product.item_name}</h3>
                 <section className="card-reviews">
