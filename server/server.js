@@ -84,6 +84,10 @@ const server = http.createServer((req, res) => {
     
   }
 
+  if (req.url == '/getProducts' && req.method === 'GET') {
+    userHandlers.getProducts(req, res, db);
+  }
+
   // Handle other endpoints
   // else {
   //     res.end(JSON.stringify({ error: 'Not Found' }));
