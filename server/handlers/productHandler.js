@@ -14,7 +14,7 @@ function newProduct(req, db, res) {
         console.log('Received product data:', body);
         const productData = JSON.parse(body);
         console.log('Parsed product data:', productData);
-        const { item_name, description, price, color_option, size, stock } = productData;
+        const { item_name, description, price, color_option, size, stock, category_name, image_filename } = productData;
 
         // Generate a random product ID
         const generateRandomProductId = () => {
@@ -56,8 +56,8 @@ function newProduct(req, db, res) {
 
         // Insert the new product with the generated product_id and a random inventory_id
         const inventoryId = await getRandomInventoryId();
-        const insertProductSql = `INSERT INTO SHOE_PRODUCT (product_id, item_name, description, price, color_option, size, stock, inventory_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
-        db.query(insertProductSql, [productId, item_name, description, price, color_option, size, stock, inventoryId], (err, result) => {
+        const insertProductSql = `INSERT INTO SHOE_PRODUCT (product_id, item_name, description, price, color_option, size, stock, inventory_id, category_name, image_filename) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+        db.query(insertProductSql, [productId, item_name, description, price, color_option, size, stock, inventoryId, category_name, image_filename], (err, result) => {
             if (err) {
                 console.error(err);
                 res.statusCode = 500;

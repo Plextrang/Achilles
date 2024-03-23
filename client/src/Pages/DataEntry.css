@@ -67,6 +67,11 @@
     justify-content: space-between;
 }
 
+.line-container-two {
+    display: flex;
+    justify-content: left;
+}
+
 .button-wrapper {
     margin: 5px;
     display: flex;

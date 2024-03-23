@@ -8,6 +8,8 @@ export default function DataEntry() {
     const [productColor, setProductColor] = useState('');
     const [productSize, setProductSize] = useState('');
     const [productStock, setProductStock] = useState('');
+    const [productType, setProductType] = useState('');
+    const [productImage, setProductImage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
     const handleSubmit = async (e) => {
@@ -18,7 +20,9 @@ export default function DataEntry() {
             price: productCost,
             color_option: productColor,
             size: productSize,
-            stock: productStock
+            stock: productStock,
+            category_name: productType,
+            image_filename: productImage
         };
 
         try {
@@ -40,6 +44,8 @@ export default function DataEntry() {
             setProductColor('');
             setProductSize('');
             setProductStock('');
+            setProductType('');
+            setProductImage('');
             setErrorMessage('');
             alert('Product added successfully');
         } catch (error) {
@@ -77,6 +83,16 @@ export default function DataEntry() {
                             <div className="input">
                                 <label className="text-label">Stock Available <span className="required">&#42;</span></label>
                                 <input className="text" type="text" value={productStock} onChange={(e) => setProductStock(e.target.value)} placeholder="Available Units" maxLength="7" required />
+                            </div>
+                        </div>
+                        <div className="line-container-two">
+                            <div className="input">
+                                <label className="text-label">Category <span className="required">&#42;</span></label>
+                                <input className="text" type="text" value={productType} onChange={(e) => setProductType(e.target.value)} placeholder="Men/Women/Kids" maxLength="5" required />
+                            </div>
+                            <div className="input">
+                                <label className="text-label">Image Name <span className="required">&#42;</span></label>
+                                <input className="text" type="text" value={productImage} onChange={(e) => setProductImage(e.target.value)} placeholder="example_name.jpg" maxLength="255" required />
                             </div>
                         </div>
                         <div className="button-wrapper">
