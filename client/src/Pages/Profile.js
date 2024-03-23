@@ -43,22 +43,22 @@ export default function Profile() {
             <div className="location-container">
                 <div className="input-name">
                     <label className="text-label">First Name</label>
-                    <input className="text" type="text" name="Fname" placeholder="John" maxlength="20" />
+                    <input className="text" type="text" name="Fname" placeholder="John" maxLength="20" />
                 </div>
             
                 <div className="input-mname">
                     <label className="text-label">Middle Initial</label>
-                    <input className="text" id="stateInput" type="text" name="Middle Initial" placeholder="P" maxlength="1"/>
+                    <input className="text" id="stateInput" type="text" name="Middle Initial" placeholder="P" maxLength="1"/>
                 </div>
                 <div className="input-name">
                     <label className="text-label">Last Name</label>
-                    <input className="text" type="text" name="Last Name" placeholder="Doe" maxlength="20" />
+                    <input className="text" type="text" name="Last Name" placeholder="Doe" maxLength="20" />
                 </div>
             </div>
             <div className="details-container">
                 <div className="input">
                     <label className="text-label">Phone Number</label>
-                    <input className="text" type="text" name="Pnum" placeholder="000-000-0000" maxlength="20" />
+                    <input className="text" type="text" name="Pnum" placeholder="000-000-0000" maxLength="20" />
                 </div>
                 <div className="input-dob">
                     <label className="text-label">Date of Birth </label>
@@ -68,25 +68,25 @@ export default function Profile() {
             </div>
             <div className="input">
                 <label className="text-label">Address 1 </label>
-                <input className="text" type="text" name="Address 1" placeholder="Street Name/Address" maxlength="50"/>
+                <input className="text" type="text" name="Address 1" placeholder="Street Name/Address" maxLength="50"/>
             </div>
             <div className="input">
                 <label className="text-label">Address 2</label>
-                <input className="text" type="text" name="Address 2" placeholder="Apt Number" maxlength="50"/>
+                <input className="text" type="text" name="Address 2" placeholder="Apt Number" maxLength="50"/>
             </div>
             <div className="location-container">
                 <div className="input-city">
                     <label className="text-label">City </label>
-                    <input className="text" type="text" name="City" placeholder="City" maxlength="20" />
+                    <input className="text" type="text" name="City" placeholder="City" maxLength="20" />
                 </div>
                 <div className="input">
                     <label className="text-label">State </label>
-                    <input className="text" id="stateInput" type="text" name="State" placeholder="State" maxlength="15" />
+                    <input className="text" id="stateInput" type="text" name="State" placeholder="State" maxLength="15" />
                     <span id="stateValidationMessage" style={{ color: 'red' }}></span>
                 </div>
                 <div className="input">
                     <label className="text-label">Zip Code</label>
-                    <input className="text" type="text" name="Zip Code" placeholder="Zip Code (5 digits)" pattern="[0-9]{5}" maxlength="7" />
+                    <input className="text" type="text" name="Zip Code" placeholder="Zip Code (5 digits)" pattern="[0-9]{5}" maxLength="7" />
                 </div>
             </div>
             <div className="button-wrapper">

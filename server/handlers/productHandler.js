@@ -41,9 +41,23 @@ function newProduct(req, db, res) {
             productId = generateRandomProductId();
         }
 
-        // Insert the new product with the generated product_id
-        const insertProductSql = `INSERT INTO SHOE_PRODUCT (product_id, item_name, description, price, color_option, size, stock) VALUES (?, ?, ?, ?, ?, ?, ?)`;
-        db.query(insertProductSql, [productId, item_name, description, price, color_option, size, stock], (err, result) => {
+        const getRandomInventoryId = async () => {
+            return new Promise((resolve, reject) => {
+                const sql = "SELECT inventory_id FROM INVENTORY ORDER BY RAND() LIMIT 1";
+                db.query(sql, (err, result) => {
+                    if (err) {
+                        reject(err);
+                        return;
+                    }
+                    resolve(result[0].inventory_id);
+                });
+            });
+        };
+
+        // Insert the new product with the generated product_id and a random inventory_id
+        const inventoryId = await getRandomInventoryId();
+        const insertProductSql = `INSERT INTO SHOE_PRODUCT (product_id, item_name, description, price, color_option, size, stock, inventory_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+        db.query(insertProductSql, [productId, item_name, description, price, color_option, size, stock, inventoryId], (err, result) => {
             if (err) {
                 console.error(err);
                 res.statusCode = 500;
