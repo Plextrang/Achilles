@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { FaStar, FaShoppingBag } from 'react-icons/fa';
 import white_converse from '../images/white_converse.jpg';
 
+const variableMap = {
+  'white_converse': white_converse
+};
+
 export default function Products() {
   const [products, setProducts] = useState([]);
 
@@ -62,7 +66,7 @@ export default function Products() {
           // Map through the fetched products and render each product card
           products.map(product => (
             <div key={product.product_id} className="card">
-              <img src="./images/${product.image_filename}.jpg" alt={product.item_name} />
+              <img src={variableMap[product.image_filename]} alt={product.item_name} />
               <div className="card-details">
                 <h3 className="card-title">{product.item_name}</h3>
                 <section className="card-reviews">
