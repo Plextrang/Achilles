@@ -90,7 +90,7 @@ export default function Profile() {
                 </div>
             </div>
             <div className="button-wrapper">
-                <button className="submit-button">Confirm Changes</button>
+                <button className="entry-button">Confirm Changes</button>
             </div>
             </div>
         </form>

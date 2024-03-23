@@ -80,13 +80,13 @@
 
 .entry-button {
     background-color: #FFAEB9;
-    border: 2px solid #FFAEB9;
+    border: none;
     width: 100%;
     color: white;
     border-radius: 6px;
     margin-top: 20px;
     margin-right: .5%;
-    padding: 10px;
+    padding: 12px;
     transition: background-color 0.3s ease;
 }
 
