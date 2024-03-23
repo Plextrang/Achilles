@@ -73,15 +73,18 @@
     justify-content: right;
 }
 
-.submit-button {
+.entry-button {
     background-color: #FFAEB9;
     border: 2px solid #FFAEB9;
+    width: 100%;
     color: white;
     border-radius: 6px;
+    margin-top: 20px;
     margin-right: .5%;
     padding: 10px;
+    transition: background-color 0.3s ease;
 }
 
-.submit-button:hover {
+.entry-button:hover {
     background-color: #ffc0c8;
 }
