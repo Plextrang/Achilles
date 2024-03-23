@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaStar, FaShoppingBag } from 'react-icons/fa';
 import white_converse from '../images/white_converse.jpg';
+import "./Products.css"
 
 const variableMap = {
   'white_converse': white_converse
@@ -43,7 +44,6 @@ export default function Products() {
         </nav>
       </header>
       <div className="card-container">
-        {/* Map through the fetched products and render each product */}
         {products.length === 0 ? (
           <div className="empty-products-message"> {/* Display a dummy page if products array is empty */}
             <div className="card">
@@ -65,7 +65,7 @@ export default function Products() {
         ) : (
           products.map(product => (
             <div key={product.product_id} className="card">
-              <img src={variableMap[product.image_filename]} alt={product.item_name} />
+              <img className="card-img" src={variableMap[product.image_filename]} alt={product.item_name} />
               <div className="card-details">
                 <h3 className="card-title">{product.item_name}</h3>
                 <section className="card-reviews">
