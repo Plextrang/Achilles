@@ -63,7 +63,6 @@ export default function Products() {
             {/* Add more dummy product cards */}
           </div>
         ) : (
-          // Map through the fetched products and render each product card
           products.map(product => (
             <div key={product.product_id} className="card">
               <img src={variableMap[product.image_filename]} alt={product.item_name} />
