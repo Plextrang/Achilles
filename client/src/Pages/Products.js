@@ -11,8 +11,7 @@ export default function Products() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    //fetch('http://localhost:12358/getProducts')
-    fetch('https://cosc-3380-backend.vercel.app/getProducts')
+    fetch('http://localhost:12358/getProducts')
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
