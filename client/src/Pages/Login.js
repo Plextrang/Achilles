@@ -66,7 +66,9 @@ export default function Login() {
 					/>
 					{/* TODO: MAKE FORGOT email/PASSWORD FORM AND LINK */}
 				</div>
-				<button type="submit">Login</button>
+				<Link to="/Home">
+					<button type="submit">Login</button>
+				</Link>
 				<Link id="no-account" to="/Register">Don't have an account?</Link>
 			</form>
 		</div>
