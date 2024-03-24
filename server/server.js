@@ -107,7 +107,7 @@ const server = http.createServer((req, res) => {
 });
 
 // Specify the port to listen on
-const port = 12358;
+const port = process.env.PORT || 12358;
 
 // Start the server
 server.listen(port, () => {
