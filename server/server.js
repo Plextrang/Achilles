@@ -26,10 +26,10 @@ const corsMiddleware = cors();
 const server = http.createServer((req, res) => {
   corsMiddleware(req, res, () => {});
 
-  res.writeHead(200, { 'Content-Type': 'text/html' });
+  // res.writeHead(200, { 'Content-Type': 'text/html' });
 
-  // Write the response content
-  res.write('<h1>Hello, Node.js HTTP Server!</h1>');
+  // // Write the response content
+  // res.write('<h1>Hello, Node.js HTTP Server!</h1>');
   
   // // Handle /users endpoint
   // if (req.url === '/users' && req.method === 'GET') {
