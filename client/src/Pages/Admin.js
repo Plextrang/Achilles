@@ -26,6 +26,11 @@ export default function Admin() {
           <button>Add Supplier </button>
           </Link>
         </div>
+        <div className = "add-new">
+        <Link to = "/SalesReport">
+          <button>Sales Report </button>
+          </Link>
+        </div>  
         <div className="search-bar">
           <input type="text" placeholder="Search..." />
           <button>Search</button>
