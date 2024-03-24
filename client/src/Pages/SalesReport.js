@@ -14,7 +14,13 @@ export default function SalesReport(){
     }, []);
   
     //only get unique employee names 
-    const uniqueEmployees = ["john doe", "sneha jacob", "your mom"];
+    const mockEmployees = [
+        // "john doe", "sneha jacob", "your mom"
+        {name: "john doe", pno: "123-456-7890", bday: '01-01-2024'},
+        {name: "jane doe", pno: "321-654-0987", bday: '01-01-2024'},
+        {name: "sneha jacob", pno: "888-888-8888", bday: '01-01-2024'},
+
+    ];
   
     return (
       <div className="sales-report-container">
@@ -33,13 +39,13 @@ export default function SalesReport(){
               </tr>
             </thead>
             <tbody>
-              {salesData.map(sale => (
-                <tr key={sale.id}>
-                  <td>{sale.date}</td>
-                  <td>{sale.shoeType}</td>
-                  <td>{sale.employeeName}</td>
-                  <td>{sale.quantity}</td>
-                  <td>${sale.amount}</td>
+              {salesData.map(report => (
+                <tr key={report.id}>
+                  <td>{report.date}</td>
+                  <td>{report.shoeType}</td>
+                  <td>{report.employeeName}</td>
+                  <td>{report.quantity}</td>
+                  <td>${report.amount}</td>
                 </tr>
               ))}
             </tbody>
@@ -52,19 +58,23 @@ export default function SalesReport(){
             <thead>
               <tr>
                 <th>Employee Name</th>
+                <th>Phone Number</th>
+                <th>Birth Date</th>
                 <th>Total Sales</th>
               </tr>
             </thead>
             <tbody>
-              {uniqueEmployees.map(employee => (
-                <tr key={employee}>
-                  <td>{employee}</td>
+              {mockEmployees.map(employee => (
+                <tr key={employee.name}>
+                  <td>{employee.name}</td>
+                  <td>{employee.pno}</td>
+                  <td>{employee.bday}</td>
                   <td>
                     {/* ${salesData.filter(sale => sale.employeeName === employee)}
                     {salesData.reduce((total, sale) => total + sale.amount, 0)} */}
                     ${salesData
-                    .filter(sale => sale.employeeName === employee)
-                    .reduce((total, sale) => total + sale.amount, 0)}
+                    .filter(report => report.employeeName === employee.name)
+                    .reduce((total, report) => total + report.amount, 0)}
                   </td>
                 </tr>
               ))}
@@ -73,4 +83,5 @@ export default function SalesReport(){
         </div>
       </div>
     );
+    //todo: create a export to pdf button 
 }
