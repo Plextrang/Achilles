@@ -13,7 +13,7 @@ export default function SalesReport(){
       setSalesData(mockData);
     }, []);
   
-    //only get unique employee names 
+    //fake ass data pt2
     const mockEmployees = [
         // "john doe", "sneha jacob", "your mom"
         {name: "john doe", pno: "123-456-7890", bday: '01-01-2024'},
