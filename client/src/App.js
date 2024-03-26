@@ -12,6 +12,7 @@ import AddShoe from "./Pages/AddShoe"
 import AddEmployee from "./Pages/AddEmployee";
 import AddSupplier from "./Pages/AddSupplier";
 import SalesReport from "./Pages/SalesReport";
+import Checkout from "./Pages/CheckOut"
 
 import './App.css';
 
@@ -33,6 +34,7 @@ function App() {
 				<Route path = "/AddEmployee" element={<AddEmployee/>}></Route>
 				<Route path = "/AddSupplier" element={<AddSupplier/>}></Route>
 				<Route path = "/SalesReport" element={<SalesReport/>}></Route>
+				<Route path = "/Checkout" element={<CheckOut/>}></Route>
 			</Routes>
     	</div>
   	);

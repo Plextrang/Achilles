@@ -1,17 +1,9 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
+import { Link } from 'react-router-dom';
 import white_converse from '../images/white_converse.jpg';
 import './Cart.css';
 
 export default function Cart() {
-
-    const navigate = useNavigate(); // useNavigate hook to get the navigate function
-
-    const handleCheckout = () => {
-        // Navigate to the checkout page
-        navigate('/checkout');
-    };
-
     return (
         <div className="cart-container">
             <h1 className="cart-title">Shopping Cart</h1>
@@ -42,7 +34,9 @@ export default function Cart() {
                     <span>Subtotal:</span>
                     <span>-add logic to get total-</span>
                 </div>
-                <button className="checkout-button" onClick={handleCheckout}>Checkout</button>
+                <Link to="/Checkout">
+                    <button className="checkout-button">Checkout</button>
+                </Link>
             </div>
             <div className="payment-section">
                 <h2>Payment Method</h2>
