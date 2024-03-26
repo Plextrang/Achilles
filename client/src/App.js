@@ -12,7 +12,7 @@ import AddShoe from "./Pages/AddShoe"
 import AddEmployee from "./Pages/AddEmployee";
 import AddSupplier from "./Pages/AddSupplier";
 import SalesReport from "./Pages/SalesReport";
-import Checkout from "./Pages/CheckOut"
+import CheckOut from "./Pages/CheckOut"
 
 import './App.css';
 
