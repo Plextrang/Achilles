@@ -28,7 +28,7 @@ const server = http.createServer((req, res) => {
 
   // res.writeHead(200, { 'Content-Type': 'text/html' });
 
-  // Write the response content
+  // // Write the response content
   // res.write('<h1>Hello, Node.js HTTP Server!</h1>');
   
   // // Handle /users endpoint

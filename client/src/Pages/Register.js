@@ -139,7 +139,9 @@ export default function Register() {
 						<input
 							type="password" id="password" placeholder='Required (8 characters minimum)' required/>
 					</div>
-				<button type="submit">Register</button>
+				<Link to="/">
+					<button type="submit">Register</button>
+				</Link>
 				<Link id="account-exist" to="/Login">Already have an account?</Link>
 			</form>
 		</div>
