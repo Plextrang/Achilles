@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import './Register.css';
 
 export default function Register() {
@@ -35,6 +35,7 @@ export default function Register() {
         };
     }, []);
 
+	const navigate = useNavigate();
 	const handleregister = async (e) => {
 		e.preventDefault();
 	
@@ -67,8 +68,11 @@ export default function Register() {
 			}
 	
 			const data = await response.json();
-			console.log(data);
-			// Handle success, maybe redirect user to login page or show a success message
+            console.log(data);
+
+            if (data.redirectUrl) {
+                navigate(data.redirectUrl);
+            }
 		} catch (error) {
 			console.error('There was a problem with your fetch operation:', error);
 			// Handle error, maybe show an error message to the user
@@ -139,9 +143,7 @@ export default function Register() {
 						<input
 							type="password" id="password" placeholder='Required (8 characters minimum)' required/>
 					</div>
-				<Link to="/">
-					<button type="submit">Register</button>
-				</Link>
+				<button type="submit">Register</button>
 				<Link id="account-exist" to="/Login">Already have an account?</Link>
 			</form>
 		</div>

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import {Link, redirect} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import './Login.css';
 
 export default function Login() {
 	const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [redirectUrl, setRedirectUrl] = useState(null);
+    const navigate = useNavigate();
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -32,17 +32,12 @@ export default function Login() {
             console.log(data);
 
             if (data.redirectUrl) {
-                // If redirectUrl is present in the response, redirect the user
-                setRedirectUrl(data.redirectUrl);
+                navigate(data.redirectUrl);
             }
         } catch (error) {
             console.error('There was a problem with your fetch operation:', error);
         }
     };
-
-	if (redirectUrl) {
-        return <Link to={redirectUrl} />;
-    }
 
 	return (
 		<div className="login-container">
@@ -66,9 +61,7 @@ export default function Login() {
 					/>
 					{/* TODO: MAKE FORGOT email/PASSWORD FORM AND LINK */}
 				</div>
-				<Link to="/Home">
-					<button type="submit">Login</button>
-				</Link>
+				<button type="submit">Login</button>
 				<Link id="no-account" to="/Register">Don't have an account?</Link>
 			</form>
 		</div>

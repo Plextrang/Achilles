@@ -31,7 +31,7 @@ function newUser(req, db, res){
                     res.end(JSON.stringify({ error: 'Internal Server Error' }));
                     return;
                 }
-                res.end(JSON.stringify({ message: 'User added successfully' }));
+                res.end(JSON.stringify({ message: 'User added successfully', redirectUrl: '/Login' }));
             });
         });
     });
@@ -41,6 +41,7 @@ function newUser(req, db, res){
 function returningUser(req, db, res) {
     let body = "";
 
+    console.log("In function")
     req.on('data', chunk => {
         body += chunk.toString(); 
     });
