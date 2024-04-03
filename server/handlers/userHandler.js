@@ -70,9 +70,38 @@ function returningUser(req, db, res) {
             }
 
             // User authenticated 
-            res.statusCode = 200;
-            res.end(JSON.stringify({ message: 'Login successful', redirectUrl: '/Products' }));
+            const updateSql = "UPDATE LOGIN SET is_active = 1 WHERE email = ?";
+            db.query(updateSql, [email], (err, updateResult) => {
+                if (err) {
+                    console.error(err);
+                    res.statusCode = 500;
+                    res.end(JSON.stringify({ error: 'Internal Server Error' }));
+                    return;
+                }
+
+                // Set is_active to 1
+                res.statusCode = 200;
+                res.end(JSON.stringify({ message: 'Login successful', redirectUrl: '/Products' }));
+            });
         });
+    });
+}
+
+function logoutUser(req, db, res) {
+    const { email } = req.body; // Assuming you pass the user's email to identify the user
+    
+    // Update the is_active field in the LOGIN table to indicate the user is not active
+    const updateSql = `UPDATE LOGIN SET is_active = 0 WHERE email = ?`;
+    db.query(updateSql, [email], (err, result) => {
+        if (err) {
+            console.error(err);
+            res.statusCode = 500;
+            res.end(JSON.stringify({ error: 'Internal Server Error' }));
+            return;
+        }
+        
+        res.statusCode = 200;
+        res.end(JSON.stringify({ message: 'Logout successful' }));
     });
 }
 
@@ -148,4 +177,5 @@ module.exports = {
     newUser, 
     returningUser,
     newEmployee,
-    newManager,}
+    newManager,
+    logoutUser,}

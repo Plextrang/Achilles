@@ -29,8 +29,8 @@ export default function Login() {
             }
 
             const data = await response.json();
-            console.log(data);
-
+            localStorage.setItem('userEmail', email);
+            console.log(email);
             if (data.redirectUrl) {
                 navigate(data.redirectUrl);
             }
