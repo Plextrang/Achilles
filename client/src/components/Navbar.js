@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import achillesLogo from '../images/companyLogo.png';
 import './Navbar.css';
 
 export default function Navbar() {
+    const navigate = useNavigate();
     const [isLoggedIn, setLoggedIn] = useState(false);
 
     useEffect(() => {
@@ -15,8 +16,11 @@ export default function Navbar() {
         }
     }, []);
 
+    const handleLogin = () => {
+        navigate('/Login');
+    };
+
     const handleLogout = () => {
-        // Assuming you have the user's email stored in local storage or state
         const userEmail = localStorage.getItem('userEmail');
 
         fetch('http://localhost:12358/logout', {
@@ -24,7 +28,7 @@ export default function Navbar() {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ email: userEmail }),
+            body: JSON.stringify({ email: userEmail })
         })
             .then(response => {
                 if (!response.ok) {
@@ -34,9 +38,9 @@ export default function Navbar() {
             })
             .then(data => {
                 console.log('Logout successful:', data);
-                localStorage.removeItem('userEmail');
+                localStorage.clear();
                 setLoggedIn(false); // LEFT OFF HERE
-                // Redirect after?
+                navigate('/Login');
             })
             .catch(error => {
                 console.error('Error logging out:', error);
@@ -57,18 +61,12 @@ export default function Navbar() {
             <div className="right-side">
                 {isLoggedIn ? (
                     <>
-                        <button className="nav-button" onClick={handleLogout}>
-                            Logout
-                        </button>
+                        <button className="nav-button" id="login-button" onClick={handleLogout}>Logout</button>
                         {/* TODO: Add more buttons */}
                     </>
                 ) : (
                     <>
-                        <Link to="/Login">
-                            <button className="nav-button" id="login-button">
-                                Login
-                            </button>
-                        </Link>
+                        <button className="nav-button" id="login-button" onClick={handleLogin}>Login</button>
                         <Link to="/Register">
                             <button className="nav-button" id="register-button">
                                 Register
