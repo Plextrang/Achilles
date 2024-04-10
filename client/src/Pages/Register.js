@@ -64,9 +64,9 @@ export default function Register() {
 				body: JSON.stringify(userData)
 			});
 	
-			// if (!response.ok) {
-			// 	throw new Error('Network response was not ok');
-			// }
+			if (!response.ok) {
+				throw new Error('Network response was not ok');
+			}
 	
 			const data = await response.json();
             console.log(data);
