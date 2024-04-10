@@ -1,4 +1,8 @@
 const { setCorsHeaders } = require("../../lib/cors");
+const http = require('http');
+const mysql = require('mysql');
+const cors = require('cors');
+const querystring = require('querystring');
 
 const db = mysql.createConnection({
     host: "cosc3380.c5iqeciq8qjg.us-east-2.rds.amazonaws.com",
