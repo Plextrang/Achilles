@@ -40,7 +40,7 @@ module.exports = async (req, res) => {
             console.log(chunk)
           body += chunk.toString();
         });
-        req.on('end', () => {
+        req.on('end', async () => {
             try {
               // Parse the body string as JSON
               console.log('user data:', body);
