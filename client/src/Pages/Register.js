@@ -63,7 +63,7 @@ export default function Register() {
 				},
 				body: JSON.stringify(userData)
 			});
-			console.log(response)
+			console.log(response.ok)
 			if (!response.ok) {
 				throw new Error('Network response was not ok');
 			}
