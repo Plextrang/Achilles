@@ -65,7 +65,7 @@ export default function Register() {
 			});
 			console.log(response.ok)
 			if (!response.ok) {
-				throw new Error('Network response was not ok');
+				throw new Error('Network response was not ok', response);
 			}
 	
 			const data = await response.json();
