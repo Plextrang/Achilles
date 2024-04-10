@@ -35,13 +35,28 @@ module.exports = async (req, res) => {
       });
     
     body = ""
-    req.on('data', async chunk => {
-        body += chunk.toString(); // convert Buffer to string
-    });
-    
+    newbody = new Promise((resolve, reject) => {
+        let body = '';
+        req.on('data', chunk => {
+          body += chunk.toString();
+        });
+        req.on('end', () => {
+            try {
+              // Parse the body string as JSON
+              const parsedBody = JSON.parse(body);
+              resolve(parsedBody);
+            } catch (error) {
+              reject(error);
+            }
+          });
+          req.on('error', (err) => {
+            reject(err);
+          });
+        });
+
     req.on('end', async () => {
         console.log('Received data:', body);
-        const userData = await JSON.parse(body);
+        const userData = await newbody;
         console.log('Parsed user data:', userData);
         const { email, password, first_name, middle_initial, last_name, phone_number, date_of_birth, address, apt_num, city, state, zip_code } = userData;
         const type = 'Customer'
