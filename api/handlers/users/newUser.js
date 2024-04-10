@@ -54,7 +54,6 @@ module.exports = async (req, res) => {
           });
         });
 
-    req.on('end', async () => {
         console.log('Received data:', body);
         const userData = await newbody;
         console.log('Parsed user data:', userData);
@@ -86,5 +85,4 @@ module.exports = async (req, res) => {
                 // })
             });
         });
-    });
 }
