@@ -43,7 +43,7 @@ module.exports = async (req, res) => {
         req.on('end', async () => {
             try {
               // Parse the body string as JSON
-              console.log('user data:', body);
+              //console.log('user data:', body);
               let parsedBody = await JSON.parse(body);
               resolve(parsedBody);
             } catch (error) {
