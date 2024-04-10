@@ -55,7 +55,7 @@ export default function Register() {
 		};
 		
 		try {
-			const response = await fetch('http://localhost:12358/newUser', {
+			const response = await fetch('cosc-3380-6au9.vercel.app/api/handlers/users/newUser', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
