@@ -42,7 +42,7 @@ module.exports = async (req, res) => {
         req.on('end', () => {
             try {
               // Parse the body string as JSON
-              const parsedBody = JSON.parse(body);
+              let parsedBody = JSON.parse(body);
               resolve(parsedBody);
             } catch (error) {
               reject(error);
