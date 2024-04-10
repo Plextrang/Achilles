@@ -53,7 +53,7 @@ module.exports = async (req, res) => {
           });
         });
 
-    console.log('Received data:', body);
+    //console.log('Received data:', body);
     const userData = await newbody;
     console.log('Parsed user data:', userData);
     const { email, password, first_name, middle_initial, last_name, phone_number, date_of_birth, address, apt_num, city, state, zip_code } = userData;
