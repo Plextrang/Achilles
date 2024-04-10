@@ -31,7 +31,7 @@ function newUser(req, db, res){
                     res.end(JSON.stringify({ error: 'Internal Server Error' }));
                     return;
                 }
-                res.end(JSON.stringify({ message: 'User added successfully' }));
+                res.end(JSON.stringify({ message: 'User added successfully', redirectUrl: '/Login' }));
             });
         });
     });
@@ -41,6 +41,7 @@ function newUser(req, db, res){
 function returningUser(req, db, res) {
     let body = "";
 
+    console.log("In function")
     req.on('data', chunk => {
         body += chunk.toString(); 
     });
@@ -69,8 +70,46 @@ function returningUser(req, db, res) {
             }
 
             // User authenticated 
+            const updateSql = "UPDATE LOGIN SET is_active = 1 WHERE email = ?";
+            db.query(updateSql, [email], (err, updateResult) => {
+                if (err) {
+                    console.error(err);
+                    res.statusCode = 500;
+                    res.end(JSON.stringify({ error: 'Internal Server Error' }));
+                    return;
+                }
+
+                // Set is_active to 1
+                res.statusCode = 200;
+                res.end(JSON.stringify({ message: 'Login successful', redirectUrl: '/Products' }));
+            });
+        });
+    });
+}
+
+function logoutUser(req, db, res) {
+    let body = '';
+
+    req.on('data', (chunk) => {
+        body += chunk.toString();
+    });
+
+    req.on('end', () => {
+        const loginData = JSON.parse(body);
+        console.log('Parsed logout data:', loginData);
+        const { email } = loginData;
+
+        const updateSql = `UPDATE LOGIN SET is_active = 0 WHERE email = ?`;
+        db.query(updateSql, [email], (err, result) => {
+            if (err) {
+                console.error(err);
+                res.statusCode = 500;
+                res.end(JSON.stringify({ error: 'Internal Server Error' }));
+                return;
+            }
+
             res.statusCode = 200;
-            res.end(JSON.stringify({ message: 'Login successful', redirectUrl: '/Products' }));
+            res.end(JSON.stringify({ message: 'Logout successful' }));
         });
     });
 }
@@ -147,4 +186,5 @@ module.exports = {
     newUser, 
     returningUser,
     newEmployee,
-    newManager,}
+    newManager,
+    logoutUser,}

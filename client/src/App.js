@@ -11,6 +11,9 @@ import Admin from "./Pages/Admin"
 import AddShoe from "./Pages/AddShoe"
 import AddEmployee from "./Pages/AddEmployee";
 import AddSupplier from "./Pages/AddSupplier";
+import SalesReport from "./Pages/SalesReport";
+import CheckOut from "./Pages/CheckOut"
+
 import './App.css';
 
 function App() {
@@ -30,9 +33,12 @@ function App() {
 				<Route path = "/AddShoe" element={<AddShoe/>}></Route>
 				<Route path = "/AddEmployee" element={<AddEmployee/>}></Route>
 				<Route path = "/AddSupplier" element={<AddSupplier/>}></Route>
+				<Route path = "/SalesReport" element={<SalesReport/>}></Route>
+				<Route path = "/Checkout" element={<CheckOut/>}></Route>
 			</Routes>
     	</div>
   	);
 }
+
 
 export default App;

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import white_converse from '../images/white_converse.jpg';
 import './Cart.css';
 
@@ -33,7 +34,9 @@ export default function Cart() {
                     <span>Subtotal:</span>
                     <span>-add logic to get total-</span>
                 </div>
-                <button className="checkout-button">Checkout</button>
+                <Link to="/Checkout">
+                    <button className="checkout-button">Checkout</button>
+                </Link>
             </div>
             <div className="payment-section">
                 <h2>Payment Method</h2>

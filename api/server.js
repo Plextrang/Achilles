@@ -92,6 +92,12 @@ const server = http.createServer((req, res) => {
     
   }
 
+  if (req.url === '/logout' && req.method === 'POST') {
+    
+    userHandlers.logoutUser(req, db, res);
+    
+  }
+
   if (req.url == '/getProducts' && req.method === 'GET') {
     productHandlers.getProducts(req, res, db);
   }
