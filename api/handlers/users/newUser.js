@@ -50,6 +50,7 @@ module.exports = async (req, res) => {
         db.query(insertCredentialsSql, [email, password], (err, loginResult) => {
             if (err) {
                 console.error(err);
+                res.writeHead(404, { 'Content-Type' : 'application/json' });
                 res.end(JSON.stringify({ error: 'Login Internal Server Error' }));
                 return;
             }
@@ -58,10 +59,12 @@ module.exports = async (req, res) => {
             db.query(insertUserSql, [email, first_name, middle_initial, last_name, phone_number, date_of_birth, address, apt_num, city, state, zip_code, type], (err, userResult) => {
                 if (err) {
                     console.error(err);
+                    res.writeHead(404, { 'Content-Type' : 'application/json' });
                     res.end(JSON.stringify({ error: 'User Internal Server Error' }));
                     return;
                 }
                 console.log("inserted yippee")
+                res.writeHead(404, { 'Content-Type' : 'application/json' });
                 res.end(JSON.stringify({ message: 'User added successfully', redirectUrl: '/Login' }));
                 // res.status(200).json({
                 //     message: 'User added successfully', redirectUrl: '/Login'
