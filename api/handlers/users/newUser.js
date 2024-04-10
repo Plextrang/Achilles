@@ -19,6 +19,7 @@ const querystring = require('querystring');
 //   });
 
 module.exports = async (req, res) => {
+    setCorsHeaders(req, res);
     const db = mysql.createConnection({
         host: "cosc3380.c5iqeciq8qjg.us-east-2.rds.amazonaws.com",
         user: "admin",
@@ -32,7 +33,7 @@ module.exports = async (req, res) => {
         }
         console.log('Connected to database');
       });
-    setCorsHeaders(req, res);
+    
     body = ""
     req.on('data', chunk => {
         body += chunk.toString(); // convert Buffer to string
