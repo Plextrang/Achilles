@@ -56,7 +56,7 @@ export default function Register() {
 		
 		try {
 			const response = await fetch('https://cosc-3380-6au9.vercel.app/api/handlers/users/newUser', {
-				mode: 'no-cors',
+				// mode: 'no-cors',
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
