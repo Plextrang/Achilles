@@ -35,7 +35,7 @@ module.exports = async (req, res) => {
       });
     
     body = ""
-    newbody = new Promise((resolve, reject) => {
+    const newbody = new Promise((resolve, reject) => {
         let body = '';
         req.on('data', chunk => {
           body += chunk.toString();
