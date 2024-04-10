@@ -35,7 +35,7 @@ module.exports = async (req, res) => {
       });
     
     body = ""
-    req.on('data', chunk => {
+    req.on('data', async chunk => {
         body += chunk.toString(); // convert Buffer to string
     });
     
