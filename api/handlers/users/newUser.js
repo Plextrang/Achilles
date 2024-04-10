@@ -10,15 +10,22 @@ const db = mysql.createConnection({
     password: "TtZDqS57PM8KxHaOLRcs",
     database: "cosc3380"
 })
-db.connect(err => {
-    if (err) {
-      console.error('Error connecting to database:', err);
-      return;
-    }
-    console.log('Connected to database');
-  });
+// db.connect(err => {
+//     if (err) {
+//       console.error('Error connecting to database:', err);
+//       return;
+//     }
+//     console.log('Connected to database');
+//   });
 
 module.exports = async (req, res) => {
+    db.connect(err => {
+        if (err) {
+          console.error('Error connecting to database:', err);
+          return;
+        }
+        console.log('Connected to database');
+      });
     setCorsHeaders(req, res);
     body = ""
     req.on('data', chunk => {
