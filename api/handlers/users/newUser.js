@@ -61,7 +61,10 @@ module.exports = async (req, res) => {
                     return;
                 }
                 console.log("inserted yippee")
-                res.end(JSON.stringify({ message: 'User added successfully', redirectUrl: '/Login' }));
+                //res.end(JSON.stringify({ message: 'User added successfully', redirectUrl: '/Login' }));
+                res.status(200).json({
+                    message: 'User added successfully', redirectUrl: '/Login'
+                })
             });
         });
     });
