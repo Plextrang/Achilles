@@ -1,3 +1,5 @@
+const { setCorsHeaders } = require("../../lib/cors");
+
 const db = mysql.createConnection({
     host: "cosc3380.c5iqeciq8qjg.us-east-2.rds.amazonaws.com",
     user: "admin",
@@ -13,6 +15,7 @@ db.connect(err => {
   });
 
 module.exports = async (req, res) => {
+    setCorsHeaders(req, res);
     body = ""
     req.on('data', chunk => {
         body += chunk.toString(); // convert Buffer to string
