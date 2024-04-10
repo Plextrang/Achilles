@@ -42,6 +42,7 @@ module.exports = async (req, res) => {
         req.on('end', () => {
             try {
               // Parse the body string as JSON
+              console.log('user data:', body);
               let parsedBody = JSON.parse(body);
               resolve(parsedBody);
             } catch (error) {
