@@ -39,9 +39,9 @@ module.exports = async (req, res) => {
         body += chunk.toString(); // convert Buffer to string
     });
     
-    req.on('end', () => {
+    req.on('end', async () => {
         console.log('Received data:', body);
-        const userData = JSON.parse(body);
+        const userData = await JSON.parse(body);
         console.log('Parsed user data:', userData);
         const { email, password, first_name, middle_initial, last_name, phone_number, date_of_birth, address, apt_num, city, state, zip_code } = userData;
         const type = 'Customer'
