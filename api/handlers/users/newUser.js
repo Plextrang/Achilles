@@ -60,6 +60,7 @@ module.exports = async (req, res) => {
                     res.end(JSON.stringify({ error: 'User Internal Server Error' }));
                     return;
                 }
+                console.log("inserted yippee")
                 res.end(JSON.stringify({ message: 'User added successfully', redirectUrl: '/Login' }));
             });
         });
