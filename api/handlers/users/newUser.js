@@ -23,6 +23,7 @@ module.exports = async (req, res) => {
       });
     
     const userData = getRequestBody(req)
+    console.log(userData);
     const { email, password, first_name, middle_initial, last_name, phone_number, date_of_birth, address, apt_num, city, state, zip_code } = userData;
     const type = 'Customer'
 
