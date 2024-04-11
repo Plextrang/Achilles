@@ -7,6 +7,10 @@ const querystring = require('querystring');
 
 module.exports = async (req, res) => {
     // console.log("this is the req \n", req);
+    let body = '';
+      req.on('data', chunk => {
+        body += chunk.toString();
+    });
     res.writeHead(200, { 'Content-Type' : 'application/json' });
     res.end(JSON.stringify({ message: 'yayy' }))
     // setCorsHeaders(req, res);
