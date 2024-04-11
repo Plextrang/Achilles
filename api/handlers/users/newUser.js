@@ -6,7 +6,7 @@ const cors = require('cors');
 const querystring = require('querystring');
 
 module.exports = async (req, res) => {
-    console.log("this is the req \n", req);
+    //console.log("this is the req \n", req);
     setCorsHeaders(req, res);
     const db = mysql.createConnection({
         host: "cosc3380.c5iqeciq8qjg.us-east-2.rds.amazonaws.com",
