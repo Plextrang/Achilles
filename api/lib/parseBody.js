@@ -1,4 +1,5 @@
 const getRequestBody = (req) => {
+    console.log("THIS IS COMING FROM THE PARSEBODY FILE!")
     return new Promise((resolve, reject) => {
       let body = '';
       req.on('data', chunk => {
