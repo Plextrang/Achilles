@@ -34,7 +34,7 @@ module.exports = async (req, res) => {
       if (err) {
         console.error('Error fetching products:', err);
         // Logs error to the console (500)
-        res.writeHead(404, { 'Content-Type' : 'application/json' });
+        // res.writeHead(404, { 'Content-Type' : 'application/json' });
         res.end(JSON.stringify({ error: 'Internal Server Error' }));
       } else {
         console.log('Fetched products: ', results);
