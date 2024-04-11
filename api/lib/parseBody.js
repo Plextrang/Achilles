@@ -7,7 +7,7 @@ const getRequestBody = (req) => {
       req.on('end', () => {
         try {
           // Parse the body string as JSON
-          console.log(body)
+          console.log("(parseBody) this is the unparsed body \n", body)
           const parsedBody = JSON.parse(body);
           resolve(parsedBody);
         } catch (error) {
