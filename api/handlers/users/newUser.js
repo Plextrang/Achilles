@@ -7,7 +7,10 @@ const querystring = require('querystring');
 
 module.exports = async (req, res) => {
     // console.log("this is the req \n", req);
-    setCorsHeaders(req, res);
+    console.log("Setting CORS headers");
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     const userData = await getRequestBody(req, res)
     res.writeHead(200, { 'Content-Type' : 'application/json' });
     res.end(JSON.stringify({ message: 'yayy' }))
