@@ -23,7 +23,7 @@ export default function Navbar() {
     const handleLogout = () => {
         const userEmail = localStorage.getItem('userEmail');
 
-        fetch('http://localhost:12358/logout', {
+        fetch('https://cosc-3380-6au9.vercel.app/api/handlers/users/logoutUser', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
