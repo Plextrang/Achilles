@@ -26,7 +26,7 @@ export default function DataEntry() {
         };
 
         try {
-            const response = await fetch('http://localhost:12358/newProduct', {
+            const response = await fetch('https://cosc-3380.vercel.app/api/handlers/products/newProduct', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

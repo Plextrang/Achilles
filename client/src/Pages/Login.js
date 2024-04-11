@@ -16,7 +16,7 @@ export default function Login() {
         };
 
         try {
-            const response = await fetch('http://localhost:12358/returningUser', {
+            const response = await fetch('https://cosc-3380.vercel.app/api/handlers/users/returningUser', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
