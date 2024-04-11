@@ -23,8 +23,8 @@ module.exports = async (req, res) => {
           return;
         }
         console.log('Connected to database');
-      });
-    loginData = getRequestBody(req, res);
+    });
+    loginData = await getRequestBody(req, res);
         const { email, password } = loginData;
 
         // Query the database 
