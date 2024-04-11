@@ -1,4 +1,4 @@
-const getRequestBody = (req) => {
+const getRequestBody = (req, res) => {
     console.log("THIS IS COMING FROM THE PARSEBODY FILE!")
     return new Promise((resolve, reject) => {
       let body = '';
@@ -12,6 +12,7 @@ const getRequestBody = (req) => {
           const parsedBody = JSON.parse(body);
           resolve(parsedBody);
         } catch (error) {
+            res.writeHead(500, { 'Content-Type' : 'application/json' });
           reject(error);
         }
       });
