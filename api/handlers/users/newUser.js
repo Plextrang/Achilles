@@ -6,7 +6,7 @@ const cors = require('cors');
 const querystring = require('querystring');
 
 module.exports = async (req, res) => {
-    //console.log("this is the req \n", req);
+    // console.log("this is the req \n", req);
     setCorsHeaders(req, res);
     const db = mysql.createConnection({
         host: "cosc3380.c5iqeciq8qjg.us-east-2.rds.amazonaws.com",
@@ -22,7 +22,7 @@ module.exports = async (req, res) => {
         console.log('Connected to database');
       });
     
-    const userData = getRequestBody(req)
+    const userData = await getRequestBody(req)
     console.log("this is the user data \n", userData);
     const { email, password, first_name, middle_initial, last_name, phone_number, date_of_birth, address, apt_num, city, state, zip_code } = userData;
     const type = 'Customer'
