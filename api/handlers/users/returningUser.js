@@ -1,30 +1,30 @@
 // TODO: Figure out token baloney :P
-const db = mysql.createConnection({
-    host: "cosc3380.c5iqeciq8qjg.us-east-2.rds.amazonaws.com",
-    user: "admin",
-    password: "TtZDqS57PM8KxHaOLRcs",
-    database: "cosc3380"
-})
-db.connect(err => {
-    if (err) {
-      console.error('Error connecting to database:', err);
-      return;
-    }
-    console.log('Connected to database');
-  });
+const { getRequestBody } = require("../../lib/parseBody")
+const http = require('http');
+const mysql = require('mysql');
+const cors = require('cors');
+const querystring = require('querystring');
 
 module.exports = async (req, res) => {
-    let body = "";
-
-    console.log("In function")
-    req.on('data', chunk => {
-        body += chunk.toString(); 
-    });
-
-    req.on('end', () => {
-        console.log('Received login data:', body);
-        const loginData = JSON.parse(body);
-        console.log('Parsed login data:', loginData);
+    if (req.method === "OPTIONS") {
+        res.writeHead(204);
+        res.end();
+        return;
+    }
+    const db = mysql.createConnection({
+        host: "cosc3380.c5iqeciq8qjg.us-east-2.rds.amazonaws.com",
+        user: "admin",
+        password: "TtZDqS57PM8KxHaOLRcs",
+        database: "cosc3380"
+    })
+    db.connect(err => {
+        if (err) {
+          console.error('Error connecting to database:', err);
+          return;
+        }
+        console.log('Connected to database');
+      });
+    loginData = getRequestBody(req, res);
         const { email, password } = loginData;
 
         // Query the database 
@@ -59,5 +59,4 @@ module.exports = async (req, res) => {
                 res.end(JSON.stringify({ message: 'Login successful', redirectUrl: '/Products' }));
             });
         });
-    });
 }
