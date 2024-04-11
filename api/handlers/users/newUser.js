@@ -11,10 +11,7 @@ module.exports = async (req, res) => {
         res.writeHead(204);
         res.end();
         return;
-    }    
-    res.writeHead(200, { 'Content-Type' : 'application/json' });
-    res.end(JSON.stringify({ message: 'yayy' }))
-    setCorsHeaders(req, res);
+    }
     const db = mysql.createConnection({
         host: "cosc3380.c5iqeciq8qjg.us-east-2.rds.amazonaws.com",
         user: "admin",
