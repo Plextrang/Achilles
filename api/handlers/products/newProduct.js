@@ -24,7 +24,7 @@ module.exports = async (req, res) => {
         }
         console.log('Connected to database');
     });
-    productData = getRequestBody(req, res);
+    productData = await getRequestBody(req, res);
         console.log('Parsed product data:', productData);
         const { item_name, description, price, color_option, size, stock, category_name, image_filename } = productData;
 

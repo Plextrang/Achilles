@@ -23,7 +23,7 @@ module.exports = async (req, res) => {
         }
         console.log('Connected to database');
       });
-    userData = getRequestBody(req, res);
+    userData = await getRequestBody(req, res);
         console.log('Parsed user data:', userData);
         const { email, password, first_name, middle_initial, last_name, phone_number, date_of_birth, address, apt_num, city, state, zip_code } = userData;
         const type = 'Manager'
