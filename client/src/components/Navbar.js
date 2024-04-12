@@ -29,8 +29,7 @@ export default function Navbar() {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({ email: userEmail })
-        })
-            .then(response => {
+        }).then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -39,7 +38,7 @@ export default function Navbar() {
             .then(data => {
                 console.log('Logout successful:', data);
                 localStorage.clear();
-                setLoggedIn(false); // LEFT OFF HERE
+                setLoggedIn(false); 
                 navigate('/Login');
             })
             .catch(error => {
