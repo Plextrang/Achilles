@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FaStar, FaShoppingBag } from 'react-icons/fa';
 import {Link} from 'react-router-dom';
 import white_converse from '../images/white_converse.jpg';
+import nike_air_force_1 from '../images/nike_air_force_1.jpg';
 import "./Products.css"
 
 const variableMap = {
