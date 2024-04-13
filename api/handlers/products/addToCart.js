@@ -31,12 +31,12 @@ module.exports = async (req, res) => {
     const productData = await getRequestBody(req, res);
     console.log('Parsed product data:', productData);
 
-    const { userEmail, ...productInfo } = productData;
+    const { email, ...productInfo } = productData;
 
     console.log('Querying for user_id', userEmail);
 
     const getUserSql = `SELECT * FROM USER WHERE email = ?`;
-    db.query(getUserSql, [userEmail], (err, userResult) => {
+    db.query(getUserSql, [email], (err, userResult) => {
         console.log("User email is: ", userEmail);
         if (err) {
             console.log('Error finding user');
