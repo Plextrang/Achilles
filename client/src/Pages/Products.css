@@ -76,6 +76,9 @@
   display: block;
   margin: 0 auto;
   max-width: 100%;
+  height: 400px; /* Needed since contents use absolute position */
+  overflow: hidden; /* To crop the img inside of it */
+  position: relative; /* Set for img position below */
 }
 
 .card-details {

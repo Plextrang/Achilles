@@ -2,6 +2,10 @@ import React from 'react';
 import white_converse from '../images/white_converse.jpg'; // Import image
 import './CheckOut.css';
 
+// Pull all shoes from cart item where the user_id matches
+// display the shoes one at a time
+// add the totals of all shoes by adding the price*quantity for each product.
+
 export default function CheckOut() {
     return (
         <div className="checkout-container">

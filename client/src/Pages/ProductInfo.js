@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { FaStar, FaShoppingBag } from 'react-icons/fa';
 import white_converse from '../images/white_converse.jpg';
 import nike_air_force_1 from '../images/nike_air_force_1.jpg';
@@ -18,22 +18,59 @@ const variableMap = {
 };
 
 export default function ProductInfo() {
-  console.log(localStorage.getItem("ProductInfo"));
-  const product = JSON.parse(localStorage.getItem('ProductInfo'));
+	const [quantity, setQuantity] = useState(1);
+	const userEmail = localStorage.getItem("userEmail");
+    const product = JSON.parse(localStorage.getItem('ProductInfo'));
+
+    const productWithUserId = {
+        ...product, 
+		quantity: quantity,
+        email: userEmail 
+    };
+
+  const handleAddCart = () => {
+	fetch('https://cosc-3380-6au9.vercel.app/api/handlers/products/addToCart/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(productWithUserId)
+        }).then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Successfully Added to Cart:', data);
+            })
+            .catch(error => {
+                console.error('Error adding to Cart:', error);
+            });
+  };
 
   return (
 	<div className="product-info-container">
 		<img className="product-img" src={variableMap[product.image_filename]} alt={product.item_name} />
 		<div className="card-details">
 			<h3 className="card-title">{product.item_name}</h3>
-			<section className="card-reviews">
-			<FaStar />
-			<span className="total-reviews">4 Reviews</span> 
-			</section>
-			<div className="bag">
-			<FaShoppingBag />
-			<div className="price">${product.price}</div>
+			<div className="card-reviews">
+				<FaStar />
+				<span className="total-reviews">4 Reviews</span> 
 			</div>
+			<div className="bag">
+				<FaShoppingBag />
+				<div className="price">${product.price}</div>
+			</div>
+			<div className="add-container">
+				<button id="add-button" onClick={handleAddCart}>Add to Cart</button>
+				<label>Quantity: </label>
+				<input type="text" id="quantity-input"
+					   value={quantity}
+					   onChange={(e) => setQuantity(e.target.value)}
+					   required />
+			</div>
+			<p>TODO: Make this page look nice</p>
 		</div>
 	</div>
   );

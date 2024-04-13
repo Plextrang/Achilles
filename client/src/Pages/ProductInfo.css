@@ -1,4 +1,13 @@
 .product-info-container {
     display: flex;
-    justify-content: center;
+}
+
+.product-img {
+    margin: 20px;
+    width: 500px;
+    height: 400px;
+}
+
+#quantity-input {
+    width: 40px;
 }

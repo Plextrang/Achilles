@@ -37,7 +37,7 @@ export default function Navbar() {
             })
             .then(data => {
                 console.log('Logout successful:', data);
-                localStorage.clear();
+                localStorage.removeItem('userEmail');
                 setLoggedIn(false); 
                 navigate('/Login');
             })
