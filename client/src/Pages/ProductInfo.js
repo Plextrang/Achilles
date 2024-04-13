@@ -29,7 +29,7 @@ export default function ProductInfo() {
     };
 
   const handleAddCart = () => {
-	fetch('https://cosc-3380-6au9.vercel.app/api/handlers/products/addToCart/', {
+	fetch('https://cosc-3380-6au9.vercel.app/api/handlers/products/addToCart', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
