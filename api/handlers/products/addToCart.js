@@ -1,3 +1,4 @@
+const { setCorsHeaders } = require("../../lib/cors");
 const { getRequestBody } = require("../../lib/parseBody")
 const http = require('http');
 const mysql = require('mysql');
@@ -5,6 +6,7 @@ const cors = require('cors');
 const querystring = require('querystring');
 
 module.exports = async (req, res) => {
+    console.log("this is the req \n", req);
     if (req.method === "OPTIONS") {
         res.writeHead(204);
         res.end();

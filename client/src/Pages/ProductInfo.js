@@ -37,7 +37,7 @@ export default function ProductInfo() {
 			},
 			body: JSON.stringify(productWithUserId)
 		});
-
+		console.log(response.ok)
 		if (!response.ok) {
 			throw new Error('Failed to add product');
 		}
@@ -67,7 +67,7 @@ export default function ProductInfo() {
 					   onChange={(e) => setQuantity(e.target.value)}
 					   required />
 			</div>
-			<p>TODO: Make this page look nice, Fix: 7</p>
+			<p>TODO: Make this page look nice, Fix: 8</p>
 		</div>
 	</div>
   );
