@@ -44,7 +44,7 @@ module.exports = async (req, res) => {
             res.end(JSON.stringify({ error: 'Internal Server Error' }));
             return;
         }
-
+        console.log(userResult);
         if (userResult.length === 0) {
             console.log('No user');
             res.statusCode = 404;
