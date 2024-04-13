@@ -33,11 +33,12 @@ module.exports = async (req, res) => {
 
     const { userEmail, ...productInfo } = productData;
 
-    console.log('Querying for user_id');
+    console.log('Querying for user_id', userEmail);
 
     const getUserSql = `SELECT user_id FROM USER WHERE email = ?`;
     db.query(getUserSql, [userEmail], (err, userResult) => {
         if (err) {
+            console.log('Error finding user');
             console.error('Error retrieving user:', err);
             res.writeHead(404, { 'Content-Type' : 'application/json' });
             res.end(JSON.stringify({ error: 'Internal Server Error' }));
@@ -45,6 +46,7 @@ module.exports = async (req, res) => {
         }
 
         if (userResult.length === 0) {
+            console.log('No user');
             res.statusCode = 404;
             res.end(JSON.stringify({ error: 'User not found' }));
             return;
