@@ -37,7 +37,6 @@ module.exports = async (req, res) => {
 
     const getUserSql = `SELECT * FROM USER WHERE email = ?`;
     db.query(getUserSql, [email], (err, userResult) => {
-        console.log("User email is: ", userEmail);
         if (err) {
             console.log('Error finding user');
             console.error('Error retrieving user:', err);
@@ -68,5 +67,7 @@ module.exports = async (req, res) => {
             res.writeHead(200, { 'Content-Type' : 'application/json' });
             res.end(JSON.stringify({ message: 'Product added to cart successfully' }));
         });
+        res.writeHead(200, { 'Content-Type' : 'application/json' });
+        res.end(JSON.stringify({ message: 'ID was found and product added' }));
     });
 };
