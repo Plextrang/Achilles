@@ -24,7 +24,7 @@ module.exports = async (req, res) => {
             console.error('Error connecting to database:', err);
             return;
         }
-        console.log('Connected to database');
+        console.log('Connected to database, in the function');
     });
 
     console.log('Attempting to get request body');
