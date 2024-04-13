@@ -61,6 +61,11 @@ export default function Navbar() {
                 {isLoggedIn ? (
                     <>
                         <button className="nav-button" id="login-button" onClick={handleLogout}>Logout</button>
+                        <Link to="/Cart">
+                            <button className="nav-button" id="cart-button">
+                                My Cart
+                            </button>
+                        </Link>
                         {/* TODO: Add more buttons */}
                     </>
                 ) : (

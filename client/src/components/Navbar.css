@@ -64,10 +64,10 @@
     background-color: #656565;
 }
 
-#register-button {
+#register-button, #cart-button {
     background-color: #FFAEB9;
 }
 
-#register-button:hover {
+#register-button:hover, #cart-button:hover {
     background-color: #ffc0c8;
 }

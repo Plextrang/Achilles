@@ -13,6 +13,7 @@ import AddEmployee from "./Pages/AddEmployee";
 import AddSupplier from "./Pages/AddSupplier";
 import SalesReport from "./Pages/SalesReport";
 import CheckOut from "./Pages/CheckOut"
+import ProductInfo from "./Pages/ProductInfo"
 
 import './App.css';
 
@@ -27,6 +28,7 @@ function App() {
 				<Route path="/Register" element={<Register />}></Route>
 				<Route path="/EntryForm" element={<DataEntry />}></Route>
 				<Route path="/Products" element={<Products/>}></Route>
+				<Route path="/GetProduct" element={<ProductInfo/>}></Route>
 				<Route path="/ProfileForm" element={<Profile/>}></Route>
 				<Route path="/Cart" element={<Cart/>}></Route>
 				<Route path = "/Admin" element={<Admin/>}></Route>

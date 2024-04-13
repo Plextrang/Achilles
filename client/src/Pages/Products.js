@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FaStar, FaShoppingBag } from 'react-icons/fa';
-import {Link} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import white_converse from '../images/white_converse.jpg';
 import nike_air_force_1 from '../images/nike_air_force_1.jpg';
 import adidas_gazelle_blue_gold from '../images/adidas_gazella_blue_gold.jpg';
@@ -20,10 +20,14 @@ const variableMap = {
 
 export default function Products() {
   const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
 
-  function openProduct(props) {
-
-  }
+  const openProduct = (product) => {
+    let stringProduct = JSON.stringify(product)
+    localStorage.setItem('ProductInfo', stringProduct);
+    console.log(localStorage.getItem('ProductInfo'));
+    navigate('/GetProduct');
+  };
 
   useEffect(() => {
     fetch('https://cosc-3380-6au9.vercel.app/api/handlers/products/getProducts')
@@ -79,7 +83,7 @@ export default function Products() {
           </div>
         ) : (
           products.map(product => (
-            <div key={product.product_id} className="card" onClick={openProduct(product)}>
+            <div key={product.product_id} className="card" onClick={() => openProduct(product)}>
               <img className="card-img" src={variableMap[product.image_filename]} alt={product.item_name} />
               <div className="card-details">
                 <h3 className="card-title">{product.item_name}</h3>
