@@ -37,6 +37,7 @@ module.exports = async (req, res) => {
 
     const getUserSql = `SELECT * FROM USER WHERE email = ?`;
     db.query(getUserSql, [userEmail], (err, userResult) => {
+        console.log("User email is: ", userEmail);
         if (err) {
             console.log('Error finding user');
             console.error('Error retrieving user:', err);
