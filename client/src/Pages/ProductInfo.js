@@ -28,25 +28,22 @@ export default function ProductInfo() {
         email: userEmail 
     };
 
-  const handleAddCart = () => {
-	fetch('https://cosc-3380-6au9.vercel.app/api/handlers/products/addToCart', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(productWithUserId)
-        }).then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Successfully Added to Cart:', data);
-            })
-            .catch(error => {
-                console.error('Error adding to Cart:', error);
-            });
+  const handleAddCart = async (e) => {
+	try {
+		const response = await fetch('https://cosc-3380-6au9.vercel.app/api/handlers/products/addToCart/', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(productWithUserId)
+		});
+
+		if (!response.ok) {
+			throw new Error('Failed to add product');
+		}
+	} catch (error) {
+		console.error('Error adding to Cart:', error);
+	}
   };
 
   return (
@@ -70,7 +67,7 @@ export default function ProductInfo() {
 					   onChange={(e) => setQuantity(e.target.value)}
 					   required />
 			</div>
-			<p>TODO: Make this page look nice, Fix: 6</p>
+			<p>TODO: Make this page look nice, Fix: 7</p>
 		</div>
 	</div>
   );
