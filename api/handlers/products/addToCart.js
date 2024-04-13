@@ -33,7 +33,10 @@ module.exports = async (req, res) => {
 
     // First, retrieve the user_id based on the userEmail
     const getUserSql = `SELECT user_id FROM USER WHERE email = ?`;
+    console.log("Checkpoint 1");
     db.query(getUserSql, [userEmail], (err, userResult) => {
+        console.log("Checkpoint 2, Email is:")
+        console.log(userEmail);
         if (err) {
             console.error('Error retrieving user:', err);
             res.writeHead(500, { 'Content-Type': 'application/json' });
@@ -48,6 +51,8 @@ module.exports = async (req, res) => {
         }
 
         const user_id = userResult[0].user_id;
+        console.log("Checkpoint 3, user-id is:")
+        console.log(user_id);
 
         // Once we have the user_id, add the product to the cart
         addProductToCart(db, res, user_id, productInfo);
@@ -55,6 +60,7 @@ module.exports = async (req, res) => {
 };
 
 function addProductToCart(db, res, user_id, productInfo) {
+    console.log("Checkpoint 4");
     const insertCartItemSql = `INSERT INTO CART_ITEM (user_id, quantity, product_id) VALUES (?, ?, ?)`;
     db.query(insertCartItemSql, [user_id, productInfo.quantity, productInfo.product_id], (err, result) => {
         if (err) {
