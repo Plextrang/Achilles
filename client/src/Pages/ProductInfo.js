@@ -20,6 +20,8 @@ const variableMap = {
 export default function ProductInfo() {
 	const [quantity, setQuantity] = useState(1);
 	const userEmail = localStorage.getItem("userEmail");
+	console.log(userEmail);
+	console.log(quantity);
     const product = JSON.parse(localStorage.getItem('ProductInfo'));
 
     const productWithUserId = {
@@ -28,6 +30,7 @@ export default function ProductInfo() {
         email: userEmail 
     };
 
+	console.log(productWithUserId);
   const handleAddCart = async (e) => {
 	try {
 		const response = await fetch('https://cosc-3380-6au9.vercel.app/api/handlers/products/addToCart/', {
@@ -37,7 +40,6 @@ export default function ProductInfo() {
 			},
 			body: JSON.stringify(productWithUserId)
 		});
-		console.log(response.ok)
 		if (!response.ok) {
 			throw new Error('Failed to add product');
 		}
@@ -67,7 +69,7 @@ export default function ProductInfo() {
 					   onChange={(e) => setQuantity(e.target.value)}
 					   required />
 			</div>
-			<p>TODO: Make this page look nice, Fix: 9</p>
+			<p>TODO: Make this page look nice, Fix: 10</p>
 		</div>
 	</div>
   );
