@@ -35,19 +35,19 @@ module.exports = async (req, res) => {
 
     console.log('Querying for user_id', userEmail);
 
-    const getUserSql = `SELECT user_id FROM USER WHERE email = ?`;
+    const getUserSql = `SELECT * FROM USER WHERE email = ?`;
     db.query(getUserSql, [userEmail], (err, userResult) => {
         if (err) {
             console.log('Error finding user');
             console.error('Error retrieving user:', err);
-            res.writeHead(404, { 'Content-Type' : 'application/json' });
+            res.writeHead(500, { 'Content-Type' : 'application/json' });
             res.end(JSON.stringify({ error: 'Internal Server Error' }));
             return;
         }
         console.log(userResult);
         if (userResult.length === 0) {
             console.log('No user');
-            res.statusCode = 404;
+            res.statusCode = 401;
             res.end(JSON.stringify({ error: 'User not found' }));
             return;
         }
