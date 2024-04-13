@@ -19,6 +19,10 @@ module.exports = async (req, res) => {
         database: "cosc3380"
     });
 
+    console.log('Attempting to get request body');
+    const productData = await getRequestBody(req, res);
+    console.log('Parsed product data:', productData);
+
     db.connect(err => {
         if (err) {
             console.error('Error connecting to database:', err);
@@ -27,9 +31,9 @@ module.exports = async (req, res) => {
         console.log('Connected to database, in the function');
     });
 
-    console.log('Attempting to get request body');
-    const productData = await getRequestBody(req, res);
-    console.log('Parsed product data:', productData);
+    // console.log('Attempting to get request body');
+    // const productData = await getRequestBody(req, res);
+    // console.log('Parsed product data:', productData);
 
     const { userEmail, ...productInfo } = productData;
 

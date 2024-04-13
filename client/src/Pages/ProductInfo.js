@@ -33,7 +33,7 @@ export default function ProductInfo() {
 	console.log(productWithUserId);
   const handleAddCart = async (e) => {
 	try {
-		const response = await fetch('https://cosc-3380-6au9.vercel.app/api/handlers/products/addToCart/', {
+		const response = await fetch('https://cosc-3380-6au9.vercel.app/api/handlers/products/addToCart', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -69,7 +69,7 @@ export default function ProductInfo() {
 					   onChange={(e) => setQuantity(e.target.value)}
 					   required />
 			</div>
-			<p>TODO: Make this page look nice, Fix Attempt: 11</p>
+			<p>TODO: Make this page look nice, Fix Attempt: 12</p>
 		</div>
 	</div>
   );
