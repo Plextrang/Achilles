@@ -70,7 +70,7 @@ export default function ProductInfo() {
 					   onChange={(e) => setQuantity(e.target.value)}
 					   required />
 			</div>
-			<p>TODO: Make this page look nice</p>
+			<p>TODO: Make this page look nice, Fix: 4</p>
 		</div>
 	</div>
   );
