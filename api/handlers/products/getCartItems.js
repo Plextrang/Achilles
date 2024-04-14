@@ -52,7 +52,7 @@ module.exports = async (req, res) => {
 
         const user_id = userResult[0].user_id;
 
-        const getCartItemsSql = `SELECT item_name, image_filename, price, description FROM CART_ITEM WHERE user_id = ?`;
+        const getCartItemsSql = `SELECT item_name, image_filename, price, description FROM SHOE_PRODUCT, CART_ITEM WHERE CART_ITEM.product_id = SHOE_PRODUCT.product_id AND CART_ITEM.user_id = ?`;
         db.query(getCartItemsSql, [user_id], (err, cartItems) => {
             if (err) {
                 console.error('Error retrieving cart items:', err);
