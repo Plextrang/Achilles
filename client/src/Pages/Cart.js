@@ -127,7 +127,7 @@ export default function Cart() {
                         <img src={variableMap[item.image_filename]} alt={item.item_name} className="cart-item-image" />
                         <div className="cart-item-details">
                             <h3 className="cart-item-name">{item.item_name}</h3>
-                            <p>{item.description}</p>
+                            <p>Quantity: {item.quantity}</p>
                             <span className="cart-item-price">${item.price}</span>
                         </div>
                         <button className="cart-item-remove">Remove</button>
