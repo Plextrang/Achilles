@@ -94,6 +94,8 @@ export default function Cart() {
     // }, []);
 
     useEffect(() => {
+        console.log("Fetching items");
+        const userEmail = localStorage.getItem('userEmail');
         fetch('https://cosc-3380-6au9.vercel.app/api/handlers/products/getCartItems?email=${encodeURIComponent(userEmail)}')
           .then(response => {
             if (!response.ok) {
@@ -111,7 +113,7 @@ export default function Cart() {
 
     return (
         <div className="cart-container">
-            <h1 className="cart-title">Shopping Cart - test7</h1>
+            <h1 className="cart-title">Shopping Cart - test8</h1>
             {cartItems.length === 0 ? (
                 <div className="cart-items"> 
                     <p>Cart is empty.</p>
