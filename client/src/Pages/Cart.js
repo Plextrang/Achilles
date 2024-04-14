@@ -104,7 +104,9 @@ export default function Cart() {
             return response.json();
           })
           .then(data => {
+            console.log("Frontend got: ", data);
             setCartItems(data);
+            console.log("cartItems is now: ", cartItems);
           })
           .catch(error => {
             console.error('Error fetching cart items:', error);
@@ -113,7 +115,7 @@ export default function Cart() {
 
     return (
         <div className="cart-container">
-            <h1 className="cart-title">Shopping Cart - test9</h1>
+            <h1 className="cart-title">Shopping Cart - test10</h1>
             {cartItems.length === 0 ? (
                 <div className="cart-items"> 
                     <p>Cart is empty.</p>
