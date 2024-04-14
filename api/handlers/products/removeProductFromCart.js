@@ -54,6 +54,7 @@ module.exports = async (req, res) => {
         }
 
         const userId = userResult[0].user_id;
+        console.log("UserID is: ", userId);
 
         const removeProductSql = `DELETE FROM CART_ITEM WHERE user_id = ? AND product_id = ?`;
         db.query(removeProductSql, [userId, productId], (err, result) => {
@@ -65,15 +66,16 @@ module.exports = async (req, res) => {
             }
 
             if (result.affectedRows === 0) {
-                // No rows were affected, meaning the product was not found in the user's cart
                 res.writeHead(404, { 'Content-Type' : 'application/json' });
                 res.end(JSON.stringify({ error: 'Product not found in cart' }));
                 return;
             }
+            console.log("Affected Rows: ", result.affectedRows);
             res.writeHead(200, { 'Content-Type' : 'application/json' });
             res.end(JSON.stringify({ message: 'Product removed from cart successfully' }));
         });
+        
+        res.writeHead(200, { 'Content-Type' : 'application/json' });
+        res.end(JSON.stringify({ message: 'Product removed from cart successfully' }));
     });
-    res.writeHead(200, { 'Content-Type' : 'application/json' });
-    res.end(JSON.stringify({ message: 'Product removed from cart successfully' }));
 };

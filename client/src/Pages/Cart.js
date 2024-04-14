@@ -64,7 +64,7 @@ export default function Cart() {
 
     return (
         <div className="cart-container">
-            <h1 className="cart-title">Shopping Cart - Test: 1</h1>
+            <h1 className="cart-title">Shopping Cart - Test: 2</h1>
             {cartItems.length === 0 ? (
                 <div className="cart-items"> 
                     <p>Cart is empty.</p>
