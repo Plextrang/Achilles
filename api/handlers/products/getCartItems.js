@@ -60,7 +60,8 @@ module.exports = async (req, res) => {
                 return;
             }
             console.log(cartItems);
-            res.status(200).json([cartItems]);
+            res.statusCode = 200;
+            res.end(JSON.stringify(cartItems));
         });
         res.end(JSON.stringify({ message: 'ID was found and Cart items sent' }));
     });
