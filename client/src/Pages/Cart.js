@@ -91,11 +91,17 @@ export default function Cart() {
             }
         }
         fetchCartItems();
+        console.log(cartItems);
     }, []);
 
     return (
         <div className="cart-container">
-            <h1 className="cart-title">Shopping Cart - test</h1>
+            <h1 className="cart-title">Shopping Cart - test2</h1>
+            {products.length === 0 ? (
+            <div className="cart-items"> 
+                <p>Cart is empty.</p>
+            </div>
+            ) : (
             <div className="cart-items">
                 {cartItems.map((item, index) => (
                     <div className="cart-item" key={index}>
@@ -109,7 +115,7 @@ export default function Cart() {
                     </div>
                 ))}
             </div>
-            {/* Other cart summary and checkout components */}
+            )}
         </div>
     );
 }

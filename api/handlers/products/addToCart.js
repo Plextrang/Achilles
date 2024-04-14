@@ -65,7 +65,7 @@ module.exports = async (req, res) => {
             }
 
             res.writeHead(200, { 'Content-Type' : 'application/json' });
-            res.end(JSON.stringify({ message: 'Product added to cart successfully' }));
+            res.end(JSON.stringify(results));
         });
         res.writeHead(200, { 'Content-Type' : 'application/json' });
         res.end(JSON.stringify({ message: 'ID was found and product added' }));
