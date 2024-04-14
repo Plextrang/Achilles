@@ -72,13 +72,14 @@ export default function Cart() {
     useEffect(() => {
         async function fetchCartItems() {
             try {
-                console.log("Fetching items, hope no spam");
-                const response = await fetch('https://cosc-3380-6au9.vercel.app/api/handlers/products/getCartItems', {
+                console.log("Fetching items");
+                const userEmail = localStorage.getItem('userEmail');
+                const url = `https://cosc-3380-6au9.vercel.app/api/handlers/products/getCartItems?email=${encodeURIComponent(userEmail)}`;
+                const response = await fetch(url, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({email: localStorage.getItem('userEmail')})
+                    }
                 });
                 if (!response.ok) {
                     throw new Error('Failed to fetch cart items');
@@ -94,7 +95,7 @@ export default function Cart() {
 
     return (
         <div className="cart-container">
-            <h1 className="cart-title">Shopping Cart</h1>
+            <h1 className="cart-title">Shopping Cart - test</h1>
             <div className="cart-items">
                 {cartItems.map((item, index) => (
                     <div className="cart-item" key={index}>

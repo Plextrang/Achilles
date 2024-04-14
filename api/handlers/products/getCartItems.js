@@ -27,7 +27,10 @@ module.exports = async (req, res) => {
         console.log('Connected to database, in the function');
     });
 
-    const email = await getRequestBody(req, res);
+    const urlParts = req.url.split('?');
+    const queryString = urlParts.length > 1 ? urlParts[1] : '';
+    const queryParams = querystring.parse(queryString);
+    const email = queryParams.email;
     console.log('Querying for user_id', email);
 
     const getUserSql = `SELECT * FROM USER WHERE email = ?`;
