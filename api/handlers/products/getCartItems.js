@@ -27,13 +27,37 @@ module.exports = async (req, res) => {
         console.log('Connected to database, in the function');
     });
 
-    const getCartItemsSql = `SELECT item_name, image_filename, price, description FROM cart_items`;
-    db.query(getCartItemsSql, (err, cartItems) => {
+    const email = await getRequestBody(req, res);
+    console.log('Querying for user_id', email);
+
+    const getUserSql = `SELECT * FROM USER WHERE email = ?`;
+    db.query(getUserSql, [email], (err, userResult) => {
         if (err) {
-            console.error('Error retrieving cart items:', err);
-            res.status(500).json({ error: 'Internal Server Error' });
+            console.log('Error finding user');
+            console.error('Error retrieving user:', err);
+            res.writeHead(500, { 'Content-Type' : 'application/json' });
+            res.end(JSON.stringify({ error: 'Internal Server Error' }));
             return;
         }
-        res.status(200).json(cartItems);
+        console.log(userResult);
+        if (userResult.length === 0) {
+            console.log('No user');
+            res.statusCode = 401;
+            res.end(JSON.stringify({ error: 'User not found' }));
+            return;
+        }
+
+        const user_id = userResult[0].user_id;
+
+        const getCartItemsSql = `SELECT item_name, image_filename, price, description FROM CART_ITEM WHERE user_id = ?`;
+        db.query(getCartItemsSql, [user_id], (err, cartItems) => {
+            if (err) {
+                console.error('Error retrieving cart items:', err);
+                res.status(500).json({ error: 'Internal Server Error' });
+                return;
+            }
+            res.status(200).json(cartItems);
+        });
+        res.end(JSON.stringify({ message: 'ID was found and Cart items sent' }));
     });
 };

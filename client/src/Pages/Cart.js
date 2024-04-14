@@ -73,7 +73,13 @@ export default function Cart() {
         async function fetchCartItems() {
             try {
                 console.log("Fetching items, hope no spam");
-                const response = await fetch('https://cosc-3380-6au9.vercel.app/api/handlers/products/getCartItems');
+                const response = await fetch('https://cosc-3380-6au9.vercel.app/api/handlers/products/getCartItems', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({email: localStorage.getItem('userEmail')})
+                });
                 if (!response.ok) {
                     throw new Error('Failed to fetch cart items');
                 }
