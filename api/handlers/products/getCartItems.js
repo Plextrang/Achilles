@@ -59,10 +59,9 @@ module.exports = async (req, res) => {
                 res.status(500).json({ error: 'Internal Server Error' });
                 return;
             }
-            console.log(cartItems);
-            res.statusCode = 200;
+            console.log("This is the query result: ", cartItems);
+            res.writeHead(200, { 'Content-Type' : 'application/json' });
             res.end(JSON.stringify(cartItems));
         });
-        res.end(JSON.stringify({ message: 'ID was found and Cart items sent' }));
     });
 };
