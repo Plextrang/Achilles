@@ -86,24 +86,24 @@ export default function Cart() {
                 }
                 const data = await response.json();
                 setCartItems(data);
+                console.log(cartItems);
             } catch (error) {
                 console.error('Error fetching cart items:', error);
             }
         }
         fetchCartItems();
-        console.log(cartItems);
     }, []);
 
     return (
         <div className="cart-container">
-            <h1 className="cart-title">Shopping Cart - test4</h1>
+            <h1 className="cart-title">Shopping Cart - test5</h1>
             {cartItems.length === 0 ? (
             <div className="cart-items"> 
                 <p>Cart is empty.</p>
             </div>
             ) : (
             <div className="cart-items">
-                {cartItems.map((item, index) => (
+                {cartItems.map((item) => (
                     <div className="cart-item" key={index}>
                         <img src={variableMap[item.image_filename]} alt={item.item_name} className="cart-item-image" />
                         <div className="cart-item-details">
