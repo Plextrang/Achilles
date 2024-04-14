@@ -33,7 +33,7 @@ module.exports = async (req, res) => {
 
     const { email, ...productInfo } = productData;
 
-    console.log('Querying for user_id', userEmail);
+    console.log('Querying for user_id', email);
 
     const getUserSql = `SELECT * FROM USER WHERE email = ?`;
     db.query(getUserSql, [email], (err, userResult) => {
