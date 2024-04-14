@@ -69,41 +69,57 @@ const variableMap = {
 export default function Cart() {
     const [cartItems, setCartItems] = useState([]);
 
+    // useEffect(() => {
+    //     async function fetchCartItems() {
+    //         try {
+    //             console.log("Fetching items");
+    //             const userEmail = localStorage.getItem('userEmail');
+    //             const url = `https://cosc-3380-6au9.vercel.app/api/handlers/products/getCartItems?email=${encodeURIComponent(userEmail)}`;
+    //             const response = await fetch(url, {
+    //                 method: 'GET',
+    //                 headers: {
+    //                     'Content-Type': 'application/json'
+    //                 }
+    //             });
+    //             if (!response.ok) {
+    //                 throw new Error('Failed to fetch cart items');
+    //             }
+    //             const data = await response.json();
+    //             setCartItems(data);
+    //         } catch (error) {
+    //             console.error('Error fetching cart items:', error);
+    //         }
+    //     }
+    //     fetchCartItems();
+    // }, []);
+
     useEffect(() => {
-        async function fetchCartItems() {
-            try {
-                console.log("Fetching items");
-                const userEmail = localStorage.getItem('userEmail');
-                const url = `https://cosc-3380-6au9.vercel.app/api/handlers/products/getCartItems?email=${encodeURIComponent(userEmail)}`;
-                const response = await fetch(url, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                });
-                if (!response.ok) {
-                    throw new Error('Failed to fetch cart items');
-                }
-                const data = await response.json();
-                setCartItems(data);
-            } catch (error) {
-                console.error('Error fetching cart items:', error);
+        fetch('https://cosc-3380-6au9.vercel.app/api/handlers/products/getCartItems?email=${encodeURIComponent(userEmail)}')
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
             }
-        }
-        fetchCartItems();
-    }, []);
+            return response.json();
+          })
+          .then(data => {
+            setCartItems(data);
+          })
+          .catch(error => {
+            console.error('Error fetching cart items:', error);
+          });
+      }, []);
 
     return (
         <div className="cart-container">
-            <h1 className="cart-title">Shopping Cart - test5</h1>
+            <h1 className="cart-title">Shopping Cart - test7</h1>
             {cartItems.length === 0 ? (
-            <div className="cart-items"> 
-                <p>Cart is empty.</p>
-            </div>
+                <div className="cart-items"> 
+                    <p>Cart is empty.</p>
+                </div>
             ) : (
             <div className="cart-items">
-                {cartItems.map((item) => (
-                    <div className="cart-item" key={index}>
+                {cartItems.map(item => (
+                    <div className="cart-item" key={item.product_id}>
                         <img src={variableMap[item.image_filename]} alt={item.item_name} className="cart-item-image" />
                         <div className="cart-item-details">
                             <h3 className="cart-item-name">{item.item_name}</h3>
