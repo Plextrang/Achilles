@@ -19,7 +19,8 @@ const variableMap = {
   const removeProductFromCart = async (productId) => {
     try {
         const userEmail = localStorage.getItem('userEmail');
-        const url = `https://cosc-3380-6au9.vercel.app/api/handlers/products/removeProductFromCart?email=${encodeURIComponent(userEmail)}&productId=${productId}`;
+        console.log("Sending this id: ", productId);
+        const url = `https://cosc-3380-6au9.vercel.app/api/handlers/products/removeProductFromCart?email=${encodeURIComponent(userEmail)}&productId=${encodeURIComponent(productId)}`;
         const response = await fetch(url, {
             method: 'DELETE', 
             headers: {
@@ -58,13 +59,14 @@ export default function Cart() {
       }, []);
 
     const handleRemoveProduct = (productId) => {
+        console.log(productId);
         removeProductFromCart(productId);
         setCartItems(prevCartItems => prevCartItems.filter(item => item.product_id !== productId));
     };
 
     return (
         <div className="cart-container">
-            <h1 className="cart-title">Shopping Cart - Test: 2</h1>
+            <h1 className="cart-title">Shopping Cart - Test: 3</h1>
             {cartItems.length === 0 ? (
                 <div className="cart-items"> 
                     <p>Cart is empty.</p>
