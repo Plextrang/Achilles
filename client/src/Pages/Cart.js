@@ -1,4 +1,5 @@
 import React, { useEffect, useState, } from 'react';
+import { Link } from 'react-router-dom';
 import white_converse from '../images/white_converse.jpg';
 import nike_air_force_1 from '../images/nike_air_force_1.jpg';
 import adidas_gazelle_blue_gold from '../images/adidas_gazella_blue_gold.jpg';
@@ -38,6 +39,7 @@ const variableMap = {
 
 export default function Cart() {
     const [cartItems, setCartItems] = useState([]);
+    const [totalPrice, setTotalPrice] = useState(0);
     useEffect(() => {
         console.log("Fetching items");
         const userEmail = localStorage.getItem('userEmail');
@@ -57,6 +59,11 @@ export default function Cart() {
             console.error('Error fetching cart items:', error);
           });
       }, []);
+    useEffect(() => {
+        let total = 0;
+        cartItems.forEach(item => {total += item.price * item.quantity;});
+        setTotalPrice(total);
+    }, [cartItems]);
 
     const handleRemoveProduct = (productId) => {
         console.log(productId);
@@ -65,6 +72,7 @@ export default function Cart() {
     };
     const handleCheckout = () => {
         console.log('Checkout button clicked');
+
     };
 
     return (
@@ -85,14 +93,17 @@ export default function Cart() {
                             <span className="cart-item-price">${item.price}</span>
                         </div>
                         <button className="cart-item-remove" onClick={() => handleRemoveProduct(item.product_id)}>Remove</button>
-                         {/* i legit do not know where this belongs i cant find it  */}
-                        <button className="checkout-button" onClick={handleCheckout}>Checkout</button> 
                     </div>
                 ))}
+                {/* <div className="total-price"> Total : ${totalPrice.toFixed(2)}</div> */}
             </div>
             
             )}
-            
+            <div className="cart-summary">
+            <div className="total-price">Total: ${totalPrice.toFixed(2)}</div>
+            {/* <div className='promo-text'> $15 off purchases $150 or more</div> */} 
+            <Link to="/CheckOut" className="checkout-button">Checkout</Link>
+            </div>
         </div>
     );
 }

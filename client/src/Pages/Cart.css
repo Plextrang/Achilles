@@ -1,5 +1,7 @@
 .cart-container {
     margin: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 .cart-title {
@@ -58,10 +60,13 @@
 }
 
 .cart-summary {
-    margin-top: 20px;
+    /* margin-top: 20px;
     padding: 20px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 5px; */
+    display: flex;
+    justify-content: space-between;
+    align-items: right;
 }
 
 .cart-summary h2 {
@@ -79,13 +84,10 @@
     color: white;
     border: none;
     padding: 10px 20px;
-    text-align: center;
     text-decoration: none;
-    display: inline-block;
     font-size: 16px;
     border-radius: 5px;
     cursor: pointer;
-    align-self: flex-end; 
 }
 
 .checkout-button:hover {
@@ -97,4 +99,13 @@
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
+}
+.total-price {
+    font-size: 24px;
+    font-weight: bold;
+    align-items: right;
+    color: #333;
+}
+.promo-text{
+    font-size: 14px;
 }
