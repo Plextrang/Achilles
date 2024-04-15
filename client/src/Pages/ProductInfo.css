@@ -1,13 +1,88 @@
 .product-info-container {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 200px;
 }
 
-.product-img {
-    margin: 20px;
-    width: 500px;
-    height: 400px;
+.card-details {
+    margin-left: 50px;
+}
+
+.card-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.card-description {
+    font-size: 14px;
+    max-width: 300px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    white-space: normal;
+    text-overflow: ellipsis;
+}
+
+.card-reviews {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.total-reviews {
+    margin-left: 5px;
+    font-size: 14px;
+    color: #777;
+}
+
+.bag {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.price {
+    margin-left: 5px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.add-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#add-button {
+    padding: 10px 20px;
+    background-color: #ff3e6c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 10px;
+    transition: background-color 0.3s ease;
+}
+
+#add-button:hover {
+    background-color: #d62c55;
+}
+
+label {
+    font-size: 16px;
+    margin-right: 10px;
 }
 
 #quantity-input {
-    width: 40px;
+    width: 50px;
+    padding: 5px;
+    font-size: 16px;
+}
+
+.product-img {
+    width: 500px;
+    height: 400px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }

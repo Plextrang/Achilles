@@ -49,6 +49,9 @@ export default function ProductInfo() {
 		<img className="product-img" src={variableMap[product.image_filename]} alt={product.item_name} />
 		<div className="card-details">
 			<h3 className="card-title">{product.item_name}</h3>
+			<div className="card-description">
+				{product.description}
+			</div>
 			<div className="card-reviews">
 				<FaStar />
 				<span className="total-reviews">4 Reviews</span> 
