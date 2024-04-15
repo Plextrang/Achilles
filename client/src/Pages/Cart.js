@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, } from 'react';
 import white_converse from '../images/white_converse.jpg';
 import nike_air_force_1 from '../images/nike_air_force_1.jpg';
 import adidas_gazelle_blue_gold from '../images/adidas_gazella_blue_gold.jpg';
@@ -63,6 +63,9 @@ export default function Cart() {
         removeProductFromCart(productId);
         setCartItems(prevCartItems => prevCartItems.filter(item => item.product_id !== productId));
     };
+    const handleCheckout = () => {
+        console.log('Checkout button clicked');
+    };
 
     return (
         <div className="cart-container">
@@ -82,10 +85,14 @@ export default function Cart() {
                             <span className="cart-item-price">${item.price}</span>
                         </div>
                         <button className="cart-item-remove" onClick={() => handleRemoveProduct(item.product_id)}>Remove</button>
+                         {/* i legit do not know where this belongs i cant find it  */}
+                        <button className="checkout-button" onClick={handleCheckout}>Checkout</button> 
                     </div>
                 ))}
             </div>
+            
             )}
+            
         </div>
     );
 }
