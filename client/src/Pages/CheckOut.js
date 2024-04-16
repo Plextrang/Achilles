@@ -156,8 +156,47 @@ export default function CheckOut() {
                         onChange = {(e) => setcvv(e.target.value)}
                     />
                 </form>
+            </div>
+            <div className = "shipping-address">
                 <h2>Shipping Address</h2>
-                <p>123 Shipping Street, City, Country</p>
+                {/*DO THE SAME HERE AS PAYMENT*/}
+                <form onSubmit = {handleOrder}>
+                    <label htmlFor = "streetAddress">Street Address: </label>
+                    <input
+                        type = "text"
+                        id = "streetAddress"
+                        value = {streetAddress}
+                        onChange = {(e) => setStreetAddress(e.target.value)}
+                    />
+                    <label htmlFor = "userCity">City: </label>
+                    <input
+                        type = "text"
+                        id = "userCity"
+                        value = {userCity}
+                        onChange = {(e) => setUserCity(e.target.value)}
+                    />
+                    <label htmlFor = "userState">State: </label>
+                    <input
+                        type = "text"
+                        id = "userState"
+                        value = {userState}
+                        onChange = {(e) => setUserState(e.target.value)}
+                    />
+                    <label htmlFor = "userPostalCode">ZIP Code: </label>
+                    <input
+                        type = "text"
+                        id = "userPostalCode"
+                        value = {userPostalCode}
+                        onChange = {(e) => setPostalCode(e.target.value)}
+                    />
+                    <label htmlFor = "userCountry">Country: </label>
+                    <input
+                        type = "text"
+                        id = "userCountry"
+                        value = {userCountry}
+                        onChange = {(e) => setCountry(e.target.value)}
+                    />
+                </form>
                 <button className="confirm-order-button" onClick={handleOrder}>Confirm Order</button>
             </div>
         </div>

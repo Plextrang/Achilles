@@ -15,6 +15,8 @@
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    /* display: flex;
+    align-items: flex-end; */
 }
 
 .checkout-summary h2 {
@@ -27,6 +29,7 @@
     margin-bottom: 10px;
 }
 
+
 .confirm-order-button {
     background-color: #4CAF50;
     color: white;
@@ -34,10 +37,10 @@
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
     font-size: 16px;
     border-radius: 5px;
     cursor: pointer;
+    margin-top: 10px; 
     align-self: flex-end; 
 }
 
@@ -72,13 +75,33 @@
     font-size: 0.9rem;
 }
 
-.payment-section button[type="submit"] {
-    padding: 8px 16px;
+.shipping-address {
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.shipping-address h2 {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.shipping-address label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.shipping-address input[type="text"] {
+    width: calc(100% - 20px); 
+    padding: 6px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
     font-size: 0.9rem;
 }
 
 
-.payment-section button[type="submit"]:hover {
-    background-color: #0056b3;
-}
+
 
