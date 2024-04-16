@@ -13,18 +13,6 @@ export default function Home() {
         <Link to="/Products">
         <button class = "shop"> Shop Now</button>
         </Link>
-        <Link to="/EntryForm">
-          <button class = "shop"> Temp Data Entry Button</button>
-        </Link>
-        <Link to="/ProfileForm">
-          <button class = "shop"> Temp Profile Button</button>
-        </Link>
-        <Link to="/Cart">
-          <button class = "shop"> Temp Shopping Cart</button>
-        </Link>
-        <Link to="/Admin">
-          <button class = "shop"> Temp Admin Portal</button>
-        </Link>
     </div> 
   )
 }
