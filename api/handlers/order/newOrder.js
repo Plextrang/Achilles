@@ -26,5 +26,7 @@ module.exports = async (req, res) => {
     orderData = await getRequestBody(req, res);
     console.log('Parsed order data:', orderData);
     
-    const num_items = orderData.num_items;
+    const {totalPrice, cartItems, datetime, email, num_items} = orderData;
+
+    res.end(JSON.stringify({message: orderData}))
 }
