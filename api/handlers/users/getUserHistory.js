@@ -53,7 +53,7 @@ module.exports = async (req, res) => {
         const getUserHistorySql = `
             SELECT 
                 t.transaction_id,
-                t.transaction_date,
+                t.date_time,
                 ti.product_id,
                 sp.product_name,
                 sp.price
