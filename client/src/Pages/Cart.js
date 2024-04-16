@@ -102,7 +102,7 @@ export default function Cart() {
             <div className="cart-summary">
             <div className="total-price">Total: ${totalPrice.toFixed(2)}</div>
             {/* <div className='promo-text'> $15 off purchases $150 or more</div> */} 
-            <Link to={{ pathname: "/CheckOut", state: {cartItems:cartItems}}} className="checkout-button">Checkout</Link>
+            <Link to={{ pathname: "/CheckOut", state: {cartItems:cartItems}}} className="checkout-button" disabled={cartItems.length === 0}>Checkout</Link>
             </div>
         </div>
     );
