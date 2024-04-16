@@ -48,7 +48,7 @@ module.exports = async (req, res) => {
         const user_id = userResult[0].user_id;
         const totalCost = totalPrice; // alter this if totalPrice has discounts
 
-        const transactionSql = `INSERT INTO TRANSACTION (datetime, num_of_items, price_of_cart, total_cost, user_id) VALUES (?, ?, ?, ?, ?)`;
+        const transactionSql = `INSERT INTO TRANSACTIONS (datetime, num_of_items, price_of_cart, total_cost, user_id) VALUES (?, ?, ?, ?, ?)`;
         db.query(transactionSql, [datetime, num_items, totalPrice, totalCost, user_id], (err, result) => {
             if (err) {
                 console.error('Error inserting transaction data:', err);
