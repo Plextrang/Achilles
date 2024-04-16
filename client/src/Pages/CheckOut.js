@@ -1,4 +1,5 @@
 import React, {useEffect, useState,} from 'react';
+import { useNavigate } from 'react-router-dom';
 import white_converse from '../images/white_converse.jpg'; 
 import nike_air_force_1 from '../images/nike_air_force_1.jpg';
 import adidas_gazelle_blue_gold from '../images/adidas_gazella_blue_gold.jpg';
@@ -23,6 +24,10 @@ const variableMap = {
 export default function CheckOut() {
     const [cartItems, setCartItems] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
+    const email = localStorage.getItem('userEmail');
+
+    const navigate = useNavigate();
+
     useEffect(() => {
         console.log("Fetching items");
         const userEmail = localStorage.getItem('userEmail');
@@ -47,6 +52,42 @@ export default function CheckOut() {
         cartItems.forEach(item => {total += item.price * item.quantity;});
         setTotalPrice(total);
     }, [cartItems]);
+
+    const handleOrder = () => {
+        console.log("Confirming Order");
+    
+        // Prepare the request body
+        const datetime = new Date();
+        const requestBody = {
+            totalPrice: totalPrice,
+            cartItems: cartItems,
+            datetime: datetime,
+            email: email,
+            num_items: cartItems.length
+        };
+    
+        fetch('https://cosc-3380-6au9.vercel.app/api/handlers/order/newOrder', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(requestBody)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Order confirmed:', data);
+            navigate('/MyProfile');
+        })
+        .catch(error => {
+            console.error('Error confirming order:', error);
+        });
+    };
+    
 
     return (
         <div className="checkout-container">
@@ -77,7 +118,7 @@ export default function CheckOut() {
                     <span>Shipping:</span>
                     <div className="total-price">Total: ${totalPrice.toFixed(2)}</div>
                 </div>
-                <button className="confirm-order-button">Confirm Order</button>
+                <button className="confirm-order-button" onClick={handleOrder}>Confirm Order</button>
             </div>
             <div className="payment-section">
                 <h2>Payment Method</h2>
