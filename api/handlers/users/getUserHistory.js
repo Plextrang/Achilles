@@ -26,11 +26,10 @@ module.exports = async (req, res) => {
         console.log('Connected to database');
     });
 
-    const requestBody = await getRequestBody(req);
     const { email } = req.query;
     console.log('Received email:', email);
 
-    const getUserSql = `SELECT user_id FROM \`USER\` WHERE email = ?`;
+    const getUserSql = `SELECT user_id, first_name, last_name, address FROM \`USER\` WHERE email = ?`;
     db.query(getUserSql, [email], (err, userResult) => {
         if (err) {
             console.log('Error finding user');
@@ -48,19 +47,8 @@ module.exports = async (req, res) => {
         }
     
         console.log('User found:', userResult[0]);
-        const getUserInfo = "SELECT first_name, last_name, address FROM USER WHERE user_id = ?";
-        db.query(getUserInfo, [user_id], (err, userInformation) => {
-            if (err) {
-                console.error("Error getting user information");
-                res.status(500).json({ error: 'Internal Server Error' });
-                return;                
-            }
-        });
 
-        console.log("This is the query result: ", userInformation);
         res.writeHead(200, { 'Content-Type' : 'application/json' });
-        res.end(JSON.stringify(userInformation));
-
-        // Add more queries here
+        res.end(JSON.stringify(userResult[0]));
     });
 };
