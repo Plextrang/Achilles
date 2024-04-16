@@ -3,6 +3,7 @@ const http = require('http');
 const mysql = require('mysql');
 const cors = require('cors');
 const querystring = require('querystring');
+const { userInfo } = require("os");
 
 module.exports = async (req, res) => {
     if (req.method === "OPTIONS") {
@@ -25,11 +26,11 @@ module.exports = async (req, res) => {
         console.log('Connected to database');
     });
 
-    // const requestBody = await getRequestBody(req);
+    const requestBody = await getRequestBody(req);
     const { email } = req.query;
     console.log('Received email:', email);
 
-    const getUserSql = `SELECT user_id FROM USER WHERE email = ?`;
+    const getUserSql = `SELECT user_id FROM \`USER\` WHERE email = ?`;
     db.query(getUserSql, [email], (err, userResult) => {
         if (err) {
             console.log('Error finding user');
@@ -38,27 +39,27 @@ module.exports = async (req, res) => {
             res.end(JSON.stringify({ error: 'Internal Server Error' }));
             return;
         }
-
+    
         if (userResult.length === 0) {
             console.log('No user');
             res.statusCode = 401;
             res.end(JSON.stringify({ error: 'User not found' }));
             return;
         }
-
+    
         console.log('User found:', userResult[0]);
+        const getUserInfo = "SELECT first_name, last_name, address FROM USER WHERE user_id = ?";
+        db.query(getUserInfo, [user_id], (err, userInformation) => {
+            if (err) {
+                console.error("Error getting user information");
+                res.status(500).json({ error: 'Internal Server Error' });
+                return;                
+            }
+        });
 
-        const userData = { 
-            user_id: userResult[0].user_id,
-            first_name: userResult[0].first_name,
-            last_name: userResult[0].last_name,
-            address: userResult[0].address
-        };
-
-        console.log('Sending user data:', userData);
-
-        res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify(userData));
+        console.log("This is the query result: ", userInformation);
+        res.writeHead(200, { 'Content-Type' : 'application/json' });
+        res.end(JSON.stringify(userInformation));
 
         // Add more queries here
     });
