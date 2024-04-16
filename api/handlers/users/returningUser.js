@@ -70,7 +70,8 @@ module.exports = async (req, res) => {
                     }
                     // Set is_active to 1
                     res.statusCode = 200;
-                    res.end(JSON.stringify({ message: 'Login successful', redirectUrl: '/Products', userType: queryRes }));
+                    const uType = JSON.stringify(queryRes);
+                    res.end(JSON.stringify({ message: 'Login successful', redirectUrl: '/Products', userType: uType }));
                 });
             });
         });
