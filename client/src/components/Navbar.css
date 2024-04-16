@@ -66,22 +66,19 @@
     /* margin-top: 15px; */
 }
 
-#login-button, #profile-button {
+#login-button, #admin-button, #emplo-button, #cart-button {
     background-color: #494949;
 }
 
-#login-button:hover {
+#login-button:hover, #cart-button:hover, #admin-button:hover, #emplo-button:hover {
     background-color: #656565;
 }
 
-#register-button, #cart-button, #admin-button, #emplo-button {
+#register-button, #profile-button, #logout-button {
     background-color: #FFAEB9;
 }
 
-#register-button:hover, #cart-button:hover, #admin-button:hover, #emplo-button:hover {
+#register-button:hover, #profile-button:hover, #logout-button:hover{
     background-color: #ffc0c8;
 }
 
-#profile-button:hover {
-    background-color: #656565;
-}

@@ -74,7 +74,7 @@ export default function Navbar() {
                         {userType === 'Customer' && (
                             <button className="nav-button" id="cart-button" onClick={() => navigate('/Cart')}>My Cart</button>
                         )}
-                        <button className="nav-button" id="login-button" onClick={handleLogout}>Logout</button>
+                        <button className="nav-button" id="logout-button" onClick={handleLogout}>Logout</button>
                         <div className="nav-button" id="profile-button" onClick={() => navigate('/MyProfile')}>
                                 <CgProfile />
                         </div>
