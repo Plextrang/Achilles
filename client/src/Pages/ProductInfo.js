@@ -19,6 +19,7 @@ const variableMap = {
 
 export default function ProductInfo() {
 	const [quantity, setQuantity] = useState(1);
+	const [feedbackData, setFeedbackData] = useState([])
 	const userEmail = localStorage.getItem("userEmail");
     const product = JSON.parse(localStorage.getItem('ProductInfo'));
 
@@ -44,6 +45,7 @@ export default function ProductInfo() {
 	}
   };
 
+
   return (
 	<div className="product-info-container">
 		<img className="product-img" src={variableMap[product.image_filename]} alt={product.item_name} />
@@ -68,7 +70,15 @@ export default function ProductInfo() {
 					   onChange={(e) => setQuantity(e.target.value)}
 					   required />
 			</div>
-			<p>TODO: Make this page look nice</p>
+			<div className = "feedback-container">
+				<h3>Feedback</h3>
+				<ul>
+                    {feedbackData.map((feedback, index) => (
+                        <li key={index}>{feedback.comment}</li>
+                    ))}
+                </ul>
+			</div>
+			<p>TODO: Make this page look nice and link in the customer page here </p>
 		</div>
 	</div>
   );
