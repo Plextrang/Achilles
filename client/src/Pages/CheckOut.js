@@ -106,7 +106,7 @@ export default function CheckOut() {
     };
 
     const clearCartBackend = () => {
-        fetch('https://cosc-3380-6au9.vercel.app/api/handlers/cart/clearCart', {
+        fetch('https://cosc-3380-6au9.vercel.app/api/handlers/order/clearCart', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
