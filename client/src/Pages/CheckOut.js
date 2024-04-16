@@ -25,6 +25,15 @@ export default function CheckOut() {
     const [cartItems, setCartItems] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
     const email = localStorage.getItem('userEmail');
+    const [cardNumber, setCardNumber] = useState('');
+    const [cardName, setCardName] = useState('');
+    const [cvv, setcvv] = useState('');
+    const [streetAddress, setStreetAddress] = useState('');
+    const [userCity, setUserCity] = useState('');
+    const [userState, setUserState] = useState('');
+    const [userPostalCode, setPostalCode] = useState('');
+    const [userCountry, setCountry] = useState('');
+    const [] = useState('');
 
     const navigate = useNavigate();
 
@@ -118,13 +127,38 @@ export default function CheckOut() {
                     <span>Shipping:</span>
                     <div className="total-price">Total: ${totalPrice.toFixed(2)}</div>
                 </div>
-                <button className="confirm-order-button" onClick={handleOrder}>Confirm Order</button>
+                {/* <button className="confirm-order-button" onClick={handleOrder}>Confirm Order</button> */}
             </div>
             <div className="payment-section">
                 <h2>Payment Method</h2>
-                <p>Credit Card</p>
+                <form onSubmit={handleOrder}>
+                    {/* Name on Card */}
+                <label htmlFor = "cardName"> Name on Card: </label>
+                    <input 
+                        type = "text"
+                        id = "cardName"
+                        value = {cardName}
+                        onChange = {(e) => setCardName(e.target.value)}
+                    />
+                      {/* Card Number */}
+                    <label htmlFor = "cardNumber"> Card Number: </label>
+                    <input 
+                        type = "text"
+                        id = "cardNumber"
+                        value = {cardNumber}
+                        onChange = {(e) => setCardNumber(e.target.value)}
+                    />
+                    <label htmlFor = "cvv"> CVV: </label>
+                    <input 
+                        type = "text"
+                        id = "cvv"
+                        value = {cvv}
+                        onChange = {(e) => setcvv(e.target.value)}
+                    />
+                </form>
                 <h2>Shipping Address</h2>
                 <p>123 Shipping Street, City, Country</p>
+                <button className="confirm-order-button" onClick={handleOrder}>Confirm Order</button>
             </div>
         </div>
     );
