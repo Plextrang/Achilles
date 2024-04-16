@@ -97,10 +97,33 @@ export default function CheckOut() {
         })
         .then(data => {
             console.log('Order confirmed:', data);
+            clearCartBackend();
             navigate('/MyProfile');
         })
         .catch(error => {
             console.error('Error confirming order:', error);
+        });
+    };
+
+    const clearCartBackend = () => {
+        fetch('https://cosc-3380-6au9.vercel.app/api/handlers/order/clearCart', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email: email }) 
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Cart cleared successfully:', data);
+        })
+        .catch(error => {
+            console.error('Error clearing cart:', error);
         });
     };
     

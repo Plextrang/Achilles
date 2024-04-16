@@ -90,6 +90,14 @@
     cursor: pointer;
 }
 
+.checkout-button:disabled {
+    background-color: #797979;
+}
+
+.checkout-button:disabled:hover {
+    background-color: #797979;
+}
+
 .checkout-button:hover {
     background-color: #78cd7b;
 }
