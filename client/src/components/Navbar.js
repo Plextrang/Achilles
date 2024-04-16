@@ -47,12 +47,6 @@ export default function Navbar() {
             });
     };
 
-    // const getProfile = () => {
-    //     const userEmail = localStorage.getItem("userEmail");
-
-    //     fetch('https://cosc-3380-6au9.vercel.app/api/handlers/users/logoutUser')
-    // }
-
     return (
         <div className="nav-container">
             <div className="left-side">
