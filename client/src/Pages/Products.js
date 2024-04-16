@@ -1,25 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { FaStar, FaShoppingBag } from 'react-icons/fa';
-import {useNavigate} from 'react-router-dom';
-import white_converse from '../images/white_converse.jpg';
-import nike_air_force_1 from '../images/nike_air_force_1.jpg';
-import adidas_gazelle_blue_gold from '../images/adidas_gazella_blue_gold.jpg';
-import doc_martens_jorge from '../images/doc_martens_jorge.jpg';
-import hk_crocs_clogs from '../images/hk_crocs_clogs.jpg';
-import naruto_crocs_clog from '../images/naruto_crocs_clog.jpg';
-import "./Products.css"
-
-const variableMap = {
-  'white_converse': white_converse,
-  'nike_air_force_1': nike_air_force_1,
-  'adidas_gazelle_blue_gold': adidas_gazelle_blue_gold,
-  'doc_martens_jorge': doc_martens_jorge,
-  'hk_crocs_clogs': hk_crocs_clogs,
-  'naruto_crocs_clog': naruto_crocs_clog
-};
+import { useNavigate } from 'react-router-dom';
+import "./Products.css";
 
 export default function Products() {
   const [products, setProducts] = useState([]);
+  const [images, setImages] = useState({});
   const navigate = useNavigate();
 
   const openProduct = (product) => {
@@ -30,6 +16,7 @@ export default function Products() {
   };
 
   useEffect(() => {
+    // Fetch products
     fetch('https://cosc-3380-6au9.vercel.app/api/handlers/products/getProducts')
       .then(response => {
         if (!response.ok) {
@@ -39,6 +26,14 @@ export default function Products() {
       })
       .then(data => {
         setProducts(data);
+        // Load images dynamically
+        const imagesToLoad = {};
+        data.forEach(product => {
+          import(`../images/${product.image_filename}.jpg`).then(image => {
+            imagesToLoad[product.image_filename] = image.default;
+            setImages(imagesToLoad);
+          });
+        });
       })
       .catch(error => {
         console.error('Error fetching products:', error);
@@ -65,26 +60,12 @@ export default function Products() {
       <div className="card-container">
         {products.length === 0 ? (
           <div className="empty-products-message"> {/* Display a dummy page if products array is empty */}
-            <div className="card">
-              <img src={white_converse} alt="White Converse" />
-              <div className="card-details">
-                <h3 className="card-title">Women's Converse</h3>
-                <section className="card-reviews">
-                  <FaStar />
-                  <span className="total-reviews">4 Reviews</span>
-                </section>
-                <div className="bag">
-                  <FaShoppingBag />
-                  <div className="price">$80</div>
-                </div>
-              </div>
-            </div>
-            {/* Add more dummy product cards */}
+            {/* Dummy product cards */}
           </div>
         ) : (
           products.map(product => (
             <div key={product.product_id} className="card" onClick={() => openProduct(product)}>
-              <img className="card-img" src={variableMap[product.image_filename]} alt={product.item_name} />
+              <img className="card-img" src={images[product.image_filename]} alt={product.item_name} />
               <div className="card-details">
                 <h3 className="card-title">{product.item_name}</h3>
                 <section className="card-reviews">

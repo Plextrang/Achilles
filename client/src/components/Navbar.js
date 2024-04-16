@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import achillesLogo from '../images/companyLogo.png';
+import { CgProfile } from "react-icons/cg";
 import './Navbar.css';
 
 export default function Navbar() {
@@ -46,6 +47,12 @@ export default function Navbar() {
             });
     };
 
+    // const getProfile = () => {
+    //     const userEmail = localStorage.getItem("userEmail");
+
+    //     fetch('https://cosc-3380-6au9.vercel.app/api/handlers/users/logoutUser')
+    // }
+
     return (
         <div className="nav-container">
             <div className="left-side">
@@ -66,6 +73,9 @@ export default function Navbar() {
                                 My Cart
                             </button>
                         </Link>
+                        <div className="nav-button" id="profile-button" onClick={() => navigate('/MyProfile')}>
+                                <CgProfile />
+                            </div>
                         {/* TODO: Add more buttons */}
                     </>
                 ) : (

@@ -14,6 +14,7 @@ import AddSupplier from "./Pages/AddSupplier";
 import SalesReport from "./Pages/SalesReport";
 import CheckOut from "./Pages/CheckOut"
 import ProductInfo from "./Pages/ProductInfo"
+import MyProfile from './Pages/MyProfile';
 
 import './App.css';
 
@@ -24,6 +25,7 @@ function App() {
 			<Routes>
 				<Route path="/" element={<Home />}/>
 				<Route path="/Home" element={<Home />}/>
+				<Route path="/MyProfile" element={<MyProfile />} />
 				<Route path="/Login" element={<Login />}></Route>
 				<Route path="/Register" element={<Register />}></Route>
 				<Route path="/EntryForm" element={<DataEntry />}></Route>

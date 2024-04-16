@@ -1,0 +1,33 @@
+.profile-container {
+    max-width: 800px;
+    justify-content: center;
+    margin: 100px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .profile-content {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .profile-info,
+  .profile-orders {
+    flex: 1;
+  }
+  
+  .profile-info h2,
+  .profile-orders h2 {
+    margin-bottom: 10px;
+  }
+  
+  .order {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  /* Add more styles as needed */
+  
