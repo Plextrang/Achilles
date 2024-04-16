@@ -34,7 +34,6 @@ export default function CheckOut() {
     const [userPostalCode, setPostalCode] = useState('');
     const [userCountry, setCountry] = useState('');
     const [] = useState('');
-
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -72,7 +71,15 @@ export default function CheckOut() {
             cartItems: cartItems,
             datetime: datetime,
             email: email,
-            num_items: cartItems.length
+            num_items: cartItems.length,
+            card_number: cardNumber, 
+            cardholder_name: cardName, 
+            billing_address: streetAddress, 
+            security_code: cvv, 
+            billing_city: userCity, 
+            bill_state: userState, 
+            bill_zip: userPostalCode, 
+            location: userCountry
         };
     
         fetch('https://cosc-3380-6au9.vercel.app/api/handlers/order/newOrder', {
