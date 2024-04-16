@@ -7,6 +7,7 @@ import './Navbar.css';
 export default function Navbar() {
     const navigate = useNavigate();
     const [isLoggedIn, setLoggedIn] = useState(false);
+    const [userType, setType] = useState("");
 
     useEffect(() => {
         if (localStorage.getItem('userEmail')) {
@@ -15,7 +16,8 @@ export default function Navbar() {
         else {
             setLoggedIn(false)
         }
-        console.log("Usertype: ", localStorage.getItem('userType'));
+        if(localStorage.getItem('userType') != undefined)
+            setType(localStorage.getItem('userType'));
     }, []);
 
     const handleLogin = () => {
@@ -40,6 +42,7 @@ export default function Navbar() {
             .then(data => {
                 console.log('Logout successful:', data);
                 localStorage.removeItem('userEmail');
+                localStorage.removeItem('userType');
                 setLoggedIn(false); 
                 navigate('/Login');
             })
