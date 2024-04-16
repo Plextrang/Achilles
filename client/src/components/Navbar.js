@@ -67,8 +67,8 @@ export default function Navbar() {
             <div className="right-side">
                 {isLoggedIn ? (
                     <>
-                        <button className="nav-button" id="login-button" onClick={handleLogout}>Logout</button>
                         <button className="nav-button" id="cart-button" onClick={() => navigate('/Cart')}>My Cart</button>
+                        <button className="nav-button" id="login-button" onClick={handleLogout}>Logout</button>
                         <div className="nav-button" id="profile-button" onClick={() => navigate('/MyProfile')}>
                                 <CgProfile />
                             </div>
@@ -88,3 +88,19 @@ export default function Navbar() {
         </div>
     );
 }
+
+{/* <Link to="/Products">
+    <button class = "shop"> Shop Now</button>
+    </Link>
+    <Link to="/EntryForm">
+        <button class = "shop"> Temp Data Entry Button</button>
+    </Link>
+    <Link to="/ProfileForm">
+        <button class = "shop"> Temp Profile Button</button>
+    </Link>
+    <Link to="/Cart">
+        <button class = "shop"> Temp Shopping Cart</button>
+    </Link>
+    <Link to="/Admin">
+        <button class = "shop"> Temp Admin Portal</button>
+    </Link> */}

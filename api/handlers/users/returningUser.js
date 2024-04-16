@@ -54,9 +54,24 @@ module.exports = async (req, res) => {
                     return;
                 }
 
-                // Set is_active to 1
-                res.statusCode = 200;
-                res.end(JSON.stringify({ message: 'Login successful', redirectUrl: '/Products' }));
+                const querysql = "SELECT user_type FROM USER WHERE email = ?"
+                db.query(querysql, [email], (err, queryRes) => {
+                    if (err) {
+                        console.error(err);
+                        res.statusCode = 500;
+                        res.end(JSON.stringify({ error: 'Internal Server Error' }));
+                        return;
+                    }
+
+                    if(queryRes.length === 0) {
+                        res.statusCode = 401;
+                        res.end(JSON.stringify({ error: 'User Type does not exist' }));
+                        return;
+                    }
+                    // Set is_active to 1
+                    res.statusCode = 200;
+                    res.end(JSON.stringify({ message: 'Login successful', redirectUrl: '/Products', userType: queryRes }));
+                });
             });
         });
 }

@@ -66,7 +66,7 @@
     /* margin-top: 15px; */
 }
 
-#login-button {
+#login-button, #profile-button {
     background-color: #494949;
 }
 
@@ -82,14 +82,14 @@
     background-color: #ffc0c8;
 }
 
-#profile-button {
+/* #profile-button {
     background-color: #494949;
     cursor: pointer;
     justify-content: center;
     align-items: center;
     border-radius: 5px;
-    /* padding: 8px; */
-}
+    /* padding: 8px; 
+} */
 #profile-button:hover {
     background-color: #656565;
 }
