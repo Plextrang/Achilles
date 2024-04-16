@@ -34,8 +34,9 @@ export default function Login() {
             console.log(email);
             if (data.redirectUrl) {
                 if(data.userType) {
-                    setType(data.userType);
-                    localStorage.setItem('userType', type.userType);
+                    const userTypeValue = data.userType[0].user_type; 
+                    setType(userTypeValue);
+                    localStorage.setItem('userType', userTypeValue);
                 }
                 navigate(data.redirectUrl);
                 window.location.reload();

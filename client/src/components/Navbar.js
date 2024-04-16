@@ -68,6 +68,7 @@ export default function Navbar() {
             <div className="right-side">
                 {isLoggedIn ? (
                     <>
+                        <button className="nav-button" id="cart-button" onClick={() => navigate('/Cart')}>Test 5</button>
                         <button className="nav-button" id="cart-button" onClick={() => navigate('/Cart')}>My Cart</button>
                         <button className="nav-button" id="login-button" onClick={handleLogout}>Logout</button>
                         <div className="nav-button" id="profile-button" onClick={() => navigate('/MyProfile')}>
