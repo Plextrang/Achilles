@@ -11,6 +11,7 @@ module.exports = async (req, res) => {
         res.end();
         return;
     }
+
     const db = mysql.createConnection({
         host: "cosc3380.c5iqeciq8qjg.us-east-2.rds.amazonaws.com",
         user: "admin",
@@ -48,7 +49,41 @@ module.exports = async (req, res) => {
     
         console.log('User found:', userResult[0]);
 
-        res.writeHead(200, { 'Content-Type' : 'application/json' });
-        res.end(JSON.stringify(userResult[0]));
+        // Now, let's fetch the user's transaction history
+        const getUserHistorySql = `
+            SELECT 
+                t.transaction_id,
+                t.transaction_date,
+                ti.product_id,
+                sp.product_name,
+                sp.price
+            FROM 
+                TRANSACTIONS t
+            JOIN 
+                TRANSACTION_ITEM ti ON t.transaction_id = ti.transaction_id
+            JOIN 
+                SHOE_PRODUCT sp ON ti.product_id = sp.product_id
+            WHERE 
+                t.user_id = ?
+        `;
+        
+        db.query(getUserHistorySql, [userResult[0].user_id], (err, transactionResults) => {
+            if (err) {
+                console.error('Error retrieving user history:', err);
+                res.writeHead(500, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ error: 'Internal Server Error' }));
+                return;
+            }
+
+            // Combine user information and transaction history
+            const userDataWithHistory = {
+                ...userResult[0],
+                transactions: transactionResults
+            };
+
+            // Send the combined data as the response
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify(userDataWithHistory));
+        });
     });
 };

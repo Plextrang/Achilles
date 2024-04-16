@@ -1,33 +1,39 @@
 .profile-container {
-    max-width: 800px;
-    justify-content: center;
-    margin: 100px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .profile-content {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .profile-info,
-  .profile-orders {
-    flex: 1;
-  }
-  
-  .profile-info h2,
-  .profile-orders h2 {
-    margin-bottom: 10px;
-  }
-  
-  .order {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 10px;
-  }
-  
-  /* Add more styles as needed */
-  
+  max-width: 800px;
+  margin: 100px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: row;
+}
+
+.personal-info {
+  flex: 1; /* Personal info takes up remaining space */
+  margin-right: 20px; /* Add margin between personal info and order history */
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  width: 400px;
+  padding: 20px;
+  justify-content: fill;
+  display: inline-block;
+}
+
+.personal-info button {
+  display: inline-block; /* Ensures the button and heading are on the same line */
+}
+
+.order-history {
+  flex: 2; /* Order history takes up twice the space of personal info */
+}
+
+.order-history .order {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  margin-bottom: 10px;
+}
+
+/* Add more styles as needed */
