@@ -15,6 +15,7 @@ export default function Navbar() {
         else {
             setLoggedIn(false)
         }
+        console.log(localStorage.getItem('userType'));
     }, []);
 
     const handleLogin = () => {
