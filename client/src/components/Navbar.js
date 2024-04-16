@@ -7,6 +7,7 @@ import './Navbar.css';
 export default function Navbar() {
     const navigate = useNavigate();
     const [isLoggedIn, setLoggedIn] = useState(false);
+    const [userType, setType] = useState("");
 
     useEffect(() => {
         if (localStorage.getItem('userEmail')) {
@@ -15,6 +16,8 @@ export default function Navbar() {
         else {
             setLoggedIn(false)
         }
+        if(localStorage.getItem('userType') != undefined)
+            setType(localStorage.getItem('userType'));
     }, []);
 
     const handleLogin = () => {
@@ -39,6 +42,7 @@ export default function Navbar() {
             .then(data => {
                 console.log('Logout successful:', data);
                 localStorage.removeItem('userEmail');
+                localStorage.removeItem('userType');
                 setLoggedIn(false); 
                 navigate('/Login');
             })
@@ -61,8 +65,9 @@ export default function Navbar() {
             <div className="right-side">
                 {isLoggedIn ? (
                     <>
-                        <button className="nav-button" id="login-button" onClick={handleLogout}>Logout</button>
+                        <button className="nav-button" id="cart-button" onClick={() => navigate('/Cart')}>Test 5</button>
                         <button className="nav-button" id="cart-button" onClick={() => navigate('/Cart')}>My Cart</button>
+                        <button className="nav-button" id="login-button" onClick={handleLogout}>Logout</button>
                         <div className="nav-button" id="profile-button" onClick={() => navigate('/MyProfile')}>
                                 <CgProfile />
                             </div>
@@ -71,14 +76,26 @@ export default function Navbar() {
                 ) : (
                     <>
                         <button className="nav-button" id="login-button" onClick={handleLogin}>Login</button>
-                        <Link to="/Register">
-                            <button className="nav-button" id="register-button">
-                                Register
-                            </button>
-                        </Link>
+                        <button className="nav-button" id="register-button" onClick={() => navigate('/Register')}>Register</button>
                     </>
                 )}
             </div>
         </div>
     );
 }
+
+{/* <Link to="/Products">
+    <button class = "shop"> Shop Now</button>
+    </Link>
+    <Link to="/EntryForm">
+        <button class = "shop"> Temp Data Entry Button</button>
+    </Link>
+    <Link to="/ProfileForm">
+        <button class = "shop"> Temp Profile Button</button>
+    </Link>
+    <Link to="/Cart">
+        <button class = "shop"> Temp Shopping Cart</button>
+    </Link>
+    <Link to="/Admin">
+        <button class = "shop"> Temp Admin Portal</button>
+    </Link> */}
