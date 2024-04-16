@@ -5,6 +5,7 @@ import './Login.css';
 export default function Login() {
 	const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [type, setType] = useState([]);
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
@@ -33,7 +34,8 @@ export default function Login() {
             console.log(email);
             if (data.redirectUrl) {
                 if(data.userType) {
-                    localStorage.setItem('userType', data.userType);
+                    setType(data.userType);
+                    localStorage.setItem('userType', type.userType);
                 }
                 navigate(data.redirectUrl);
                 window.location.reload();
