@@ -77,11 +77,7 @@ export default function Navbar() {
                 ) : (
                     <>
                         <button className="nav-button" id="login-button" onClick={handleLogin}>Login</button>
-                        <Link to="/Register">
-                            <button className="nav-button" id="register-button">
-                                Register
-                            </button>
-                        </Link>
+                        <button className="nav-button" id="register-button" onClick={() => navigate('/Register')}>Register</button>
                     </>
                 )}
             </div>
