@@ -26,7 +26,7 @@ module.exports = async (req, res) => {
     orderData = await getRequestBody(req, res);
     console.log('Parsed order data:', orderData);
     
-    const {totalPrice, cartItems, datetime, email, num_items} = orderData;
+    const {totalPrice, cartItems, datetime, email, num_items, card_number, cardholder_name, billing_address, security_code, billing_city, bill_state, bill_zip} = orderData;
 
     const getUserSql = `SELECT user_id FROM USER WHERE email = ?`;
     db.query(getUserSql, [email], (err, userResult) => {
@@ -46,34 +46,43 @@ module.exports = async (req, res) => {
         }
 
         const user_id = userResult[0].user_id;
-        const totalCost = totalPrice; // alter this if totalPrice has discounts
 
-        const transactionSql = `INSERT INTO TRANSACTIONS (date_time, num_of_items, price_of_cart, total_cost, user_id) VALUES (?, ?, ?, ?, ?)`;
-        db.query(transactionSql, [datetime, num_items, totalPrice, totalCost, user_id], (err, result) => {
+        const insertPaymentSql = `INSERT INTO PAYMENT_METHOD (card_number, cardholder_name, billing_address, security_code, billing_city, bill_state, bill_zip, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+        db.query(insertPaymentSql, [card_number, cardholder_name, billing_address, security_code, billing_city, bill_state, bill_zip, user_id], (err, paymentResult) => {
             if (err) {
-                console.error('Error inserting transaction data:', err);
-                res.writeHead(500, { 'Content-Type' : 'application/json' });
+                console.error('Error inserting payment method:', err);
+                res.writeHead(500, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({ error: 'Internal Server Error' }));
                 return;
             }
+    
+            const method_id = paymentResult.insertId;
+            const totalCost = totalPrice; // alter this if totalPrice has discounts
 
-            const transactionId = result.insertId; // Retrieve the transaction_id of the inserted transaction
+            const transactionSql = `INSERT INTO TRANSACTIONS (date_time, num_of_items, price_of_cart, total_cost, method_id, user_id) VALUES (?, ?, ?, ?, ?, ?)`;
+            db.query(transactionSql, [datetime, num_items, totalPrice, totalCost, method_id, user_id], (err, result) => {
+                if (err) {
+                    console.error('Error inserting transaction data:', err);
+                    res.writeHead(500, { 'Content-Type' : 'application/json' });
+                    res.end(JSON.stringify({ error: 'Internal Server Error' }));
+                    return;
+                }
 
-            // Loop through cartItems to insert each item into TRANSACTION_ITEM table
-            cartItems.forEach(cartItem => {
-                const { product_id, quantity } = cartItem;
-                const transactionItemSql = `INSERT INTO TRANSACTION_ITEM (transaction_id, user_id, product_id, quantity) VALUES (?, ?, ?, ?)`;
-                db.query(transactionItemSql, [transactionId, user_id, product_id, quantity], (err, result) => {
-                    if (err) {
-                        console.error('Error inserting transaction item:', err);
-                        res.writeHead(500, { 'Content-Type' : 'application/json' });
-                        res.end(JSON.stringify({ error: 'Internal Server Error' }));
-                        return;
-                    }
+                const transactionId = result.insertId; 
+                cartItems.forEach(cartItem => {
+                    const { product_id, quantity } = cartItem;
+                    const transactionItemSql = `INSERT INTO TRANSACTION_ITEM (transaction_id, user_id, product_id, quantity) VALUES (?, ?, ?, ?)`;
+                    db.query(transactionItemSql, [transactionId, user_id, product_id, quantity], (err, result) => {
+                        if (err) {
+                            console.error('Error inserting transaction item:', err);
+                            res.writeHead(500, { 'Content-Type' : 'application/json' });
+                            res.end(JSON.stringify({ error: 'Internal Server Error' }));
+                            return;
+                        }
+                    });
                 });
+                res.end(JSON.stringify({ message: "Transaction was made successfully" }));
             });
-
-            res.end(JSON.stringify({ message: "Transaction was made successfully" }));
         });
     });
 }
