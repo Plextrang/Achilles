@@ -66,24 +66,18 @@ export default function Navbar() {
                 {isLoggedIn ? (
                     <>
                         {(userType === 'Manager' || userType === 'Administrator') && (
-                            <button className="nav-button" id="cart-button" onClick={() => navigate('/Admin')}>Manager Portal</button>
+                            <button className="nav-button" id="admin-button" onClick={() => navigate('/Admin')}>Manager Portal</button>
                         )}
                         {userType === 'Employee' && (
-                            <button className="nav-button" id="cart-button" >Employee Button</button>
+                            <button className="nav-button" id="emplo-button" >Employee Button</button>
                         )}
                         {userType === 'Customer' && (
                             <button className="nav-button" id="cart-button" onClick={() => navigate('/Cart')}>My Cart</button>
                         )}
                         <button className="nav-button" id="login-button" onClick={handleLogout}>Logout</button>
                         <div className="nav-button" id="profile-button" onClick={() => navigate('/MyProfile')}>
-                            <CgProfile />
-                        </div>
-                        <button className="nav-button" id="cart-button" onClick={() => navigate('/Cart')}>Test 6</button>
-                        <button className="nav-button" id="login-button" onClick={handleLogout}>Logout</button>
-                        <div className="nav-button" id="profile-button" onClick={() => navigate('/MyProfile')}>
                                 <CgProfile />
-                            </div>
-                        {/* TODO: Add more buttons */}
+                        </div>
                     </>
                 ) : (
                     <>

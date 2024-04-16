@@ -74,22 +74,14 @@
     background-color: #656565;
 }
 
-#register-button, #cart-button {
+#register-button, #cart-button, #admin-button, #emplo-button {
     background-color: #FFAEB9;
 }
 
-#register-button:hover, #cart-button:hover {
+#register-button:hover, #cart-button:hover, #admin-button:hover, #emplo-button:hover {
     background-color: #ffc0c8;
 }
 
-/* #profile-button {
-    background-color: #494949;
-    cursor: pointer;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px;
-    /* padding: 8px; 
-} */
 #profile-button:hover {
     background-color: #656565;
 }
