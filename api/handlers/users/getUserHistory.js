@@ -55,7 +55,7 @@ module.exports = async (req, res) => {
                 t.transaction_id,
                 t.date_time,
                 ti.product_id,
-                sp.product_name,
+                sp.item_name,
                 sp.price
             FROM 
                 TRANSACTIONS t
