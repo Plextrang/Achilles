@@ -15,7 +15,7 @@ export default function Navbar() {
         else {
             setLoggedIn(false)
         }
-        console.log(localStorage.getItem('userType'));
+        console.log("Usertype: ", JSON.parse(localStorage.getItem('userType')));
     }, []);
 
     const handleLogin = () => {
