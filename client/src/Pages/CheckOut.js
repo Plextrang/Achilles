@@ -21,34 +21,60 @@ const variableMap = {
 
 
 export default function CheckOut() {
-  
+    const [cartItems, setCartItems] = useState([]);
+    const [totalPrice, setTotalPrice] = useState(0);
+    useEffect(() => {
+        console.log("Fetching items");
+        const userEmail = localStorage.getItem('userEmail');
+        fetch(`https://cosc-3380-6au9.vercel.app/api/handlers/products/getCartItems?email=${encodeURIComponent(userEmail)}`)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.json();
+          })
+          .then(data => {
+            console.log("Frontend got: ", data);
+            setCartItems(data);
+            console.log("cartItems is now: ", cartItems);
+          })
+          .catch(error => {
+            console.error('Error fetching cart items:', error);
+          });
+      }, []);
+    useEffect(() => {
+        let total = 0;
+        cartItems.forEach(item => {total += item.price * item.quantity;});
+        setTotalPrice(total);
+    }, [cartItems]);
+
     return (
         <div className="checkout-container">
             <h1 className="checkout-title">Checkout</h1>
-            <div className="checkout-items">
-                <div className="cart-item">
-                    <img src={white_converse} alt="White Converse" className="cart-item-image" />
-                    <div className="cart-item-details">
-                        <h3 className="cart-item-name">Converse</h3>
-                        <p>Put Description Here</p>
-                        <span className="cart-item-price">$80</span>
-                    </div>
+            {cartItems.length === 0 ? (
+                <div className="cart-items"> 
+                    <p>Cart is empty.</p>
                 </div>
-
-                <div className="cart-item">
-                    <img src={white_converse} alt="White Converse" className="cart-item-image" />
-                    <div className="cart-item-details">
-                        <h3 className="cart-item-name">Converse</h3>
-                        <p>Put Description Here</p>
-                        <span className="cart-item-price">$80</span>
+            ) : (
+            <div className="cart-items">
+                {cartItems.map(item => (
+                    <div className="cart-item" key={item.product_id}>
+                        <img src={variableMap[item.image_filename]} alt={item.item_name} className="cart-item-image" />
+                        <div className="cart-item-details">
+                            <h3 className="cart-item-name">{item.item_name}</h3>
+                            <p>Quantity: {item.quantity}</p>
+                            <span className="cart-item-price">${item.price}</span>
+                        </div>
                     </div>
-                </div>
+                ))}
             </div>
+            
+            )}
             <div className="checkout-summary">
                 <h2>Order Summary</h2>
                 <div className="checkout-subtotal">
                     <span>Subtotal:</span>
-                    <span>-add logic to get total-</span>
+                    <div className="total-price">Total: ${totalPrice.toFixed(2)}</div>
                 </div>
                 <button className="confirm-order-button">Confirm Order</button>
             </div>

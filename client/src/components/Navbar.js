@@ -16,7 +16,7 @@ export default function Navbar() {
         else {
             setLoggedIn(false)
         }
-        if(localStorage.getItem('userType') != undefined)
+        if(localStorage.getItem('userType') !== undefined)
             setType(localStorage.getItem('userType'));
     }, []);
 
@@ -89,19 +89,3 @@ export default function Navbar() {
         </div>
     );
 }
-
-{/* <Link to="/Products">
-    <button class = "shop"> Shop Now</button>
-    </Link>
-    <Link to="/EntryForm">
-        <button class = "shop"> Temp Data Entry Button</button>
-    </Link>
-    <Link to="/ProfileForm">
-        <button class = "shop"> Temp Profile Button</button>
-    </Link>
-    <Link to="/Cart">
-        <button class = "shop"> Temp Shopping Cart</button>
-    </Link>
-    <Link to="/Admin">
-        <button class = "shop"> Temp Admin Portal</button>
-    </Link> */}
