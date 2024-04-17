@@ -97,7 +97,7 @@ export default function CheckOut() {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-            if(response.status = 210){
+            if(response.status === 210){
                 setShowPopup(true);
             }
             return response.json();
