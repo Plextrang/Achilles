@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { FaStar, FaShoppingBag } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import white_converse from '../images/white_converse.jpg';
 import nike_air_force_1 from '../images/nike_air_force_1.jpg';
 import adidas_gazelle_blue_gold from '../images/adidas_gazella_blue_gold.jpg';
@@ -18,68 +19,76 @@ const variableMap = {
 };
 
 export default function ProductInfo() {
-	const [quantity, setQuantity] = useState(1);
-	const [feedbackData, setFeedbackData] = useState([])
-	const userEmail = localStorage.getItem("userEmail");
+    const [quantity, setQuantity] = useState(1);
+    const [feedbackData, setFeedbackData] = useState([]);
+    const [showPopup, setShowPopup] = useState(false);
+    const [error, setError] = useState('');
+    const userEmail = localStorage.getItem("userEmail");
     const product = JSON.parse(localStorage.getItem('ProductInfo'));
 
-    const productWithUserId = {
-        ...product, 
-		quantity: quantity,
-        email: userEmail 
+    const handleAddCart = async () => {
+        try {
+            const response = await fetch('https://cosc-3380-6au9.vercel.app/api/handlers/products/addToCart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ ...product, quantity, email: userEmail })
+            });
+            const data = await response.json();
+            if (!response.ok) {
+                throw new Error(data.error || 'Failed to add product');
+            }
+            setShowPopup(true);
+        } catch (error) {
+            console.error('Error adding to Cart:', error);
+            setError(error.message);
+        }
     };
-  const handleAddCart = async (e) => {
-	try {
-		const response = await fetch('https://cosc-3380-6au9.vercel.app/api/handlers/products/addToCart', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(productWithUserId)
-		});
-		if (!response.ok) {
-			throw new Error('Failed to add product');
-		}
-	} catch (error) {
-		console.error('Error adding to Cart:', error);
-	}
-  };
 
-
-  return (
-	<div className="product-info-container">
-		<img className="product-img" src={variableMap[product.image_filename]} alt={product.item_name} />
-		<div className="card-details">
-			<h3 className="card-title">{product.item_name}</h3>
-			<div className="card-description">
-				{product.description}
-			</div>
-			<div className="card-reviews">
-				<FaStar />
-				<span className="total-reviews">4 Reviews</span> 
-			</div>
-			<div className="bag">
-				<FaShoppingBag />
-				<div className="price">${product.price}</div>
-			</div>
-			<div className="add-container">
-				<button id="add-button" onClick={handleAddCart}>Add to Cart</button>
-				<label>Quantity: </label>
-				<input type="text" id="quantity-input"
-					   value={quantity}
-					   onChange={(e) => setQuantity(e.target.value)}
-					   required />
-			</div>
-			<div className = "feedback-container">
-				<h3>Feedback</h3>
-				<ul>
-                    {feedbackData.map((feedback, index) => (
-                        <li key={index}>{feedback.comment}</li>
-                    ))}
-                </ul>
-			</div>
-			<p>TODO: Make this page look nice and link in the customer page here </p>
-		</div>
-	</div>
-  );
+    return (
+        <div className="product-info-container">
+            <img className="product-img" src={variableMap[product.image_filename]} alt={product.item_name} />
+            <div className="card-details">
+                <h3 className="card-title">{product.item_name}</h3>
+                <div className="card-description">{product.description}</div>
+                <div className="card-reviews">
+                    <FaStar />
+                    <span className="total-reviews">4 Reviews</span>
+                </div>
+                <div className="bag">
+                    <FaShoppingBag />
+                    <div className="price">${product.price}</div>
+                </div>
+                <div className="add-container">
+                    <button className="quantity-button" onClick={() => setQuantity(Math.max(1, quantity - 1))}>-</button>
+                    <input type="text" className="quantity-input" value={quantity} readOnly />
+                    <button className="quantity-button" onClick={() => setQuantity(quantity + 1)}>+</button>
+                    <button id="add-button" onClick={handleAddCart}>Add to Cart</button>
+                </div>
+                {feedbackData.length > 0 && (
+                    <div className="feedback-container">
+                        <h3>Feedback</h3>
+                        <ul>
+                            {feedbackData.map((feedback, index) => (
+                                <li key={index}>{feedback.comment}</li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
+                {showPopup && (
+                    <div className="popup">
+                        <p>Item added to cart!</p>
+                        <Link to="/cart" className="go-to-cart">Go to Cart</Link>
+                        <button onClick={() => setShowPopup(false)}>Close</button>
+                    </div>
+                )}
+                {error && (
+                    <div className="error-message">
+                        <p>Error: {error}</p>
+                    </div>
+                )}
+            </div>
+        </div>
+    );
 }
