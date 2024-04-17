@@ -79,6 +79,7 @@ module.exports = async (req, res) => {
                 
                 transactionId = result.insertId;
                 discount = result.discount;
+                console.log(discount)
 
                 console.log("Transaction ID is: ", transactionId);
 
