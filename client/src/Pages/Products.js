@@ -6,6 +6,7 @@ import "./Products.css";
 export default function Products() {
   const [products, setProducts] = useState([]);
   const [images, setImages] = useState({});
+  const [selectedCategory, setSelectedCategory] = useState('All'); // Default to display all products
   const navigate = useNavigate();
 
   const openProduct = (product) => {
@@ -40,6 +41,9 @@ export default function Products() {
       });
   }, []);
 
+  // Filter products based on selected category
+  const filteredProducts = selectedCategory === 'All' ? products : products.filter(product => product.category_name === selectedCategory);
+
   return (
     <div className="product-container">
       <header className="title">
@@ -49,21 +53,19 @@ export default function Products() {
           <button>Search</button>
         </div>
         <nav className="filters">
-          <a href="#" className="active">
-            All
-          </a>
-          <a href="#">Womens</a>
-          <a href="#">Mens</a>
-          <a href="#">Kids</a>
+          <a href="#" className={selectedCategory === 'All' ? 'active' : ''} onClick={() => setSelectedCategory('All')}>All</a>
+          <a href="#" className={selectedCategory === 'Womens' ? 'active' : ''} onClick={() => setSelectedCategory('Women')}>Womens</a>
+          <a href="#" className={selectedCategory === 'Mens' ? 'active' : ''} onClick={() => setSelectedCategory('Men')}>Mens</a>
+          <a href="#" className={selectedCategory === 'Kids' ? 'active' : ''} onClick={() => setSelectedCategory('Kids')}>Kids</a>
         </nav>
       </header>
       <div className="card-container">
-        {products.length === 0 ? (
+        {filteredProducts.length === 0 ? (
           <div className="empty-products-message"> {/* Display a dummy page if products array is empty */}
             {/* Dummy product cards */}
           </div>
         ) : (
-          products.map(product => (
+          filteredProducts.map(product => (
             <div key={product.product_id} className="card" onClick={() => openProduct(product)}>
               <img className="card-img" src={images[product.image_filename]} alt={product.item_name} />
               <div className="card-details">
