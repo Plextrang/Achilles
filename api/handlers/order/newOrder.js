@@ -69,6 +69,7 @@ module.exports = async (req, res) => {
                 }
 
                 const transactionId = result.insertId; 
+                let num = cartItems.length;
 
                 cartItems.forEach(cartItem => {
                     let { product_id, quantity } = cartItem;
@@ -84,10 +85,12 @@ module.exports = async (req, res) => {
                             return;
                         }
                         console.log("Entered product-id: ", product_id);
+                        num -= 1;
+                        if(num === 0)
+                            res.end(JSON.stringify({ message: "Transaction was made successfully" }));
                     });
                 });
             });
         });
-        res.end(JSON.stringify({ message: "Transaction was made successfully" }));
     });
 }
