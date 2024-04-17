@@ -78,6 +78,7 @@ module.exports = async (req, res) => {
                 }
                 
                 transactionId = result.insertId;
+                discount = 0;
                 const discountSql = 'SELECT discount FROM TRANSACTIONS WHERE transaction_id = ?'
                 db.query(discountSql, [transactionId], (err, discountResult) => {
                     if (err) {
