@@ -7,7 +7,6 @@ import doc_martens_jorge from '../images/doc_martens_jorge.jpg';
 import hk_crocs_clogs from '../images/hk_crocs_clogs.jpg';
 import naruto_crocs_clog from '../images/naruto_crocs_clog.jpg';
 import './Cart.css';
-
 const variableMap = {
     'white_converse': white_converse,
     'nike_air_force_1': nike_air_force_1,
@@ -16,7 +15,6 @@ const variableMap = {
     'hk_crocs_clogs': hk_crocs_clogs,
     'naruto_crocs_clog': naruto_crocs_clog
   };
-
   const removeProductFromCart = async (productId) => {
     try {
         const userEmail = localStorage.getItem('userEmail');
@@ -36,7 +34,6 @@ const variableMap = {
         console.error('Error removing product from cart:', error);
     }
 };
-
 export default function Cart() {
     const [cartItems, setCartItems] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
@@ -64,7 +61,6 @@ export default function Cart() {
         cartItems.forEach(item => {total += item.price * item.quantity;});
         setTotalPrice(total);
     }, [cartItems]);
-
     const handleRemoveProduct = (productId) => {
         console.log(productId);
         removeProductFromCart(productId);
@@ -72,9 +68,7 @@ export default function Cart() {
     };
     const handleCheckout = () => {
         console.log('Checkout button clicked');
-
     };
-
     return (
         <div className="cart-container">
             <h1 className="cart-title">Shopping Cart - Test: 6</h1>
