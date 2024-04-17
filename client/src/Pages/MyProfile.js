@@ -30,7 +30,6 @@ const MyProfile = () => {
     email: '',
     phone_number: '',
     image_filename: ''
-    
   });
   const [isReviewModalOpen, setReviewModalOpen] = useState(false); // State for controlling the review modal
   const [isManageModalOpen, setManageModalOpen] = useState(false); // State for controlling the manage modal
@@ -131,6 +130,9 @@ const MyProfile = () => {
 
             <label htmlFor="email">Email:</label>
             <input type="text" id="email" name="email" value={userEmail} />
+
+            <label htmlFor="phone_number">Phone Number:</label>
+            <input type="text" id="phone_number" name="phone_number" value={userData.phone_number} />
 
             <label htmlFor="address">Address:</label>
             <input type="text" id="address" name="address" value={userData.address} />
