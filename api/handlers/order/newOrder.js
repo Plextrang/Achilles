@@ -75,7 +75,7 @@ module.exports = async (req, res) => {
                     const { product_id, quantity } = cartItem;
                     console.log("This is the cart item added: ", cartItem);
                     const transactionItemSql = `INSERT INTO TRANSACTION_ITEM (transaction_id, product_id, quantity) VALUES (?, ?, ?)`;
-                    db.query(transactionItemSql, [transactionId, user_id, product_id, quantity], (err, result) => {
+                    db.query(transactionItemSql, [transactionId, product_id, quantity], (err, result) => {
                         if (err) {
                             console.error('Error inserting transaction item:', err);
                             res.writeHead(500, { 'Content-Type' : 'application/json' });
