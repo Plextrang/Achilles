@@ -58,4 +58,32 @@
   margin-left: auto;
 }
 
+.manage-modal-content {
+  position: relative;
+  width: 300px; /* Adjust the width as needed */
+  margin: left; /* Center the modal horizontally */
+  padding: 50px;
+}
+.manage-modal-content input {
+  justify-content: center;
+  width: 300;
+  margin-bottom: 15px; /* Add padding between each label and input field */
+}
+
+.manage-modal-content button[type="submit"] {
+  margin-bottom: auto;
+  justify-content: inline;
+  padding: 10px;
+  margin-right: 10px;
+}
+
+.exit-button {
+  cursor:pointer;
+  position: absolute; /* Position the button absolutely */
+  top: 10px; /* Adjust the distance from the top */
+  left: 10px; /* Adjust the distance from the left */
+  padding: 10px;
+}
+
+
 /* Add more styles as needed */
