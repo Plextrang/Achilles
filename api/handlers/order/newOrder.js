@@ -78,21 +78,24 @@ module.exports = async (req, res) => {
 
                 console.log("Transaction ID is: ", transactionId);
 
-                const firstCartItem = cartItems[0];
-                let { product_id, quantity } = firstCartItem;
-                console.log("This is the cart item added: ", firstCartItem);
-                console.log("New product_id: ", product_id);
-                
-                let transactionItemSql = `INSERT INTO TRANSACTION_ITEM (transaction_id, product_id, quantity) VALUES (?, ?, ?)`;
-                db.query(transactionItemSql, [transactionId, product_id, quantity], (err, result) => {
-                    if (err) {
-                        console.error('Error inserting transaction item:', err);
-                        res.writeHead(500, { 'Content-Type' : 'application/json' });
-                        res.end(JSON.stringify({ error: 'Internal Server Error' }));
-                        return;
-                    }
-                    console.log("Entered product-id: ", product_id);
-                    res.end(JSON.stringify({ message: "Transaction was made successfully" }));
+                cartItems.forEach((cartItem, index) => { // Attemping index logic cuz nothing else worked
+                    let { product_id, quantity } = cartItem;
+                    console.log("This is the cart item added: ", cartItem);
+                    console.log("New product_id: ", product_id);
+                    
+                    let transactionItemSql = `INSERT INTO TRANSACTION_ITEM (transaction_id, product_id, quantity) VALUES (?, ?, ?)`;
+                    db.query(transactionItemSql, [transactionId, product_id, quantity], (err, result) => {
+                        if (err) {
+                            console.error('Error inserting transaction item:', err);
+                            res.writeHead(500, { 'Content-Type' : 'application/json' });
+                            res.end(JSON.stringify({ error: 'Internal Server Error' }));
+                            return;
+                        }
+                        console.log("Entered product-id: ", product_id);
+                        if (index === cartItems.length - 1) {
+                            res.end(JSON.stringify({ message: "Transaction was made successfully" }));
+                        }
+                    });
                 });
             });
         });
