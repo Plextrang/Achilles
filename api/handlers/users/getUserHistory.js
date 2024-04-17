@@ -30,7 +30,7 @@ module.exports = async (req, res) => {
     const { email } = req.query;
     console.log('Received email:', email);
 
-    const getUserSql = `SELECT user_id, first_name, last_name, address FROM \`USER\` WHERE email = ?`;
+    const getUserSql = `SELECT user_id, first_name, last_name, address, phone_number FROM \`USER\` WHERE email = ?`;
     db.query(getUserSql, [email], (err, userResult) => {
         if (err) {
             console.log('Error finding user');
