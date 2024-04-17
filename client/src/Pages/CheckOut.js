@@ -252,7 +252,7 @@ export default function CheckOut() {
                 {showDiscountPopup && (
                     <div className="popup">
                         <p>Thank you for your order!</p>
-                        <p>You got a Discount for spending over $100!</p>
+                        <p>You got a 10% discount for spending over $100!</p>
                         <Link to="/MyProfile" className="go-to-profile">Close</Link>
                     </div>
                 )}
