@@ -71,9 +71,10 @@ module.exports = async (req, res) => {
                 const transactionId = result.insertId; 
 
                 cartItems.forEach(cartItem => {
-                    const { product_id, quantity } = cartItem;
+                    let { product_id, quantity } = cartItem;
                     console.log("This is the cart item added: ", cartItem);
                     console.log("New product_id: ", product_id);
+                    
                     const transactionItemSql = `INSERT INTO TRANSACTION_ITEM (transaction_id, product_id, quantity) VALUES (?, ?, ?)`;
                     db.query(transactionItemSql, [transactionId, product_id, quantity], (err, result) => {
                         if (err) {
