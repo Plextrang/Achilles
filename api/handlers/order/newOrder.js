@@ -68,10 +68,17 @@ module.exports = async (req, res) => {
             const transactionSql = `INSERT INTO TRANSACTIONS (date_time, num_of_items, price_of_cart, total_cost, method_id, user_id) VALUES (?, ?, ?, ?, ?, ?)`;
             db.query(transactionSql, [datetime, num_items, totalPrice, totalCost, method_id, user_id], (err, result) => {
                 if (err) {
+                    if (err.code === 'ER_SIGNAL_EXCEPTION') {
+                        // Handle signal exception here
+                        console.error("Signal exception:", error);
+                        res.writeHead(210, { 'Content-Type' : 'application/json' });
+                        res.end(JSON.stringify({ error: 'Discount Applied' }));
+                    } else {
                     console.error('Error inserting transaction data:', err);
                     res.writeHead(500, { 'Content-Type' : 'application/json' });
                     res.end(JSON.stringify({ error: 'Internal Server Error' }));
                     return;
+                    }
                 }
 
                 transactionId = result.insertId;
