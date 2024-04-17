@@ -1,4 +1,4 @@
-const { getRequestBody } = require("../../lib/parseBody")
+const { getRequestBody } = require("../../lib/parseBody");
 const http = require('http');
 const mysql = require('mysql');
 const cors = require('cors');
@@ -10,12 +10,14 @@ module.exports = async (req, res) => {
         res.end();
         return;
     }
+
     const db = mysql.createConnection({
         host: "cosc3380-team7.mysql.database.azure.com",
         user: "achilles_admin",
         password: "iFTq^U^!efry3L",
         database: "cosc3380"
-    })
+    });
+
     db.connect(err => {
         if (err) {
           console.error('Error connecting to database:', err);
@@ -23,10 +25,11 @@ module.exports = async (req, res) => {
         }
         console.log('Connected to database');
     });
+
     orderData = await getRequestBody(req, res);
     console.log('Parsed order data:', orderData);
     
-    const {totalPrice, cartItems, datetime, email, num_items, card_number, cardholder_name, billing_address, security_code, billing_city, bill_state, bill_zip} = orderData;
+    const { totalPrice, cartItems, datetime, email, num_items, card_number, cardholder_name, billing_address, security_code, billing_city, bill_state, bill_zip } = orderData;
 
     let user_id = 0;
 
@@ -67,35 +70,7 @@ module.exports = async (req, res) => {
             let transactionId = 0;
             const transactionSql = `INSERT INTO TRANSACTIONS (date_time, num_of_items, price_of_cart, total_cost, method_id, user_id) VALUES (?, ?, ?, ?, ?, ?)`;
             db.query(transactionSql, [datetime, num_items, totalPrice, totalCost, method_id, user_id], (err, result) => {
-                try {
-                    if (err) {
-                        throw err;
-                    }
-                    
-                    transactionId = result.insertId;
-
-                    console.log("Transaction ID is: ", transactionId);
-
-                    cartItems.forEach((cartItem, index) => { // Attemping index logic cuz nothing else worked
-                        let { product_id, quantity } = cartItem;
-                        console.log("This is the cart item added: ", cartItem);
-                        console.log("New product_id: ", product_id);
-                        
-                        let transactionItemSql = `INSERT INTO TRANSACTION_ITEM (transaction_id, product_id, quantity) VALUES (?, ?, ?)`;
-                        db.query(transactionItemSql, [transactionId, product_id, quantity], (err, result) => {
-                            if (err) {
-                                console.error('Error inserting transaction item:', err);
-                                res.writeHead(500, { 'Content-Type' : 'application/json' });
-                                res.end(JSON.stringify({ error: 'Internal Server Error' }));
-                                return;
-                            }
-                            console.log("Entered product-id: ", product_id);
-                            if (index === cartItems.length - 1) {
-                                res.end(JSON.stringify({ message: "Transaction was made successfully" }));
-                            }
-                        });
-                    });
-                } catch (err) {
+                if (err) {
                     if (err.code === 'ER_SIGNAL_EXCEPTION') {
                         // Handle signal exception here
                         console.error("Signal exception:", err);
@@ -108,6 +83,30 @@ module.exports = async (req, res) => {
                         return;
                     }
                 }
+                
+                transactionId = result.insertId;
+
+                console.log("Transaction ID is: ", transactionId);
+
+                cartItems.forEach((cartItem, index) => {
+                    let { product_id, quantity } = cartItem;
+                    console.log("This is the cart item added: ", cartItem);
+                    console.log("New product_id: ", product_id);
+                    
+                    let transactionItemSql = `INSERT INTO TRANSACTION_ITEM (transaction_id, product_id, quantity) VALUES (?, ?, ?)`;
+                    db.query(transactionItemSql, [transactionId, product_id, quantity], (err, result) => {
+                        if (err) {
+                            console.error('Error inserting transaction item:', err);
+                            res.writeHead(500, { 'Content-Type' : 'application/json' });
+                            res.end(JSON.stringify({ error: 'Internal Server Error' }));
+                            return;
+                        }
+                        console.log("Entered product-id: ", product_id);
+                        if (index === cartItems.length - 1) {
+                            res.end(JSON.stringify({ message: "Transaction was made successfully" }));
+                        }
+                    });
+                });
             });
         });
     });
