@@ -65,7 +65,7 @@ export default function CheckOut() {
     }, [cartItems]);
 
     const handleOrder = () => {
-        const discount = 0;
+        let discount = 0;
         console.log("Confirming Order");
     
         // Prepare the request body
@@ -109,7 +109,7 @@ export default function CheckOut() {
             console.log('Order confirmed:', data);
             
             clearCartBackend();
-            if(discount){
+            if(discount === 1){
                 setShowDiscountPopup(true);
             } else {
                 setShowPopup(true);
