@@ -27,7 +27,8 @@ export default function MyProfile() {
     first_name: '',
     last_name: '',
     address: '',
-    email: '' 
+    email: '',
+    image_filename: ''
   });
   
   const handleProfile = async () => {
@@ -55,7 +56,8 @@ export default function MyProfile() {
   }, []); // Empty dependency array ensures that this effect runs only once when the component mounts
 
   useEffect(() => {
-    console.log('User data:', userData); // Log 'userData' when it changes
+    console.log('User data:', userData); 
+    // Log 'userData' when it changes
   }, [userData]); // Add 'userData' as a dependency
 
   return (
@@ -82,10 +84,12 @@ export default function MyProfile() {
             {orderedItems.length > 0 ? (
               orderedItems.map(item => (
                 <div className="order" key={item.transaction_id}>
+                  <img src={variableMap[item.image_filename]} alt={item.item_name} className="cart-item-image" />
                   <p>Transaction (ID: {item.transaction_id})</p>
                   <p>Shoe Name: {item.item_name}</p>
                   <p>Date: {new Date(item.date_time).toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })}</p>
                   <p>Price: ${item.price}</p>
+                  <button onClick={() => {}}>Write Review</button>
                 </div>
               ))
             ) : (

@@ -56,7 +56,8 @@ module.exports = async (req, res) => {
                 t.date_time,
                 ti.product_id,
                 sp.item_name,
-                sp.price
+                sp.price,
+                sp.image_filename
             FROM 
                 TRANSACTIONS t
             JOIN 
