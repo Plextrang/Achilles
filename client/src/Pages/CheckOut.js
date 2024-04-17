@@ -66,6 +66,9 @@ export default function CheckOut() {
     
         // Prepare the request body
         const datetime = new Date();
+        let formattedDatetimeStr = inputDatetime.toISOString().slice(0, 19).replace('T', ' ');
+        //debugging date-time
+        console.log(formattedDatetimeStr);
         const requestBody = {
             totalPrice: totalPrice,
             cartItems: cartItems,
