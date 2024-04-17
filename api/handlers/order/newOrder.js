@@ -86,8 +86,8 @@ module.exports = async (req, res) => {
                         console.log("Entered product-id: ", product_id);
                     });
                 });
-                res.end(JSON.stringify({ message: "Transaction was made successfully" }));
             });
         });
+        res.end(JSON.stringify({ message: "Transaction was made successfully" }));
     });
 }
