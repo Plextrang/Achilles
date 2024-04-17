@@ -34,6 +34,7 @@ export default function CheckOut() {
     const [userPostalCode, setPostalCode] = useState('');
     const [userCountry, setCountry] = useState('');
     const [showPopup, setShowPopup] = useState(false);
+    const [showDiscountPopup, setShowDiscountPopup] = useState(false);
     const [] = useState('');
     const navigate = useNavigate();
 
@@ -63,6 +64,7 @@ export default function CheckOut() {
     }, [cartItems]);
 
     const handleOrder = () => {
+        const discount = 0;
         console.log("Confirming Order");
     
         // Prepare the request body
@@ -98,7 +100,7 @@ export default function CheckOut() {
                 throw new Error('Network response was not ok');
             }
             if(response.status === 210){
-                setShowPopup(true);
+                discount = 1;
             }
             return response.json();
         })
@@ -106,7 +108,11 @@ export default function CheckOut() {
             console.log('Order confirmed:', data);
             
             clearCartBackend();
-            navigate('/MyProfile');
+            if(discount){
+                setShowDiscountPopup(true);
+            } else {
+                setShowPopup(true);
+            }
         })
         .catch(error => {
             console.error('Error confirming order:', error);
@@ -238,8 +244,15 @@ export default function CheckOut() {
                 <button className="confirm-order-button" onClick={handleOrder}>Confirm Order</button>
                 {showPopup && (
                     <div className="popup">
+                        <p>Thank you for your order!</p>
+                        <Link to="/profile" className="go-to-profile">Close</Link>
+                    </div>
+                )}
+                {showDiscountPopup && (
+                    <div className="popup">
+                        <p>Thank you for your order!</p>
                         <p>You got a Discount for spending over $100!</p>
-                        <button onClick={() => setShowPopup(false)}>Close</button>
+                        <Link to="/profile" className="go-to-profile">Close</Link>
                     </div>
                 )}
             </div>
