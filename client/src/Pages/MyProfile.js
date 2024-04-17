@@ -1,5 +1,5 @@
-// MyProfile.js
 import React, { useEffect, useState } from 'react';
+import Model from 'react-modal'
 import { useNavigate } from 'react-router-dom';
 import white_converse from '../images/white_converse.jpg'; 
 import nike_air_force_1 from '../images/nike_air_force_1.jpg';
@@ -28,9 +28,12 @@ const MyProfile = () => {
     last_name: '',
     address: '',
     email: '',
+    phone_number: '',
     image_filename: ''
+    
   });
   const [isReviewModalOpen, setReviewModalOpen] = useState(false); // State for controlling the review modal
+  const [isManageModalOpen, setManageModalOpen] = useState(false); // State for controlling the manage modal
 
   const handleProfile = async () => {
     try {
@@ -46,6 +49,7 @@ const MyProfile = () => {
       const userData = await response.json();
       setUserData(userData);
       setOrderedItems(userData.transactions);
+      console.log("User data: ", userData);
     } catch (error) {
       console.error('Error fetching user history:', error);
     }
@@ -63,6 +67,14 @@ const MyProfile = () => {
     setReviewModalOpen(false);
   };
 
+  const handleOpenManageModal = () => {
+    setManageModalOpen(true);
+  };
+
+  const handleCloseManageModal = () => {
+    setManageModalOpen(false);
+  };
+
   return (
     <div>
       <div className="profile-container">
@@ -73,11 +85,12 @@ const MyProfile = () => {
           {/* Personal Information Section */}
           <div className="personal-info">
             <h2>Personal Information
-            <button onClick={() => {}}>Manage</button>
+            <button onClick={handleOpenManageModal}>Manage</button>
             </h2>
             <p>Name: {userData.first_name} {userData.last_name}</p>
             <p>Email: {userEmail}</p>
             <p>Address: {userData.address}</p>
+            <p>Phone Number: {userData.phone_number}</p>
             {/* Add more personal information as needed */}
           </div>
           
@@ -104,7 +117,28 @@ const MyProfile = () => {
           </div>
         </div>
       </div>
-      {/* Render the ReviewModal component */}
+      {/* Render the Manage Modal component */}
+      <Model isOpen={isManageModalOpen} onRequestClose={handleCloseManageModal}>
+        <div className="manage-modal-content">
+          <div className="exit-button" onClick={handleCloseManageModal}>X</div>
+          <h2>Edit Personal Information</h2>
+          <form>
+            <label htmlFor="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName" value={userData.first_name} />
+
+            <label htmlFor="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName" value={userData.last_name} />
+
+            <label htmlFor="email">Email:</label>
+            <input type="text" id="email" name="email" value={userEmail} />
+
+            <label htmlFor="address">Address:</label>
+            <input type="text" id="address" name="address" value={userData.address} />
+
+            <button type="submit">Save Changes</button>
+          </form>
+        </div>
+      </Model>
     </div>
   );
 };
