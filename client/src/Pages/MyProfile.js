@@ -20,8 +20,7 @@ const variableMap = {
 export default function MyProfile() {
   const navigate = useNavigate();
   const userEmail = localStorage.getItem('userEmail');
-  const [orderedItems, setOrderedItems] = useState({
-  });
+  const [orderedItems, setOrderedItems] = useState([]);
 
   const [userData, setUserData] = useState({
     user_id: '',
@@ -44,6 +43,7 @@ export default function MyProfile() {
       }
       const userData = await response.json();
       setUserData(userData);
+      setOrderedItems(userData.transactions);
       // No need to log 'userData' here
     } catch (error) {
       console.error('Error fetching user history:', error);
@@ -79,12 +79,18 @@ export default function MyProfile() {
           {/* Order History Section */}
           <div className="order-history">
             <h2>Order History</h2>
-            <div className="order">
-              <p>Shoe Name: Nike Air Force 1</p>
-              <p>Size: 9</p>
-              <p>Price: $100</p>
-            </div>
-            {/* Add more order details as needed */}
+            {orderedItems.length > 0 ? (
+              orderedItems.map(item => (
+                <div className="order" key={item.transaction_id}>
+                  <p>Transaction (ID: {item.transaction_id})</p>
+                  <p>Shoe Name: {item.item_name}</p>
+                  <p>Date: {new Date(item.date_time).toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })}</p>
+                  <p>Price: ${item.price}</p>
+                </div>
+              ))
+            ) : (
+              <p>No items ordered</p>
+            )}
           </div>
         </div>
       </div>

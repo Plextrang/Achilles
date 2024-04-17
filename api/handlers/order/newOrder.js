@@ -69,7 +69,6 @@ module.exports = async (req, res) => {
                 }
 
                 const transactionId = result.insertId; 
-                console.log("This is the t-id outside: ", transactionId);
 
                 cartItems.forEach(cartItem => {
                     const { product_id, quantity } = cartItem;
@@ -82,9 +81,6 @@ module.exports = async (req, res) => {
                             res.end(JSON.stringify({ error: 'Internal Server Error' }));
                             return;
                         }
-                        console.log("This is the t-id entered: ", transactionId);
-                        console.log("This is the p-id entered: ", product_id);
-                        console.log("This is the quant entered: ", quantity);
                     });
                 });
                 res.end(JSON.stringify({ message: "Transaction was made successfully" }));

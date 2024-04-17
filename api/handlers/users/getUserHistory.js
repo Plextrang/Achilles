@@ -75,6 +75,7 @@ module.exports = async (req, res) => {
                 return;
             }
 
+            console.log(transactionResults);
             // Combine user information and transaction history
             const userDataWithHistory = {
                 ...userResult[0],
