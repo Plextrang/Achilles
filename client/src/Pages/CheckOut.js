@@ -33,6 +33,7 @@ export default function CheckOut() {
     const [userState, setUserState] = useState('');
     const [userPostalCode, setPostalCode] = useState('');
     const [userCountry, setCountry] = useState('');
+    const [showPopup, setShowPopup] = useState(false);
     const [] = useState('');
     const navigate = useNavigate();
 
@@ -96,13 +97,14 @@ export default function CheckOut() {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
+            if(response.status = 210){
+                setShowPopup(true);
+            }
             return response.json();
         })
         .then(data => {
             console.log('Order confirmed:', data);
-            if(response.status = 210){
-                setShowPopup(true);
-            }
+            
             clearCartBackend();
             navigate('/MyProfile');
         })
