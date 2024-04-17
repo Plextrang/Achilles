@@ -100,6 +100,9 @@ export default function CheckOut() {
         })
         .then(data => {
             console.log('Order confirmed:', data);
+            if(response.status = 210){
+                setShowPopup(true);
+            }
             clearCartBackend();
             navigate('/MyProfile');
         })
@@ -231,6 +234,12 @@ export default function CheckOut() {
                     />
                 </form>
                 <button className="confirm-order-button" onClick={handleOrder}>Confirm Order</button>
+                {showPopup && (
+                    <div className="popup">
+                        <p>You got a Discount for spending over $100!</p>
+                        <button onClick={() => setShowPopup(false)}>Close</button>
+                    </div>
+                )}
             </div>
         </div>
     );
