@@ -70,7 +70,7 @@ module.exports = async (req, res) => {
                 if (err) {
                     if (err.code === 'ER_SIGNAL_EXCEPTION') {
                         // Handle signal exception here
-                        console.error("Signal exception:", error);
+                        console.error("Signal exception:", err);
                         res.writeHead(210, { 'Content-Type' : 'application/json' });
                         res.end(JSON.stringify({ error: 'Discount Applied' }));
                     } else {
