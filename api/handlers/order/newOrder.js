@@ -67,47 +67,89 @@ module.exports = async (req, res) => {
             let transactionId = 0;
             const transactionSql = `INSERT INTO TRANSACTIONS (date_time, num_of_items, price_of_cart, total_cost, method_id, user_id) VALUES (?, ?, ?, ?, ?, ?)`;
             db.query(transactionSql, [datetime, num_items, totalPrice, totalCost, method_id, user_id], (err, result) => {
-                if (err) {
+                try {
+                    if (err) {
+                        throw err;
+                    }
+                    
+                    transactionId = result.insertId;
+
+                    console.log("Transaction ID is: ", transactionId);
+
+                    cartItems.forEach((cartItem, index) => { // Attemping index logic cuz nothing else worked
+                        let { product_id, quantity } = cartItem;
+                        console.log("This is the cart item added: ", cartItem);
+                        console.log("New product_id: ", product_id);
+                        
+                        let transactionItemSql = `INSERT INTO TRANSACTION_ITEM (transaction_id, product_id, quantity) VALUES (?, ?, ?)`;
+                        db.query(transactionItemSql, [transactionId, product_id, quantity], (err, result) => {
+                            if (err) {
+                                console.error('Error inserting transaction item:', err);
+                                res.writeHead(500, { 'Content-Type' : 'application/json' });
+                                res.end(JSON.stringify({ error: 'Internal Server Error' }));
+                                return;
+                            }
+                            console.log("Entered product-id: ", product_id);
+                            if (index === cartItems.length - 1) {
+                                res.end(JSON.stringify({ message: "Transaction was made successfully" }));
+                            }
+                        });
+                    });
+                } catch (err) {
                     if (err.code === 'ER_SIGNAL_EXCEPTION') {
                         // Handle signal exception here
                         console.error("Signal exception:", err);
                         res.writeHead(210, { 'Content-Type' : 'application/json' });
                         res.end(JSON.stringify({ error: 'Discount Applied' }));
                     } else {
-                    console.error('Error inserting transaction data:', err);
-                    res.writeHead(500, { 'Content-Type' : 'application/json' });
-                    res.end(JSON.stringify({ error: 'Internal Server Error' }));
-                    return;
+                        console.error('Error inserting transaction data:', err);
+                        res.writeHead(500, { 'Content-Type' : 'application/json' });
+                        res.end(JSON.stringify({ error: 'Internal Server Error' }));
+                        return;
                     }
                 }
-
-                transactionId = result.insertId;
-
-                console.log("Transaction ID is: ", transactionId);
-
-                cartItems.forEach((cartItem, index) => { // Attemping index logic cuz nothing else worked
-                    let { product_id, quantity } = cartItem;
-                    console.log("This is the cart item added: ", cartItem);
-                    console.log("New product_id: ", product_id);
-                    
-                    let transactionItemSql = `INSERT INTO TRANSACTION_ITEM (transaction_id, product_id, quantity) VALUES (?, ?, ?)`;
-                    db.query(transactionItemSql, [transactionId, product_id, quantity], (err, result) => {
-                        if (err) {
-                            console.error('Error inserting transaction item:', err);
-                            res.writeHead(500, { 'Content-Type' : 'application/json' });
-                            res.end(JSON.stringify({ error: 'Internal Server Error' }));
-                            return;
-                        }
-                        console.log("Entered product-id: ", product_id);
-                        if (index === cartItems.length - 1) {
-                            res.end(JSON.stringify({ message: "Transaction was made successfully" }));
-                        }
-                    });
-                });
             });
         });
     });
 
+    // old way of processing after transactions insert:
+    // if (err) {
+    //     if (err.code === 'ER_SIGNAL_EXCEPTION') {
+    //         // Handle signal exception here
+    //         console.error("Signal exception:", err);
+    //         res.writeHead(210, { 'Content-Type' : 'application/json' });
+    //         res.end(JSON.stringify({ error: 'Discount Applied' }));
+    //     } else {
+    //     console.error('Error inserting transaction data:', err);
+    //     res.writeHead(500, { 'Content-Type' : 'application/json' });
+    //     res.end(JSON.stringify({ error: 'Internal Server Error' }));
+    //     return;
+    //     }
+    // }
+
+    // transactionId = result.insertId;
+
+    // console.log("Transaction ID is: ", transactionId);
+
+    // cartItems.forEach((cartItem, index) => { // Attemping index logic cuz nothing else worked
+    //     let { product_id, quantity } = cartItem;
+    //     console.log("This is the cart item added: ", cartItem);
+    //     console.log("New product_id: ", product_id);
+        
+    //     let transactionItemSql = `INSERT INTO TRANSACTION_ITEM (transaction_id, product_id, quantity) VALUES (?, ?, ?)`;
+    //     db.query(transactionItemSql, [transactionId, product_id, quantity], (err, result) => {
+    //         if (err) {
+    //             console.error('Error inserting transaction item:', err);
+    //             res.writeHead(500, { 'Content-Type' : 'application/json' });
+    //             res.end(JSON.stringify({ error: 'Internal Server Error' }));
+    //             return;
+    //         }
+    //         console.log("Entered product-id: ", product_id);
+    //         if (index === cartItems.length - 1) {
+    //             res.end(JSON.stringify({ message: "Transaction was made successfully" }));
+    //         }
+    //     });
+    // });
 
     // cartItems.forEach(cartItem => {
     //     let { product_id, quantity } = cartItem;
