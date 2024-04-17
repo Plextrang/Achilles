@@ -78,10 +78,16 @@ module.exports = async (req, res) => {
                 }
                 
                 transactionId = result.insertId;
-                discount = result.discount;
-                console.log(discount)
-
+                const discountSql = 'SELECT discount FROM TRANSACTIONS WHERE transaction_id = ?'
+                db.query(discountSql, [transactionId], (err, discountResult) => {
+                    if (err) {
+                        console.error('Error inserting transaction data:', err);
+                        res.writeHead(500, { 'Content-Type' : 'application/json' });
+                        res.end(JSON.stringify({ error: 'Internal Server Error' }));
+                    }
+                    discount = discountResult[0].discount
                 console.log("Transaction ID is: ", transactionId);
+                console.log("Transaction ID is: ", discount);
 
                 cartItems.forEach((cartItem, index) => {
                     let { product_id, quantity } = cartItem;
