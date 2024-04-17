@@ -79,6 +79,7 @@ module.exports = async (req, res) => {
 
     console.log("Transaction ID is: ", transactionId);
 
+    const firstCartItem = cartItems[0];
     let { product_id, quantity } = firstCartItem;
     console.log("This is the cart item added: ", firstCartItem);
     console.log("New product_id: ", product_id);
