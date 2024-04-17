@@ -64,8 +64,9 @@ export default function ProductInfo() {
                     <button className="quantity-button" onClick={() => setQuantity(Math.max(1, quantity - 1))}>-</button>
                     <input type="text" className="quantity-input" value={quantity} readOnly />
                     <button className="quantity-button" onClick={() => setQuantity(quantity + 1)}>+</button>
-                    <button id="add-button" onClick={handleAddCart}>Add to Cart</button>
+                    {/* <button id="add-button" onClick={handleAddCart}>Add to Cart</button> */}
                 </div>
+                <button id="add-button" onClick={handleAddCart}>Add to Cart</button>
                 {feedbackData.length > 0 && (
                     <div className="feedback-container">
                         <h3>Feedback</h3>
