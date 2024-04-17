@@ -79,19 +79,9 @@ module.exports = async (req, res) => {
                 
                 transactionId = result.insertId;
                 discount = 0;
-                const discountSql = 'SELECT discount FROM TRANSACTIONS WHERE transaction_id = ?'
-                db.query(discountSql, [transactionId], (err, discountResult) => {
-                    if (err) {
-                        console.error('Error inserting transaction data:', err);
-                        res.writeHead(500, { 'Content-Type' : 'application/json' });
-                        res.end(JSON.stringify({ error: 'Internal Server Error' }));
-                    }
-                    console.log("This is the discount result:", discountResult);
-                    discount = discountResult.discount;
-                });
+                
                 console.log("Transaction ID is: ", transactionId);
-                console.log("Discount Bool is: ", discount);
-
+                
                 cartItems.forEach((cartItem, index) => {
                     let { product_id, quantity } = cartItem;
                     console.log("This is the cart item added: ", cartItem);
@@ -106,14 +96,26 @@ module.exports = async (req, res) => {
                             return;
                         }
                         console.log("Entered product-id: ", product_id);
-                        if (index === cartItems.length - 1) {
-                            if(discount){
-                                res.writeHead(210, { 'Content-Type' : 'application/json' });
-                                res.end(JSON.stringify({ message: "Transaction was made successfully with discount!" }));
-                            } else {
-                                res.end(JSON.stringify({ message: "Transaction was made successfully" }));
+                        const discountSql = 'SELECT discount FROM TRANSACTIONS WHERE transaction_id = ?'
+                        db.query(discountSql, [transactionId], (err, discountResult) => {
+                            if (err) {
+                                console.error('Error inserting transaction data:', err);
+                                res.writeHead(500, { 'Content-Type' : 'application/json' });
+                                res.end(JSON.stringify({ error: 'Internal Server Error' }));
                             }
-                        }
+                            console.log("This is the discount result:", discountResult);
+                            discount = discountResult.discount;
+                            console.log("Discount Bool is: ", discount);
+                            if (index === cartItems.length - 1) {
+                                if(discount){
+                                    res.writeHead(210, { 'Content-Type' : 'application/json' });
+                                    res.end(JSON.stringify({ message: "Transaction was made successfully with discount!" }));
+                                } else {
+                                    res.end(JSON.stringify({ message: "Transaction was made successfully" }));
+                                }
+                            }
+                        });
+                        
                     });
                 });
             });
