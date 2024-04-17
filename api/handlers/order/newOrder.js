@@ -39,20 +39,21 @@ module.exports = async (req, res) => {
             res.end(JSON.stringify({ error: 'Internal Server Error' }));
             return;
         }
+
         if (userResult.length === 0) {
             console.log('No user');
             res.statusCode = 401;
             res.end(JSON.stringify({ error: 'User not found' }));
             return;
         }
-        user_id = userResult[0].user_id;
-    });
 
-    console.log("Queried User_ID is: ", user_id);
+        const user_id = userResult[0].user_id;
 
-    let method_id = 0;
-    let totalCost = totalPrice; // alter this line if discounts r added.
-    const insertPaymentSql = `INSERT INTO PAYMENT_METHOD (card_number, cardholder_name, billing_address, security_code, billing_city, bill_state, bill_zip, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+        console.log("Queried User_ID is: ", user_id);
+
+        let method_id = 0;
+        let totalCost = totalPrice; // alter this line if discounts r added.
+        const insertPaymentSql = `INSERT INTO PAYMENT_METHOD (card_number, cardholder_name, billing_address, security_code, billing_city, bill_state, bill_zip, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
         db.query(insertPaymentSql, [card_number, cardholder_name, billing_address, security_code, billing_city, bill_state, bill_zip, user_id], (err, paymentResult) => {
             if (err) {
                 console.error('Error inserting payment method:', err);
@@ -61,39 +62,40 @@ module.exports = async (req, res) => {
                 return;
             }
             method_id = paymentResult.insertId;
-    });
 
-    console.log("Queried mathod_id is: ", method_id);
-    let transactionId = 0;
-    const transactionSql = `INSERT INTO TRANSACTIONS (date_time, num_of_items, price_of_cart, total_cost, method_id, user_id) VALUES (?, ?, ?, ?, ?, ?)`;
-        db.query(transactionSql, [datetime, num_items, totalPrice, totalCost, method_id, user_id], (err, result) => {
-            if (err) {
-                console.error('Error inserting transaction data:', err);
-                res.writeHead(500, { 'Content-Type' : 'application/json' });
-                res.end(JSON.stringify({ error: 'Internal Server Error' }));
-                return;
-            }
+            console.log("Queried mathod_id is: ", method_id);
+            let transactionId = 0;
+            const transactionSql = `INSERT INTO TRANSACTIONS (date_time, num_of_items, price_of_cart, total_cost, method_id, user_id) VALUES (?, ?, ?, ?, ?, ?)`;
+            db.query(transactionSql, [datetime, num_items, totalPrice, totalCost, method_id, user_id], (err, result) => {
+                if (err) {
+                    console.error('Error inserting transaction data:', err);
+                    res.writeHead(500, { 'Content-Type' : 'application/json' });
+                    res.end(JSON.stringify({ error: 'Internal Server Error' }));
+                    return;
+                }
 
-            transactionId = result.insertId; 
-    });
+                transactionId = result.insertId;
 
-    console.log("Transaction ID is: ", transactionId);
+                console.log("Transaction ID is: ", transactionId);
 
-    const firstCartItem = cartItems[0];
-    let { product_id, quantity } = firstCartItem;
-    console.log("This is the cart item added: ", firstCartItem);
-    console.log("New product_id: ", product_id);
-    
-    let transactionItemSql = `INSERT INTO TRANSACTION_ITEM (transaction_id, product_id, quantity) VALUES (?, ?, ?)`;
-    db.query(transactionItemSql, [transactionId, product_id, quantity], (err, result) => {
-        if (err) {
-            console.error('Error inserting transaction item:', err);
-            res.writeHead(500, { 'Content-Type' : 'application/json' });
-            res.end(JSON.stringify({ error: 'Internal Server Error' }));
-            return;
-        }
-        console.log("Entered product-id: ", product_id);
-        res.end(JSON.stringify({ message: "Transaction was made successfully" }));
+                const firstCartItem = cartItems[0];
+                let { product_id, quantity } = firstCartItem;
+                console.log("This is the cart item added: ", firstCartItem);
+                console.log("New product_id: ", product_id);
+                
+                let transactionItemSql = `INSERT INTO TRANSACTION_ITEM (transaction_id, product_id, quantity) VALUES (?, ?, ?)`;
+                db.query(transactionItemSql, [transactionId, product_id, quantity], (err, result) => {
+                    if (err) {
+                        console.error('Error inserting transaction item:', err);
+                        res.writeHead(500, { 'Content-Type' : 'application/json' });
+                        res.end(JSON.stringify({ error: 'Internal Server Error' }));
+                        return;
+                    }
+                    console.log("Entered product-id: ", product_id);
+                    res.end(JSON.stringify({ message: "Transaction was made successfully" }));
+                });
+            });
+        });
     });
 
 
