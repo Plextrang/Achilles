@@ -14,26 +14,48 @@
   margin-right: 20px; /* Add margin between personal info and order history */
   border: 1px solid #ccc;
   background-color: #f9f9f9;
-  width: 400px;
+  width: 750px;
   padding: 20px;
   justify-content: fill;
   display: inline-block;
 }
 
 .personal-info button {
-  display: inline-block; /* Ensures the button and heading are on the same line */
+  display: inline-block;
+  width: 100px;
+  white-space: normal;
+  margin-left: 390px;
+   /* Ensures the button and heading are on the same line */
 }
 
 .order-history {
+  height: 300px;
+  overflow-y: auto;
+  padding: 20px;
   flex: 2; /* Order history takes up twice the space of personal info */
 }
 
 .order-history .order {
   border: 1px solid #ccc;
   border-radius: 5px;
-  padding: 10px;
+  padding: 20px;
   background-color: #f9f9f9;
   margin-bottom: 10px;
+  flex: 1;
+  display: flex;
+  justify-content: wrap;
+  align-items: center;
+}
+.order-history-image {
+  width: 200px; 
+  height: auto; 
+  margin-right: 25px;
+}
+
+.review-button {
+  display: inline-block;
+  white-space: normal;
+  margin-left: auto;
 }
 
 /* Add more styles as needed */

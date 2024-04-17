@@ -1,3 +1,4 @@
+// MyProfile.js
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import white_converse from '../images/white_converse.jpg'; 
@@ -17,11 +18,10 @@ const variableMap = {
   'naruto_crocs_clog': naruto_crocs_clog
 };
 
-export default function MyProfile() {
+const MyProfile = () => {
   const navigate = useNavigate();
   const userEmail = localStorage.getItem('userEmail');
   const [orderedItems, setOrderedItems] = useState([]);
-
   const [userData, setUserData] = useState({
     user_id: '',
     first_name: '',
@@ -30,7 +30,8 @@ export default function MyProfile() {
     email: '',
     image_filename: ''
   });
-  
+  const [isReviewModalOpen, setReviewModalOpen] = useState(false); // State for controlling the review modal
+
   const handleProfile = async () => {
     try {
       if (!userEmail) {
@@ -45,7 +46,6 @@ export default function MyProfile() {
       const userData = await response.json();
       setUserData(userData);
       setOrderedItems(userData.transactions);
-      // No need to log 'userData' here
     } catch (error) {
       console.error('Error fetching user history:', error);
     }
@@ -55,10 +55,13 @@ export default function MyProfile() {
     handleProfile();
   }, []); // Empty dependency array ensures that this effect runs only once when the component mounts
 
-  useEffect(() => {
-    console.log('User data:', userData); 
-    // Log 'userData' when it changes
-  }, [userData]); // Add 'userData' as a dependency
+  const handleOpenReviewModal = () => {
+    setReviewModalOpen(true);
+  };
+
+  const handleCloseReviewModal = () => {
+    setReviewModalOpen(false);
+  };
 
   return (
     <div>
@@ -79,17 +82,19 @@ export default function MyProfile() {
           </div>
           
           {/* Order History Section */}
+          <h2>Order History</h2>
           <div className="order-history">
-            <h2>Order History</h2>
             {orderedItems.length > 0 ? (
               orderedItems.map(item => (
                 <div className="order" key={item.transaction_id}>
                   <img src={variableMap[item.image_filename]} alt={item.item_name} className="cart-item-image" />
-                  <p>Transaction (ID: {item.transaction_id})</p>
-                  <p>Shoe Name: {item.item_name}</p>
-                  <p>Date: {new Date(item.date_time).toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })}</p>
-                  <p>Price: ${item.price}</p>
-                  <button onClick={() => {}}>Write Review</button>
+                  <div>
+                    <p>Transaction (ID: {item.transaction_id})</p>
+                    <p>Shoe Name: {item.item_name}</p>
+                    <p>Date: {new Date(item.date_time).toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })}</p>
+                    <p>Price: ${item.price}</p>
+                  </div>
+                  <button className= "review-button" onClick={handleOpenReviewModal}>Write Review</button>
                 </div>
               ))
             ) : (
@@ -98,6 +103,9 @@ export default function MyProfile() {
           </div>
         </div>
       </div>
+      {/* Render the ReviewModal component */}
     </div>
   );
-}
+};
+
+export default MyProfile;
