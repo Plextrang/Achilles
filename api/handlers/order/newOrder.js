@@ -68,8 +68,8 @@ module.exports = async (req, res) => {
 
             console.log("Queried mathod_id is: ", method_id);
             let transactionId = 0;
-            const transactionSql = `INSERT INTO TRANSACTIONS (date_time, num_of_items, price_of_cart, total_cost, method_id, user_id, discount) VALUES (?, ?, ?, ?, ?, ?, ?)`;
-            db.query(transactionSql, [datetime, num_items, totalPrice, totalCost, method_id, user_id, discount], (err, result) => {
+            const transactionSql = `INSERT INTO TRANSACTIONS (date_time, num_of_items, price_of_cart, total_cost, method_id, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)`;
+            db.query(transactionSql, [datetime, num_items, totalPrice, totalCost, method_id, user_id], (err, result) => {
                 if (err) {
                     console.error('Error inserting transaction data:', err);
                     res.writeHead(500, { 'Content-Type' : 'application/json' });
