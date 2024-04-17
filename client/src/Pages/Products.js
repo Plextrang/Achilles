@@ -41,7 +41,6 @@ export default function Products() {
       });
   }, []);
 
-  // Filter products based on selected category
   const filteredProducts = selectedCategory === 'All' ? products : products.filter(product => product.category_name === selectedCategory);
 
   return (
