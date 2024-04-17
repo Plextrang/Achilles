@@ -71,6 +71,7 @@ module.exports = async (req, res) => {
                 const transactionId = result.insertId; 
                 cartItems.forEach(cartItem => {
                     const { product_id, quantity } = cartItem;
+                    console.log("This is the cart item added: ", cartItem);
                     const transactionItemSql = `INSERT INTO TRANSACTION_ITEM (transaction_id, user_id, product_id, quantity) VALUES (?, ?, ?, ?)`;
                     db.query(transactionItemSql, [transactionId, user_id, product_id, quantity], (err, result) => {
                         if (err) {
@@ -79,6 +80,10 @@ module.exports = async (req, res) => {
                             res.end(JSON.stringify({ error: 'Internal Server Error' }));
                             return;
                         }
+                        console.log("This is the t-id entered: ", transactionId);
+                        console.log("This is the u-id entered: ", user_id);
+                        console.log("This is the p-id entered: ", product_id);
+                        console.log("This is the quant entered: ", quantity);
                     });
                 });
                 res.end(JSON.stringify({ message: "Transaction was made successfully" }));
