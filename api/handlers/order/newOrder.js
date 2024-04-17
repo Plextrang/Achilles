@@ -86,11 +86,11 @@ module.exports = async (req, res) => {
                         res.writeHead(500, { 'Content-Type' : 'application/json' });
                         res.end(JSON.stringify({ error: 'Internal Server Error' }));
                     }
-                    console.log(discountResult);
+                    console.log("This is the discount result:", discountResult);
                     discount = discountResult.discount;
                 });
                 console.log("Transaction ID is: ", transactionId);
-                console.log("Transaction ID is: ", discount);
+                console.log("Discount Bool is: ", discount);
 
                 cartItems.forEach((cartItem, index) => {
                     let { product_id, quantity } = cartItem;
