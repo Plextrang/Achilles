@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './DataEntry.css';
 
 export default function DataEntry() {
@@ -11,6 +12,7 @@ export default function DataEntry() {
     const [productType, setProductType] = useState('');
     const [productImage, setProductImage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const [visible, setVisible] = useState(true);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -56,8 +58,14 @@ export default function DataEntry() {
     return (
         <div className="data-entry-container">
             <div id="form-space">
+                
                 <form className="form-wrapper" onSubmit={handleSubmit}>
+                    
                     <div className="form-container">
+                    <button className="exit-button-wrapper">
+                    <Link to="/Admin" className="close-button">Close</Link>
+                    </button>
+                
                         <h1 id="title">Shoe/Product Entry Form</h1>
                         <div className="input">
                             <label className="text-label">Product Name <span className="required">&#42;</span></label>
@@ -99,9 +107,21 @@ export default function DataEntry() {
                             <button className="entry-button" type="submit">List Item</button>
                         </div>
                         {errorMessage && <p className="error-message">{errorMessage}</p>}
+                    {/* <button className="exit-button-wrapper">
+                    <Link to="/Admin" className="close-button">Close</Link>
+                    </button> */}
                     </div>
+                    {/* <button className="exit-button-wrapper">
+                    <Link to="/Admin" className="close-button">Close</Link>
+                    </button> */}
                 </form>
+              
             </div>
+            
         </div>
     );
 }
+
+{/* <Link to = "/SalesReport">
+<button>Sales Report </button>
+</Link> */}

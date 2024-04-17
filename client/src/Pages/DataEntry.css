@@ -91,5 +91,16 @@
 }
 
 .entry-button:hover {
-    background-color: #ffc0c8;
+    background-color: #65232c;
+}
+.close-button{
+    background-color:#65232c;
+    border: none;
+    width: 100%;
+    color: #65232c;
+    border-radius: 6px;
+    margin-top: px;
+    margin-right: 27%;
+    padding: 102px;
+    transition: background-color 0.3s ease;
 }
