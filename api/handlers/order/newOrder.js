@@ -74,7 +74,7 @@ module.exports = async (req, res) => {
                 cartItems.forEach(cartItem => {
                     const { product_id, quantity } = cartItem;
                     console.log("This is the cart item added: ", cartItem);
-                    const transactionItemSql = `INSERT INTO TRANSACTION_ITEM (transaction_id, user_id, product_id, quantity) VALUES (?, ?, ?, ?)`;
+                    const transactionItemSql = `INSERT INTO TRANSACTION_ITEM (transaction_id, product_id, quantity) VALUES (?, ?, ?)`;
                     db.query(transactionItemSql, [transactionId, user_id, product_id, quantity], (err, result) => {
                         if (err) {
                             console.error('Error inserting transaction item:', err);
@@ -83,7 +83,6 @@ module.exports = async (req, res) => {
                             return;
                         }
                         console.log("This is the t-id entered: ", transactionId);
-                        console.log("This is the u-id entered: ", user_id);
                         console.log("This is the p-id entered: ", product_id);
                         console.log("This is the quant entered: ", quantity);
                     });
