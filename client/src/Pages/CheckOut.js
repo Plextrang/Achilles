@@ -72,7 +72,7 @@ export default function CheckOut() {
         const requestBody = {
             totalPrice: totalPrice,
             cartItems: cartItems,
-            datetime: datetime,
+            datetime: formattedDatetimeStr,
             email: email,
             num_items: cartItems.length,
             card_number: cardNumber, 
