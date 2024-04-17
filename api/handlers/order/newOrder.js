@@ -104,7 +104,7 @@ module.exports = async (req, res) => {
                                 res.end(JSON.stringify({ error: 'Internal Server Error' }));
                             }
                             console.log("This is the discount result:", discountResult);
-                            discount = discountResult.discount;
+                            discount = discountResult[0].discount;
                             console.log("Discount Bool is: ", discount);
                             if (index === cartItems.length - 1) {
                                 if(discount){

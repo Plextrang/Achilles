@@ -1,5 +1,6 @@
 import React, {useEffect, useState,} from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import white_converse from '../images/white_converse.jpg'; 
 import nike_air_force_1 from '../images/nike_air_force_1.jpg';
 import adidas_gazelle_blue_gold from '../images/adidas_gazella_blue_gold.jpg';
@@ -33,6 +34,8 @@ export default function CheckOut() {
     const [userState, setUserState] = useState('');
     const [userPostalCode, setPostalCode] = useState('');
     const [userCountry, setCountry] = useState('');
+    const [showPopup, setShowPopup] = useState(false);
+    const [showDiscountPopup, setShowDiscountPopup] = useState(false);
     const [] = useState('');
     const navigate = useNavigate();
 
@@ -62,6 +65,7 @@ export default function CheckOut() {
     }, [cartItems]);
 
     const handleOrder = () => {
+        let discount = 0;
         console.log("Confirming Order");
     
         // Prepare the request body
@@ -96,12 +100,20 @@ export default function CheckOut() {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
+            if(response.status === 210){
+                discount = 1;
+            }
             return response.json();
         })
         .then(data => {
             console.log('Order confirmed:', data);
+            
             clearCartBackend();
-            navigate('/MyProfile');
+            if(discount === 1){
+                setShowDiscountPopup(true);
+            } else {
+                setShowPopup(true);
+            }
         })
         .catch(error => {
             console.error('Error confirming order:', error);
@@ -231,6 +243,19 @@ export default function CheckOut() {
                     />
                 </form>
                 <button className="confirm-order-button" onClick={handleOrder}>Confirm Order</button>
+                {showPopup && (
+                    <div className="popup">
+                        <p>Thank you for your order!</p>
+                        <Link to="/profile" className="go-to-profile">Close</Link>
+                    </div>
+                )}
+                {showDiscountPopup && (
+                    <div className="popup">
+                        <p>Thank you for your order!</p>
+                        <p>You got a Discount for spending over $100!</p>
+                        <Link to="/profile" className="go-to-profile">Close</Link>
+                    </div>
+                )}
             </div>
         </div>
     );
