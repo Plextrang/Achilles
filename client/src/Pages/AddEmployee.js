@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from 'react-router-dom';
 import Model from "react-modal";
 import './AddEmployee.css';
 
@@ -35,6 +36,7 @@ export default function AddEmployee() {
 
     return (
         <div className="addemployee-container">
+
             {visible && (
                 <div className="modal-overlay">
                     <Model isOpen={visible} onRequestClose={() => setVisible(false)}>
@@ -123,9 +125,7 @@ export default function AddEmployee() {
                             
                             <button type="submit" className="submit-button">Submit</button>
                         </form>
-                        <button className="close-button" onClick={() => setVisible(false)}>
-                            X
-                        </button>
+
                     </Model>
                 </div>
             )}
