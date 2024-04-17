@@ -12,9 +12,9 @@ module.exports = async (req, res) => {
         return;
     }
     const db = mysql.createConnection({
-        host: "cosc3380.c5iqeciq8qjg.us-east-2.rds.amazonaws.com",
-        user: "admin",
-        password: "TtZDqS57PM8KxHaOLRcs",
+        host: "cosc3380-team7.mysql.database.azure.com",
+        user: "achilles_admin",
+        password: "iFTq^U^!efry3L",
         database: "cosc3380"
     })
     db.connect(err => {
