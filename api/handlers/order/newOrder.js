@@ -85,7 +85,8 @@ module.exports = async (req, res) => {
                         res.writeHead(500, { 'Content-Type' : 'application/json' });
                         res.end(JSON.stringify({ error: 'Internal Server Error' }));
                     }
-                    discount = discountResult[0].discount
+                    console.log(discountResult);
+                    discount = discountResult.discount;
                 });
                 console.log("Transaction ID is: ", transactionId);
                 console.log("Transaction ID is: ", discount);
