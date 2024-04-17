@@ -92,6 +92,7 @@ const MyProfile = () => {
                     <p>Transaction (ID: {item.transaction_id})</p>
                     <p>Shoe Name: {item.item_name}</p>
                     <p>Date: {new Date(item.date_time).toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })}</p>
+                    <p>Time: {new Date(item.date_time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: true})}</p>
                     <p>Price: ${item.price}</p>
                   </div>
                   <button className= "review-button" onClick={handleOpenReviewModal}>Write Review</button>
