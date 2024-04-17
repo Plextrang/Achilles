@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React,{useState, useEffect}from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import './Admin.css';
 import white_converse from '../images/white_converse.jpg';
 import { FaShoePrints, FaShoppingBasket, FaStar } from 'react-icons/fa';
@@ -7,7 +7,42 @@ import { FaShoppingBag } from 'react-icons/fa';
 import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 
 export default function Admin() {
-  return (
+  const[product, setProducts] = useState([]);
+  const[images, setImages] = useState({});
+  const navigate = useNavigate();
+
+  const openProduct = (product) =>{
+    let stringProduct = JSON.stringify(product)
+    localStorage.setItem('ProductInfo', stringProduct);
+    console.log(localStorage.getItem('ProductInfo'));
+    navigate('/GetProduct');
+  };
+ useEffect(() => {
+    // Fetch products
+    fetch('https://cosc-3380-6au9.vercel.app/api/handlers/products/getProducts')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        setProducts(data);
+        // Load images dynamically
+        const imagesToLoad = {};
+        data.forEach(product => {
+          import(`../images/${product.image_filename}.jpg`).then(image => {
+            imagesToLoad[product.image_filename] = image.default;
+            setImages(imagesToLoad);
+          });
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching products:', error);
+      });
+  }, []);
+
+    return (
     <div className="admin-container">
       <header className="title">
         <h1 className="shop-now-container">Current Inventory</h1>
