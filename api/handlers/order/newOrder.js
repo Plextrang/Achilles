@@ -69,6 +69,8 @@ module.exports = async (req, res) => {
                 }
 
                 const transactionId = result.insertId; 
+                console.log("This is the t-id outside: ", transactionId);
+
                 cartItems.forEach(cartItem => {
                     const { product_id, quantity } = cartItem;
                     console.log("This is the cart item added: ", cartItem);
