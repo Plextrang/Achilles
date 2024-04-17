@@ -31,8 +31,18 @@ const MyProfile = () => {
     phone_number: '',
     image_filename: ''
   });
-  const [isReviewModalOpen, setReviewModalOpen] = useState(false); // State for controlling the review modal
-  const [isManageModalOpen, setManageModalOpen] = useState(false); // State for controlling the manage modal
+  const [isReviewModalOpen, setReviewModalOpen] = useState(false);
+  const [isManageModalOpen, setManageModalOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    user_id: '',
+    first_name: '',
+    last_name: '',
+    address: '',
+    email: '',
+    phone_number: '',
+    image_filename: ''
+  });
+  const [successMessage, setSuccessMessage] = useState('');
 
   const handleProfile = async () => {
     try {
@@ -56,7 +66,7 @@ const MyProfile = () => {
 
   useEffect(() => {
     handleProfile();
-  }, []); // Empty dependency array ensures that this effect runs only once when the component mounts
+  }, []);
 
   const handleOpenReviewModal = () => {
     setReviewModalOpen(true);
@@ -72,6 +82,34 @@ const MyProfile = () => {
 
   const handleCloseManageModal = () => {
     setManageModalOpen(false);
+    // Reset the success message when the modal is closed
+    setSuccessMessage('');
+  };
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      // Your logic to update user information and submit it to the server goes here
+      // For now, let's assume the data is successfully updated
+      // Simulate a delay to show the success message
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      // Set the success message
+      setSuccessMessage('User information updated successfully!');
+      // Close the modal after successfully saving changes
+      handleCloseManageModal();
+    } catch (error) {
+      console.error('Error saving changes:', error);
+      // Optionally, you can show an error message to the user
+    }
   };
 
   return (
@@ -90,7 +128,6 @@ const MyProfile = () => {
             <p>Email: {userEmail}</p>
             <p>Address: {userData.address}</p>
             <p>Phone Number: {userData.phone_number}</p>
-            {/* Add more personal information as needed */}
           </div>
           
           {/* Order History Section */}
@@ -121,24 +158,25 @@ const MyProfile = () => {
         <div className="manage-modal-content">
           <div className="exit-button" onClick={handleCloseManageModal}>X</div>
           <h2>Edit Personal Information</h2>
-          <form>
+          <form onSubmit={handleSubmit}>
             <label htmlFor="firstName">First Name:</label>
-            <input type="text" id="firstName" name="firstName" value={userData.first_name} />
-
+            <input type="text" id="firstName" name="firstName" value={formData.first_name} onChange={handleChange} />
+  
             <label htmlFor="lastName">Last Name:</label>
-            <input type="text" id="lastName" name="lastName" value={userData.last_name} />
-
+            <input type="text" id="lastName" name="lastName" value={formData.last_name} onChange={handleChange} />
+  
             <label htmlFor="email">Email:</label>
-            <input type="text" id="email" name="email" value={userEmail} />
-
+            <input type="text" id="email" name="email" value={userEmail} readOnly />
+  
             <label htmlFor="phone_number">Phone Number:</label>
-            <input type="text" id="phone_number" name="phone_number" value={userData.phone_number} />
-
+            <input type="text" id="phone_number" name="phoneNumber" value={formData.phone_number} onChange={handleChange} />
+  
             <label htmlFor="address">Address:</label>
-            <input type="text" id="address" name="address" value={userData.address} />
-
+            <input type="text" id="address" name="address" value={formData.address} onChange={handleChange} />
+  
             <button type="submit">Save Changes</button>
           </form>
+          {successMessage && <p className="success-message">{successMessage}</p>}
         </div>
       </Model>
     </div>
