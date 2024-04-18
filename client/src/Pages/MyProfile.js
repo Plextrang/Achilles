@@ -120,7 +120,7 @@ const MyProfile = () => {
           last_name: formData.last_name,
           phone_number: formData.phone_number,
           address: formData.address,
-          email: formData.email,
+          //email: formData.email,
           user_id: userData.user_id 
         })
       });
