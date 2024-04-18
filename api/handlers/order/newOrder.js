@@ -104,7 +104,7 @@ module.exports = async (req, res) => {
                                 res.end(JSON.stringify({ error: 'Flag Internal Server Error' }));
                                 return;
                             }
-                            console.log("This is the discount result:", flagResult);
+                            console.log("This is the flag result:", flagResult);
                             const flag = flagResult[0].low_stock_flag;
                             console.log("Discount Bool is: ", flag);
                             if(flag){
