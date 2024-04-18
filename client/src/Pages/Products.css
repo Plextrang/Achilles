@@ -1,5 +1,5 @@
 .product-container * {
-  padding: 0;
+  padding: 10;
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
@@ -60,7 +60,7 @@
 .card-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   margin: 0px 20px;
 }
 
