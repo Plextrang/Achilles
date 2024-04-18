@@ -6,14 +6,14 @@ async function sendEmail(productName, recipientEmail) {
     let transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: 'your_email@gmail.com', // Your email address
-            pass: 'your_password' // Your email password or application-specific password
+            user: 'achillesemail67@gmail.com', // Your email address
+            pass: 'AchillesAdmin1!' // Your email password or application-specific password
         }
     });
 
     // Email content
     let mailOptions = {
-        from: 'your_email@gmail.com', // Sender address
+        from: 'achillesemail67', // Sender address
         to: recipientEmail, // Recipient address
         subject: 'Low Stock Alert', // Subject line
         text: `Product ${productName} is low on stock.`, // Plain text body
