@@ -34,7 +34,7 @@
   width: 200px;
   margin: 20px auto;
   padding: 10px 20px;
-  background-color: #FFAEB9; /* Updated color */
+  background-color: maroon; /* Updated color */
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -44,7 +44,7 @@
 }
 
 .personal-info button:hover {
-  background-color: #ffc0c8; /* Updated color */
+  background-color: pink; /* Updated color */
 }
 
 .order-history {
@@ -81,7 +81,7 @@
 }
 
 .review-button:hover {
-  background-color: #4f0a0a; /* Updated color */
+  background-color: #555; /* Updated color */
 }
 
 .manage-modal-content {
@@ -90,7 +90,7 @@
   max-width: 400px;
   margin: 0 auto;
   padding: 30px;
-  background-color: #333;
+  background-color: #fff; /* Updated color */
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
@@ -99,15 +99,15 @@
   width: 100%;
   margin-bottom: 20px;
   padding: 10px;
-  border: 1px solid #333;
+  border: 1px solid #333; /* Updated color */
   border-radius: 5px;
 }
 
 .manage-modal-content button[type="submit"] {
   width: 100%;
   padding: 10px;
-  background-color: #4f0a0a;
-  color: #555;
+  background-color: #4f0a0a; /* Updated color */
+  color: #fff;
   border: none;
   border-radius: 5px;
   font-size: 16px;
@@ -116,7 +116,7 @@
 }
 
 .manage-modal-content button[type="submit"]:hover {
-  background-color: #4f0a0a;
+  background-color: #5d0b0b; /* Updated color */
 }
 
 .exit-button {
@@ -182,7 +182,7 @@
 .review-modal button[type="submit"] {
   width: 200px;
   padding: 10px;
-  background-color: #4f0a0a;
+  background-color: #4f0a0a; /* Updated color */
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -192,7 +192,7 @@
 }
 
 .review-modal button[type="submit"]:hover {
-  background-color: #4f0a0a;
+  background-color: #45a049; /* Updated color */
 }
 
 .exit-review-button {
@@ -210,7 +210,7 @@
 }
 
 .required {
-  color: #FFAEB9; /* Updated color */
+  color: maroon; /* Updated color */
 }
 
 .form-container {
@@ -218,9 +218,9 @@
 }
 
 .entry-button {
-  background-color: #4f0a0a;
+  background-color: #4f0a0a; /* Updated color */
 }
 
 .entry-button:hover {
-  background-color: #4f0a0a;
+  background-color: #4f0a0a; /* Updated color */
 }
