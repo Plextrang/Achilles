@@ -8,6 +8,8 @@ import doc_martens_jorge from '../images/doc_martens_jorge.jpg';
 import hk_crocs_clogs from '../images/hk_crocs_clogs.jpg';
 import naruto_crocs_clog from '../images/naruto_crocs_clog.jpg';
 import "./MyProfile.css";
+Model.setAppElement('#root');
+
 
 const variableMap = {
   'white_converse': white_converse,
@@ -16,6 +18,15 @@ const variableMap = {
   'doc_martens_jorge': doc_martens_jorge,
   'hk_crocs_clogs': hk_crocs_clogs,
   'naruto_crocs_clog': naruto_crocs_clog
+};
+
+const initialFormData = {  
+  user_id: '',
+  first_name: '',
+  last_name: '',
+  address: '',
+  email: localStorage.getItem('userEmail'),
+  phone_number: ''
 };
 
 const MyProfile = () => {
@@ -33,15 +44,7 @@ const MyProfile = () => {
   });
   const [isReviewModalOpen, setReviewModalOpen] = useState(false);
   const [isManageModalOpen, setManageModalOpen] = useState(false);
-  const [formData, setFormData] = useState({
-    user_id: '',
-    first_name: '',
-    last_name: '',
-    address: '',
-    email: '',
-    phone_number: '',
-    image_filename: ''
-  });
+  const [formData, setFormData] = useState(initialFormData);
   const [successMessage, setSuccessMessage] = useState('');
 
   const handleProfile = async () => {
@@ -77,11 +80,14 @@ const MyProfile = () => {
   };
 
   const handleOpenManageModal = () => {
+    setFormData(userData);
     setManageModalOpen(true);
   };
 
   const handleCloseManageModal = () => {
+    handleProfile();
     setManageModalOpen(false);
+    setFormData(initialFormData);
     // Reset the success message when the modal is closed
     setSuccessMessage('');
   };
@@ -96,10 +102,30 @@ const MyProfile = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+  
     try {
       // Your logic to update user information and submit it to the server goes here
       // For now, let's assume the data is successfully updated
+      // Simulate a delay to show the success message
+      const response = await fetch('https://cosc-3380-6au9.vercel.app/api/handlers/users/updateUser', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          first_name: formData.first_name, // Assuming formData is defined and contains updated user information
+          last_name: formData.last_name,
+          phone_number: formData.phone_number,
+          address: formData.address,
+          user_id: userData.user_id // Assuming userData is defined and contains user ID
+        })
+      });
+      
+      // Check if the response is successful
+      if (!response.ok) {
+        throw new Error('Failed to update user information');
+      }
+  
       // Simulate a delay to show the success message
       await new Promise((resolve) => setTimeout(resolve, 1000));
       // Set the success message
@@ -111,7 +137,6 @@ const MyProfile = () => {
       // Optionally, you can show an error message to the user
     }
   };
-
   return (
     <div>
       <div className="profile-container">
@@ -160,16 +185,16 @@ const MyProfile = () => {
           <h2>Edit Personal Information</h2>
           <form onSubmit={handleSubmit}>
             <label htmlFor="firstName">First Name:</label>
-            <input type="text" id="firstName" name="firstName" value={formData.first_name} onChange={handleChange} />
+            <input type="text" id="first_name" name="first_name" value={formData.first_name || ''} onChange={handleChange} />
   
             <label htmlFor="lastName">Last Name:</label>
-            <input type="text" id="lastName" name="lastName" value={formData.last_name} onChange={handleChange} />
+            <input type="text" id="last_name" name="last_name" value={formData.last_name} onChange={handleChange} />
   
             <label htmlFor="email">Email:</label>
             <input type="text" id="email" name="email" value={userEmail} readOnly />
   
             <label htmlFor="phone_number">Phone Number:</label>
-            <input type="text" id="phone_number" name="phoneNumber" value={formData.phone_number} onChange={handleChange} />
+            <input type="text" id="phone_number" name="phone_number" value={formData.phone_number} onChange={handleChange} />
   
             <label htmlFor="address">Address:</label>
             <input type="text" id="address" name="address" value={formData.address} onChange={handleChange} />

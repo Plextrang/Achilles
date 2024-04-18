@@ -13,7 +13,7 @@ const db = mysql.createConnection({
 
 // Route to handle PUT request for updating user information
 router.put('/updateUser', (req, res) => {
-  const { first_name, last_name, email, phone_number, address } = req.body;
+  const { first_name, last_name, user_id, phone_number, address } = req.body;
 
   // Update user information in the database
   const updateUserQuery = `
@@ -22,10 +22,11 @@ router.put('/updateUser', (req, res) => {
         last_name = ?,
         phone_number = ?,
         address = ?
-    WHERE email = ?;
+        email = ?
+    WHERE user_id = ?;
   `;
 
-  db.query(updateUserQuery, [first_name, last_name, phone_number, address, email], (err, result) => {
+  db.query(updateUserQuery, [first_name, last_name, phone_number, address, user_id], (err, result) => {
     if (err) {
       console.error('Error updating user:', err);
       res.status(500).json({ error: 'Internal Server Error' });
