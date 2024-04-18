@@ -30,7 +30,7 @@ module.exports = async (req, res) => {
     SELECT 
         u.user_id,
         CONCAT_WS(' ', u.first_name, u.middle_initial, u.last_name) AS full_name,
-        COUNT(t.transaction_id) AS total_transactions,
+        COUNT(distinct t.transaction_id) AS total_transactions,
         SUM(t.total_cost) AS total_cost_of_purchases,
         SUM(ti.quantity) AS units_bought
     FROM 
