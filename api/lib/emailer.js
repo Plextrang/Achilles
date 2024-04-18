@@ -1,7 +1,9 @@
 const nodemailer = require('nodemailer');
+const { testSMTPConnection } = require('./testConnection');
 async function sendEmail(productName, recipientEmail) {
     try {
         console.log("This is from the sendEmail function!");
+        testSMTPConnection();
         let transporter = nodemailer.createTransport({
             service: 'gmail',
             host: 'smtp.gmail.com',
