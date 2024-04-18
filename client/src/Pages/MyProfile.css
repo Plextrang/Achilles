@@ -71,7 +71,7 @@
 .review-button {
   margin-left: auto;
   padding: 8px 16px;
-  background-color: #4caf50; /* Updated color */
+  background-color: #4f0a0a; /* Updated color */
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -81,7 +81,7 @@
 }
 
 .review-button:hover {
-  background-color: #45a049; /* Updated color */
+  background-color: #4f0a0a; /* Updated color */
 }
 
 .manage-modal-content {
@@ -90,7 +90,7 @@
   max-width: 400px;
   margin: 0 auto;
   padding: 30px;
-  background-color: #fff;
+  background-color: #333;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
@@ -99,15 +99,15 @@
   width: 100%;
   margin-bottom: 20px;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #333;
   border-radius: 5px;
 }
 
 .manage-modal-content button[type="submit"] {
   width: 100%;
   padding: 10px;
-  background-color: #4caf50;
-  color: #fff;
+  background-color: #4f0a0a;
+  color: #555;
   border: none;
   border-radius: 5px;
   font-size: 16px;
@@ -116,7 +116,7 @@
 }
 
 .manage-modal-content button[type="submit"]:hover {
-  background-color: #45a049;
+  background-color: #4f0a0a;
 }
 
 .exit-button {
@@ -130,7 +130,7 @@
 }
 
 .exit-button:hover {
-  color: #ff6347;
+  color: #555;
 }
 
 .review-modal {
@@ -182,7 +182,7 @@
 .review-modal button[type="submit"] {
   width: 200px;
   padding: 10px;
-  background-color: #4caf50;
+  background-color: #4f0a0a;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -192,7 +192,7 @@
 }
 
 .review-modal button[type="submit"]:hover {
-  background-color: #45a049;
+  background-color: #4f0a0a;
 }
 
 .exit-review-button {
@@ -206,7 +206,7 @@
 }
 
 .exit-review-button:hover {
-  color: #ff6347;
+  color: #555;
 }
 
 .required {
@@ -218,9 +218,9 @@
 }
 
 .entry-button {
-  background-color: #4CAF50;
+  background-color: #4f0a0a;
 }
 
 .entry-button:hover {
-  background-color: #78cd7b;
+  background-color: #4f0a0a;
 }
