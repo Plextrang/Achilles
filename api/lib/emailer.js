@@ -1,30 +1,26 @@
-const nodemailer = require('nodemailer');
-
-// Function to send email
 async function sendEmail(productName, recipientEmail) {
-    // Create a Nodemailer transporter
-    let transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: 'achillesemail67@gmail.com', // Your email address
-            pass: 'AchillesAdmin1!' // Your email password or application-specific password
-        }
-    });
+    try {
+        let transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: 'achillesemail67@gmail.com',
+                //pass: 'AchillesAdmin1!'
+                pass: 'ualm ggwh fqdp vdbd'
+            }
+        });
 
-    // Email content
-    let mailOptions = {
-        from: 'achillesemail67', // Sender address
-        to: recipientEmail, // Recipient address
-        subject: 'Low Stock Alert', // Subject line
-        text: `Product ${productName} is low on stock.`, // Plain text body
-    };
+        let mailOptions = {
+            from: 'achillesemail67@gmail.com',
+            to: recipientEmail,
+            subject: 'Low Stock Alert',
+            text: `Product ${productName} is low on stock.`
+        };
 
-    // Send email
-    let info = await transporter.sendMail(mailOptions);
-
-    console.log('Message sent: %s', info.messageId);
+        let info = await transporter.sendMail(mailOptions);
+        console.log('Message sent: %s', info.messageId);
+    } catch (error) {
+        console.error('Error sending email:', error);
+    }
 }
 
-module.exports = {sendEmail}
-// Example usage:
-// sendEmail('Product ABC', 'recipient@example.com');
+module.exports = { sendEmail }
