@@ -110,7 +110,7 @@ module.exports = async (req, res) => {
                             if(flag){
                                 const productName = flagResult[0].item_name;
                                 const managerEmail = flagResult[0].manager_email;
-                                sendEmail(productName, ManagerEmail);
+                                sendEmail(productName, managerEmail);
                             }
                         
                             let transactionItemSql = `INSERT INTO TRANSACTION_ITEM (transaction_id, product_id, quantity) VALUES (?, ?, ?)`;
