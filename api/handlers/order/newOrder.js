@@ -4,7 +4,6 @@ const http = require('http');
 const mysql = require('mysql');
 const cors = require('cors');
 const querystring = require('querystring');
-const nodemailer = require('nodemailer');
 
 module.exports = async (req, res) => {
     if (req.method === "OPTIONS") {
@@ -107,8 +106,8 @@ module.exports = async (req, res) => {
                             }
                             console.log("This is the flag result:", flagResult);
                             const flag = flagResult[0].low_stock_flag;
-                            console.log("Discount Bool is: ", flag);
-                            if(flag){
+                            console.log("Flag Bool is: ", flag);
+                            if(flag === 1){
                                 const productName = flagResult[0].item_name;
                                 const managerEmail = flagResult[0].manager_email;
                                 sendEmail(productName, managerEmail);
