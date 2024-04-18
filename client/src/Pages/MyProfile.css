@@ -229,7 +229,20 @@
   background-color: #6e1010; /* Updated color */
 }
 
+input[type=radio] {
+  display:none;
+}
 
+.star-rating {
+  padding: 10px;
+  display: flex; /* Change flex-direction to display as flex container */
+  flex-direction: row; /* Ensure flex direction is row */
+  align-items: center; /* Align items along the cross axis (vertically) */
+}
 
-
+.star {
+  cursor: pointer;
+  display: inline-block; /* Display star icons inline */
+  margin-right: 5px; /* Add some spacing between the stars */
+}
 
