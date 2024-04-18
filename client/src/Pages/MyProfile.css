@@ -130,3 +130,79 @@
 .exit-button:hover {
   color: #ff6347; 
 }
+
+.review-modal {
+  position: relative;
+  width: 80%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.review-modal h2 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.review-modal .product-description {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.review-modal .product-description img {
+  max-width: 200px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.review-modal form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.review-modal label {
+  margin-bottom: 10px;
+}
+
+.review-modal textarea {
+  width: 100%;
+  min-height: 100px;
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.review-modal button[type="submit"] {
+  width: 200px;
+  padding: 10px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.review-modal button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+.exit-review-button {
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 10px;
+  font-size: 20px;
+  transition: color 0.3s ease;
+}
+
+.exit-review-button:hover {
+  color: #ff6347;
+}

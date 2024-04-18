@@ -228,30 +228,30 @@ const MyProfile = () => {
         </div>
       </Model>
       <Model isOpen={isReviewModalOpen} onRequestClose={handleCloseReviewModal}>
-        <div className='review-modal'>
-          <div className='exit-review-button' onClick={handleCloseReviewModal}>X</div>
-          <h2>Write Review</h2>
-          <div className='product-description'>
-            {/* Display information about the selected item */}
-            {selectedItem && (
-              <div className="order">
-                <img src={variableMap[selectedItem.image_filename]} alt={selectedItem.item_name} className="cart-item-image" />
-                <div>
-                  <p>Transaction (ID: {selectedItem.transaction_id})</p>
-                  <p>Shoe Name: {selectedItem.item_name}</p>
-                  {/* Add more details as needed */}
-                </div>
-              </div>
-            )}
+  <div className='review-modal'>
+    <div className='exit-review-button' onClick={handleCloseReviewModal}>X</div>
+    <h2>Write Review</h2>
+    <div className='product-description'>
+      {/* Display information about the selected item */}
+      {selectedItem && (
+        <div className="order">
+          <img src={variableMap[selectedItem.image_filename]} alt={selectedItem.item_name} className="cart-item-image" />
+          <div>
+            <p>Transaction (ID: {selectedItem.transaction_id})</p>
+            <p>Shoe Name: {selectedItem.item_name}</p>
+            {/* Add more details as needed */}
           </div>
-          <form onSubmit={handleReviewSubmit}>
-            <label htmlFor='review'>Review:</label>
-            <textarea id='review' name='review' required></textarea>
-            <button type='submit'>Submit Review</button>
-          </form>
-          {successMessage && <p className="success-message">{successMessage}</p>}
         </div>
-      </Model>
+      )}
+    </div>
+    <form onSubmit={handleReviewSubmit}>
+      <label htmlFor='review'>Review:</label>
+      <textarea id='review' name='review' required></textarea>
+      <button type='submit'>Submit Review</button>
+    </form>
+    {successMessage && <p className="success-message">{successMessage}</p>}
+  </div>
+</Model>
     </div>
   );
 };
