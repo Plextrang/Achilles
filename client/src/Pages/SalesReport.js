@@ -38,14 +38,14 @@ export default function SalesReport(){
   
     return (
       <div className="sales-report-container">
-        <h1 className="report-heading">Sales Report</h1>
-        <nav className="filters">
-          <a href="#" className="active">
-            Inventory
-          </a>
-          <a href="#">Employees</a>
-          <a href="#">Supplier</a>
-        </nav>
+        <div className="report-header-container">
+          <h1 className="report-heading">Sales Report</h1>
+          <nav className="filters">
+            <a href="#" className="active">Make</a>
+            <a href="#">These</a>
+            <a href="#">Work Later</a>
+          </nav>
+        </div>
   
         <div className="data-table">
           <h2>Sales Data</h2>
