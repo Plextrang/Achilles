@@ -68,6 +68,7 @@ module.exports = async (req, res) => {
                 SHOE_PRODUCT sp ON ti.product_id = sp.product_id
             WHERE 
                 t.user_id = ?
+            ORDER BY t.transaction_id desc;
         `;
         
         db.query(getUserHistorySql, [userResult[0].user_id], (err, transactionResults) => {
