@@ -33,6 +33,7 @@ const MyProfile = () => {
   const navigate = useNavigate();
   const userEmail = localStorage.getItem('userEmail');
   const [orderedItems, setOrderedItems] = useState([]);
+  const [selectedItem, setSelectedItem] = useState(null); // State to hold the selected item for review
   const [userData, setUserData] = useState({
     user_id: '',
     first_name: '',
@@ -71,11 +72,13 @@ const MyProfile = () => {
     handleProfile();
   }, []);
 
-  const handleOpenReviewModal = () => {
+  const handleOpenReviewModal = (item) => { // Pass the selected item when opening the review modal
+    setSelectedItem(item);
     setReviewModalOpen(true);
   };
 
   const handleCloseReviewModal = () => {
+    setSelectedItem(null); // Reset the selected item when closing the modal
     setReviewModalOpen(false);
   };
 
@@ -138,6 +141,10 @@ const MyProfile = () => {
       // Optionally, you can show an error message to the user
     }
   };
+
+  const handleReviewSubmit = () => {
+    handleCloseReviewModal();
+  }
   return (
     <div>
       <div className="profile-container">
@@ -161,7 +168,7 @@ const MyProfile = () => {
           <div className="order-history">
             {orderedItems.length > 0 ? (
               orderedItems.map(item => (
-                <div className="order" key={item.transaction_id}>
+                <div className="order">
                   <img src={variableMap[item.image_filename]} alt={item.item_name} className="cart-item-image" />
                   <div>
                     <p>Transaction (ID: {item.transaction_id})</p>
@@ -201,6 +208,31 @@ const MyProfile = () => {
             <input type="text" id="address" name="address" value={formData.address} onChange={handleChange} />
   
             <button type="submit">Save Changes</button>
+          </form>
+          {successMessage && <p className="success-message">{successMessage}</p>}
+        </div>
+      </Model>
+      <Model isOpen={isReviewModalOpen} onRequestClose={handleCloseReviewModal}>
+        <div className='review-modal'>
+          <div className='exit-review-button' onClick={handleCloseReviewModal}>X</div>
+          <h2>Write Review</h2>
+          <div className='product-description'>
+            {/* Display information about the selected item */}
+            {selectedItem && (
+              <div className="order">
+                <img src={variableMap[selectedItem.image_filename]} alt={selectedItem.item_name} className="cart-item-image" />
+                <div>
+                  <p>Transaction (ID: {selectedItem.transaction_id})</p>
+                  <p>Shoe Name: {selectedItem.item_name}</p>
+                  {/* Add more details as needed */}
+                </div>
+              </div>
+            )}
+          </div>
+          <form onSubmit={handleReviewSubmit}>
+            <label htmlFor='review'>Review:</label>
+            <textarea id='review' name='review' required></textarea>
+            <button type='submit'>Submit Review</button>
           </form>
           {successMessage && <p className="success-message">{successMessage}</p>}
         </div>
