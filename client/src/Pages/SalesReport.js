@@ -93,7 +93,7 @@ export default function SalesReport(){
                   <td>{customer.full_name}</td>
                   <td>{customer.total_transactions}</td>
                   <td>{customer.units_bought}</td>
-                  <td>${customer.total_expenditure.toFixed(2)}</td>
+                  <td>${customer.total_expenditure ? customer.total_expenditure.toFixed(2) : 'N/A'}</td>
                 </tr>
               ))}
           </tbody>
