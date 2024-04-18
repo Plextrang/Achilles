@@ -32,7 +32,7 @@
   width: 200px; 
   margin: 20px auto; 
   padding: 10px 20px; 
-  background-color: #ff7f50; 
+  background-color: #FFAEB9;
   color: #fff; 
   border: none; 
   border-radius: 5px; 
@@ -42,7 +42,7 @@
 }
 
 .personal-info button:hover {
-  background-color: #ff6347; 
+  background-color: #ffc0c8;
 }
 
 .order-history {

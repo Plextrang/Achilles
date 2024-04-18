@@ -80,10 +80,13 @@
 }
 
 #register-button:hover, #profile-button:hover, #logout-button:hover{
-    background-color: #5a0d17;
+    background-color: #ffc0c8;
 }
 #continue-shopping{
     background-color:  #5a0d17;
+    cursor: pointer;
     margin: 0 5px; /* Adjust margin */
 }
-
+#profile-button {
+    cursor: pointer;
+}

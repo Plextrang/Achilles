@@ -32,6 +32,13 @@ export default function SalesReport(){
     return (
       <div className="sales-report-container">
         <h1 className="report-heading">Sales Report</h1>
+        <nav className="filters">
+          <a href="#" className="active">
+            Inventory
+          </a>
+          <a href="#">Employees</a>
+          <a href="#">Supplier</a>
+        </nav>
   
         <div className="data-table">
           <h2>Sales Data</h2>
@@ -61,7 +68,7 @@ export default function SalesReport(){
         </div>
   
         <div className="data-table">
-          <h2>Employee Details</h2>
+          <h2>Customer Details</h2>
           <table>
             <thead>
               <tr>
