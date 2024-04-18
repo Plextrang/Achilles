@@ -102,7 +102,7 @@ export default function Register() {
 				<div className='multi-container'>
 					<div className="input-group">
 						<label>Phone Number: <span className="required">&#42;</span></label>
-						<input type="text" className="phone-box" id="phone-number" placeholder='000-000-0000' required/>
+						<input type="text" className="phone-box" id="phone-number" placeholder='No Dashes' maxLength="20" required/>
 					</div>
 					<div className='input-group'>
 						<label>Date of Birth: <span className="required">&#42;</span></label>

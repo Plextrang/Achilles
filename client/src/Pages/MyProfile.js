@@ -198,8 +198,8 @@ const MyProfile = () => {
             <label htmlFor="lastName">Last Name:</label>
             <input type="text" id="last_name" name="last_name" value={formData.last_name} onChange={handleChange} />
   
-            <label htmlFor="email">Email:</label>
-            <input type="text" id="email" name="email" value={userEmail} readOnly />
+            {/* <label htmlFor="email">Email:</label>
+            <input type="text" id="email" name="email" value={userEmail} readOnly /> */}
   
             <label htmlFor="phone_number">Phone Number:</label>
             <input type="text" id="phone_number" name="phone_number" value={formData.phone_number} onChange={handleChange} />
