@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Model from "react-modal";
 import './AddEmployee.css';
 
 export default function AddEmployee() {
+    const navigate = useNavigate();
     const [visible, setVisible] = useState(true);
     const [employeeData, setEmployeeData] = useState({
         name: '',
@@ -32,6 +33,10 @@ export default function AddEmployee() {
         console.log("Submitted data:", employeeData);
         // You can add further processing or API calls here
         setVisible(false); // Close the modal after submission
+    };
+
+    const close = () =>{
+        navigate('/Admin');
     };
 
     return (
@@ -124,6 +129,10 @@ export default function AddEmployee() {
                             </div>
                             
                             <button type="submit" className="submit-button">Submit</button>
+                            <button className="close-button" onClick={close}>
+                            {/* <Link to= '/Admin'>close </Link> */}
+                            X
+                        </button>
                         </form>
 
                     </Model>
