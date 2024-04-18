@@ -44,7 +44,7 @@
 }
 
 .personal-info button:hover {
-  background-color: pink; /* Updated color */
+  background-color: #871010; /* Updated color */
 }
 
 .order-history {
@@ -81,7 +81,7 @@
 }
 
 .review-button:hover {
-  background-color: #555; /* Updated color */
+  background-color: #650d0d; /* Updated color */
 }
 
 .manage-modal-content {
@@ -224,3 +224,12 @@
 .entry-button:hover {
   background-color: #4f0a0a; /* Updated color */
 }
+
+.review-modal button[type="submit"]:hover {
+  background-color: #6e1010; /* Updated color */
+}
+
+
+
+
+
