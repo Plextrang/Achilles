@@ -1,6 +1,6 @@
 const net = require('net');
 
-function testSMTPConnection() {
+async function testSMTPConnection() {
     const gmailSMTPServer = 'smtp.gmail.com';
     const port = 465;
 

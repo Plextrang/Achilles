@@ -5,7 +5,7 @@ async function sendEmail(productName, recipientEmail) {
         console.log("This is from the sendEmail function!");
         console.log("productName: ", productName);
         console.log("recipientEmail: ", recipientEmail);
-        testSMTPConnection();
+        await testSMTPConnection();
         let transporter = nodemailer.createTransport({
             service: 'Gmail',
             host: 'smtp.gmail.com',
@@ -31,7 +31,7 @@ async function sendEmail(productName, recipientEmail) {
             text: `Product ${productName} is low on stock.`
         };
 
-        transporter.sendMail(mailOptions, (error, info) => {
+        await transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
                 return console.log(error);
             }
