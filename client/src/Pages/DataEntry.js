@@ -15,6 +15,7 @@ export default function DataEntry() {
     const [visible, setVisible] = useState(true);
 
     const handleSubmit = async (e) => {
+        const userEmail = localStorage.getItem('userEmail');
         e.preventDefault();
         const productData = {
             item_name: productName,
@@ -24,7 +25,8 @@ export default function DataEntry() {
             size: productSize,
             stock: productStock,
             category_name: productType,
-            image_filename: productImage
+            image_filename: productImage,
+            email: userEmail
         };
 
         try {
