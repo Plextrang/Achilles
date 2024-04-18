@@ -1,84 +1,85 @@
 .cart-container {
-    max-width: 800px;
-    margin: 100px auto;
-    padding: 40px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    background-color: #f5f5f5;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  }
-  
-  .cart-title {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .cart-items {
+    margin: 20px;
     display: flex;
     flex-direction: column;
-  }
-  
-  .cart-item {
+}
+
+.cart-title {
+    margin-bottom: 20px;
+}
+
+.cart-items {
+    width: 100%;
+}
+
+.cart-item {
     display: flex;
     align-items: center;
-    width: 100%;
+    width: 100%; 
     border: 1px solid #ccc;
     border-radius: 5px;
     margin-bottom: 20px;
-    padding: 15px;
-    box-sizing: border-box;
-  }
-  
-  .cart-item-image {
-    width: 80px;
-    height: auto;
+    padding: 15px; 
+    box-sizing: border-box; 
+}
+
+.cart-item-image {
+    width: 80px; 
+    height: auto; 
     margin-right: 20px;
-  }
-  
-  .cart-item-details {
+}
+
+.cart-item-details {
     flex: 1;
     display: flex;
     justify-content: space-between;
     align-items: center;
-  }
-  
-  .cart-item-name {
+}
+
+.cart-item-name {
     margin: 0;
-  }
-  
-  .cart-item-price {
+}
+
+.cart-item-price {
     margin: 0;
     font-weight: bold;
-  }
-  
-  .cart-item-remove {
-    background-color: #dc3545; /* Change red color to bootstrap's danger color */
+}
+
+.cart-item-remove {
+    background-color: #ff5252;
     color: white;
     border: none;
     padding: 5px 10px;
     border-radius: 5px;
     cursor: pointer;
-    margin-left: 10px;
-  }
-  
-  .cart-item-remove:hover {
-    background-color: #c82333; /* Change red color on hover */
-  }
-  
-  .cart-summary {
+    margin-left: 10px; 
+}
+
+.cart-item-remove:hover {
+    background-color: #ff8888;
+}
+
+.cart-summary {
+    /* margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px; */
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-top: 20px;
-  }
-  
-  .total-price {
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
-  }
-  
-  .checkout-button {
+    align-items: right;
+}
+
+.cart-summary h2 {
+    margin-top: 0;
+}
+
+.cart-subtotal {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.checkout-button {
     background-color: #4CAF50;
     color: white;
     border: none;
@@ -87,43 +88,32 @@
     font-size: 16px;
     border-radius: 5px;
     cursor: pointer;
-  }
-  
-  .checkout-button:disabled {
-    background-color: #797979;
-  }
-  
-  .checkout-button:hover:disabled {
-    background-color: #797979;
-  }
-  
-  .checkout-button:hover {
-    background-color: #78cd7b;
-  }
-  
-  .return-button {
-    background-color: #007bff; /* Bootstrap's primary color */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    text-decoration: none;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-right: 10px;
-  }
+}
 
-  .return-button:hover {
-    background-color: #0056b3; /* Darker shade of blue on hover */
-  }
-  
-  .back-button {
-    background-color: #6c757d; /* Bootstrap's secondary color */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    text-decoration: none;
-    font-size: 16px;
+.checkout-button:disabled {
+    background-color: #797979;
+}
+
+.checkout-button:disabled:hover {
+    background-color: #797979;
+}
+
+.checkout-button:hover {
+    background-color: #78cd7b;
+}
+
+.payment-section {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    cursor: pointer;
-  }
+}
+.total-price {
+    font-size: 24px;
+    font-weight: bold;
+    align-items: right;
+    color: #333;
+}
+.promo-text{
+    font-size: 14px;
+}
