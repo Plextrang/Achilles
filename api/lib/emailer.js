@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer');
 async function sendEmail(productName, recipientEmail) {
     try {
-        console.log("This is from the sendEmail function!")
+        console.log("This is from the sendEmail function!");
         let transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
