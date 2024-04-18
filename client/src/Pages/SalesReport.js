@@ -1,16 +1,23 @@
-
 import React, { useState, useEffect } from 'react';
 import './SalesReport.css';
 export default function SalesReport(){
     const [salesData, setSalesData] = useState([]);
 
     useEffect(() => {
-        //fake ass data 
-      const mockData = [
-        { id: 1, date: '02-14-2064', shoeType: 'Converse', employeeName: 'john doe', quantity: 5, amount: 1000 },
-        { id: 2, date: '01-01-2024', shoeType: 'More Converse', employeeName: 'sneha jacob', quantity: 10000, amount: 150000 },
-      ];
-      setSalesData(mockData);
+      async function fetchData() {
+          try {
+              const response = await fetch('https://cosc-3380-6au9.vercel.app/api/handlers/history/getShoeReport/');
+              if (!response.ok) {
+                  throw new Error('Network response was not ok');
+              }
+              const data = await response.json();
+              setSalesData(data);
+          } catch (error) {
+              console.error('Error fetching sales report:', error);
+          }
+      }
+
+      fetchData();
     }, []);
   
     //fake ass data pt2
@@ -31,21 +38,22 @@ export default function SalesReport(){
           <table>
             <thead>
               <tr>
-                <th>Date</th>
-                <th>Shoe Type</th>
-                <th>Employee Name</th>
-                <th>Quantity</th>
-                <th>Amount</th>
+                <th>Shoe Name</th>
+                <th>Shoe ID</th>
+                <th>Units Sold</th>
+                <th>Total Sales</th>
+                <th>Stock Remaining</th>
+                {/* <th>Amount</th> */}
               </tr>
             </thead>
             <tbody>
               {salesData.map(report => (
-                <tr key={report.id}>
-                  <td>{report.date}</td>
-                  <td>{report.shoeType}</td>
-                  <td>{report.employeeName}</td>
-                  <td>{report.quantity}</td>
-                  <td>${report.amount}</td>
+                <tr key={report.product_id}>
+                  <td>{report.item_name}</td>
+                  <td>{report.product_id}</td>
+                  <td>{report.units_sold}</td>
+                  <td>${report.total_sales}</td>
+                  <td>{report.stock}</td>
                 </tr>
               ))}
             </tbody>
