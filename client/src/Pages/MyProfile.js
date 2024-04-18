@@ -165,7 +165,7 @@ const MyProfile = () => {
             </h2>
             <p>Name: {userData.first_name} {userData.last_name}</p>
             <p>Email: {userEmail}</p>
-            <p>Address: {userData.address}</p>
+            <p>Address: {userData.address}, {userData.city}, {userData.state} {userData.zip_code}</p>
             <p>Phone Number: {userData.phone_number}</p>
           </div>
           
