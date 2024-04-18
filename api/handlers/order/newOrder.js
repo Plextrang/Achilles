@@ -1,4 +1,5 @@
 const { getRequestBody } = require("../../lib/parseBody");
+const { sendEmail } = require("../../lib/emailer");
 const http = require('http');
 const mysql = require('mysql');
 const cors = require('cors');
@@ -61,7 +62,7 @@ module.exports = async (req, res) => {
             if (err) {
                 console.error('Error inserting payment method:', err);
                 res.writeHead(500, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify({ error: 'Internal Server Error' }));
+                res.end(JSON.stringify({ error: 'Payment Internal Server Error' }));
                 return;
             }
             method_id = paymentResult.insertId;
@@ -73,7 +74,7 @@ module.exports = async (req, res) => {
                 if (err) {
                     console.error('Error inserting transaction data:', err);
                     res.writeHead(500, { 'Content-Type' : 'application/json' });
-                    res.end(JSON.stringify({ error: 'Internal Server Error' }));
+                    res.end(JSON.stringify({ error: 'Transaction Internal Server Error' }));
                    
                 }
                 
@@ -92,40 +93,57 @@ module.exports = async (req, res) => {
                         if (err) {
                             console.error('Error updating stock:', err);
                             res.writeHead(500, { 'Content-Type' : 'application/json' });
-                            res.end(JSON.stringify({ error: 'Internal Server Error' }));
+                            res.end(JSON.stringify({ error: 'Stock Internal Server Error' }));
                             return;
                         }
-                        
-                        let transactionItemSql = `INSERT INTO TRANSACTION_ITEM (transaction_id, product_id, quantity) VALUES (?, ?, ?)`;
-                        db.query(transactionItemSql, [transactionId, product_id, quantity], (err, result) => {
+                        const lowStockSql = 'SELECT low_stock_flag, item_name, manager_email FROM shoe_product WHERE product_id = ?';
+                        db.query(lowStockSql, [product_id], (err, flagResult) => {
                             if (err) {
                                 console.error('Error inserting transaction item:', err);
                                 res.writeHead(500, { 'Content-Type' : 'application/json' });
-                                res.end(JSON.stringify({ error: 'Internal Server Error' }));
+                                res.end(JSON.stringify({ error: 'Flag Internal Server Error' }));
                                 return;
                             }
-                            
-                            console.log("Entered product-id: ", product_id);
-                            const discountSql = 'SELECT discount FROM TRANSACTIONS WHERE transaction_id = ?';
-                            db.query(discountSql, [transactionId], (err, discountResult) => {
+                            console.log("This is the discount result:", flagResult);
+                            const flag = flagResult[0].low_stock_flag;
+                            console.log("Discount Bool is: ", flag);
+                            if(flag){
+                                const productName = flagResult[0].item_name;
+                                const managerEmail = flagResult[0].manager_email;
+                                sendEmail(productName, ManagerEmail);
+                            }
+                        
+                            let transactionItemSql = `INSERT INTO TRANSACTION_ITEM (transaction_id, product_id, quantity) VALUES (?, ?, ?)`;
+                            db.query(transactionItemSql, [transactionId, product_id, quantity], (err, result) => {
                                 if (err) {
-                                    console.error('Error inserting transaction data:', err);
+                                    console.error('Error inserting transaction item:', err);
                                     res.writeHead(500, { 'Content-Type' : 'application/json' });
-                                    res.end(JSON.stringify({ error: 'Internal Server Error' }));
+                                    res.end(JSON.stringify({ error: 'Transaction Item Internal Server Error' }));
                                     return;
                                 }
-                                console.log("This is the discount result:", discountResult);
-                                const discount = discountResult[0].discount;
-                                console.log("Discount Bool is: ", discount);
                                 
-                                if (index === cartItems.length - 1) {
-                                    if (discount) {
-                                        res.writeHead(210, { 'Content-Type' : 'application/json' });
-                                        res.end(JSON.stringify({ message: "Transaction was made successfully with discount!" }));
-                                    } else {
-                                        res.end(JSON.stringify({ message: "Transaction was made successfully" }));
+                                console.log("Entered product-id: ", product_id);
+                                const discountSql = 'SELECT discount FROM TRANSACTIONS WHERE transaction_id = ?';
+                                db.query(discountSql, [transactionId], (err, discountResult) => {
+                                    if (err) {
+                                        console.error('Error inserting transaction data:', err);
+                                        res.writeHead(500, { 'Content-Type' : 'application/json' });
+                                        res.end(JSON.stringify({ error: 'Discount Internal Server Error' }));
+                                        return;
                                     }
-                                }
+                                    console.log("This is the discount result:", discountResult);
+                                    const discount = discountResult[0].discount;
+                                    console.log("Discount Bool is: ", discount);
+                                    
+                                    if (index === cartItems.length - 1) {
+                                        if (discount) {
+                                            res.writeHead(210, { 'Content-Type' : 'application/json' });
+                                            res.end(JSON.stringify({ message: "Transaction was made successfully with discount!" }));
+                                        } else {
+                                            res.end(JSON.stringify({ message: "Transaction was made successfully" }));
+                                        }
+                                    }
+                                });
                             });
                         });
                     });
