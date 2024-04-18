@@ -113,11 +113,12 @@ const MyProfile = () => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          first_name: formData.first_name, // Assuming formData is defined and contains updated user information
+          first_name: formData.first_name, 
           last_name: formData.last_name,
           phone_number: formData.phone_number,
           address: formData.address,
-          user_id: userData.user_id // Assuming userData is defined and contains user ID
+          email: formData.email,
+          user_id: userData.user_id 
         })
       });
       
