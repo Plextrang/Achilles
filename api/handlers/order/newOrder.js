@@ -4,6 +4,7 @@ const http = require('http');
 const mysql = require('mysql');
 const cors = require('cors');
 const querystring = require('querystring');
+const nodemailer = require('nodemailer');
 
 module.exports = async (req, res) => {
     if (req.method === "OPTIONS") {
