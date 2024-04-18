@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Model from 'react-modal'
+import { FaStar, FaShoppingBag } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import white_converse from '../images/white_converse.jpg'; 
 import nike_air_force_1 from '../images/nike_air_force_1.jpg';
@@ -32,6 +33,8 @@ const initialFormData = {
 const MyProfile = () => {
   const navigate = useNavigate();
   const userEmail = localStorage.getItem('userEmail');
+  const [rating, setRating] = useState(null);
+  const [hover, setHover] = useState(null);
   const [orderedItems, setOrderedItems] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null); // State to hold the selected item for review
   const [userData, setUserData] = useState({
@@ -148,10 +151,44 @@ const MyProfile = () => {
     }
   };
 
-  const handleReviewSubmit = () => {
-    
-    handleCloseReviewModal();
-  }
+  const handleReviewSubmit = async (event) => {
+    event.preventDefault();
+  
+    try {
+      const reviewData = {
+        product_id: selectedItem.product_id,
+        user_id: userData.user_id,
+        rating: rating, // Use the rating state
+        review: event.target.review.value, // Use the review text from the form data
+        // item: selectedItem // Include the selected item information
+      };
+  
+      // Send the review data to the server
+      const response = await fetch('https://cosc-3380-6au9.vercel.app/api/handlers/products/submitReview', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(reviewData)
+      });
+  
+      // Check if the response is successful
+      if (!response.ok) {
+        throw new Error('Failed to submit review');
+      }
+  
+      // Reset the rating and form data
+      setRating(null);
+      setFormData(initialFormData);
+      // Close the modal after successfully submitting the review
+      handleCloseReviewModal();
+    } catch (error) {
+      console.error('Error submitting review:', error);
+      // Optionally, you can show an error message to the user
+    }
+  };
+
+
   return (
     <div>
       <div className="profile-container">
@@ -248,6 +285,28 @@ const MyProfile = () => {
     <form onSubmit={handleReviewSubmit}>
       <label htmlFor='review'>Review:</label>
       <textarea id='review' name='review' required></textarea>
+      <div className="star-rating">
+          {[...Array(5)].map((star, index) => {
+            const currentRating = index + 1;
+            return (
+              <label>
+                <input
+                type="radio" 
+                name="rating"
+                value={currentRating}
+                onClick={() => setRating(currentRating)}
+                />
+                <FaStar
+                 classname="star"
+                 size={20} 
+                 color = {currentRating <= (hover || rating) ? "#ffc107" : "e4e5e9" }
+                 onMouseEnter={() => setHover(currentRating)}
+                 onMouseLeave={() => setHover(null)}
+                 />
+              </label>
+            );
+          })}
+      </div>
       <button type='submit'>Submit Review</button>
     </form>
     {successMessage && <p className="success-message">{successMessage}</p>}
