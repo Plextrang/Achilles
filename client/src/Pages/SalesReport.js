@@ -2,32 +2,39 @@ import React, { useState, useEffect } from 'react';
 import './SalesReport.css';
 export default function SalesReport(){
     const [salesData, setSalesData] = useState([]);
+    const [custData, setCustData] = useState([]);
 
     useEffect(() => {
-      async function fetchData() {
-          try {
-              const response = await fetch('https://cosc-3380-6au9.vercel.app/api/handlers/history/getShoeReport/');
-              if (!response.ok) {
-                  throw new Error('Network response was not ok');
-              }
-              const data = await response.json();
-              setSalesData(data);
-          } catch (error) {
-              console.error('Error fetching sales report:', error);
+      async function fetchSalesData() {
+        try {
+          const salesResponse = await fetch('https://cosc-3380-6au9.vercel.app/api/handlers/history/getShoeReport/');
+          if (!salesResponse.ok) {
+              throw new Error('Failed to fetch sales data');
           }
+          const salesData = await salesResponse.json();
+          setSalesData(salesData);
+        } catch (error) {
+          console.error('Error fetching sales data:', error);
+        }
       }
 
-      fetchData();
+      async function fetchCustomerData() {
+        try {
+          const custResponse = await fetch('https://cosc-3380-6au9.vercel.app/api/handlers/history/getCustomerReport/');
+          if (!custResponse.ok) {
+              throw new Error('Failed to fetch customer data');
+          }
+          const custData = await custResponse.json();
+          setCustData(custData);
+        } catch (error) {
+          console.error('Error fetching customer data:', error);
+        }
+      }
+
+      fetchSalesData();
+      fetchCustomerData();
     }, []);
   
-    //fake ass data pt2
-    const mockEmployees = [
-        // "john doe", "sneha jacob", "your mom"
-        {name: "john doe", pno: "123-456-7890", bday: '01-01-2024'},
-        {name: "jane doe", pno: "321-654-0987", bday: '01-01-2024'},
-        {name: "sneha jacob", pno: "888-888-8888", bday: '01-01-2024'},
-
-    ];
   
     return (
       <div className="sales-report-container">
@@ -54,16 +61,16 @@ export default function SalesReport(){
               </tr>
             </thead>
             <tbody>
-              {salesData.map(report => (
-                <tr key={report.product_id}>
-                  <td>{report.item_name}</td>
-                  <td>{report.product_id}</td>
-                  <td>{report.units_sold}</td>
-                  <td>${report.total_sales.toFixed(2)}</td>
-                  <td>{report.stock}</td>
+              {custData.map(customer => (
+                <tr key={customer.user_id}>
+                  <td>{customer.user_id}</td>
+                  <td>{customer.full_name}</td>
+                  <td>{customer.total_transactions}</td>
+                  <td>{customer.units_bought}</td>
+                  <td>${customer.total_expenditure.toFixed(2)}</td>
                 </tr>
               ))}
-            </tbody>
+          </tbody>
           </table>
         </div>
   
@@ -72,10 +79,11 @@ export default function SalesReport(){
           <table>
             <thead>
               <tr>
-                <th>Employee Name</th>
-                <th>Phone Number</th>
-                <th>Birth Date</th>
-                <th>Total Sales</th>
+                <th>Customer ID</th>
+                <th>Customer Name</th>
+                <th># of Transactions</th>
+                <th>Units Bought</th>
+                <th>Total Expenditure</th>
               </tr>
             </thead>
             <tbody>
