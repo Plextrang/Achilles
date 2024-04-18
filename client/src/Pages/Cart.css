@@ -101,3 +101,29 @@
     background-color: #78cd7b;
   }
   
+  .return-button {
+    background-color: #007bff; /* Bootstrap's primary color */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+
+  .return-button:hover {
+    background-color: #0056b3; /* Darker shade of blue on hover */
+  }
+  
+  .back-button {
+    background-color: #6c757d; /* Bootstrap's secondary color */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
