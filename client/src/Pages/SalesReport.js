@@ -52,7 +52,7 @@ export default function SalesReport(){
                   <td>{report.item_name}</td>
                   <td>{report.product_id}</td>
                   <td>{report.units_sold}</td>
-                  <td>${report.total_sales}</td>
+                  <td>${report.total_sales.toFixed(2)}</td>
                   <td>{report.stock}</td>
                 </tr>
               ))}
