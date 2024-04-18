@@ -4,6 +4,9 @@ async function sendEmail(productName, recipientEmail) {
         console.log("This is from the sendEmail function!");
         let transporter = nodemailer.createTransport({
             service: 'gmail',
+            host: 'smtp.gmail.com',
+            port: 465,
+            secure: true,
             auth: {
                 user: 'achillesemail67@gmail.com',
                 //pass: 'AchillesAdmin1!'
