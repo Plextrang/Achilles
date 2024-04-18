@@ -31,7 +31,7 @@ async function sendEmail(productName, recipientEmail) {
             text: `Product ${productName} is low on stock.`
         };
 
-        transport.sendMail(mailOptions, (error, info) => {
+        transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
                 return console.log(error);
             }
