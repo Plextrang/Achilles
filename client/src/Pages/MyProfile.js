@@ -149,6 +149,7 @@ const MyProfile = () => {
   };
 
   const handleReviewSubmit = () => {
+    
     handleCloseReviewModal();
   }
   return (
@@ -183,14 +184,8 @@ const MyProfile = () => {
                     <p>Time: {new Date(item.date_time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: true})}</p>
                     <p>Price: ${item.price}</p>
                   </div>
-<<<<<<< Updated upstream
-                  <button className= "review-button" onClick={() => handleOpenReviewModal(item)}>Write Review</button>
-                </div>
-=======
-                  <button className="review-button" onClick={() => handleOpenReviewModal(item)}>
-  Write Review
-</button>                </div>
->>>>>>> Stashed changes
+                  <button className="review-button" onClick={() => handleOpenReviewModal(item)}>Write Review</button>
+                                  </div>
               ))
             ) : (
               <p>No items ordered</p>
