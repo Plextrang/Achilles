@@ -91,9 +91,9 @@ export default function SalesReport(){
                 <tr key={customer.user_id}>
                   <td>{customer.user_id}</td>
                   <td>{customer.full_name}</td>
-                  <td>{customer.total_transactions}</td>
-                  <td>{customer.units_bought}</td>
-                  <td>${customer.total_expenditure ? customer.total_expenditure.toFixed(2) : 'N/A'}</td>
+                  <td>{customer.total_transactions ? customer.total_transactions : 0}</td>
+                  <td>{customer.units_bought ? customer.units_bought : 0}</td>
+                  <td>${customer.total_expenditure ? customer.total_cost_of_purchases.toFixed(2) : 'N/A'}</td>
                 </tr>
               ))}
           </tbody>
