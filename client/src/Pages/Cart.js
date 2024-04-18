@@ -2,7 +2,7 @@ import React, { useEffect, useState, } from 'react';
 import { Link } from 'react-router-dom';
 import white_converse from '../images/white_converse.jpg';
 import nike_air_force_1 from '../images/nike_air_force_1.jpg';
-import adidas_gazelle_blue_gold from '../images/adidas_gazella_blue_gold.jpg';
+import adidas_gazelle_blue_gold from '../images/adidas_gazelle_blue_gold.jpg';
 import doc_martens_jorge from '../images/doc_martens_jorge.jpg';
 import hk_crocs_clogs from '../images/hk_crocs_clogs.jpg';
 import naruto_crocs_clog from '../images/naruto_crocs_clog.jpg';
@@ -71,7 +71,7 @@ export default function Cart() {
     };
     return (
         <div className="cart-container">
-            <h1 className="cart-title">Shopping Cart - Test: 6</h1>
+            <h1 className="cart-title">Shopping Cart</h1>
             {cartItems.length === 0 ? (
                 <div className="cart-items"> 
                     <p>Cart is empty.</p>

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import white_converse from '../images/white_converse.jpg'; 
 import nike_air_force_1 from '../images/nike_air_force_1.jpg';
-import adidas_gazelle_blue_gold from '../images/adidas_gazella_blue_gold.jpg';
+import adidas_gazelle_blue_gold from '../images/adidas_gazelle_blue_gold.jpg';
 import doc_martens_jorge from '../images/doc_martens_jorge.jpg';
 import hk_crocs_clogs from '../images/hk_crocs_clogs.jpg';
 import naruto_crocs_clog from '../images/naruto_crocs_clog.jpg';
