@@ -224,3 +224,8 @@
 .entry-button:hover {
   background-color: #4f0a0a; /* Updated color */
 }
+
+.review-modal button[type="submit"]:hover {
+  background-color: #6e1010; /* Updated color */
+}
+
