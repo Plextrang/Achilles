@@ -59,7 +59,7 @@ label {
     background-color: #0056b3;
 }
 
-.close-button {
+/* .close-button {
     display: block;
     position: absolute;
     top: 10px;
@@ -79,4 +79,4 @@ label {
 
 .close-button:hover span {
     color: #777;
-}
+} */

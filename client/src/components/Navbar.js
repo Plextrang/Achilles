@@ -26,7 +26,7 @@ export default function Navbar() {
     };
     const coninueShopping = () =>{
         navigate('/Products')
-    }
+    };
 
     const handleLogout = () => {
         const userEmail = localStorage.getItem('userEmail');

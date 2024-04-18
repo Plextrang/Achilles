@@ -93,7 +93,7 @@
 .entry-button:hover {
     background-color: #65232c;
 }
-.close-button{
+/* .close-button{
     background-color:#65232c;
     border: none;
     width: 100%;
@@ -103,4 +103,25 @@
     margin-right: 27%;
     padding: 102px;
     transition: background-color 0.3s ease;
+} */
+.close-button {
+    display: block;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
 }
+
+.close-button span {
+    font-size: 30px;
+    color: #333;
+    line-height: 30px;
+}
+
+.close-button:hover span {
+    color: #777;
+} 
