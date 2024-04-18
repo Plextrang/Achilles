@@ -39,6 +39,9 @@ const MyProfile = () => {
     first_name: '',
     last_name: '',
     address: '',
+    city: '',
+    state: '',
+    zip_code: '',
     email: '',
     phone_number: '',
     image_filename: ''
@@ -120,6 +123,9 @@ const MyProfile = () => {
           last_name: formData.last_name,
           phone_number: formData.phone_number,
           address: formData.address,
+          city: formData.city,
+          state: formData.state,
+          zip_code: formData.zip_code,
           //email: formData.email,
           user_id: userData.user_id 
         })
@@ -206,6 +212,15 @@ const MyProfile = () => {
   
             <label htmlFor="address">Address:</label>
             <input type="text" id="address" name="address" value={formData.address} onChange={handleChange} />
+
+            <label htmlFor="city">City:</label>
+            <input type="text" id="city" name="City" value={formData.city} onChange={handleChange} />
+
+            <label htmlFor="state">State:</label>
+            <input type="text" id="state" name="State" value={formData.state} onChange={handleChange} />
+
+            <label htmlFor="zip">Zip Code:</label>
+            <input type="text" id="zip" name="Zip Code" value={formData.zip_code} onChange={handleChange} />
   
             <button type="submit">Save Changes</button>
           </form>

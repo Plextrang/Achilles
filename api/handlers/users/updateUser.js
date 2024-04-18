@@ -29,7 +29,7 @@ module.exports = async (req, res) => {
 
     userData = await getRequestBody(req, res);
     console.log('Parsed product data:', userData);
-    const { first_name, last_name, phone_number, address, user_id } = userData;
+    const { first_name, last_name, phone_number, address, city, state, zip_code, user_id } = userData;
 
     const updateUserSql = `UPDATE USER SET first_name = ?, last_name = ?, phone_number = ?, address = ? WHERE user_id = ?`;
 
