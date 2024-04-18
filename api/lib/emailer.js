@@ -1,3 +1,4 @@
+const nodemailer = require('nodemailer');
 async function sendEmail(productName, recipientEmail) {
     try {
         let transporter = nodemailer.createTransport({
