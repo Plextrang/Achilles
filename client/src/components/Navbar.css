@@ -66,6 +66,7 @@
     /* margin-top: 15px; */
 }
 
+
 #login-button, #admin-button, #emplo-button, #cart-button {
     background-color: #494949;
 }
@@ -79,6 +80,10 @@
 }
 
 #register-button:hover, #profile-button:hover, #logout-button:hover{
-    background-color: #ffc0c8;
+    background-color: #5a0d17;
+}
+#continue-shopping{
+    background-color:  #5a0d17;
+    margin: 0 5px; /* Adjust margin */
 }
 

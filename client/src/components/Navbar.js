@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import achillesLogo from '../images/companyLogo.png';
 import { CgProfile } from "react-icons/cg";
+import { CiShop } from "react-icons/ci";
 import './Navbar.css';
 
 export default function Navbar() {
@@ -23,6 +24,9 @@ export default function Navbar() {
     const handleLogin = () => {
         navigate('/Login');
     };
+    const coninueShopping = () =>{
+        navigate('/Products')
+    }
 
     const handleLogout = () => {
         const userEmail = localStorage.getItem('userEmail');
@@ -86,6 +90,10 @@ export default function Navbar() {
                     </>
                 )}
             </div>
+            <div className="nav-button" id="continue-shopping" onClick={() => navigate('/Products')}>
+                <CiShop />
+            </div>
         </div>
+
     );
 }
