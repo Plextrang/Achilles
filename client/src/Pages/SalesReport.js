@@ -61,16 +61,16 @@ export default function SalesReport(){
               </tr>
             </thead>
             <tbody>
-              {custData.map(customer => (
-                <tr key={customer.user_id}>
-                  <td>{customer.user_id}</td>
-                  <td>{customer.full_name}</td>
-                  <td>{customer.total_transactions}</td>
-                  <td>{customer.units_bought}</td>
-                  <td>${customer.total_expenditure.toFixed(2)}</td>
+              {salesData.map(report => (
+                <tr key={report.product_id}>
+                  <td>{report.item_name}</td>
+                  <td>{report.product_id}</td>
+                  <td>{report.units_sold}</td>
+                  <td>${report.total_sales.toFixed(2)}</td>
+                  <td>{report.stock}</td>
                 </tr>
               ))}
-          </tbody>
+            </tbody>
           </table>
         </div>
   
@@ -87,21 +87,16 @@ export default function SalesReport(){
               </tr>
             </thead>
             <tbody>
-              {mockEmployees.map(employee => (
-                <tr key={employee.name}>
-                  <td>{employee.name}</td>
-                  <td>{employee.pno}</td>
-                  <td>{employee.bday}</td>
-                  <td>
-                    {/* ${salesData.filter(sale => sale.employeeName === employee)}
-                    {salesData.reduce((total, sale) => total + sale.amount, 0)} */}
-                    ${salesData
-                    .filter(report => report.employeeName === employee.name)
-                    .reduce((total, report) => total + report.amount, 0)}
-                  </td>
+              {custData.map(customer => (
+                <tr key={customer.user_id}>
+                  <td>{customer.user_id}</td>
+                  <td>{customer.full_name}</td>
+                  <td>{customer.total_transactions}</td>
+                  <td>{customer.units_bought}</td>
+                  <td>${customer.total_expenditure.toFixed(2)}</td>
                 </tr>
               ))}
-            </tbody>
+          </tbody>
           </table>
         </div>
       </div>
