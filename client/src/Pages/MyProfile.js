@@ -153,7 +153,7 @@ const MyProfile = () => {
 
   const handleReviewSubmit = async (event) => {
     event.preventDefault();
-  
+
     try {
       const reviewData = {
         product_id: selectedItem.product_id,
@@ -162,6 +162,8 @@ const MyProfile = () => {
         review: event.target.review.value, // Use the review text from the form data
         // item: selectedItem // Include the selected item information
       };
+
+      console.log("Review data: ", reviewData);
   
       // Send the review data to the server
       const response = await fetch('https://cosc-3380-6au9.vercel.app/api/handlers/products/submitReview', {
@@ -171,6 +173,8 @@ const MyProfile = () => {
         },
         body: JSON.stringify(reviewData)
       });
+
+      console.log("Review data: ", reviewData);
   
       // Check if the response is successful
       if (!response.ok) {
