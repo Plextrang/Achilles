@@ -59,6 +59,11 @@ export default function SalesReport(){
       const formattedMinutes = minutes < 10 ? '0' + minutes : minutes; 
       return `${formattedHours}:${formattedMinutes} ${ampm}`;
     }
+
+    function formatPhoneNumber(phoneNumber) {
+      const formattedNumber = phoneNumber.toString().replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
+      return formattedNumber;
+    }
   
     return (
       <div className="sales-report-container">
@@ -125,11 +130,11 @@ export default function SalesReport(){
         </div>
 
         <div className="data-table">
-          <h2>Report 3</h2>
+          <h2>Daily Transactions</h2>
           <table>
             <thead>
               <tr>
-                <th>T-ID</th>
+                <th>Transaction ID</th>
                 <th>Time</th>
                 <th># of Items</th>
                 <th>Total Cost</th>
@@ -147,7 +152,7 @@ export default function SalesReport(){
                   <td>${daily.total_cost}</td>
                   <td>{daily.user_id}</td>
                   <td>{daily.full_name}</td>
-                  <td>{daily.phone_number}</td>
+                  <td>{formatPhoneNumber(daily.phone_number)}</td>
                 </tr>
               ))}
           </tbody>
