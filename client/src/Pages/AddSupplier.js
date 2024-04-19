@@ -26,7 +26,7 @@ export default function AddSupplier() {
         supplier_zip: supplierZIP
     };
     try { 
-        const response = await fetch('https://cosc-3380-6au9.vercel.app/api/handlers/products/newSupplier', {
+        const response = await fetch('https://cosc-3380-6au9.vercel.app/api/handlers/users/newSupplier', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
