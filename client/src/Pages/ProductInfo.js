@@ -22,6 +22,7 @@ export default function ProductInfo() {
     const [quantity, setQuantity] = useState(1);
     const [feedbackData, setFeedbackData] = useState([]);
     const [showPopup, setShowPopup] = useState(false);
+    const [showPopup2, setShowPopup2] = useState(false);
     const [popupMessage, setPopupMessage] = useState('');
     const [error, setError] = useState('');
     const [userType, setUserType] = useState('');
@@ -56,6 +57,26 @@ export default function ProductInfo() {
         }
     };
 
+    const handleUpdatePrice = async () => {
+        try {
+            const response = await fetch('https://cosc-3380-6au9.vercel.app/api/handlers/products/updateProduct', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ product_id: product.product_id, price: product.price })
+            });
+            const data = await response.json();
+            if (!response.ok) {
+                throw new Error(data.error || 'Failed to update product');
+            }
+            setShowPopup2(true);
+        } catch (error) {
+            console.error('Error adjusting price:', error);
+            setError(error.message);
+        }
+    };
+
     const handleAdjustPrice = () => {
         const newPriceInput = window.prompt('Enter the new price:');
         if (newPriceInput) {
@@ -64,7 +85,8 @@ export default function ProductInfo() {
                 setNewPrice(newPriceValue);
                 product.price = newPriceValue;
                 localStorage.setItem('ProductInfo', JSON.stringify(product));
-                setShowPopup(true);
+                handleUpdatePrice();
+                setShowPopup2(true);
                 setPopupMessage('Price adjusted successfully!');
                 setChangesSaved(true);
             } else {
@@ -90,6 +112,7 @@ export default function ProductInfo() {
 
     const handleCompleteAction = () => {
         setShowPopup(false);
+        setShowPopup2(false);
         setError('');
         setNewPrice('');
         setChangesSaved(false); // Reset changesSaved state
@@ -170,11 +193,10 @@ export default function ProductInfo() {
                             </ul>
                         </div>
                     )}
-                    {showPopup && (
+                    {showPopup2 && (
                         <div className="popup">
-                            <p>Item added to cart!</p>
-                            <Link to="/cart" className="go-to-cart">Go to Cart</Link>
-                            <button onClick={() => setShowPopup(false)}>Close</button>
+                            <p>Price has been adjusted!</p>
+                            <button onClick={() => setShowPopup2(false)}>Close</button>
                         </div>
                     )}
                     {error && (
