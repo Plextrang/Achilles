@@ -129,18 +129,20 @@ export default function SalesReport(){
           <table>
             <thead>
               <tr>
-                <th>Column 1</th>
-                <th>Column 2</th>
-                <th>Column 3</th>
-                <th>Column 4</th>
-                <th>Column 5</th>
+                <th>T-ID</th>
+                <th>Time</th>
+                <th># of Items</th>
+                <th>Total Cost</th>
+                <th>User ID</th>
+                <th>Customer Name</th>
+                <th>Phone Number</th>
               </tr>
             </thead>
             <tbody>
               {dailyData.map(daily => (
                 <tr key={daily.transaction_id}>
+                  <td>{daily.transaction_id}</td>
                   <td>{formatTime(daily.date_time)}</td>
-                  <td>{daily.date_time}</td>
                   <td>{daily.num_of_items}</td>
                   <td>${daily.total_cost}</td>
                   <td>{daily.user_id}</td>
