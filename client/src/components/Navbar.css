@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Gothic&family=Noto+Sans+Lao+Looped&display=swap');
 
 .nav-container {
+    position: relative;
     background-color: white;
     height: 50px;
     margin: 0;
@@ -66,6 +67,28 @@
     /* margin-top: 15px; */
 }
 
+.notifications-container {
+    position: relative;
+    top: 100%; /* Position it just below the button */
+    right: 0;
+    background-color: #fff; /* Background color of the notifications box */
+    border: 1px solid #ccc; /* Border around the notifications box */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle effect */
+    padding: 10px; /* Padding inside the notifications box */
+    max-height: 200px; /* Maximum height of the notifications box */
+    overflow-y: auto; /* Enable scrolling if content exceeds the height */
+}
+  
+.notifications-container h3 {
+    margin-top: 0; /* Remove default margin for the heading */
+}
+  
+.notifications-container ul {
+    list-style: none; /* Remove bullet points */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+}
+
 
 #login-button, #admin-button, #emplo-button, #cart-button {
     background-color: #494949;
@@ -83,6 +106,11 @@
     background-color: #ffc0c8;
 }
 #continue-shopping{
+    background-color:  #5a0d17;
+    cursor: pointer;
+    margin: 0 5px; /* Adjust margin */
+}
+#notifications{
     background-color:  #5a0d17;
     cursor: pointer;
     margin: 0 5px; /* Adjust margin */
