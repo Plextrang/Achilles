@@ -103,19 +103,27 @@ export default function Navbar() {
                         <Link to="/MyProfile" className="nav-link" id="profile-link">
                             <CgProfile />
                         </Link>
+                        <Link to="/Products" className="nav-link" id="continue-shopping">
+                    <CiShop />
+                </Link>
+                        <div className="nav-link" id="notifications" onClick={getNotifications}>
+                    <IoIosNotifications />
+                </div>
                     </>
                 ) : (
                     <>
                         <Link to="/Login" className="nav-link" id="login-link">Login</Link>
                         <Link to="/Register" className="nav-link" id="register-link">Register</Link>
+                        
                     </>
+                    
                 )}
-                <Link to="/Products" className="nav-link" id="continue-shopping">
+                {/* <Link to="/Products" className="nav-link" id="continue-shopping">
                     <CiShop />
-                </Link>
-                <div className="nav-link" id="notifications" onClick={getNotifications}>
+                </Link> */}
+                {/* <div className="nav-link" id="notifications" onClick={getNotifications}>
                     <IoIosNotifications />
-                </div>
+                </div> */}
                 {/* Render notifications */}
                 {notifications.length > 0 && showNotifications && (
                     <div className="notifications-container show"> {/* Add show class to display the container */}
