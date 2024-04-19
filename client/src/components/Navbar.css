@@ -1,4 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Gothic&family=Noto+Sans+Lao+Looped&display=swap');
+#logo-button {
+    width: 180px;
+    height: 40px;
+    background-color: white;
+    border: 0px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Add transition for smooth effect */
+}
+
+#logo-button:hover {
+    background-color: #f5f5f5; /* Change to a slightly different color on hover */
+    color: #333; /* Darken the text color on hover */
+    border-radius: 6px; /* Add border radius for a button-like appearance */
+}
+
+
+#logo-button img {
+    display: block; /* Ensure the image fills the button */
+    width: 100%;
+    height: 100%;
+}
 
 .nav-container {
     position: relative;
@@ -7,114 +29,42 @@
     margin: 0;
     width: 100%;
     border-bottom: 2px solid rgb(64, 64, 64);
-    display: flex; 
+    display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.nav-container button {
+.nav-link {
     cursor: pointer;
-}
-
-#logo-space {
-    width: 180px;
-    height: 40px;
-}
-
-#logo-button {
-    width: 180px;
-    height: 40px; 
-    background-color: white;
-    border: 0px solid white;
-}
-
-#logo-button img {
-    margin-left: -7px;
-}
-
-#logo-button:hover {
-    opacity: .7;
-}
-
-.left-side {
-    margin-left: 10px; /* Adjust margin */
-    margin-bottom: 2px;
-    flex: 1; /* Add flex property */
-    display: flex; /* Add display flex */
-    justify-content: flex-start; /* Align items to the start */
-}
-
-.right-side {
-    margin-right: 10px;
-    display: flex;
-    flex: 1; /* Add flex property */
-    justify-content: flex-end; /* Align items to the end */
-}
-
-.nav-button {
-    font-family: "Noto Sans Gothic", sans-serif;
-    font-size: larger;
-    font-weight: lighter;
-    color: white;
-    height: 35px;
-    margin: 0 5px; /* Adjust margin */
-    border: 0px solid;
-    border-radius: 6px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0 10px;
-    /* margin-top: 15px; */
-}
-
-.notifications-container {
+    text-decoration: none; /* Remove default underline for links */
     position: relative;
-    top: 100%; /* Position it just below the button */
+    color: inherit; /* Use the same color as the parent element */
+    display: inline-block; /* Ensure the link takes up only necessary space */
+    padding: 0 10px; /* Add padding to create space around the links */
+    margin: 0 10px; /* Add margin to create space between the links */
+}
+
+.nav-link::before,
+.nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
     right: 0;
-    background-color: #fff; /* Background color of the notifications box */
-    border: 1px solid #ccc; /* Border around the notifications box */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle effect */
-    padding: 10px; /* Padding inside the notifications box */
-    max-height: 200px; /* Maximum height of the notifications box */
-    overflow-y: auto; /* Enable scrolling if content exceeds the height */
-}
-  
-.notifications-container h3 {
-    margin-top: 0; /* Remove default margin for the heading */
-}
-  
-.notifications-container ul {
-    list-style: none; /* Remove bullet points */
-    padding: 0; /* Remove default padding */
-    margin: 0; /* Remove default margin */
+    height: 1px;
+    background-color: transparent;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Add transition for smooth effect */
 }
 
-
-#login-button, #admin-button, #emplo-button, #cart-button {
-    background-color: #494949;
+.nav-link::before {
+    width: 0%;
 }
 
-#login-button:hover, #cart-button:hover, #admin-button:hover, #emplo-button:hover {
-    background-color: #656565;
-}
-
-#register-button, #profile-button, #logout-button {
-    background-color: #FFAEB9;
-}
-
-#register-button:hover, #profile-button:hover, #logout-button:hover{
-    background-color: #ffc0c8;
-}
-#continue-shopping{
-    background-color:  #5a0d17;
-    cursor: pointer;
-    margin: 0 5px; /* Adjust margin */
-}
-#notifications{
-    background-color:  #5a0d17;
-    cursor: pointer;
-    margin: 0 5px; /* Adjust margin */
-}
-#profile-button {
-    cursor: pointer;
+.nav-link:hover::before,
+.nav-link:hover::after {
+    width: 100%;
+    bottom: -2px; /* Adjust vertical position to align with text and make it thicker */
+    height: 2px; /* Adjust thickness of underline */
+    background-color: #5a0d17; /* Change to desired underline color */
+    transition: background-color 1s ease;
 }
