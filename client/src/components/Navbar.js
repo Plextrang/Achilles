@@ -11,6 +11,7 @@ export default function Navbar() {
     const [isLoggedIn, setLoggedIn] = useState(false);
     const [userType, setType] = useState("");
     const [notifications, setNotifications] = useState([]);
+    const [showNotifications, setShowNotifications] = useState(false);
 
     useEffect(() => {
         if (localStorage.getItem('userEmail')) {
@@ -31,17 +32,22 @@ export default function Navbar() {
     };
     const getNotifications = () =>{
         const userEmail = localStorage.getItem('userEmail');
-        fetch(`https://cosc-3380-6au9.vercel.app/api/handlers/users/getNotifications?email=${encodeURIComponent(userEmail)}`
-        ).then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        }).then (data => {
-            setNotifications(data);
-        }).catch(error => {
-            console.error('Error logging out:', error);
-        });
+        if (showNotifications) {
+            // Clear notifications if already shown
+            setNotifications([]);
+            setShowNotifications(false);
+        } else {
+            // Fetch notifications
+            fetch(`https://cosc-3380-6au9.vercel.app/api/handlers/users/getNotifications?email=${userEmail}`)
+                .then(response => response.json())
+                .then(data => {
+                    setNotifications(data);
+                    setShowNotifications(true);
+                })
+                .catch(error => {
+                    console.error('Network response was not ok', error);
+                });
+        }
     }
 
     const handleLogout = () => {
