@@ -79,18 +79,8 @@ export default function AddSupplier() {
                                         <input className="text" type="text" value={supplierZIP} onChange={(e) => setsupplierZIP(e.target.value)} placeholder="10101" maxLength="5" required />
                                     </div>
                                 </div>
-                                {/* <div className="line-container-two">
-                                    <div className="input">
-                                        <label className="text-label">Category <span className="required">&#42;</span></label>
-                                        <input className="text" type="text" value={productType} onChange={(e) => setProductType(e.target.value)} placeholder="Men/Women/Kids" maxLength="5" required />
-                                    </div>
-                                    <div className="input">
-                                        <label className="text-label">Image Name <span className="required">&#42;</span></label>
-                                        <input className="text" type="text" value={productImage} onChange={(e) => setProductImage(e.target.value)} placeholder="example_name.jpg" maxLength="255" required />
-                                    </div>
-                                </div> */}
                                 <div className="button-wrapper">
-                                    <button className="entry-button" type="submit">List Supplier</button>
+                                    <button className="entry-button" type="submit">Add Supplier</button>
                                 </div>
                                 {/* {errorMessage && <p className="error-message">{errorMessage}</p>} */}
 
