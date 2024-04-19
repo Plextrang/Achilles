@@ -111,3 +111,23 @@ label {
 .go-to-cart:hover {
     background-color: #45a049;
 }
+
+.manager-actions {
+    margin-bottom: 25px;
+}
+
+.manager-actions button {
+    padding: 12px 24px;
+    background-color: maroon; 
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-right: 15px;
+    transition: transform 0.2s ease;
+}
+
+.manager-actions button:hover {
+    transform: scale(1.05);
+}

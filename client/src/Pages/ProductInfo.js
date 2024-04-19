@@ -10,12 +10,12 @@ import naruto_crocs_clog from '../images/naruto_crocs_clog.jpg';
 import "./ProductInfo.css"
 
 const variableMap = {
-  'white_converse': white_converse,
-  'nike_air_force_1': nike_air_force_1,
-  'adidas_gazelle_blue_gold': adidas_gazelle_blue_gold,
-  'doc_martens_jorge': doc_martens_jorge,
-  'hk_crocs_clogs': hk_crocs_clogs,
-  'naruto_crocs_clog': naruto_crocs_clog
+    'white_converse': white_converse,
+    'nike_air_force_1': nike_air_force_1,
+    'adidas_gazelle_blue_gold': adidas_gazelle_blue_gold,
+    'doc_martens_jorge': doc_martens_jorge,
+    'hk_crocs_clogs': hk_crocs_clogs,
+    'naruto_crocs_clog': naruto_crocs_clog
 };
 
 export default function ProductInfo() {
@@ -49,6 +49,14 @@ export default function ProductInfo() {
             console.error('Error adding to Cart:', error);
             setError(error.message);
         }
+    };
+
+    const handleAdjustPrice = async (product) => {
+        // Logic to adjust price
+    };
+
+    const handleOrderShoe = async (product) => {
+        // Logic to order shoe
     };
 
     if (userType === 'Customer') {
@@ -97,11 +105,49 @@ export default function ProductInfo() {
                 </div>
             </div>
         );
-    } 
-    else {
+    } else {
         return (
-        <div>
-            Make Manager edit view here!
-        </div>)
+            <div className="product-info-container">
+                <img className="product-img" src={variableMap[product.image_filename]} alt={product.item_name} />
+                <div className="card-details">
+                    <h3 className="card-title">{product.item_name}</h3>
+                    <div className="card-description">{product.description}</div>
+                    <div className="card-reviews">
+                        <FaStar />
+                        <span className="total-reviews">4 Reviews</span>
+                    </div>
+                    <div className="bag">
+                        <FaShoppingBag />
+                        <div className="price">${product.price}</div>
+                    </div>
+                    <div className="manager-actions">
+                        <button id="adjust-price" onClick={() => handleAdjustPrice(product)}>Adjust Price</button>
+                        <button id="order-shoe" onClick={() => handleOrderShoe(product)}>Order Shoe</button>
+                    </div>
+                    {feedbackData.length > 0 && (
+                        <div className="feedback-container">
+                            <h3>Feedback</h3>
+                            <ul>
+                                {feedbackData.map((feedback, index) => (
+                                    <li key={index}>{feedback.comment}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+                    {showPopup && (
+                        <div className="popup">
+                            <p>Item added to cart!</p>
+                            <Link to="/cart" className="go-to-cart">Go to Cart</Link>
+                            <button onClick={() => setShowPopup(false)}>Close</button>
+                        </div>
+                    )}
+                    {error && (
+                        <div className="error-message">
+                            <p>Error: {error}</p>
+                        </div>
+                    )}
+                </div>
+            </div>
+        );
     }
-}
+};
