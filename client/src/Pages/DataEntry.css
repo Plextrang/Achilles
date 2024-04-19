@@ -78,7 +78,7 @@
 }
 
 .entry-button {
-    background-color: #FFAEB9;
+    background-color:#65232c; 
     border: none;
     width: 100%;
     color: white;
@@ -90,7 +90,7 @@
 }
 
 .entry-button:hover {
-    background-color: #65232c;
+    background-color: #f6cad0;
 }
 /* .close-button{
     background-color:#65232c;
