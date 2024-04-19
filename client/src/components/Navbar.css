@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Gothic&family=Noto+Sans+Lao+Looped&display=swap');
 
 .nav-container {
+    position: relative;
     background-color: white;
     height: 50px;
     margin: 0;
@@ -67,7 +68,7 @@
 }
 
 .notifications-container {
-    position: absolute;
+    position: relative;
     top: 100%; /* Position it just below the button */
     right: 0;
     background-color: #fff; /* Background color of the notifications box */
