@@ -36,6 +36,8 @@ export default function AddSupplier() {
         if (!response.ok) {
             throw new Error('Failed to add product');
         }
+        close();
+        window.alert("Supplier was added successfully");
     }  
     catch(error) {
         console.error('Error adding to Supplier:', error);
