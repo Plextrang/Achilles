@@ -135,6 +135,14 @@ export default function Navbar() {
                         </ul>
                     </div>
                 )}
+                {notifications.length === 0 && showNotifications && (
+                    <div className="notifications-container show"> {/* Add show class to display the container */}
+                        <h3>Notifications</h3>
+                        <ul>
+                            <li>No Notifications at this time.</li>
+                        </ul>
+                    </div>
+                )}
             </div>
         </div>
     );
