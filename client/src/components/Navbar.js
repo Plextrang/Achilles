@@ -32,21 +32,20 @@ export default function Navbar() {
     };
     const getNotifications = () =>{
         const userEmail = localStorage.getItem('userEmail');
-        if (showNotifications) {
-            // Clear notifications if already shown
-            setNotifications([]);
-            setShowNotifications(false);
-        } else {
-            // Fetch notifications
+        if (!showNotifications) {
+            // Fetch notifications only if container is not already shown
             fetch(`https://cosc-3380-6au9.vercel.app/api/handlers/users/getNotifications?email=${userEmail}`)
                 .then(response => response.json())
                 .then(data => {
                     setNotifications(data);
-                    setShowNotifications(true);
+                    setShowNotifications(true); // Show the container
                 })
                 .catch(error => {
                     console.error('Network response was not ok', error);
                 });
+        } else {
+            // Hide the container if already shown
+            setShowNotifications(false);
         }
     }
 
@@ -118,8 +117,8 @@ export default function Navbar() {
                     <IoIosNotifications />
                 </div>
                 {/* Render notifications */}
-                {notifications.length > 0 && (
-                    <div className="notifications-container">
+                {notifications.length > 0 && showNotifications && (
+                    <div className="notifications-container show"> {/* Add show class to display the container */}
                         <h3>Notifications</h3>
                         <ul>
                             {notifications.map((notification, index) => (
@@ -133,7 +132,6 @@ export default function Navbar() {
     );
     
 }
-
 
 // import React, { useState, useEffect } from 'react';
 // import { Link, useNavigate } from 'react-router-dom';

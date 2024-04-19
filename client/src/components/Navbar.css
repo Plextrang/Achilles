@@ -68,3 +68,36 @@
     background-color: #5a0d17; /* Change to desired underline color */
     transition: background-color 1s ease;
 }
+.notifications-container {
+    margin-right: auto;
+    position: absolute;
+    top: calc(100% + 10px); /* Adjust vertical position */
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+    border-radius: 6px; /* Make the box more square */
+    opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+    transition: opacity 1s ease; /* Add transition for fade-in effect */
+}
+
+.notifications-container.show {
+    opacity: 1; /* Fade in when the show class is added */
+}
+.notifications-container h3 {
+    margin-top: 0;
+}
+
+.notifications-container ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Show the container when the showNotifications state is true */
+.notifications-container.show {
+    display: block;
+}
