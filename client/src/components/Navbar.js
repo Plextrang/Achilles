@@ -31,13 +31,8 @@ export default function Navbar() {
     };
     const getNotifications = () =>{
         const userEmail = localStorage.getItem('userEmail');
-        fetch('https://cosc-3380-6au9.vercel.app/api/handlers/users/getNotifications', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email: userEmail })
-        }).then(response => {
+        fetch(`https://cosc-3380-6au9.vercel.app/api/handlers/users/getNotifications?email=${encodeURIComponent(userEmail)}`
+        ).then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
