@@ -2,24 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Model from 'react-modal'
 import { FaStar, FaShoppingBag } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import white_converse from '../images/white_converse.jpg'; 
-import nike_air_force_1 from '../images/nike_air_force_1.jpg';
-import adidas_gazelle_blue_gold from '../images/adidas_gazelle_blue_gold.jpg';
-import doc_martens_jorge from '../images/doc_martens_jorge.jpg';
-import hk_crocs_clogs from '../images/hk_crocs_clogs.jpg';
-import naruto_crocs_clog from '../images/naruto_crocs_clog.jpg';
 import "./MyProfile.css";
-Model.setAppElement('#root');
-
-
-const variableMap = {
-  'white_converse': white_converse,
-  'nike_air_force_1': nike_air_force_1,
-  'adidas_gazelle_blue_gold': adidas_gazelle_blue_gold,
-  'doc_martens_jorge': doc_martens_jorge,
-  'hk_crocs_clogs': hk_crocs_clogs,
-  'naruto_crocs_clog': naruto_crocs_clog
-};
 
 const initialFormData = {  
   user_id: '',
@@ -53,6 +36,7 @@ const MyProfile = () => {
   const [isManageModalOpen, setManageModalOpen] = useState(false);
   const [formData, setFormData] = useState(initialFormData);
   const [successMessage, setSuccessMessage] = useState('');
+  const [images, setImages] = useState({}); // State to hold dynamically loaded images
 
   const handleProfile = async () => {
     try {
@@ -76,6 +60,27 @@ const MyProfile = () => {
 
   useEffect(() => {
     handleProfile();
+  
+    // Dynamically load images
+    const loadImages = async () => {
+      const imagesToLoad = {};
+      try {
+        const response = await fetch('https://cosc-3380-6au9.vercel.app/api/handlers/products/getProducts');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        await Promise.all(data.map(async (product) => {
+          const image = await import(`../images/${product.image_filename}.jpg`);
+          imagesToLoad[product.image_filename] = image.default;
+        }));
+        setImages(imagesToLoad);
+      } catch (error) {
+        console.error('Error loading images:', error);
+      }
+    };
+  
+    loadImages();
   }, []);
 
   const handleOpenReviewModal = (item) => { // Pass the selected item when opening the review modal
@@ -216,8 +221,8 @@ const MyProfile = () => {
           <div className="order-history">
             {orderedItems.length > 0 ? (
               orderedItems.map(item => (
-                <div className="order">
-                  <img src={variableMap[item.image_filename]} alt={item.item_name} className="cart-item-image" />
+                <div /*key={item.transaction_id}*/ className="order"> {/* Add key prop */}
+                  <img src={images[item.image_filename]} alt={item.item_name} className="cart-item-image" />
                   <div>
                     <p>Transaction (ID: {item.transaction_id})</p>
                     <p>Shoe Name: {item.item_name}</p>
@@ -226,7 +231,7 @@ const MyProfile = () => {
                     <p>Price: ${item.price}</p>
                   </div>
                   <button className="review-button" onClick={() => handleOpenReviewModal(item)}>Write Review</button>
-                                  </div>
+                </div>
               ))
             ) : (
               <p>No items ordered</p>
@@ -270,52 +275,52 @@ const MyProfile = () => {
         </div>
       </Model>
       <Model isOpen={isReviewModalOpen} onRequestClose={handleCloseReviewModal}>
-  <div className='review-modal'>
-    <div className='exit-review-button' onClick={handleCloseReviewModal}>X</div>
-    <h2>Write Review</h2>
-    <div className='product-description'>
-      {/* Display information about the selected item */}
-      {selectedItem && (
-        <div className="order">
-          <img src={variableMap[selectedItem.image_filename]} alt={selectedItem.item_name} className="cart-item-image" />
-          <div>
-            <p>Transaction (ID: {selectedItem.transaction_id})</p>
-            <p>Shoe Name: {selectedItem.item_name}</p>
-            {/* Add more details as needed */}
+        <div className='review-modal'>
+          <div className='exit-review-button' onClick={handleCloseReviewModal}>X</div>
+          <h2>Write Review</h2>
+          <div className='product-description'>
+            {/* Display information about the selected item */}
+            {selectedItem && (
+              <div className="order">
+                <img src={images[selectedItem.image_filename]} alt={selectedItem.item_name} className="cart-item-image" />
+                <div>
+                  <p>Transaction (ID: {selectedItem.transaction_id})</p>
+                  <p>Shoe Name: {selectedItem.item_name}</p>
+                  {/* Add more details as needed */}
+                </div>
+              </div>
+            )}
           </div>
+          <form onSubmit={handleReviewSubmit}>
+            <label htmlFor='review'>Review:</label>
+            <textarea id='review' name='review' required></textarea>
+            <div className="star-rating">
+                {[...Array(5)].map((star, index) => {
+                  const currentRating = index + 1;
+                  return (
+                    <label key={index}>
+                      <input
+                        type="radio" 
+                        name="rating"
+                        value={currentRating}
+                        onClick={() => setRating(currentRating)}
+                      />
+                      <FaStar
+                        className="star"
+                        size={20} 
+                        color = {currentRating <= (hover || rating) ? "#ffc107" : "e4e5e9" }
+                        onMouseEnter={() => setHover(currentRating)}
+                        onMouseLeave={() => setHover(null)}
+                      />
+                    </label>
+                  );
+                })}
+            </div>
+            <button type='submit'>Submit Review</button>
+          </form>
+          {successMessage && <p className="success-message">{successMessage}</p>}
         </div>
-      )}
-    </div>
-    <form onSubmit={handleReviewSubmit}>
-      <label htmlFor='review'>Review:</label>
-      <textarea id='review' name='review' required></textarea>
-      <div className="star-rating">
-          {[...Array(5)].map((star, index) => {
-            const currentRating = index + 1;
-            return (
-              <label>
-                <input
-                type="radio" 
-                name="rating"
-                value={currentRating}
-                onClick={() => setRating(currentRating)}
-                />
-                <FaStar
-                 classname="star"
-                 size={20} 
-                 color = {currentRating <= (hover || rating) ? "#ffc107" : "e4e5e9" }
-                 onMouseEnter={() => setHover(currentRating)}
-                 onMouseLeave={() => setHover(null)}
-                 />
-              </label>
-            );
-          })}
-      </div>
-      <button type='submit'>Submit Review</button>
-    </form>
-    {successMessage && <p className="success-message">{successMessage}</p>}
-  </div>
-</Model>
+      </Model>
     </div>
   );
 };
