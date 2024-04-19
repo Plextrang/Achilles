@@ -22,10 +22,14 @@ export default function ProductInfo() {
     const [quantity, setQuantity] = useState(1);
     const [feedbackData, setFeedbackData] = useState([]);
     const [showPopup, setShowPopup] = useState(false);
+    const [popupMessage, setPopupMessage] = useState('');
     const [error, setError] = useState('');
     const [userType, setUserType] = useState('');
     const userEmail = localStorage.getItem("userEmail");
     const product = JSON.parse(localStorage.getItem('ProductInfo'));
+    const [actionType, setActionType] = useState('');
+    const [newPrice, setNewPrice] = useState('');
+    const [changesSaved, setChangesSaved] = useState(false); // Define setChangesSaved state
 
     useEffect(() => {
         setUserType(localStorage.getItem('userType'));
@@ -45,20 +49,52 @@ export default function ProductInfo() {
                 throw new Error(data.error || 'Failed to add product');
             }
             setShowPopup(true);
+            setPopupMessage('Item added to cart!');
         } catch (error) {
             console.error('Error adding to Cart:', error);
             setError(error.message);
         }
     };
 
-    const handleAdjustPrice = async (product) => {
-        // Logic to adjust price
+    const handleAdjustPrice = () => {
+        const newPriceInput = window.prompt('Enter the new price:');
+        if (newPriceInput) {
+            const newPriceValue = parseFloat(newPriceInput);
+            if (!isNaN(newPriceValue)) {
+                setNewPrice(newPriceValue);
+                product.price = newPriceValue;
+                localStorage.setItem('ProductInfo', JSON.stringify(product));
+                setShowPopup(true);
+                setPopupMessage('Price adjusted successfully!');
+                setChangesSaved(true);
+            } else {
+                setError('Invalid price. Please enter a valid number.');
+            }
+        }
     };
 
-    const handleOrderShoe = async (product) => {
-        // Logic to order shoe
+    const handleOrderShoe = () => {
+        const orderQuantity = window.prompt('Enter the quantity to order:');
+        if (orderQuantity) {
+            const orderQuantityValue = parseInt(orderQuantity);
+            if (!isNaN(orderQuantityValue) && orderQuantityValue > 0) {
+                // Handle ordering logic here
+                setShowPopup(true);
+                setPopupMessage('Order placed successfully!');
+                setChangesSaved(true);
+            } else {
+                setError('Invalid quantity. Please enter a valid number.');
+            }
+        }
     };
 
+    const handleCompleteAction = () => {
+        setShowPopup(false);
+        setError('');
+        setNewPrice('');
+        setChangesSaved(false); // Reset changesSaved state
+    };
+    
     if (userType === 'Customer') {
         return (
             <div className="product-info-container">
