@@ -26,19 +26,20 @@ module.exports = async (req, res) => {
         console.log('Connected to database');
 
         const query = `
-            SELECT 
-                t.transaction_id,
-                t.num_of_items,
-                t.total_cost,
-                u.user_id,
-                CONCAT_WS(' ', u.first_name, u.middle_initial, u.last_name) AS full_name,
-                u.phone_number
-            FROM 
-                transactions t
-            JOIN 
-                user u ON t.user_id = u.user_id
-            WHERE 
-                DATE(t.transaction_date) = CURDATE();
+        SELECT 
+            t.transaction_id,
+            t.date_time,
+            t.num_of_items,
+            t.total_cost,
+            u.user_id,
+            CONCAT_WS(' ', u.first_name, u.middle_initial, u.last_name) AS full_name,
+            u.phone_number
+        FROM 
+            transactions t
+        JOIN 
+            user u ON t.user_id = u.user_id
+        WHERE 
+            DATE(t.date_time) = CURDATE();
         `;
         
         db.query(query, (err, result) => {
