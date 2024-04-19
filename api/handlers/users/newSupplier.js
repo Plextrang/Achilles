@@ -26,10 +26,7 @@ module.exports = async (req, res) => {
     supData = await getRequestBody(req, res);
     const { supplier_name, supplier_email, supplier_phone, supplier_street, supplier_city, supplier_state, supplier_zip } = supData;
 
-    const insertQuery = `
-        INSERT INTO supplier (supplier_company_name, company_email, company_phone_num, street_name, city, state, zip_code)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-    `;
+    const insertQuery = `INSERT INTO supplier (supplier_company_name, company_email, company_phone_num, street_name, city, state, zip_code) VALUES (?, ?, ?, ?, ?, ?, ?)`;
     
     db.query(insertQuery, [supplier_name, supplier_email, supplier_phone, supplier_street, supplier_city, supplier_state, supplier_zip], (err, result) => {
         if (err) {
