@@ -82,6 +82,7 @@
     border-radius: 6px; /* Make the box more square */
     opacity: 0; /* Set initial opacity to 0 for fade-in effect */
     transition: opacity 1s ease; /* Add transition for fade-in effect */
+    z-index: 1;
 }
 
 .notifications-container.show {
