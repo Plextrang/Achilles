@@ -3,12 +3,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import achillesLogo from '../images/companyLogo.png';
 import { CgProfile } from "react-icons/cg";
 import { CiShop } from "react-icons/ci";
+import { IoIosNotifications } from "react-icons/io";
 import './Navbar.css';
 
 export default function Navbar() {
     const navigate = useNavigate();
     const [isLoggedIn, setLoggedIn] = useState(false);
     const [userType, setType] = useState("");
+    const [notifications, setNotifications] = useState([]);
 
     useEffect(() => {
         if (localStorage.getItem('userEmail')) {
@@ -27,6 +29,25 @@ export default function Navbar() {
     const coninueShopping = () =>{
         navigate('/Products')
     };
+    const getNotifications = () =>{
+        const userEmail = localStorage.getItem('userEmail');
+        fetch('https://cosc-3380-6au9.vercel.app/api/handlers/users/getNotifications', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email: userEmail })
+        }).then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        }).then (data => {
+            setNotifications(data);
+        }).catch(error => {
+            console.error('Error logging out:', error);
+        });
+    }
 
     const handleLogout = () => {
         const userEmail = localStorage.getItem('userEmail');
@@ -93,6 +114,20 @@ export default function Navbar() {
             <div className="nav-button" id="continue-shopping" onClick={() => navigate('/Products')}>
                 <CiShop />
             </div>
+            <div className="nav-button" id="notifications" onClick={getNotifications}>
+                <IoIosNotifications />
+            </div>
+            {/* Render notifications */}
+            {notifications.length > 0 && (
+                <div className="notifications-container">
+                    <h3>Notifications</h3>
+                    <ul>
+                        {notifications.map((notification, index) => (
+                            <li key={index}>{notification.message}</li>
+                        ))}
+                    </ul>
+                </div>
+            )}
         </div>
 
     );
