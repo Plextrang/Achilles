@@ -33,6 +33,10 @@ export default function Navbar() {
     const getNotifications = () =>{
         const userEmail = localStorage.getItem('userEmail');
         if (showNotifications) {
+            // Clear notifications if already shown
+            setNotifications([]);
+            setShowNotifications(false);
+        } else {
             // Fetch notifications
             fetch(`https://cosc-3380-6au9.vercel.app/api/handlers/users/getNotifications?email=${userEmail}`)
                 .then(response => response.json())
@@ -43,11 +47,6 @@ export default function Navbar() {
                 .catch(error => {
                     console.error('Network response was not ok', error);
                 });
-        } else {
-            
-            // Clear notifications if already shown
-            setNotifications([]);
-            setShowNotifications(false);
         }
     }
 
