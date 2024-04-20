@@ -9,6 +9,9 @@ import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 export default function Admin() {
   const [product, setProducts] = useState([]);
   const [images, setImages] = useState({});
+  const [selectedCategory, setSelectedCategory] = useState('All'); // Default to display all products
+  const [employees, setEmployees] = useState([]);
+  const [suppliers, setSuppliers] = useState([]);
   const navigate = useNavigate();
 
   const openProduct = (product) => {
@@ -19,28 +22,41 @@ export default function Admin() {
   };
 
   useEffect(() => {
-    // Fetch products
-    fetch('https://cosc-3380-6au9.vercel.app/api/handlers/products/getProducts')
-      .then(response => {
-        if (!response.ok) {
+    const fetchData = async () => {
+      try {
+        const productsResponse = await fetch('https://cosc-3380-6au9.vercel.app/api/handlers/products/getProducts');
+        if (!productsResponse.ok) {
           throw new Error('Network response was not ok');
         }
-        return response.json();
-      })
-      .then(data => {
-        setProducts(data);
-        // Load images dynamically
+        const productsData = await productsResponse.json();
+        setProducts(productsData);
+  
         const imagesToLoad = {};
-        data.forEach(product => {
-          import(`../images/${product.image_filename}.jpg`).then(image => {
-            imagesToLoad[product.image_filename] = image.default;
-            setImages(imagesToLoad);
-          });
-        });
-      })
-      .catch(error => {
-        console.error('Error fetching products:', error);
-      });
+        await Promise.all(productsData.map(async (product) => {
+          const image = await import(`../images/${product.image_filename}.jpg`);
+          imagesToLoad[product.image_filename] = image.default;
+        }));
+        setImages(imagesToLoad);
+  
+        const employeesResponse = await fetch('https://cosc-3380-6au9.vercel.app/api/handlers/history/getEmployees');
+        if (!employeesResponse.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const employeesData = await employeesResponse.json();
+        setEmployees(employeesData);
+  
+        const suppliersResponse = await fetch('https://cosc-3380-6au9.vercel.app/api/handlers/history/getSuppliers');
+        if (!suppliersResponse.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const suppliersData = await suppliersResponse.json();
+        setSuppliers(suppliersData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+  
+    fetchData();
   }, []);
 
   return (
