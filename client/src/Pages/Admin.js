@@ -118,8 +118,8 @@ export default function Admin() {
               <p><strong>Address:</strong> {employee.full_address}</p>
             </div>
             <div className="line-admin">
-              <p><strong>Salary:</strong> {employee.salary}</p>
-              <p><strong>SSN:</strong> {employee.e_ssn}</p>
+              <p><strong>Salary:</strong> {employee.salary.toLocaleString()}</p>
+              <p><strong>SSN:</strong> {String(employee.e_ssn).replace(/(\d{3})(\d{2})(\d{3})/, '$1-$2-$3')}</p>
             </div>
           </div>
           <div className="employee-actions">
