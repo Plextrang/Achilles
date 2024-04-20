@@ -7,6 +7,8 @@ export default function SalesReport(){
     const [filteredData, setFilteredData] = useState([]);
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
+    const [active, setActive] = useState(true);
+    const [notActive, setNotActive] = useState(true);
     const [selectedCategory, setSelectedCategory] = useState('Daily');
 
     useEffect(() => {
@@ -20,19 +22,6 @@ export default function SalesReport(){
           setSalesData(salesData);
         } catch (error) {
           console.error('Error fetching sales data:', error);
-        }
-      }
-
-      async function fetchCustomerData() {
-        try {
-          const custResponse = await fetch('https://cosc-3380-6au9.vercel.app/api/handlers/history/getCustomerReport/');
-          if (!custResponse.ok) {
-              throw new Error('Failed to fetch customer data');
-          }
-          const custData = await custResponse.json();
-          setCustData(custData);
-        } catch (error) {
-          console.error('Error fetching customer data:', error);
         }
       }
 
@@ -54,6 +43,27 @@ export default function SalesReport(){
       fetchDailyData();
       fetchFilteredData();
     }, []);
+
+    async function fetchCustomerData() {
+      try {
+        let url = 'https://cosc-3380-6au9.vercel.app/api/handlers/history/';
+        if (active && notActive) {
+            url += 'getCustomerReport/';
+        } else if (active) {
+            url += 'getActiveCustomerReport/';
+        } else {
+            url += 'getInactiveCustomerReport/';
+        }
+        const custResponse = await fetch(url);
+        if (!custResponse.ok) {
+            throw new Error('Failed to fetch customer data');
+        }
+        const custData = await custResponse.json();
+        setCustData(custData);
+      } catch (error) {
+        console.error('Error fetching customer data:', error);
+      }
+    }
 
     async function fetchFilteredData() {
       const defaultStartDate = new Date('2024-04-16');
@@ -202,6 +212,27 @@ export default function SalesReport(){
         {selectedCategory === 'Customer' && (
         <div className="data-table">
           <h2>Customer Details</h2>
+          <div className="filtered-button-row">
+            <label>
+                <input
+                    type="checkbox"
+                    checked={active}
+                    onChange={() => setActive(!active)}
+                />
+                Active
+            </label>
+            <label>
+                <input
+                    type="checkbox"
+                    checked={notActive}
+                    onChange={() => setNotActive(!notActive)}
+                />
+                Not Active
+            </label>
+            <div className='filtered-button-section'>
+              <button onClick={() => fetchCustomerData()}>Update</button>
+            </div>
+          </div>
           <table>
             <thead>
               <tr>
@@ -210,6 +241,7 @@ export default function SalesReport(){
                 <th># of Transactions</th>
                 <th>Units Bought</th>
                 <th>Total Expenditure</th>
+                <th>Still Active</th>
               </tr>
             </thead>
             <tbody>
@@ -220,6 +252,7 @@ export default function SalesReport(){
                   <td>{customer.total_transactions ? customer.total_transactions : 0}</td>
                   <td>{customer.units_bought ? customer.units_bought : 0}</td>
                   <td>${customer.total_cost_of_purchases ? customer.total_cost_of_purchases.toFixed(2) : 'N/A'}</td>
+                  <td>{customer.inactive === 0 ? "Yes" : "No"}</td>
                 </tr>
               ))}
           </tbody>

@@ -50,7 +50,7 @@ module.exports = async (req, res) => {
         FROM 
             user 
         WHERE 
-            user_type IN ('Manager', 'Employee')
+            user_type IN ('Manager', 'Employee') AND inactive = 0
     `;
 
     db.query(query, (err, results) => {

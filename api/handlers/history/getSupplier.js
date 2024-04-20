@@ -46,6 +46,8 @@ module.exports = async (req, res) => {
         ) AS full_address
     FROM 
         supplier
+    WHERE
+        inactive = 0
     `;
 
     db.query(query, (err, results) => {

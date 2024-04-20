@@ -41,7 +41,7 @@ module.exports = async (req, res) => {
     LEFT JOIN 
         transaction_item ti ON t.transaction_id = ti.transaction_id
     WHERE
-        u.user_type = 'customer'
+        u.user_type = 'customer' AND u.inactive = 1
     GROUP BY 
         u.user_id;`;
 

@@ -36,6 +36,8 @@ module.exports = async (req, res) => {
         shoe_product sp
     LEFT JOIN 
         transaction_item ti ON sp.product_id = ti.product_id
+    WHERE 
+        sp.inactive = 0
     GROUP BY 
         sp.product_id;
     `;
