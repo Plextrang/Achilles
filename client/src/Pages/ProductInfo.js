@@ -28,13 +28,29 @@ export default function ProductInfo() {
     const [userType, setUserType] = useState('');
     const userEmail = localStorage.getItem("userEmail");
     const product = JSON.parse(localStorage.getItem('ProductInfo'));
+    const [prodReviews, setProdReviews] = useState('');
     const [actionType, setActionType] = useState('');
     const [newPrice, setNewPrice] = useState('');
     const [changesSaved, setChangesSaved] = useState(false); // Define setChangesSaved state
 
     useEffect(() => {
         setUserType(localStorage.getItem('userType'));
+        fetchProductReviews();
     }, []);
+
+    const fetchProductReviews = async () => {
+        try {
+            const response = await fetch(`https://cosc-3380-6au9.vercel.app/api/handlers/history/getReviews?product_id=${product.product_id}`);
+            if (!response.ok) {
+                throw new Error('Failed to fetch product reviews');
+            }
+            const data = await response.json();
+            setProdReviews(data);
+            console.log(prodReviews);
+        } catch (error) {
+            console.error('Error fetching product reviews:', error);
+        }
+    };
 
     const handleAddCart = async () => {
         try {
