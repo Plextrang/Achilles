@@ -236,7 +236,7 @@ export default function Admin() {
   return (
     <div className="admin-container">
       <header className="title">
-        <h1 className="shop-now-container">Current Inventory</h1>
+        <h1 className="shop-now-container">Manager Portal</h1>
         <div className="add-new">
           <Link to="/EntryForm">
             <button>Add Shoe</button>
@@ -257,10 +257,10 @@ export default function Admin() {
             <button>Sales Report</button>
           </Link>
         </div>
-        <div className="search-bar">
+        {/* <div className="search-bar">
           <input type="text" placeholder="Search..." />
           <button>Search</button>
-        </div>
+        </div> */}
         <nav className="filters">
           <a href="#" className={selectedCategory === 'Inventory' ? 'active' : ''} onClick={() => setSelectedCategory('Inventory')}>
             Inventory
