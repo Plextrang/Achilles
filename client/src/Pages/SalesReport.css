@@ -67,3 +67,12 @@
     color: white;
   }
   
+  .filtered-button-row {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 10px;
+  }
+  
+  .filtered-button-section {
+    margin-right: 20px;
+  }

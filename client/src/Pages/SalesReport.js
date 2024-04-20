@@ -57,8 +57,8 @@ export default function SalesReport(){
 
     async function fetchFilteredData() {
       const defaultStartDate = new Date('2024-04-16');
-      const start = startDate ? startDate : defaultStartDate;
-      const end = endDate ? endDate : new Date();
+      const start = startDate ? new Date(startDate) : defaultStartDate;
+      const end = endDate ? new Date(endDate) : new Date();
       const startParam = start.toISOString();
       const endParam = end.toISOString();
       try {
@@ -72,9 +72,29 @@ export default function SalesReport(){
         console.error('Error fetching customer data:', error);
       }
     }
+
+    function formatDate(dateTime) {
+      let date = new Date(dateTime);
+      const options = {
+        timeZone: 'UTC', 
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+      };
+      return date.toLocaleDateString('en-US', options);
+    }
+
+    const handleEndDateChange = (e) => {
+      const selectedEndDate = new Date(e.target.value);
+      if (selectedEndDate < new Date(startDate)) {
+        setEndDate(startDate);
+      } else {
+        setEndDate(e.target.value);
+      }
+    };
   
     function formatTime(dateTime) {
-      const date = new Date(dateTime);
+      let date = new Date(dateTime);
       const options = {
         timeZone: 'UTC',
         hour12: true,
@@ -134,10 +154,24 @@ export default function SalesReport(){
 
             <div className="data-table">
             <h2>Filtered Transactions</h2>
+            <div className="filtered-button-row">
+              <div className='filtered-button-section'>
+                <label>Start Date:</label>
+                <input type="date" value={startDate} max={new Date().toISOString().split('T')[0]} onChange={(e) => setStartDate(e.target.value)} />
+              </div>
+              <div className='filtered-button-section'>
+                <label>End Date:</label>
+                <input type="date" value={endDate} min={startDate} max={new Date().toISOString().split('T')[0]} onChange={(e) => handleEndDateChange(e)} disabled={!startDate} />
+              </div>
+              <div className='filtered-button-section'>
+                <button onClick={() => fetchFilteredData()}>Adjust Time Period</button>
+              </div>
+            </div>
             <table>
               <thead>
                 <tr>
                   <th>Transaction ID</th>
+                  <th>Date of Purchase</th>
                   <th>Time</th>
                   <th># of Items</th>
                   <th>Total Cost</th>
@@ -147,15 +181,16 @@ export default function SalesReport(){
                 </tr>
               </thead>
               <tbody>
-                {dailyData.map(daily => (
-                  <tr key={daily.transaction_id}>
-                    <td>{daily.transaction_id}</td>
-                    <td>{formatTime(daily.date_time)}</td>
-                    <td>{daily.num_of_items}</td>
-                    <td>${daily.total_cost}</td>
-                    <td>{daily.user_id}</td>
-                    <td>{daily.full_name}</td>
-                    <td>{formatPhoneNumber(daily.phone_number)}</td>
+                {filteredData.map(filtered => (
+                  <tr key={filtered.transaction_id}>
+                    <td>{filtered.transaction_id}</td>
+                    <td>{formatDate(filtered.date_time)}</td>
+                    <td>{formatTime(filtered.date_time)}</td>
+                    <td>{filtered.num_of_items}</td>
+                    <td>${filtered.total_cost}</td>
+                    <td>{filtered.user_id}</td>
+                    <td>{filtered.full_name}</td>
+                    <td>{formatPhoneNumber(filtered.phone_number)}</td>
                   </tr>
                 ))}
             </tbody>
