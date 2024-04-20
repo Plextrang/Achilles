@@ -133,9 +133,9 @@ export default function Navbar() {
                         <Link to="/Products" className="nav-link" id="continue-shopping">
                             <CiShop />
                         </Link>
-                        <div className="nav-link" id="notifications" onClick={getNotifications}>
-                            <p><IoIosNotifications />{notifications.length}</p>
-                        </div>
+                        <Link to="#" className="nav-link" id="notifications" onClick={getNotifications}>
+                        <IoIosNotifications /> <span>{notifications.length}</span>
+                        </Link>
                     </>
                 ) : (
                     <>

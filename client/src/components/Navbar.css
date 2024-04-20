@@ -69,9 +69,8 @@
     transition: background-color 1s ease;
 }
 .notifications-container {
-    margin-right: auto;
     position: absolute;
-    top: calc(100% + 10px); /* Adjust vertical position */
+    top: calc(100% + 10px);
     right: 0;
     background-color: #fff;
     border: 1px solid #ccc;
@@ -79,14 +78,14 @@
     padding: 10px;
     max-height: 200px;
     overflow-y: auto;
-    border-radius: 6px; /* Make the box more square */
-    opacity: 0; /* Set initial opacity to 0 for fade-in effect */
-    transition: opacity 1s ease; /* Add transition for fade-in effect */
-    z-index: 1;
+    border-radius: 6px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1; 
 }
 
 .notifications-container.show {
-    opacity: 1; /* Fade in when the show class is added */
+    opacity: 1;
 }
 .notifications-container h3 {
     margin-top: 0;
@@ -98,46 +97,6 @@
     margin: 0;
 }
 
-/* Show the container when the showNotifications state is true */
 .notifications-container.show {
     display: block;
-}
-.checkbox-label {
-    display: flex; /* Use flexbox for layout */
-    align-items: center; /* Center align items vertically */
-    position: relative;
-    padding-left: 35px; /* Adjust padding as needed */
-    margin-bottom: 10px; /* Adjust margin as needed */
-    cursor: pointer;
-    font-size: 16px; /* Adjust font size as needed */
-}
-
-.checkmark {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-    height: 20px; /* Adjust height as needed */
-    width: 20px; /* Adjust width as needed */
-    border-radius: 3px; /* Adjust border radius as needed */
-    background-color: #fff; /* Color of the checkbox background */
-    border: 1px solid #ccc; /* Border color for the checkbox */
-    margin-right: 10px; /* Add margin between checkbox and text */
-}
-
-.checkmark::after {
-    content: "";
-    display: none;
-    position: absolute;
-    left: 6px; /* Adjust position of the checkmark inside the checkbox */
-    top: 2px; /* Adjust position of the checkmark inside the checkbox */
-    width: 5px; /* Adjust width of the checkmark */
-    height: 10px; /* Adjust height of the checkmark */
-    border: solid #000; /* Color of the checkmark */
-    border-width: 0 2px 2px 0; /* Adjust thickness and direction of the checkmark */
-    transform: rotate(45deg); /* Rotate the checkmark to make it look like a check */
-}
-
-.custom-checkbox:checked + .checkbox-label .checkmark::after {
-    display: block; /* Show the checkmark when checkbox is checked */
 }
