@@ -52,17 +52,25 @@
   }
   
   .cart-item-remove {
-    background-color: #dc3545; /* Change red color to bootstrap's danger color */
-    color: white;
+     /* Change red color to bootstrap's danger color */
+    background-color: transparent;
+    font-weight: 1px;
+    color: #5a0d17;;
     border: none;
     padding: 5px 10px;
     border-radius: 5px;
     cursor: pointer;
     margin-left: 10px;
+    text-decoration: none;
+    transition: color 0.3s ease, background-color 0.3s ease;
   }
   
   .cart-item-remove:hover {
-    background-color: #c82333; /* Change red color on hover */
+    background-color: transparent;
+    text-decoration: underline;
+    text-decoration-thickness: 1.4px;
+    color:#421010;
+
   }
   
   .cart-summary {
@@ -102,7 +110,7 @@
   }
   
   .return-button {
-    background-color: #007bff; /* Bootstrap's primary color */
+    background-color: #6d1a1a; /* Bootstrap's primary color */
     color: white;
     border: none;
     padding: 10px 20px;
@@ -114,7 +122,7 @@
   }
 
   .return-button:hover {
-    background-color: #0056b3; /* Darker shade of blue on hover */
+    background-color: #421010; /* Darker shade of blue on hover */
   }
   
   .back-button {
