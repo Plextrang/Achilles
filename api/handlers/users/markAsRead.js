@@ -30,16 +30,24 @@ module.exports = async (req, res) => {
     const notifData = await getRequestBody(req, res)
     console.log("this is the notif data \n", notifData);
 
-    const notificationId = notifData.notification_id;
+    const notif_id = notifData.notification_id;
     const deleteQuery = `DELETE FROM notification WHERE notification_id = ?`;
 
-    db.query(deleteQuery, [notificationId], (err, result) => {
+    db.query(deleteQuery, [notif_id], (err, result) => {
         if (err) {
             console.error('Error deleting notification:', err);
             res.writeHead(500, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify({ error: 'Internal Server Error' }));
             return;
         }
+        if(result.length === 0)
+        {
+            console.error('Error deleting notification:', err);
+            res.writeHead(404, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: 'No Notif found' }));
+            return;
+        }
+
         console.log('Notification deleted successfully');
         res.writeHead(200, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ message: 'Notification deleted successfully' }));
