@@ -136,47 +136,57 @@ export default function ProductInfo() {
     
     if (userType === 'Customer') {
         return (
-            <div className="product-info-container">
-                <img className="product-img" src={variableMap[product.image_filename]} alt={product.item_name} />
-                <div className="card-details">
-                    <h3 className="card-title">{product.item_name}</h3>
-                    <div className="card-description">{product.description}</div>
-                    <div className="card-reviews">
-                        <FaStar />
-                        <span className="total-reviews">4 Reviews</span>
-                    </div>
-                    <div className="bag">
-                        <FaShoppingBag />
-                        <div className="price">${product.price}</div>
-                    </div>
-                    <div className="add-container">
-                        <button className="quantity-button" onClick={() => setQuantity(Math.max(1, quantity - 1))}>-</button>
-                        <input type="text" className="quantity-input" value={quantity} readOnly />
-                        <button className="quantity-button" onClick={() => setQuantity(quantity + 1)}>+</button>
-                    </div>
-                    <button id="add-button" onClick={handleAddCart}>Add to Cart</button>
-                    {feedbackData.length > 0 && (
-                        <div className="feedback-container">
-                            <h3>Feedback</h3>
-                            <ul>
-                                {feedbackData.map((feedback, index) => (
-                                    <li key={index}>{feedback.comment}</li>
-                                ))}
-                            </ul>
+            <div>
+                <div className="product-info-container">
+                    <img className="product-img" src={variableMap[product.image_filename]} alt={product.item_name} />
+                    <div className="card-details">
+                        <h3 className="card-title">{product.item_name}</h3>
+                        <div className="card-description">{product.description}</div>
+                        <div className="card-reviews">
+                            <FaStar />
+                            <span className="total-reviews">4 Reviews</span>
                         </div>
-                    )}
-                    {showPopup && (
-                        <div className="popup">
-                            <p>Item added to cart!</p>
-                            <Link to="/cart" className="go-to-cart">Go to Cart</Link>
-                            <button onClick={() => setShowPopup(false)}>Close</button>
+                        <div className="bag">
+                            <FaShoppingBag />
+                            <div className="price">${product.price}</div>
                         </div>
-                    )}
-                    {error && (
-                        <div className="error-message">
-                            <p>Error: {error}</p>
+                        <div className="add-container">
+                            <button className="quantity-button" onClick={() => setQuantity(Math.max(1, quantity - 1))}>-</button>
+                            <input type="text" className="quantity-input" value={quantity} readOnly />
+                            <button className="quantity-button" onClick={() => setQuantity(quantity + 1)}>+</button>
                         </div>
-                    )}
+                        <button id="add-button" onClick={handleAddCart}>Add to Cart</button>
+                        {feedbackData.length > 0 && (
+                            <div className="feedback-container">
+                                <h3>Feedback</h3>
+                                <ul>
+                                    {feedbackData.map((feedback, index) => (
+                                        <li key={index}>{feedback.comment}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
+                        {showPopup && (
+                            <div className="popup">
+                                <p>Item added to cart!</p>
+                                <Link to="/cart" className="go-to-cart">Go to Cart</Link>
+                                <button onClick={() => setShowPopup(false)}>Close</button>
+                            </div>
+                        )}
+                        {error && (
+                            <div className="error-message">
+                                <p>Error: {error}</p>
+                            </div>
+                        )}
+                    </div>
+                </div>
+                <div className="product-review-container">
+                    <center><h2>Reviews</h2></center>
+                    <div className="user-review-box">
+                        <p id="customer-name-box">John Doe: </p>
+                        <p id="customer-review-box">This is where the review will be what if its loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong</p>
+                    </div>
+                    {/* {Each review will need to be in a className='user-review-box' div} */}
                 </div>
             </div>
         );
