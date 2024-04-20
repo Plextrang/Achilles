@@ -78,7 +78,7 @@ export default function Register() {
 					throw new Error('Network response was not ok', response);
 				}
 		
-				data = await response.json();
+				let data = await response.json();
 				console.log(data);
 
 				if (data.redirectUrl) {
@@ -100,7 +100,7 @@ export default function Register() {
 					throw new Error('Network response was not ok', response);
 				}
 		
-				data = await response.json();
+				let data = await response.json();
 				console.log(data);
 
 				if (data.redirectUrl) {
