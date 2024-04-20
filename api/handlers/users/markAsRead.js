@@ -27,29 +27,29 @@ module.exports = async (req, res) => {
         console.log('Connected to database, in the function');
     });
 
-    const notifData = await getRequestBody(req, res)
+    const notifData = await getRequestBody(req, res);
     console.log("this is the notif data \n", notifData);
 
-    const notif_id = notifData.notif_id;
-    const deleteQuery = `DELETE FROM notification WHERE notification_id = ?`;
+    const { notif_id, email } = notifData;
+    const updateQuery = `UPDATE notification SET mark_as_read = 1 WHERE notification_id = ?`;
 
-    db.query(deleteQuery, [notif_id], (err, result) => {
+    db.query(updateQuery, [notif_id], (err, result) => {
         if (err) {
-            console.error('Error deleting notification:', err);
+            console.error('Error updating notification:', err);
             res.writeHead(500, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify({ error: 'Internal Server Error' }));
             return;
         }
-        if(result.length === 0)
-        {
-            console.error('Error deleting notification:', err);
+
+        if (result.affectedRows === 0) {
+            console.error('Error updating notification:', err);
             res.writeHead(404, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify({ error: 'No Notif found' }));
             return;
         }
 
-        console.log('Notification deleted successfully');
+        console.log('Notification updated successfully');
         res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ message: 'Notification deleted successfully' }));
+        res.end(JSON.stringify({ message: 'Notification updated successfully' }));
     });
 };
