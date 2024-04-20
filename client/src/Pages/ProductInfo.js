@@ -179,8 +179,8 @@ export default function ProductInfo() {
                         )}
                     </div>
                 </div>
+                <center><h2>- Reviews -</h2></center>
                 <div className="product-review-container">
-                    <center><h2>Reviews</h2></center>
                     {prodReviews.map((review, index) => (
                         <div className="user-review-box" key={index}>
                             <div>
@@ -238,8 +238,8 @@ export default function ProductInfo() {
                         )}
                     </div>
                 </div>
+                <center><h2>- Reviews -</h2></center>
                 <div className="product-review-container">
-                    <center><h2>Reviews</h2></center>
                     {prodReviews.map((review, index) => (
                         <div className="user-review-box" key={index}>
                             <div>
