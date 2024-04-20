@@ -125,6 +125,8 @@ export default function ProductInfo() {
         }
     };
 
+    const averageReview = prodReviews.reduce((acc, review) => acc + review.review, 0) / prodReviews.length;
+
     const handleCompleteAction = () => {
         setShowPopup(false);
         setShowPopup2(false);
@@ -143,7 +145,7 @@ export default function ProductInfo() {
                         <div className="card-description">{product.description}</div>
                         <div className="card-reviews">
                             <FaStar />
-                            <span className="total-reviews">4 Reviews</span>
+                            <span className="total-reviews">{averageReview.toFixed(1)}/5 &#40;{prodReviews.length} user reviews&#41;</span>
                         </div>
                         <div className="bag">
                             <FaShoppingBag />
@@ -209,7 +211,7 @@ export default function ProductInfo() {
                         <div className="card-description">{product.description}</div>
                         <div className="card-reviews">
                             <FaStar />
-                            <span className="total-reviews">4 Reviews</span>
+                            <span className="total-reviews">{averageReview.toFixed(1)}/5 &#40;{prodReviews.length} user reviews&#41;</span>
                         </div>
                         <div className="bag">
                             <FaShoppingBag />
