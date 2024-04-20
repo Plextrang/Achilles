@@ -6,6 +6,7 @@ import "./Products.css";
 export default function Products() {
   const [products, setProducts] = useState([]);
   const [images, setImages] = useState({});
+  const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All'); // Default to display all products
   const navigate = useNavigate();
 
@@ -15,6 +16,7 @@ export default function Products() {
     console.log(localStorage.getItem('ProductInfo'));
     navigate('/GetProduct');
   };
+
 
   useEffect(() => {
     // Fetch products
@@ -41,15 +43,22 @@ export default function Products() {
       });
   }, []);
 
-  const filteredProducts = selectedCategory === 'All' ? products : products.filter(product => product.category_name === selectedCategory);
+  //const filteredProducts = selectedCategory === 'All' ? products : products.filter(product => product.category_name === selectedCategory);
 
+const categoryFilteredProducts = selectedCategory === 'All' ? products : products.filter(product => product.category_name === selectedCategory);
+const filteredProducts = searchQuery === '' ? categoryFilteredProducts : categoryFilteredProducts.filter(product => product.item_name.toLowerCase().includes(searchQuery.toLowerCase()));
+
+const handleSearchInputChange = (event) => {
+  setSearchQuery(event.target.value);
+};
+  
   return (
     <div className="product-container">
       <header className="title">
         <h1 className="shop-now-container">Our Products</h1>
         <div className="search-bar">
-          <input type="text" placeholder="Search..." />
-          <button>Search</button>
+        <input type="text" placeholder="Search..." value={searchQuery} onChange={handleSearchInputChange}/>
+          <button onClick={() => setSearchQuery('')}>Clear Search</button>
         </div>
         <nav className="filters">
           <a href="#" className={selectedCategory === 'All' ? 'active' : ''} onClick={() => setSelectedCategory('All')}>All</a>
