@@ -41,6 +41,7 @@ export default function Login() {
             }
         } catch (error) {
             console.error('There was a problem with your fetch operation:', error);
+            alert("Invalid email or password");
         }
     };
 
