@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import achillesLogo from '../images/companyLogo.png';
+import achillesLogo from '../images/achillesicon.png';
 import { CgProfile } from "react-icons/cg";
 import { CiShop } from "react-icons/ci";
 import { IoIosNotifications } from "react-icons/io";
