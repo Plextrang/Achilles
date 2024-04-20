@@ -9,7 +9,7 @@ import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 export default function Admin() {
   const [product, setProducts] = useState([]);
   const [images, setImages] = useState({});
-  const [selectedCategory, setSelectedCategory] = useState('All'); // Default to display all products
+  const [selectedCategory, setSelectedCategory] = useState('Inventory'); // Default to display all products
   const [employees, setEmployees] = useState([]);
   const [suppliers, setSuppliers] = useState([]);
   const navigate = useNavigate();
@@ -45,7 +45,7 @@ export default function Admin() {
         const employeesData = await employeesResponse.json();
         setEmployees(employeesData);
   
-        const suppliersResponse = await fetch('https://cosc-3380-6au9.vercel.app/api/handlers/history/getSuppliers');
+        const suppliersResponse = await fetch('https://cosc-3380-6au9.vercel.app/api/handlers/history/getSupplier');
         if (!suppliersResponse.ok) {
           throw new Error('Network response was not ok');
         }
@@ -58,6 +58,79 @@ export default function Admin() {
   
     fetchData();
   }, []);
+
+  
+
+  const renderProducts = () => (
+    <div className="card-container">
+      {product.length === 0 ? (
+        <div className="empty-products-message">
+          {/* Display a dummy page if products array is empty */}
+          {/* Dummy product cards */}
+        </div>
+      ) : (
+        product.map(product => (
+          <div key={product.product_id} className="card" onClick={() => openProduct(product)}>
+            <img className="card-img" src={images[product.image_filename]} alt={product.item_name} />
+            <div className="card-details">
+              <h3 className="card-title">{product.item_name}</h3>
+              <section className="card-reviews">
+                <FaStar />
+                <span className="total-reviews">4 Reviews</span> {/* Assuming this is a placeholder, you can replace it with product.reviews */}
+              </section>
+              <div className="bag">
+                <FaShoppingBag />
+                <div className="price">${product.price}</div>
+                <div className='edit-container'>
+                  <button className='edit'>Manage</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))
+      )}
+    </div>
+  );
+
+  const renderEmployees = () => (
+    <div className="employee-container">
+      {employees.map(employee => (
+        <div key={employee.email} className="employee-row">
+          <div className="employee-info">
+            <p>{employee.full_name}</p>
+            <p>{employee.email}</p>
+            <p>{employee.phone_number}</p>
+            <p>{employee.date_of_birth}</p>
+            <p>{employee.full_address}</p>
+            <p>{employee.user_type}</p>
+            <p>{employee.salary}</p>
+            <p>{employee.e_ssn}</p>
+          </div>
+          <div className="employee-actions">
+            <button className="manage-employee-button">Manage</button>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+  
+  const renderSuppliers = () => (
+    <div className="supplier-container">
+      {suppliers.map(supplier => (
+        <div key={supplier.supplier_id} className="supplier-row">
+          <div className="supplier-info">
+            <p>{supplier.company_name}</p>
+            <p>{supplier.company_email}</p>
+            <p>{supplier.phone_num}</p>
+            <p>{supplier.full_address}</p>
+          </div>
+          <div className="supplier-actions">
+            <button className="manage-supplier-button">Manage</button>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
 
   return (
     <div className="admin-container">
@@ -88,42 +161,21 @@ export default function Admin() {
           <button>Search</button>
         </div>
         <nav className="filters">
-          <a href="#" className="active">
+          <a href="#" className={selectedCategory === 'Inventory' ? 'active' : ''} onClick={() => setSelectedCategory('Inventory')}>
             Inventory
           </a>
-          <a href="#">Employees</a>
-          <a href="#">Supplier</a>
+          <a href="#" className={selectedCategory === 'Employees' ? 'active' : ''} onClick={() => setSelectedCategory('Employees')}>
+            Employees
+          </a>
+          <a href="#" className={selectedCategory === 'Suppliers' ? 'active' : ''} onClick={() => setSelectedCategory('Suppliers')}>
+            Suppliers
+          </a>
         </nav>
       </header>
 
-      <div className="card-container">
-        {product.length === 0 ? (
-          <div className="empty-products-message">
-            {/* Display a dummy page if products array is empty */}
-            {/* Dummy product cards */}
-          </div>
-        ) : (
-          product.map(product => (
-            <div key={product.product_id} className="card" onClick={() => openProduct(product)}>
-              <img className="card-img" src={images[product.image_filename]} alt={product.item_name} />
-              <div className="card-details">
-                <h3 className="card-title">{product.item_name}</h3>
-                <section className="card-reviews">
-                  <FaStar />
-                  <span className="total-reviews">4 Reviews</span> {/* Assuming this is a placeholder, you can replace it with product.reviews */}
-                </section>
-                <div className="bag">
-                  <FaShoppingBag />
-                  <div className="price">${product.price}</div>
-                  <div className='edit-container'>
-                    <button className='edit'>Manage</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))
-        )}
-      </div>
+      {selectedCategory === 'Inventory' && renderProducts()}
+      {selectedCategory === 'Employees' && renderEmployees()}
+      {selectedCategory === 'Suppliers' && renderSuppliers()}
     </div>
   );
 }
