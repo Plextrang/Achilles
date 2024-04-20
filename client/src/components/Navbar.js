@@ -75,6 +75,27 @@ export default function Navbar() {
                 console.error('Error logging out:', error);
             });
     };
+    const markAsRead = () =>{
+        const userEmail = localStorage.getItem('userEmail')
+        fetch('https://cosc-3380-6au9.vercel.app/api/handlers/users/markAsRead', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email: userEmail })
+        }).then(response => {
+            if(!response.ok){
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Marked as read successfully')
+        })
+        .catch(error =>{
+            console.error('Error marking notification ');
+        });
+    }
 
     return (
         <div className="nav-container">
@@ -126,23 +147,33 @@ export default function Navbar() {
                 </div> */}
                 {/* Render notifications */}
                 {notifications.length > 0 && showNotifications && (
-                    <div className="notifications-container show"> {/* Add show class to display the container */}
-                        <h3>Notifications</h3>
-                        <ul>
-                            {notifications.map((notification, index) => (
-                                <li key={index}>{notification.message}</li>
-                            ))}
-                        </ul>
-                    </div>
-                )}
-                {notifications.length === 0 && showNotifications && (
-                    <div className="notifications-container show"> {/* Add show class to display the container */}
-                        <h3>Notifications</h3>
-                        <ul>
-                            <li>No Notifications at this time.</li>
-                        </ul>
-                    </div>
-                )}
+        <div className="notifications-container show">
+            <h3>Notifications</h3>
+                <ul>
+                    {notifications.map((notification, index) => (
+                <li key={index}>
+                    <input
+                        type="checkbox"
+                        id={`notification-${notification.check}`}
+                        onChange={() => markAsRead(notification.check)} 
+                    />
+                    <label htmlFor={`notification-${notification.check}`} className = "checkbox-label">
+                        {notification.message}</label>
+                </li>
+            ))}
+        </ul>
+    </div>
+)}
+
+{notifications.length === 0 && showNotifications && (
+    <div className="notifications-container show">
+        <h3>Notifications</h3>
+        <ul>
+            <li>No Notifications at this time.</li>
+        </ul>
+    </div>
+)}
+
             </div>
         </div>
     );
