@@ -63,7 +63,7 @@ export default function Register() {
 			}
 			let inactiveData = await checkInactive.json();
 			console.log(JSON.stringify(inactiveData));
-			if(JSON.stringify(inactiveData).length === 0){
+			if(JSON.stringify(inactiveData) === '[]'){
 				const response = await fetch('https://cosc-3380-6au9.vercel.app/api/handlers/users/newUser/', {
 				// mode: 'no-cors',
 				method: 'POST',
