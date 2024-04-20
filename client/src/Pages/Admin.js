@@ -62,11 +62,24 @@ export default function Admin() {
   }, []);
 
   const handleDeleteEmployee = async () => { 
-    // Add endpoint/fetch here!
+    console.log(selectedEmployee); // use selectedEmployee to get employee to fire info. it contains email & e_ssn alongside other attributes.
+    try {
+      // endpoint/fetch here! no need to mess with popups
+    } 
+    catch (error) {
+        console.error('Error firing employee:', error);
+    }
   };
 
   const handleDeleteSupplier = async () => { 
-    // Add endpoint/fetch here!
+    console.log(selectedSupplier);
+    try {
+      // endpoint/fetch here! no need to mess with popups
+      // similar to deleteEmployee, theres a var 'selectedSupplier' with supplier_id and email that you can send to the backend.
+    } 
+    catch (error) {
+        console.error('Error removing supplier:', error);
+    }
   };
 
   const renderProducts = () => (
