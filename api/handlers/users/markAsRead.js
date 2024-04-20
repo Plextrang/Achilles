@@ -30,7 +30,7 @@ module.exports = async (req, res) => {
     const notifData = await getRequestBody(req, res)
     console.log("this is the notif data \n", notifData);
 
-    const notif_id = notifData.notification_id;
+    const notif_id = notifData.notif_id;
     const deleteQuery = `DELETE FROM notification WHERE notification_id = ?`;
 
     db.query(deleteQuery, [notif_id], (err, result) => {
