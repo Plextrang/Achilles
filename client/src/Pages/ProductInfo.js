@@ -181,17 +181,21 @@ export default function ProductInfo() {
                 </div>
                 <center><h2>- Reviews -</h2></center>
                 <div className="product-review-container">
-                    {prodReviews.map((review, index) => (
-                        <div className="user-review-box" key={index}>
-                            <div>
-                                <p className="customer-info-box">{review.full_name}: </p>
-                                <div className="customer-info-box">
-                                {[...Array(review.review)].map((_, i) => (<FaStar key={i} />))}
+                    {prodReviews.length === 0 ? (
+                        <center><p style={{ color: "#c1c1c1" }}><i>Have you purchased this item? Leave a Review from your Profile!</i></p></center>
+                    ) : (
+                        prodReviews.map((review, index) => (
+                            <div className="user-review-box" key={index}>
+                                <div>
+                                    <p className="customer-info-box">{review.full_name}: </p>
+                                    <div className="customer-info-box">
+                                        {[...Array(review.review)].map((_, i) => (<FaStar key={i} />))}
+                                    </div>
                                 </div>
+                                <p className="customer-review-text">{review.review_of_product}</p>
                             </div>
-                            <p id="customer-review-box">{review.review_of_product}</p>
-                        </div>
-                    ))}
+                        ))
+                    )}
                 </div>
             </div>
         );
@@ -240,17 +244,21 @@ export default function ProductInfo() {
                 </div>
                 <center><h2>- Reviews -</h2></center>
                 <div className="product-review-container">
-                    {prodReviews.map((review, index) => (
-                        <div className="user-review-box" key={index}>
-                            <div>
-                                <p className="customer-info-box">{review.full_name}: </p>
-                                <div className="customer-info-box">
-                                {[...Array(review.review)].map((_, i) => (<FaStar key={i} />))}
+                    {prodReviews.length === 0 ? (
+                        <center><p style={{ color: "#c1c1c1" }}><i>Have you purchased this item? Leave a Review from your Profile!</i></p></center>
+                    ) : (
+                        prodReviews.map((review, index) => (
+                            <div className="user-review-box" key={index}>
+                                <div>
+                                    <p className="customer-info-box">{review.full_name}: </p>
+                                    <div className="customer-info-box">
+                                        {[...Array(review.review)].map((_, i) => (<FaStar key={i} />))}
+                                    </div>
                                 </div>
+                                <p className="customer-review-text">{review.review_of_product}</p>
                             </div>
-                            <p id="customer-review-box">{review.review_of_product}</p>
-                        </div>
-                    ))}
+                        ))
+                    )}
                 </div>
             </div>
         );
