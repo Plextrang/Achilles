@@ -56,7 +56,7 @@ export default function Register() {
 		
 		try {
 			console.log(JSON.stringify(userData))
-			const checkInactive = await fetch(`https://cosc-3380-6au9.vercel.app/api/handlers/users/checkInactiveUser?email=${encodeURIComponent(userEmail)}`, {
+			const checkInactive = await fetch(`https://cosc-3380-6au9.vercel.app/api/handlers/users/checkInactiveUser?email=${encodeURIComponent(document.getElementById('email').value)}`, {
 
 			})
 			console.log(checkInactive.ok)
