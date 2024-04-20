@@ -29,18 +29,18 @@ module.exports = async (req, res) => {
 
     reviewData = await getRequestBody(req, res);
     console.log("Parsed review data: ", reviewData);
-    const { product_id, user_id, rating, actualReview } = reviewData;
+    const { product_id, user_id, rating, review } = reviewData;
 
-    const postReviewSql = "INSERT INTO reviews (product_id, actualReview, rating, user_id) VALUES (?, ?, ?, ?)";
-    db.query(postReviewSql, [product_id, actualReview, rating, user_id], (err, result) => {
+    const postReviewSql = "INSERT INTO reviews (product_id, review_of_product, review, user_id) VALUES (?, ?, ?, ?)";
+    db.query(postReviewSql, [product_id, review, rating, user_id], (err, result) => {
         if (err) {
             console.error('Error inserting review data:', err);
             res.writeHead(500, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify({ error: 'Review Internal Server Error' }));
-        } else {
-            console.log('Review data inserted successfully:', result);
-            res.writeHead(200, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ message: 'Review submitted successfully' }));
         }
+
+        console.log('Review data inserted successfully:', result);
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ message: 'Review submitted successfully' }));
     });
 }
