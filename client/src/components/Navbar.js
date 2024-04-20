@@ -92,8 +92,11 @@ export default function Navbar() {
             }
 
             const data = await response.json();
-            if(data)
+            if(data) {
                 console.log("Notif was deleted successfully", data);
+                setShowNotifications(false);
+                getNotifications();
+            }
         } catch (error) {
             console.error('There was a problem with your fetch operation:', error);
         }
@@ -131,7 +134,7 @@ export default function Navbar() {
                             <CiShop />
                         </Link>
                         <div className="nav-link" id="notifications" onClick={getNotifications}>
-                            <IoIosNotifications />
+                            <p><IoIosNotifications />{notifications.length}</p>
                         </div>
                     </>
                 ) : (
