@@ -135,7 +135,7 @@ export default function AddEmployee() {
                                 </div>
                                 <div className="input">
                                     <center><label className="text-label">Is this Employee a Manager?</label></center>
-                                    <input className="checkbox-alignment" type="checkbox" checked={isManager} onChange={() => setIsManager(!isManager)} />
+                                    <input className="checkbox-alignment" type="checkbox" checked={isManager} onChange={() => setIsManager(!isManager)}></input>
                                 </div>
                                 <div className="button-wrapper">
                                     <button className="entry-button" type="submit">Add Employee</button>
