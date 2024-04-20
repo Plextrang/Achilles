@@ -56,25 +56,60 @@ export default function Register() {
 		
 		try {
 			console.log(JSON.stringify(userData))
-			const response = await fetch('https://cosc-3380-6au9.vercel.app/api/handlers/users/newUser/', {
+			const checkInactive = await fetch(`https://cosc-3380-6au9.vercel.app/api/handlers/users/checkInactiveUser?email=${encodeURIComponent(userEmail)}`, {
+
+			})
+			console.log(checkInactive.ok)
+			if (!checkInactive.ok) {
+				throw new Error('Network response was not ok', checkInactive);
+			}
+			let inactiveData = await checkInactive.json();
+			if(stringify(inactiveData).length === 0){
+				const response = await fetch('https://cosc-3380-6au9.vercel.app/api/handlers/users/newUser/', {
 				// mode: 'no-cors',
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
 				},
 				body: JSON.stringify(userData)
-			});
-			console.log(response.ok)
-			if (!response.ok) {
-				throw new Error('Network response was not ok', response);
-			}
-	
-			const data = await response.json();
-            console.log(data);
+				});
+				console.log(response.ok)
+				if (!response.ok) {
+					throw new Error('Network response was not ok', response);
+				}
+		
+				data = await response.json();
+				console.log(data);
 
-            if (data.redirectUrl) {
-                navigate(data.redirectUrl);
-            }
+				if (data.redirectUrl) {
+					navigate(data.redirectUrl);
+				}
+			}
+			let inactiveBool = inactiveData[0].inactive;
+			if(inactiveBool){
+				const response = await fetch('https://cosc-3380-6au9.vercel.app/api/handlers/users/reactivateUser', {
+					// mode: 'no-cors',
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(userData)
+				});
+				console.log(response.ok)
+				if (!response.ok) {
+					throw new Error('Network response was not ok', response);
+				}
+		
+				data = await response.json();
+				console.log(data);
+
+				if (data.redirectUrl) {
+					navigate(data.redirectUrl);
+				}
+			} else {
+				//somehow show error saying this email already has an account
+			}
+			
 		} catch (error) {
 			console.error('There was a problem with your fetch operation:', error);
 			// Handle error, maybe show an error message to the user
