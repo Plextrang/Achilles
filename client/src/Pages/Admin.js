@@ -119,7 +119,11 @@ export default function Admin() {
             </div>
             <div className="line-admin">
               <p><strong>Salary:</strong> {employee.salary.toLocaleString()}</p>
-              <p><strong>SSN:</strong> {String(employee.e_ssn).replace(/(\d{3})(\d{2})(\d{3})/, '$1-$2-$3')}</p>
+              {userType === 'Administrator' ? (
+                <p><strong>SSN:</strong> {employee.e_ssn ? String(employee.e_ssn).replace(/(\d{3})(\d{2})(\d{3})/, '$1-$2-$3') : 'No SSN found'}</p>
+              ) : (
+                <p><strong>SSN:</strong> {employee.e_ssn ? 'XXX-XX-' + employee.e_ssn.slice(-4) : 'No SSN found'}</p>
+              )}
             </div>
           </div>
           <div className="employee-actions">
