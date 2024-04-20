@@ -134,7 +134,7 @@ const MyProfile = () => {
       if (data.redirectUrl) {
         navigate(data.redirectUrl);
       }
-    }catch{
+    }catch (error){
       console.error('Error saving changes:', error);
     }
     setShowPopup(true);
