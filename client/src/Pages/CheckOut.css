@@ -31,7 +31,7 @@
 
 
 .confirm-order-button {
-    background-color: #4CAF50;
+    background-color: #4f0a0a;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -45,7 +45,7 @@
 }
 
 .confirm-order-button:hover {
-    background-color: #78cd7b;
+    background-color: #972626;
 }
 
 .payment-section {
