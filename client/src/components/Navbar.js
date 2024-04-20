@@ -27,7 +27,7 @@ export default function Navbar() {
     const handleLogin = () => {
         navigate('/Login');
     };
-    const coninueShopping = () =>{
+    const continueShopping = () =>{
         navigate('/Products')
     };
     const getNotifications = () =>{
@@ -75,26 +75,29 @@ export default function Navbar() {
                 console.error('Error logging out:', error);
             });
     };
-    const markAsRead = () =>{
+    const markAsRead = async (notification) =>{
+        console.log(notification);
         const userEmail = localStorage.getItem('userEmail')
-        fetch('https://cosc-3380-6au9.vercel.app/api/handlers/users/markAsRead', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email: userEmail })
-        }).then(response => {
-            if(!response.ok){
+        try {
+            const response = await fetch('https://cosc-3380-6au9.vercel.app/api/handlers/users/markAsRead', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email: userEmail, notif_id: notification.notification_id })
+            });
+
+            if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Marked as read successfully')
-        })
-        .catch(error =>{
-            console.error('Error marking notification ');
-        });
+
+            const data = await response.json();
+            if(data)
+                console.log("Notif was deleted successfully", data);
+        } catch (error) {
+            console.error('There was a problem with your fetch operation:', error);
+        }
+        
     }
 
     return (
@@ -125,17 +128,16 @@ export default function Navbar() {
                             <CgProfile />
                         </Link>
                         <Link to="/Products" className="nav-link" id="continue-shopping">
-                    <CiShop />
-                </Link>
+                            <CiShop />
+                        </Link>
                         <div className="nav-link" id="notifications" onClick={getNotifications}>
-                    <IoIosNotifications />
-                </div>
+                            <IoIosNotifications />
+                        </div>
                     </>
                 ) : (
                     <>
                         <Link to="/Login" className="nav-link" id="login-link">Login</Link>
-                        <Link to="/Register" className="nav-link" id="register-link">Register</Link>
-                        
+                        <Link to="/Register" className="nav-link" id="register-link">Register</Link>             
                     </>
                     
                 )}
@@ -151,16 +153,16 @@ export default function Navbar() {
                         <h3>Notifications</h3>
                             <ul>
                                 {notifications.map((notification, index) => (
-                            <li key={index}>
-                                <input
-                                    type="checkbox"
-                                    id={`notification-${notification.check}`}
-                                    onChange={() => markAsRead(notification.check)} 
-                                />
-                                <label htmlFor={`notification-${notification.check}`} className = "checkbox-label">
-                                    {notification.message}</label>
-                            </li>
-                        ))}
+                                    <li key={index}>
+                                        <input
+                                            type="checkbox"
+                                            id={`notification-${notification.check}`}
+                                            onChange={() => markAsRead(notification)} 
+                                        />
+                                        <label htmlFor={`notification-${notification.check}`} className = "checkbox-label">
+                                            {notification.message}</label>
+                                    </li>
+                                ))}
                     </ul>
                 </div>
                 )}
