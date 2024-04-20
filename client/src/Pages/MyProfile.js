@@ -137,6 +137,30 @@ const MyProfile = () => {
     }catch (error){
       console.error('Error saving changes:', error);
     }
+    const userEmail = localStorage.getItem('userEmail');
+
+        fetch('https://cosc-3380-6au9.vercel.app/api/handlers/users/logoutUser', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email: userEmail })
+        }).then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Logout successful:', data);
+                localStorage.removeItem('userEmail');
+                localStorage.removeItem('userType');
+                setLoggedIn(false); 
+                navigate('/Login');
+            })
+            .catch(error => {
+                console.error('Error logging out:', error);
+            });
     setShowPopup(true);
   }
 
