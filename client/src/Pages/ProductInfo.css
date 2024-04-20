@@ -149,7 +149,7 @@ label {
 
 .user-review-box {
     display: flex;
-    align-items: flex-start; /* Align items to the start (top) of the flex container */
+    align-items: flex-start;
     background-color: #f1f1f1;
     padding: 20px;
     margin: 10px;
@@ -158,11 +158,11 @@ label {
 #customer-name-box {
     font-weight: bold;
     margin-right: 20px;
-    white-space: nowrap; /* Prevent user's name from wrapping */
+    white-space: nowrap; 
 }
 
 #customer-review-box {
-    flex-grow: 1; /* Allow review box to grow and fill available space */
+    flex-grow: 1; 
     max-width: calc(100% - 100px);
     word-wrap: break-word;
 }
