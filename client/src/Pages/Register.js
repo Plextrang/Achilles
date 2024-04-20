@@ -89,11 +89,11 @@ export default function Register() {
 			if(inactiveBool){
 				const response = await fetch('https://cosc-3380-6au9.vercel.app/api/handlers/users/reactivateUser', {
 					// mode: 'no-cors',
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(userData)
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(userData)
 				});
 				console.log(response.ok)
 				if (!response.ok) {
