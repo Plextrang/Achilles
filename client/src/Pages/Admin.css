@@ -182,9 +182,18 @@
   }
   
   .manage-employee-button, .manage-supplier-button {
-    margin-left: auto; /* this lets button be bottom right */
+    margin-left: auto;
+    background-color: transparent;
+    border: 1px solid #4f0a0a;
+    padding: 10px 16px;
+    font-size: 15px;
   }
-
+  .manage-employee-button:hover,
+  .manage-supplier-button:hover {
+      background-color: #4f0a0a;
+      color: white;
+      border-color: #4f0a0a;
+  }
   /* The Pop-Up tags (should look the same regardless of on employee or supplier) */
   /* Please change it so it looks nicer :) - Raian */
 
@@ -211,6 +220,11 @@
     background-color: white;
     border: 1px solid #4f0a0a;
     padding: 1px;
+  }
+  .confirm-delete-:hover {
+    background-color: #4f0a0a;
+    color: white;
+    border-color: #4f0a0a;
   }
 
 
