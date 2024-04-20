@@ -33,7 +33,7 @@ module.exports = async (req, res) => {
     const email = queryParams.email;
     console.log('Querying for user_id', email);
 
-    const getNotifSql = `SELECT notification_id, message FROM NOTIFICATION WHERE email = ?`;
+    const getNotifSql = `SELECT notification_id, message FROM NOTIFICATION WHERE email = ? AND mark_as_read = 0`;
     db.query(getNotifSql, [email], (err, notifResult) => {
         if (err) {
             console.log('Error finding user');
