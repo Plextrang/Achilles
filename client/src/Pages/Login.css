@@ -38,7 +38,7 @@ input[type='password'] {
     width: 100%;
     margin-top: 10px;
     padding: 10px;
-    background-color: #FFAEB9;
+    background-color: #4f0a0a;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -47,7 +47,7 @@ input[type='password'] {
 }
 
 .login-container button:hover {
-    background-color: #ffc0c8;
+    background-color: #774d53;
 }
 
 #no-account {
