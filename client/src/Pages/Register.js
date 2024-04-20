@@ -62,6 +62,7 @@ export default function Register() {
 				throw new Error('Network response was not ok', checkInactive);
 			}
 			let inactiveData = await checkInactive.json();
+			console.log(JSON.stringify(inactiveData));
 			if(JSON.stringify(inactiveData).length === 0){
 				const response = await fetch('https://cosc-3380-6au9.vercel.app/api/handlers/users/newUser/', {
 				// mode: 'no-cors',
