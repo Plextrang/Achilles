@@ -82,6 +82,7 @@ export default function Register() {
 				if (data.redirectUrl) {
 					navigate(data.redirectUrl);
 				}
+				return;
 			}
 			let inactiveBool = inactiveData[0].inactive;
 			if(inactiveBool){
