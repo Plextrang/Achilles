@@ -37,7 +37,7 @@ module.exports = async (req, res) => {
             CONCAT(
                 address, 
                 IF(apt_num IS NOT NULL, CONCAT(', Apt. ', apt_num), ''), 
-                CASE WHEN apt_num IS NOT NULL THEN ', ' ELSE '' END, 
+                CASE WHEN apt_num IS NOT NULL THEN ', ' ELSE '. ' END, 
                 city, 
                 ', ', 
                 state, 

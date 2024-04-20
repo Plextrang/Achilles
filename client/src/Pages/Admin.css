@@ -157,6 +157,64 @@
     cursor: pointer;
   }
 
+  /* Dear CSS Team, here's the row css tags */
+
+  .employee-container, .supplier-container { /* Don't put background-color in this one - Raian */
+    margin-right: 20px;
+  }
+
+  .employee-row, .supplier-row {
+    margin-bottom: 10px;
+    background-color: #f1f1f1;
+    padding: 10px;
+  }
+  
+  .employee-info, .supplier-info {
+  }
+  
+  .employee-actions, .supplier-actions {
+    display: flex; /* this lets button be bottom right */
+    align-items: flex-end; /* this lets button be bottom right */
+  }
+  
+  .line-admin {
+    margin-bottom: 5px;
+  }
+  
+  .manage-employee-button, .manage-supplier-button {
+    margin-left: auto; /* this lets button be bottom right */
+  }
+
+  /* The Pop-Up tags (should look the same regardless of on employee or supplier) */
+  /* Please change it so it looks nicer :) - Raian */
+
+  .pop-up-admin{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    text-align: center;
+  }
+
+  .go-back-admin {
+    background-color: #4f0a0a;
+    color: white;
+    margin-right: 20px; 
+  }
+
+  .confirm-delete-admin {
+    background-color: white;
+    border: 2px solid #4f0a0a;
+    padding: 2px;
+  }
+
+
+
      /* border: #4f0a0a;
     color: transparent;
     padding: 15px 32 px;

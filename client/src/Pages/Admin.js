@@ -12,6 +12,7 @@ export default function Admin() {
   const [selectedCategory, setSelectedCategory] = useState('Inventory'); // Default to display all products
   const [employees, setEmployees] = useState([]);
   const [suppliers, setSuppliers] = useState([]);
+  const [showPopup, setShowPopup] = useState(false);
   const navigate = useNavigate();
 
   const openProduct = (product) => {
@@ -59,7 +60,13 @@ export default function Admin() {
     fetchData();
   }, []);
 
-  
+  const handleDeleteEmployee = async () => { 
+    // Add endpoint/fetch here!
+  };
+
+  const handleDeleteSupplier = async () => { 
+    // Add endpoint/fetch here!
+  };
 
   const renderProducts = () => (
     <div className="card-container">
@@ -92,40 +99,86 @@ export default function Admin() {
     </div>
   );
 
+  const [selectedEmployee, setSelectedEmployee] = useState(null);
+
   const renderEmployees = () => (
     <div className="employee-container">
       {employees.map(employee => (
         <div key={employee.email} className="employee-row">
           <div className="employee-info">
-            <p>{employee.full_name}</p>
-            <p>{employee.email}</p>
-            <p>{employee.phone_number}</p>
-            <p>{employee.date_of_birth}</p>
-            <p>{employee.full_address}</p>
-            <p>{employee.user_type}</p>
-            <p>{employee.salary}</p>
-            <p>{employee.e_ssn}</p>
+            <div className="line-admin">
+              <p><strong>Name:</strong> {employee.full_name}</p>
+              <p><strong>Email:</strong> {employee.email}</p>
+              <p><strong>User Type:</strong> {employee.user_type}</p>
+            </div>
+            <div className="line-admin">
+              <p><strong>Phone:</strong> {String(employee.phone_number).replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3')}</p>
+              <p><strong>Date of Birth:</strong> {new Date(employee.date_of_birth).toLocaleDateString()}</p>
+              <p><strong>Address:</strong> {employee.full_address}</p>
+            </div>
+            <div className="line-admin">
+              <p><strong>Salary:</strong> {employee.salary}</p>
+              <p><strong>SSN:</strong> {employee.e_ssn}</p>
+            </div>
           </div>
           <div className="employee-actions">
-            <button className="manage-employee-button">Manage</button>
+            <button
+              className="manage-employee-button"
+              onClick={() => {
+                setSelectedEmployee(employee);
+                setShowPopup(true);
+              }}
+            >
+              Fire
+            </button>
+            {showPopup && selectedEmployee && (
+              <div className="pop-up-admin">
+                <p>Do you want to fire {selectedEmployee.full_name}?</p>
+                <button className="go-back-admin" onClick={() => setShowPopup(false)}>
+                  Go Back
+                </button>
+                <button className="confirm-delete-admin" onClick={() => handleDeleteEmployee(employee)}>
+                  Delete
+                </button>
+              </div>
+            )}
           </div>
         </div>
       ))}
     </div>
   );
   
+  const [selectedSupplier, setSelectedSupplier] = useState(null);
+
   const renderSuppliers = () => (
     <div className="supplier-container">
       {suppliers.map(supplier => (
         <div key={supplier.supplier_id} className="supplier-row">
           <div className="supplier-info">
-            <p>{supplier.company_name}</p>
-            <p>{supplier.company_email}</p>
-            <p>{supplier.phone_num}</p>
-            <p>{supplier.full_address}</p>
+            <div className="line-admin">
+              <p><strong>Company Name:</strong> {supplier.company_name}</p>
+              <p><strong>Email:</strong> {supplier.company_email}</p>
+            </div>
+            <div className="line-admin">
+              <p><strong>Phone:</strong> {String(supplier.phone_num).replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3')}</p>
+              <p><strong>Address:</strong> {supplier.full_address}</p>
+            </div>
           </div>
           <div className="supplier-actions">
-            <button className="manage-supplier-button">Manage</button>
+            <button className="manage-supplier-button" onClick={() => { setSelectedSupplier(supplier); setShowPopup(true);}}>
+              Remove
+            </button>
+            {showPopup && selectedSupplier && (
+              <div className="pop-up-admin">
+                <p>Do you want to remove {selectedSupplier.company_name}?</p>
+                <button className="go-back-admin" onClick={() => setShowPopup(false)}>
+                  Go Back
+                </button>
+                <button className="confirm-delete-admin" onClick={() => handleDeleteSupplier(supplier)}>
+                  Remove
+                </button>
+              </div>
+            )}
           </div>
         </div>
       ))}
