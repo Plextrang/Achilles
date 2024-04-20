@@ -147,32 +147,32 @@ export default function Navbar() {
                 </div> */}
                 {/* Render notifications */}
                 {notifications.length > 0 && showNotifications && (
-        <div className="notifications-container show">
-            <h3>Notifications</h3>
-                <ul>
-                    {notifications.map((notification, index) => (
-                <li key={index}>
-                    <input
-                        type="checkbox"
-                        id={`notification-${notification.check}`}
-                        onChange={() => markAsRead(notification.check)} 
-                    />
-                    <label htmlFor={`notification-${notification.check}`} className = "checkbox-label">
-                        {notification.message}</label>
-                </li>
-            ))}
-        </ul>
-    </div>
-)}
+                    <div className="notifications-container show">
+                        <h3>Notifications</h3>
+                            <ul>
+                                {notifications.map((notification, index) => (
+                            <li key={index}>
+                                <input
+                                    type="checkbox"
+                                    id={`notification-${notification.check}`}
+                                    onChange={() => markAsRead(notification.check)} 
+                                />
+                                <label htmlFor={`notification-${notification.check}`} className = "checkbox-label">
+                                    {notification.message}</label>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+                )}
 
-{notifications.length === 0 && showNotifications && (
-    <div className="notifications-container show">
-        <h3>Notifications</h3>
-        <ul>
-            <li>No Notifications at this time.</li>
-        </ul>
-    </div>
-)}
+                {notifications.length === 0 && showNotifications && (
+                    <div className="notifications-container show">
+                        <h3>Notifications</h3>
+                        <ul>
+                            <li>No Notifications at this time.</li>
+                        </ul>
+                    </div>
+                )}
 
             </div>
         </div>
