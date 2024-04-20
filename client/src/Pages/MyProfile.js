@@ -37,6 +37,7 @@ const MyProfile = () => {
   const [formData, setFormData] = useState(initialFormData);
   const [successMessage, setSuccessMessage] = useState('');
   const [images, setImages] = useState({}); // State to hold dynamically loaded images
+  const [showPopup, setShowPopup] = useState(false);
 
   const handleProfile = async () => {
     try {
@@ -113,6 +114,10 @@ const MyProfile = () => {
       [name]: value
     }));
   };
+  const handleDeleteAccount = () =>{
+    //add functionality here i think?
+    setShowPopup(true);
+  }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -238,6 +243,14 @@ const MyProfile = () => {
             )}
           </div>
         </div>
+        <button className = "delete-button" onClick={() =>setShowPopup(true)}>Delete Account</button>
+        {showPopup &&(
+          <div className = "pop-up">
+            <p>Are you sure?</p>
+            <button className = "go-back" onClick={() =>setShowPopup(false)}>Go Back</button>
+            <button className = "confirm-delete" onClick={() =>handleDeleteAccount()}>Delete</button>
+          </div>
+        )}
       </div>
       {/* Render the Manage Modal component */}
       <Model isOpen={isManageModalOpen} onRequestClose={handleCloseManageModal}>

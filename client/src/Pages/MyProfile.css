@@ -246,3 +246,36 @@ input[type=radio] {
   margin-right: 5px; /* Add some spacing between the stars */
 }
 
+.delete-button{
+  margin-top: 40px;
+  margin-left: 620px;
+  padding: 8px 16px;
+  background-color: #4f0a0a;/* Updated color */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.pop-up {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  text-align: center;
+}
+.go-back{
+  background-color: #4f0a0a;
+  color: white;
+  margin-right: 20px; 
+}
+.confirm-delete{
+  background-color: white;
+  border: #4f0a0a;
+}
