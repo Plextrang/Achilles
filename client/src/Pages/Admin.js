@@ -64,7 +64,20 @@ export default function Admin() {
   const handleDeleteEmployee = async () => { 
     console.log(selectedEmployee); // use selectedEmployee to get employee to fire info. it contains email & e_ssn alongside other attributes.
     try {
-      // endpoint/fetch here! no need to mess with popups
+      const response = await fetch('https://cosc-3380-6au9.vercel.app/api/handlers/users/inactiveUser', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email: selectedEmployee.email,
+        })
+      })
+      if (!response.ok) {
+        throw new Error('Failed to update user information');
+      }
+      let data = await response.json();
+				console.log(data);
     } 
     catch (error) {
         console.error('Error firing employee:', error);
@@ -74,8 +87,21 @@ export default function Admin() {
   const handleDeleteSupplier = async () => { 
     console.log(selectedSupplier);
     try {
-      // endpoint/fetch here! no need to mess with popups
       // similar to deleteEmployee, theres a var 'selectedSupplier' with supplier_id and email that you can send to the backend.
+      const response = await fetch('https://cosc-3380-6au9.vercel.app/api/handlers/users/inactiveSupplier', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          supplier_id: selectedSupplier.supplier_id
+        })
+      })
+      if (!response.ok) {
+        throw new Error('Failed to update supplier information');
+      }
+      let data = await response.json();
+				console.log(data);
     } 
     catch (error) {
         console.error('Error removing supplier:', error);
