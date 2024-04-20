@@ -63,9 +63,7 @@ export default function AddEmployee() {
 			const data = await response.json();
             console.log(data);
 
-            if (data.redirectUrl) {
-                navigate(data.redirectUrl);
-            }
+            close();
 		} catch (error) {
 			console.error('There was a problem with your fetch operation:', error);
 			// Handle error, maybe show an error message to the user
@@ -109,11 +107,11 @@ export default function AddEmployee() {
                                 </div>
                                 <div className="input">
                                     <label className="text-label">Employee City <span className="required">&#42;</span></label>
-                                    <input className="text" type="text" value={emp_city} onChange={(e) => setEmp_city(e.target.value)} placeholder="Houston" maxLength="5" required />
+                                    <input className="text" type="text" value={emp_city} onChange={(e) => setEmp_city(e.target.value)} placeholder="Houston" maxLength="20" required />
                                 </div>
                                 <div className="input">
                                     <label className="text-label">Employee State <span className="required">&#42;</span></label>
-                                    <input className="text" type="text" value={emp_state} onChange={(e) => setEmp_state(e.target.value)} placeholder="Texas" maxLength="5" required />
+                                    <input className="text" type="text" value={emp_state} onChange={(e) => setEmp_state(e.target.value)} placeholder="Texas" maxLength="20" required />
                                 </div>
                                 <div className="input">
                                     <label className="text-label">Employee ZIP <span className="required">&#42;</span></label>
