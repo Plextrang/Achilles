@@ -28,7 +28,7 @@ export default function ProductInfo() {
     const [userType, setUserType] = useState('');
     const userEmail = localStorage.getItem("userEmail");
     const product = JSON.parse(localStorage.getItem('ProductInfo'));
-    const [prodReviews, setProdReviews] = useState('');
+    const [prodReviews, setProdReviews] = useState([]);
     const [actionType, setActionType] = useState('');
     const [newPrice, setNewPrice] = useState('');
     const [changesSaved, setChangesSaved] = useState(false); // Define setChangesSaved state
@@ -46,7 +46,7 @@ export default function ProductInfo() {
             }
             const data = await response.json();
             setProdReviews(data);
-            console.log(prodReviews);
+            console.log("This is the results ", prodReviews);
         } catch (error) {
             console.error('Error fetching product reviews:', error);
         }
