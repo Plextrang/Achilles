@@ -230,7 +230,7 @@ export default function SalesReport(){
                 Not Active
             </label>
             <div className='filtered-button-section'>
-              <button onClick={() => fetchCustomerData()}>Update</button>
+              <button onClick={() => fetchCustomerData()} disabled={!active && !notActive}>Update</button>
             </div>
           </div>
           <table>
