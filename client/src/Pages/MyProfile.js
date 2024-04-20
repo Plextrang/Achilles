@@ -115,8 +115,28 @@ const MyProfile = () => {
       [name]: value
     }));
   };
-  const handleDeleteAccount = () =>{
-    //add functionality here i think?
+  const handleDeleteAccount = async() =>{
+    try{
+      const response = await fetch('https://cosc-3380-6au9.vercel.app/api/handlers/users/inactiveUser', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email: formData.email,
+        })
+      })
+      if (!response.ok) {
+        throw new Error('Failed to update user information');
+      }
+      let data = await response.json();
+				console.log(data);
+      if (data.redirectUrl) {
+        navigate(data.redirectUrl);
+      }
+    }catch{
+      console.error('Error saving changes:', error);
+    }
     setShowPopup(true);
   }
 
