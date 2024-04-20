@@ -48,7 +48,7 @@ export default function Register() {
 			phone_number: document.getElementById('phone-number').value,
 			date_of_birth: document.getElementById('dob-box').value,
 			address: document.getElementById('add-1').value,
-			apt_num: document.getElementById('add-2').value,
+			apt_num: document.getElementById('add-2').value.trim() !== '' ? document.getElementById('add-2').value : null,
 			city: document.getElementById('city').value,
 			state: document.getElementById('stateInput').value,
 			zip_code: document.getElementById('zip').value
