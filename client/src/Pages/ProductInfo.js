@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FaStar, FaShoppingBag } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import white_converse from '../images/white_converse.jpg';
 import nike_air_force_1 from '../images/nike_air_force_1.jpg';
 import adidas_gazelle_blue_gold from '../images/adidas_gazelle_blue_gold.jpg';
@@ -29,11 +29,19 @@ export default function ProductInfo() {
     const userEmail = localStorage.getItem("userEmail");
     const product = JSON.parse(localStorage.getItem('ProductInfo'));
     const [prodReviews, setProdReviews] = useState([]);
+    const [isLoggedIn, setLoggedIn] = useState(false);
     const [actionType, setActionType] = useState('');
     const [newPrice, setNewPrice] = useState('');
     const [changesSaved, setChangesSaved] = useState(false); // Define setChangesSaved state
+    const navigate = useNavigate();
 
     useEffect(() => {
+        if (localStorage.getItem('userEmail')) {
+            setLoggedIn(true)
+        } 
+        else {
+            setLoggedIn(false)
+        }
         setUserType(localStorage.getItem('userType'));
         fetchProductReviews();
     }, []);
@@ -134,8 +142,56 @@ export default function ProductInfo() {
         setNewPrice('');
         setChangesSaved(false); // Reset changesSaved state
     };
+
+    const handleNotLoggedIn = () => {
+        navigate("/Login");
+    };
     
-    if (userType === 'Customer') {
+    if (!isLoggedIn) {
+        return (
+            <div>
+                <div className="product-info-container">
+                    <img className="product-img" src={variableMap[product.image_filename]} alt={product.item_name} />
+                    <div className="card-details">
+                        <h3 className="card-title">{product.item_name}</h3>
+                        <div className="card-description">{product.description}</div>
+                        <div className="card-reviews">
+                            <FaStar />
+                            <span className="total-reviews">{averageReview.toFixed(1)}/5 &#40;{prodReviews.length} user reviews&#41;</span>
+                        </div>
+                        <div className="bag">
+                            <FaShoppingBag />
+                            <div className="price">${product.price}</div>
+                        </div>
+                        <div className="add-container">
+                            <button className="quantity-button" onClick={() => setQuantity(Math.max(1, quantity - 1))}>-</button>
+                            <input type="text" className="quantity-input" value={quantity} readOnly />
+                            <button className="quantity-button" onClick={() => setQuantity(quantity + 1)}>+</button>
+                        </div>
+                        <button id="add-button" onClick={handleNotLoggedIn}>Add to Cart</button>
+                    </div>
+                </div>
+                <center><h2>- Reviews -</h2></center>
+                <div className="product-review-container">
+                    {prodReviews.length === 0 ? (
+                        <center><p style={{ color: "#c1c1c1" }}><i>Have you purchased this item? Leave a Review from your Profile!</i></p></center>
+                    ) : (
+                        prodReviews.map((review, index) => (
+                            <div className="user-review-box" key={index}>
+                                <div>
+                                    <p className="customer-info-box">{review.full_name}: </p>
+                                    <div className="customer-info-box">
+                                        {[...Array(review.review)].map((_, i) => (<FaStar key={i} />))}
+                                    </div>
+                                </div>
+                                <p className="customer-review-text">{review.review_of_product}</p>
+                            </div>
+                        ))
+                    )}
+                </div>
+            </div>
+        );
+    } else if (userType === 'Customer') {
         return (
             <div>
                 <div className="product-info-container">
