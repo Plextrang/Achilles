@@ -46,7 +46,7 @@ module.exports = async (req, res) => {
                 return;
             }
             res.writeHead(200, { 'Content-Type' : 'application/json' });
-            res.end(JSON.stringify({ message: "User is now inactive" }));
+            res.end(JSON.stringify({ message: "User is now inactive", redirectUrl: '/Login' }));
         })
     })
 }

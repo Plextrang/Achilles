@@ -16,6 +16,7 @@ const initialFormData = {
 const MyProfile = () => {
   const navigate = useNavigate();
   const userEmail = localStorage.getItem('userEmail');
+  const [isLoggedIn, setLoggedIn] = useState(false);
   const [rating, setRating] = useState(null);
   const [hover, setHover] = useState(null);
   const [orderedItems, setOrderedItems] = useState([]);
@@ -115,8 +116,49 @@ const MyProfile = () => {
       [name]: value
     }));
   };
-  const handleDeleteAccount = () =>{
-    //add functionality here i think?
+  const handleDeleteAccount = async() =>{
+    try{
+      const response = await fetch('https://cosc-3380-6au9.vercel.app/api/handlers/users/inactiveUser', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email: formData.email,
+        })
+      })
+      if (!response.ok) {
+        throw new Error('Failed to update user information');
+      }
+      let data = await response.json();
+				console.log(data);
+    }catch (error){
+      console.error('Error saving changes:', error);
+    }
+    const userEmail = localStorage.getItem('userEmail');
+
+        fetch('https://cosc-3380-6au9.vercel.app/api/handlers/users/logoutUser', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email: userEmail })
+        }).then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Logout successful:', data);
+                localStorage.removeItem('userEmail');
+                localStorage.removeItem('userType');
+                setLoggedIn(false); 
+                navigate('/Login');
+            })
+            .catch(error => {
+                console.error('Error logging out:', error);
+            });
     setShowPopup(true);
   }
 
