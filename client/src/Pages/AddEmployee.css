@@ -78,7 +78,7 @@
 }
 
 .entry-button {
-    background-color: #FFAEB9;
+    background-color: #65232c;
     border: none;
     width: 100%;
     color: white;
@@ -92,6 +92,7 @@
 .checkbox-alignment {
     margin-left: 0;
     text-align: left;
+    color:#65232c;
 }
 
 .text-box {
