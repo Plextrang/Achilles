@@ -23,6 +23,7 @@ export default function ProductInfo() {
     const [feedbackData, setFeedbackData] = useState([]);
     const [showPopup, setShowPopup] = useState(false);
     const [showPopup2, setShowPopup2] = useState(false);
+    const [showPopup3, setShowPopup3] = useState(false);
     const [popupMessage, setPopupMessage] = useState('');
     const [error, setError] = useState('');
     const [userType, setUserType] = useState('');
@@ -132,6 +133,17 @@ export default function ProductInfo() {
             }
         }
     };
+
+    const handleDeleteShoe = async (product) => { 
+        try {
+            // endpoint/fetch here! no need to mess with popups
+            // product contains most (not all) of the shoe_product's attributes
+            // including product_id :)
+        } 
+        catch (error) {
+            console.error('Error deleting shoe:', error);
+        }
+    }
 
     const averageReview = prodReviews.reduce((acc, review) => acc + review.review, 0) / prodReviews.length;
 
@@ -276,6 +288,18 @@ export default function ProductInfo() {
                         <div className="manager-actions">
                             <button id="adjust-price" onClick={() => handleAdjustPrice(product)}>Adjust Price</button>
                             <button id="order-shoe" onClick={() => handleOrderShoe(product)}>Order Shoe</button>
+                            <button id="order-shoe" onClick={() => setShowPopup3(true)}>Delete Shoe</button>
+                            {showPopup3 && (
+                                <div className="pop-up">
+                                    <p>Are you sure?</p>
+                                    <button className="go-back" onClick={() => setShowPopup3(false)}>
+                                        Go Back
+                                    </button>
+                                    <button className="confirm-delete" onClick={() => handleDeleteShoe(product)}>
+                                        Delete
+                                    </button>
+                                </div>
+                            )}
                         </div>
                         {feedbackData.length > 0 && (
                             <div className="feedback-container">
