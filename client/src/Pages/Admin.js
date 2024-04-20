@@ -13,6 +13,7 @@ export default function Admin() {
   const [employees, setEmployees] = useState([]);
   const [suppliers, setSuppliers] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
+  const userType = localStorage.getItem('userType');
   const navigate = useNavigate();
 
   const openProduct = (product) => {
@@ -109,7 +110,7 @@ export default function Admin() {
             <div className="line-admin">
               <p><strong>Name:</strong> {employee.full_name}</p>
               <p><strong>Email:</strong> {employee.email}</p>
-              <p><strong>User Type:</strong> {employee.user_type}</p>
+              <p><strong>Role:</strong> {employee.user_type}</p>
             </div>
             <div className="line-admin">
               <p><strong>Phone:</strong> {String(employee.phone_number).replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3')}</p>
@@ -122,15 +123,19 @@ export default function Admin() {
             </div>
           </div>
           <div className="employee-actions">
-            <button
-              className="manage-employee-button"
-              onClick={() => {
-                setSelectedEmployee(employee);
-                setShowPopup(true);
-              }}
-            >
-              Fire
-            </button>
+            {((employee.user_type === 'Employee' || (employee.user_type === 'Manager' && userType === 'Administrator')) ? (
+              <button
+                className="manage-employee-button"
+                onClick={() => {
+                  setSelectedEmployee(employee);
+                  setShowPopup(true);
+                }}
+              >
+                Fire
+              </button>
+            ) : (
+              <p className="manage-employee-button">Must be admin to fire</p>
+            ))}
             {showPopup && selectedEmployee && (
               <div className="pop-up-admin">
                 <p>Do you want to fire {selectedEmployee.full_name}?</p>
