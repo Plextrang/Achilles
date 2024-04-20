@@ -10,7 +10,7 @@ export default function AddEmployee() {
     const [emp_mname, setEmp_mname] = useState('');
     const [emp_lname, setEmp_lname] = useState('');
     const [emp_pnum, setEmp_pnum] = useState('');
-    const [emp_DOB, setEmp_DOB] = useState('');
+    //const [emp_DOB, setEmp_DOB] = useState('');
     const [emp_address, setEmp_address] = useState('');
     const [emp_city, setEmp_city] = useState('');
     const [emp_state, setEmp_state] = useState('');
@@ -19,6 +19,7 @@ export default function AddEmployee() {
     const [emp_password, setEmp_password] = useState('');
     const [emp_SSN, setEmp_SSN] = useState('');
     const [emp_salary, setEmp_salary] = useState('');
+    const [isManager, setIsManager] = useState(false);
 
     const close = () =>{
         navigate('/Admin');
@@ -32,7 +33,7 @@ export default function AddEmployee() {
             middle_initial: emp_mname,
             last_name: emp_lname, 
             phone_number: emp_pnum, 
-            date_of_birth: emp_DOB, 
+            date_of_birth: document.getElementById('dob-box').value, 
             address: emp_address, 
             city: emp_city, 
             state: emp_state, 
@@ -45,7 +46,8 @@ export default function AddEmployee() {
 
         console.log(JSON.stringify(employeeData))
         try {
-			const response = await fetch('https://cosc-3380-6au9.vercel.app/api/handlers/users/newEmployee/', {
+			const endpoint = isManager ? 'newManager' : 'newEmployee'; 
+            const response = await fetch(`https://cosc-3380-6au9.vercel.app/api/handlers/users/${endpoint}`, {
 				// mode: 'no-cors',
 				method: 'POST',
 				headers: {
@@ -61,9 +63,7 @@ export default function AddEmployee() {
 			const data = await response.json();
             console.log(data);
 
-            if (data.redirectUrl) {
-                navigate(data.redirectUrl);
-            }
+            close();
 		} catch (error) {
 			console.error('There was a problem with your fetch operation:', error);
 			// Handle error, maybe show an error message to the user
@@ -99,7 +99,7 @@ export default function AddEmployee() {
                                 </div>
                                 <div className="input">
                                     <label className="text-label">Employee D.O.B <span className="required">&#42;</span></label>
-                                    <input className="text-box" id='dob-box' type="date" name="Date of Birth" min="1950-01-01" max="2024-3-17" pattern="\d{4}-\d{2}-\d{2}" title="Format is Year-Month-Day" />
+                                    <input className="text-box" id="dob-box" type="date" name="Date of Birth" min="1950-01-01" max="2024-3-17" pattern="\d{4}-\d{2}-\d{2}" title="Format is Year-Month-Day" />
                                 </div>
                                 <div className="input">
                                     <label className="text-label">Employee Address <span className="required">&#42;</span></label>
@@ -107,11 +107,11 @@ export default function AddEmployee() {
                                 </div>
                                 <div className="input">
                                     <label className="text-label">Employee City <span className="required">&#42;</span></label>
-                                    <input className="text" type="text" value={emp_city} onChange={(e) => setEmp_city(e.target.value)} placeholder="Houston" maxLength="5" required />
+                                    <input className="text" type="text" value={emp_city} onChange={(e) => setEmp_city(e.target.value)} placeholder="Houston" maxLength="20" required />
                                 </div>
                                 <div className="input">
                                     <label className="text-label">Employee State <span className="required">&#42;</span></label>
-                                    <input className="text" type="text" value={emp_state} onChange={(e) => setEmp_state(e.target.value)} placeholder="Texas" maxLength="5" required />
+                                    <input className="text" type="text" value={emp_state} onChange={(e) => setEmp_state(e.target.value)} placeholder="Texas" maxLength="20" required />
                                 </div>
                                 <div className="input">
                                     <label className="text-label">Employee ZIP <span className="required">&#42;</span></label>
@@ -132,6 +132,10 @@ export default function AddEmployee() {
                                 <div className="input">
                                     <label className="text-label">Employee Salary <span className="required">&#42;</span></label>
                                     <input className="text" type="text" value={emp_salary} onChange={(e) => setEmp_salary(e.target.value)} placeholder="USD ($###.##)" maxLength="8" required />
+                                </div>
+                                <div className="input">
+                                    <center><label className="text-label">Is this Employee a Manager?</label></center>
+                                    <input className="checkbox-alignment" type="checkbox" checked={isManager} onChange={() => setIsManager(!isManager)} />
                                 </div>
                                 <div className="button-wrapper">
                                     <button className="entry-button" type="submit">Add Employee</button>
