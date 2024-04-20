@@ -40,7 +40,7 @@ module.exports = async (req, res) => {
             return;
         }
 
-        const reactivateUserSql = `UPDATE user SET first_name = ?, middle_initial = ?, last_name = ?, phone_number = ?, date_of_birth = ?, address = ?, apt_num = ?, city = ?, state = ?, zip_code = ?, inactive = 0 WHERE email = ?)`;
+        const reactivateUserSql = `UPDATE user SET first_name = ?, middle_initial = ?, last_name = ?, phone_number = ?, date_of_birth = ?, address = ?, apt_num = ?, city = ?, state = ?, zip_code = ?, inactive = 0 WHERE email = ?`;
         db.query(reactivateUserSql, [first_name, middle_initial, last_name, phone_number, date_of_birth, address, apt_num, city, state, zip_code, email], (err, userResult) => {
             if (err) {
                     console.error(err);
