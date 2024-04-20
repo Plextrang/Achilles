@@ -38,6 +38,7 @@ const MyProfile = () => {
   const [successMessage, setSuccessMessage] = useState('');
   const [images, setImages] = useState({}); // State to hold dynamically loaded images
   const [showPopup, setShowPopup] = useState(false);
+  const isCustomer = localStorage.getItem('userType') === 'Customer';
 
   const handleProfile = async () => {
     try {
@@ -243,12 +244,20 @@ const MyProfile = () => {
             )}
           </div>
         </div>
-        <button className = "delete-button" onClick={() =>setShowPopup(true)}>Delete Account</button>
-        {showPopup &&(
-          <div className = "pop-up">
+        {isCustomer && (
+          <button className="delete-button" onClick={() => setShowPopup(true)}>
+            Delete Account
+          </button>
+        )}
+        {showPopup && (
+          <div className="pop-up">
             <p>Are you sure?</p>
-            <button className = "go-back" onClick={() =>setShowPopup(false)}>Go Back</button>
-            <button className = "confirm-delete" onClick={() =>handleDeleteAccount()}>Delete</button>
+            <button className="go-back" onClick={() => setShowPopup(false)}>
+              Go Back
+            </button>
+            <button className="confirm-delete" onClick={() => handleDeleteAccount()}>
+              Delete
+            </button>
           </div>
         )}
       </div>

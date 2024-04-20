@@ -34,7 +34,7 @@
   width: 200px;
   margin: 20px auto;
   padding: 10px 20px;
-  background-color: maroon; /* Updated color */
+  background-color: #4f0a0a; /* Updated color */
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -210,7 +210,7 @@
 }
 
 .required {
-  color: maroon; /* Updated color */
+  color: #4f0a0a;; /* Updated color */
 }
 
 .form-container {
@@ -277,5 +277,6 @@ input[type=radio] {
 }
 .confirm-delete{
   background-color: white;
-  border: #4f0a0a;
+  border: 2px solid #4f0a0a;
+  padding: 2px;
 }
