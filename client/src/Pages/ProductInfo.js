@@ -46,7 +46,6 @@ export default function ProductInfo() {
             }
             const data = await response.json();
             setProdReviews(data);
-            console.log("This is the results ", prodReviews);
         } catch (error) {
             console.error('Error fetching product reviews:', error);
         }
@@ -180,13 +179,23 @@ export default function ProductInfo() {
                         )}
                     </div>
                 </div>
+                <center><h2>- Reviews -</h2></center>
                 <div className="product-review-container">
-                    <center><h2>Reviews</h2></center>
-                    <div className="user-review-box">
-                        <p id="customer-name-box">John Doe: </p>
-                        <p id="customer-review-box">This is where the review will be what if its loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong</p>
-                    </div>
-                    {/* {Each review will need to be in a className='user-review-box' div} */}
+                    {prodReviews.length === 0 ? (
+                        <center><p style={{ color: "#c1c1c1" }}><i>Have you purchased this item? Leave a Review from your Profile!</i></p></center>
+                    ) : (
+                        prodReviews.map((review, index) => (
+                            <div className="user-review-box" key={index}>
+                                <div>
+                                    <p className="customer-info-box">{review.full_name}: </p>
+                                    <div className="customer-info-box">
+                                        {[...Array(review.review)].map((_, i) => (<FaStar key={i} />))}
+                                    </div>
+                                </div>
+                                <p className="customer-review-text">{review.review_of_product}</p>
+                            </div>
+                        ))
+                    )}
                 </div>
             </div>
         );
@@ -233,13 +242,23 @@ export default function ProductInfo() {
                         )}
                     </div>
                 </div>
+                <center><h2>- Reviews -</h2></center>
                 <div className="product-review-container">
-                    <center><h2>Reviews</h2></center>
-                    <div className="user-review-box">
-                        <p id="customer-name-box">John Doe: </p>
-                        <p id="customer-review-box">This is where the review will be what if its loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong</p>
-                    </div>
-                    {/* {Each review will need to be in a className='user-review-box' div} */}
+                    {prodReviews.length === 0 ? (
+                        <center><p style={{ color: "#c1c1c1" }}><i>Have you purchased this item? Leave a Review from your Profile!</i></p></center>
+                    ) : (
+                        prodReviews.map((review, index) => (
+                            <div className="user-review-box" key={index}>
+                                <div>
+                                    <p className="customer-info-box">{review.full_name}: </p>
+                                    <div className="customer-info-box">
+                                        {[...Array(review.review)].map((_, i) => (<FaStar key={i} />))}
+                                    </div>
+                                </div>
+                                <p className="customer-review-text">{review.review_of_product}</p>
+                            </div>
+                        ))
+                    )}
                 </div>
             </div>
         );

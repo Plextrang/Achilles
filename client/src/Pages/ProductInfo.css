@@ -155,7 +155,7 @@ label {
     margin: 10px;
 }
 
-#customer-name-box {
+.customer-info-box {
     font-weight: bold;
     margin-right: 20px;
     white-space: nowrap; 
