@@ -155,6 +155,7 @@ const MyProfile = () => {
                 localStorage.removeItem('userType');
                 setLoggedIn(false); 
                 navigate('/Login');
+                window.location.reload();
             })
             .catch(error => {
                 console.error('Error logging out:', error);
