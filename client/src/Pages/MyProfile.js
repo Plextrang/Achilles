@@ -131,9 +131,6 @@ const MyProfile = () => {
       }
       let data = await response.json();
 				console.log(data);
-      if (data.redirectUrl) {
-        navigate(data.redirectUrl);
-      }
     }catch (error){
       console.error('Error saving changes:', error);
     }
