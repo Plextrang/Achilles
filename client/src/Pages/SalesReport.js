@@ -114,9 +114,9 @@ export default function SalesReport(){
         <div className="report-header-container">
           <h1 className="report-heading">Sales Report</h1>
           <nav className="filters">
-          <a href="#" className={selectedCategory === 'Daily' ? 'active' : ''} onClick={() => setSelectedCategory('Daily')}>Daily Sales</a>
-          <a href="#" className={selectedCategory === 'Customer' ? 'active' : ''} onClick={() => setSelectedCategory('Customer')}>Customer</a>
-          <a href="#" className={selectedCategory === 'All' ? 'active' : ''} onClick={() => setSelectedCategory('All')}>All Sales</a>
+          <a href="#" className={selectedCategory === 'Daily' ? 'active' : ''} onClick={() => setSelectedCategory('Daily')}>Transactions</a>
+          <a href="#" className={selectedCategory === 'Customer' ? 'active' : ''} onClick={() => setSelectedCategory('Customer')}>Customer Report</a>
+          <a href="#" className={selectedCategory === 'All' ? 'active' : ''} onClick={() => setSelectedCategory('All')}>Total Shoe Sales</a>
           </nav>
         </div>
 
