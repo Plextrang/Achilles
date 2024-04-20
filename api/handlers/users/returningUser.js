@@ -45,7 +45,7 @@ module.exports = async (req, res) => {
             }
 
             // User authenticated 
-            const updateSql = "UPDATE LOGIN SET is_active = 1 WHERE email = ?";
+            const updateSql = "UPDATE LOGIN SET is_active = 1 WHERE email = ? AND inactive = 0";
             db.query(updateSql, [email], (err, updateResult) => {
                 if (err) {
                     console.error(err);
