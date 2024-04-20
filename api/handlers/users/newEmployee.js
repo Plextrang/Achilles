@@ -24,7 +24,7 @@ module.exports = async (req, res) => {
         console.log('Connected to database');
       });
     userData = await getRequestBody(req, res);
-        const { email, password, first_name, middle_initial, last_name, phone_number, date_of_birth, address, apt_num, city, state, zip_code } = userData;
+        const { email, password, first_name, middle_initial, last_name, phone_number, date_of_birth, address, apt_num, city, state, zip_code, salary, e_ssn } = userData;
         const type = 'Employee'
 
         const insertCredentialsSql = `INSERT INTO LOGIN (email, password) VALUES (?, ?)`;
@@ -36,8 +36,8 @@ module.exports = async (req, res) => {
                 return;
             }
 
-            const insertUserSql = `INSERT INTO USER (email, first_name, middle_initial, last_name, phone_number, date_of_birth, address, apt_num, city, state, zip_code, user_type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-            db.query(insertUserSql, [email, first_name, middle_initial, last_name, phone_number, date_of_birth, address, apt_num, city, state, zip_code, type], (err, userResult) => {
+            const insertUserSql = `INSERT INTO USER (email, first_name, middle_initial, last_name, phone_number, date_of_birth, address, apt_num, city, state, zip_code, user_type, salary, e_ssn) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+            db.query(insertUserSql, [email, first_name, middle_initial, last_name, phone_number, date_of_birth, address, apt_num, city, state, zip_code, type, salary, e_ssn], (err, userResult) => {
                 if (err) {
                     console.error(err);
                     res.writeHead(404, { 'Content-Type' : 'application/json' });

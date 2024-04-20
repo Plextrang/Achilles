@@ -16,6 +16,7 @@ export default function AddEmployee() {
     const [emp_state, setEmp_state] = useState('');
     const [emp_ZIP, setEmp_ZIP] = useState('');
     const [emp_email, setEmp_email] = useState('');
+    const [emp_password, setEmp_password] = useState('');
     const [emp_SSN, setEmp_SSN] = useState('');
     const [emp_salary, setEmp_salary] = useState('');
 
@@ -27,22 +28,46 @@ export default function AddEmployee() {
         const userEmail = localStorage.getItem('userEmail');
         e.preventDefault();
         const employeeData = {
-            employee_fname: emp_fname,
-            employee_mname: emp_mname,
-            employee_lname: emp_lname, 
-            employee_pnum: emp_pnum, 
-            employee_DOB: emp_DOB, 
-            employee_address: emp_address, 
-            employee_city: emp_city, 
-            employee_state: emp_state, 
-            employee_ZIP: emp_ZIP, 
-            employee_email: emp_email, 
-            employee_SSN: emp_SSN, 
-            emp_salary: emp_salary
+            first_name: emp_fname,
+            middle_initial: emp_mname,
+            last_name: emp_lname, 
+            phone_number: emp_pnum, 
+            date_of_birth: emp_DOB, 
+            address: emp_address, 
+            city: emp_city, 
+            state: emp_state, 
+            zip_code: emp_ZIP, 
+            email: emp_email, 
+            password: emp_password,
+            e_ssn: emp_SSN, 
+            salary: emp_salary
         };
 
-        try{/*insert backend here */}
-        catch(error){/*continue with backend */}
+        console.log(JSON.stringify(employeeData))
+        try {
+			const response = await fetch('https://cosc-3380-6au9.vercel.app/api/handlers/users/newEmployee/', {
+				// mode: 'no-cors',
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(employeeData)
+			});
+			console.log(response.ok)
+			if (!response.ok) {
+				throw new Error('Network response was not ok', response);
+			}
+	
+			const data = await response.json();
+            console.log(data);
+
+            if (data.redirectUrl) {
+                navigate(data.redirectUrl);
+            }
+		} catch (error) {
+			console.error('There was a problem with your fetch operation:', error);
+			// Handle error, maybe show an error message to the user
+		}
     };
 
 
@@ -95,6 +120,10 @@ export default function AddEmployee() {
                                 <div className="input">
                                     <label className="text-label">Employee E-mail  <span className="required">&#42;</span></label>
                                     <input className="text" type="text" value={emp_email} onChange={(e) => setEmp_email(e.target.value)} placeholder="employee@achilles.com" maxLength="50" required />
+                                </div>
+                                <div className="input">
+                                    <label className="text-label">Employee Password  <span className="required">&#42;</span></label>
+                                    <input className="text" type="text" value={emp_password} onChange={(e) => setEmp_password(e.target.value)} placeholder="Password1!" maxLength="50" required />
                                 </div>
                                 <div className="input">
                                     <label className="text-label">Employee SSN <span className="required">&#42;</span></label>
