@@ -89,6 +89,18 @@
     transition: background-color 0.3s ease;
 }
 
+.checkbox-alignment {
+    margin-left: 0;
+    text-align: left;
+}
+
+.text-box {
+    width: 30%;
+    padding: 10px 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
 .entry-button:hover {
     background-color: #65232c;
 }
