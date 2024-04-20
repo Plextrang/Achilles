@@ -16,6 +16,7 @@ const initialFormData = {
 const MyProfile = () => {
   const navigate = useNavigate();
   const userEmail = localStorage.getItem('userEmail');
+  const [isLoggedIn, setLoggedIn] = useState(false);
   const [rating, setRating] = useState(null);
   const [hover, setHover] = useState(null);
   const [orderedItems, setOrderedItems] = useState([]);
