@@ -166,44 +166,54 @@ export default function ProductInfo() {
         );
     } else {
         return (
-            <div className="product-info-container">
-                <img className="product-img" src={variableMap[product.image_filename]} alt={product.item_name} />
-                <div className="card-details">
-                    <h3 className="card-title">{product.item_name}</h3>
-                    <div className="card-description">{product.description}</div>
-                    <div className="card-reviews">
-                        <FaStar />
-                        <span className="total-reviews">4 Reviews</span>
-                    </div>
-                    <div className="bag">
-                        <FaShoppingBag />
-                        <div className="price">${product.price}</div>
-                    </div>
-                    <div className="manager-actions">
-                        <button id="adjust-price" onClick={() => handleAdjustPrice(product)}>Adjust Price</button>
-                        <button id="order-shoe" onClick={() => handleOrderShoe(product)}>Order Shoe</button>
-                    </div>
-                    {feedbackData.length > 0 && (
-                        <div className="feedback-container">
-                            <h3>Feedback</h3>
-                            <ul>
-                                {feedbackData.map((feedback, index) => (
-                                    <li key={index}>{feedback.comment}</li>
-                                ))}
-                            </ul>
+            <div>
+                <div className="product-info-container">
+                    <img className="product-img" src={variableMap[product.image_filename]} alt={product.item_name} />
+                    <div className="card-details">
+                        <h3 className="card-title">{product.item_name}</h3>
+                        <div className="card-description">{product.description}</div>
+                        <div className="card-reviews">
+                            <FaStar />
+                            <span className="total-reviews">4 Reviews</span>
                         </div>
-                    )}
-                    {showPopup2 && (
-                        <div className="popup">
-                            <p>Price has been adjusted!</p>
-                            <button onClick={() => setShowPopup2(false)}>Close</button>
+                        <div className="bag">
+                            <FaShoppingBag />
+                            <div className="price">${product.price}</div>
                         </div>
-                    )}
-                    {error && (
-                        <div className="error-message">
-                            <p>Error: {error}</p>
+                        <div className="manager-actions">
+                            <button id="adjust-price" onClick={() => handleAdjustPrice(product)}>Adjust Price</button>
+                            <button id="order-shoe" onClick={() => handleOrderShoe(product)}>Order Shoe</button>
                         </div>
-                    )}
+                        {feedbackData.length > 0 && (
+                            <div className="feedback-container">
+                                <h3>Feedback</h3>
+                                <ul>
+                                    {feedbackData.map((feedback, index) => (
+                                        <li key={index}>{feedback.comment}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
+                        {showPopup2 && (
+                            <div className="popup">
+                                <p>Price has been adjusted!</p>
+                                <button onClick={() => setShowPopup2(false)}>Close</button>
+                            </div>
+                        )}
+                        {error && (
+                            <div className="error-message">
+                                <p>Error: {error}</p>
+                            </div>
+                        )}
+                    </div>
+                </div>
+                <div className="product-review-container">
+                    <center><h2>Reviews</h2></center>
+                    <div className="user-review-box">
+                        <p id="customer-name-box">John Doe: </p>
+                        <p id="customer-review-box">This is where the review will be what if its loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong</p>
+                    </div>
+                    {/* {Each review will need to be in a className='user-review-box' div} */}
                 </div>
             </div>
         );
