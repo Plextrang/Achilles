@@ -4,7 +4,10 @@ export default function SalesReport(){
     const [salesData, setSalesData] = useState([]);
     const [custData, setCustData] = useState([]);
     const [dailyData, setDailyData] = useState([]);
-    const [selectedCategory, setSelectedCategory] = useState('Inventory');
+    const [filteredData, setFilteredData] = useState([]);
+    const [startDate, setStartDate] = useState(null);
+    const [endDate, setEndDate] = useState(null);
+    const [selectedCategory, setSelectedCategory] = useState('Daily');
 
     useEffect(() => {
       async function fetchSalesData() {
@@ -49,16 +52,36 @@ export default function SalesReport(){
       fetchSalesData();
       fetchCustomerData();
       fetchDailyData();
+      fetchFilteredData();
     }, []);
+
+    async function fetchFilteredData() {
+      const defaultStartDate = new Date('2024-04-16');
+      const start = startDate ? startDate : defaultStartDate;
+      const end = endDate ? endDate : new Date();
+      const startParam = start.toISOString();
+      const endParam = end.toISOString();
+      try {
+        const filteredResponse = await fetch(`https://cosc-3380-6au9.vercel.app/api/handlers/history/getFilteredReport/?start=${startParam}&end=${endParam}`);
+        if (!filteredResponse.ok) {
+            throw new Error('Failed to fetch customer data');
+        }
+        const filteredData = await filteredResponse.json();
+        setFilteredData(filteredData);
+      } catch (error) {
+        console.error('Error fetching customer data:', error);
+      }
+    }
   
     function formatTime(dateTime) {
       const date = new Date(dateTime);
-      const hours = date.getHours();
-      const minutes = date.getMinutes();
-      const ampm = hours >= 12 ? 'PM' : 'AM';
-      const formattedHours = hours % 12 || 12; 
-      const formattedMinutes = minutes < 10 ? '0' + minutes : minutes; 
-      return `${formattedHours}:${formattedMinutes} ${ampm}`;
+      const options = {
+        timeZone: 'UTC',
+        hour12: true,
+        hour: 'numeric',
+        minute: '2-digit'
+      };
+      return new Intl.DateTimeFormat('en-US', options).format(date);
     }
 
     function formatPhoneNumber(phoneNumber) {
@@ -78,8 +101,39 @@ export default function SalesReport(){
         </div>
 
         {selectedCategory === 'Daily' && (
-          <div className="data-table">
-            <h2>Daily Transactions</h2>
+          <div>
+            <div className="data-table">
+              <h2>Daily Transactions</h2>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Transaction ID</th>
+                    <th>Time</th>
+                    <th># of Items</th>
+                    <th>Total Cost</th>
+                    <th>User ID</th>
+                    <th>Customer Name</th>
+                    <th>Phone Number</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {dailyData.map(daily => (
+                    <tr key={daily.transaction_id}>
+                      <td>{daily.transaction_id}</td>
+                      <td>{formatTime(daily.date_time)}</td>
+                      <td>{daily.num_of_items}</td>
+                      <td>${daily.total_cost}</td>
+                      <td>{daily.user_id}</td>
+                      <td>{daily.full_name}</td>
+                      <td>{formatPhoneNumber(daily.phone_number)}</td>
+                    </tr>
+                  ))}
+              </tbody>
+              </table>
+            </div>
+
+            <div className="data-table">
+            <h2>Filtered Transactions</h2>
             <table>
               <thead>
                 <tr>
@@ -106,6 +160,7 @@ export default function SalesReport(){
                 ))}
             </tbody>
             </table>
+            </div>
           </div>
         )}
 
