@@ -80,7 +80,7 @@ const handleSearchInputChange = (event) => {
                 <h3 className="card-title">{product.item_name}</h3>
                 <section className="card-reviews">
                   <FaStar />
-                  <span className="total-reviews">4 Reviews</span> {/* Assuming this is a placeholder, you can replace it with product.reviews */}
+                  <span className="total-reviews">{product.stars} Stars</span> {/* Assuming this is a placeholder, you can replace it with product.reviews */}
                 </section>
                 <div className="bag">
                   <FaShoppingBag />
