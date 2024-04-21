@@ -29,6 +29,7 @@ export default function Products() {
       })
       .then(data => {
         setProducts(data);
+        console.log("Data: ", data);
         // Load images dynamically
         const imagesToLoad = {};
         data.forEach(product => {
@@ -78,10 +79,16 @@ const handleSearchInputChange = (event) => {
               <img className="card-img" src={images[product.image_filename]} alt={product.item_name} />
               <div className="card-details">
                 <h3 className="card-title">{product.item_name}</h3>
-                <section className="card-reviews">
-                  <FaStar />
-                  <span className="total-reviews">{product.stars} Stars</span> {/* Assuming this is a placeholder, you can replace it with product.reviews */}
-                </section>
+                  <section className="card-reviews">
+                      <FaStar />
+                      <span className="total-reviews">
+                          {product.stars == null ? (
+                              "No Reviews"
+                          ) : (
+                              `${product.stars} Stars`
+                          )}
+                      </span>
+                  </section>
                 <div className="bag">
                   <FaShoppingBag />
                   <div className="price">${product.price}</div>
