@@ -134,7 +134,7 @@ export default function Register() {
 						<input type="text" className='name-box' id="lname" placeholder='Doe' required />
 					</div>
 				</div>
-				<div className='multi-container'>
+				{/* <div className='multi-container'>
 					<div className="input-group">
 						<label>Phone Number: <span className="required">&#42;</span></label>
 						<input type="text" className="phone-box" id="phone-number" placeholder='No Dashes' maxLength="20" required/>
@@ -147,7 +147,18 @@ export default function Register() {
 						</div>
 					</div>
 					
-				</div>
+				</div> */}
+				<div className="input-group">
+						<label>Phone Number: <span className="required">&#42;</span></label>
+						<input type="text" className="phone-box" id="phone-number" placeholder='No Dashes' maxLength="20" required/>
+					</div>
+					<div className='input-group'>
+						<label>Date of Birth: <span className="required">&#42;</span></label>
+						<div className = "input-dob">
+						<input className="text-box" id='dob-box' type="date" name="Date of Birth" min="1950-01-01" max="2024-3-17"
+							   pattern="\d{4}-\d{2}-\d{2}" title="Format is Year-Month-Day" />
+						</div>
+					</div>
 				<div className='input-group'>
 					<label>Address 1: <span className="required">&#42;</span></label>
 					<input className="text-box" id="add-1" type="text" name="Address 1" placeholder="Street Name/Address" maxLength="50"/>
