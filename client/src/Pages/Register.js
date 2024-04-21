@@ -141,9 +141,12 @@ export default function Register() {
 					</div>
 					<div className='input-group'>
 						<label>Date of Birth: <span className="required">&#42;</span></label>
+						<div className = "input-dob">
 						<input className="text-box" id='dob-box' type="date" name="Date of Birth" min="1950-01-01" max="2024-3-17"
 							   pattern="\d{4}-\d{2}-\d{2}" title="Format is Year-Month-Day" />
+						</div>
 					</div>
+					
 				</div>
 				<div className='input-group'>
 					<label>Address 1: <span className="required">&#42;</span></label>

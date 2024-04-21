@@ -23,6 +23,8 @@
 .multi-container {
     display: flex;
     justify-content: left;
+    padding: 5px; 
+    border-radius: 5px;
 }
 
 .input-group {
@@ -45,6 +47,7 @@
 .input-dob {
   display: flex;
   flex-direction: column;
+  margin-top: 5px;
 }
 
 .input-city {
