@@ -26,8 +26,8 @@ module.exports = async (req, res) => {
     });
     productData = await getRequestBody(req, res);
 
-    const updateProductSql = `UPDATE SHOE_PRODUCT SET price = ? WHERE product_id = ?`;
-    db.query(updateProductSql, [productData.price, productData.product_id], (err, result) => {
+    const updateProductSql = `UPDATE SHOE_PRODUCT SET price = ?, stock = stock + ? WHERE product_id = ?`;
+    db.query(updateProductSql, [productData.price, productData.stock, productData.product_id], (err, result) => {
         if (err) {
             console.error(err);
             res.statusCode = 500;
