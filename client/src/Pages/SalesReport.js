@@ -9,7 +9,6 @@ export default function SalesReport(){
     const [endDate, setEndDate] = useState(null);
     const [active, setActive] = useState(true);
     const [notActive, setNotActive] = useState(true);
-    const [sortMethod, setSortMethod] = useState('unitsSold');
     const [selectedCategory, setSelectedCategory] = useState('Daily');
 
     useEffect(() => {
@@ -27,7 +26,7 @@ export default function SalesReport(){
         }
       }
 
-      fetchSalesData();
+      fetchSalesData('unitsSold');
       fetchCustomerData();
       fetchDailyData();
       fetchFilteredData();
@@ -72,9 +71,9 @@ export default function SalesReport(){
       }
     }
 
-    async function fetchSalesData() {
+    async function fetchSalesData(method) {
       try {
-        const salesResponse = await fetch(`https://cosc-3380-6au9.vercel.app/api/handlers/history/getShoeReport/?method=${sortMethod}`);
+        const salesResponse = await fetch(`https://cosc-3380-6au9.vercel.app/api/handlers/history/getShoeReport/?method=${method}`);
         if (!salesResponse.ok) {
             throw new Error('Failed to fetch sales data');
         }
@@ -267,14 +266,12 @@ export default function SalesReport(){
             <h2>Sales Data</h2>
             <div className="sales-button-row">
               <button type="button" onClick={() => {
-                setSortMethod('unitsSold');
-                fetchSalesData();
+                fetchSalesData('unitsSold');
               }}>
                 Sort by Units
               </button>
               <button type="button" onClick={() => {
-                setSortMethod('totalSales');
-                fetchSalesData();
+                fetchSalesData('totalSales');
               }}>
                 Sort by Total Sales
               </button>
