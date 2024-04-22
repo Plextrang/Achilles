@@ -57,15 +57,35 @@ module.exports = async (req, res) => {
 
         let method_id = 0;
         let totalCost = totalPrice; // alter this line if discounts r added.
-        const insertPaymentSql = `INSERT INTO PAYMENT_METHOD (card_number, cardholder_name, billing_address, security_code, billing_city, bill_state, bill_zip, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
-        db.query(insertPaymentSql, [card_number, cardholder_name, billing_address, security_code, billing_city, bill_state, bill_zip, user_id], (err, paymentResult) => {
+        const checkPaymentMethodSql = `SELECT method_id FROM PAYMENT_METHOD WHERE user_id = ? AND card_number = ?`;
+        db.query(checkPaymentMethodSql, [user_id, card_number], (err, paymentCheckResult) => {
             if (err) {
-                console.error('Error inserting payment method:', err);
+                console.error('Error checking payment method:', err);
                 res.writeHead(500, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify({ error: 'Payment Internal Server Error' }));
+                res.end(JSON.stringify({ error: 'Internal Server Error' }));
                 return;
             }
-            method_id = paymentResult.insertId;
+
+            if (paymentCheckResult.length > 0) {
+                // Payment method already exists, do not insert again
+                method_id = paymentCheckResult[0].method_id;
+                console.log("Payment method already exists for user");
+                // Proceed with the transaction insertion or any other logic
+            } else {
+                // Payment method does not exist, insert it
+                const insertPaymentSql = `INSERT INTO PAYMENT_METHOD (card_number, cardholder_name, billing_address, security_code, billing_city, bill_state, bill_zip, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+                db.query(insertPaymentSql, [card_number, cardholder_name, billing_address, security_code, billing_city, bill_state, bill_zip, user_id], (err, paymentResult) => {
+                    if (err) {
+                        console.error('Error inserting payment method:', err);
+                        res.writeHead(500, { 'Content-Type': 'application/json' });
+                        res.end(JSON.stringify({ error: 'Payment Internal Server Error' }));
+                        return;
+                    }
+                    method_id = paymentResult.insertId;
+                    console.log("Inserted new payment method for user");
+                    // Proceed with the transaction insertion or any other logic
+                });
+            }
 
             console.log("Queried mathod_id is: ", method_id);
             let transactionId = 0;
