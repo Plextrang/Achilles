@@ -127,7 +127,7 @@ export default function ProductInfo() {
             const orderQuantityValue = parseInt(orderQuantity);
             if (!isNaN(orderQuantityValue) && orderQuantityValue > 0) {
                 // Handle ordering logic here
-                product.stock = orderQuantity;
+                product.stock = product.stock + orderQuantityValue;
                 localStorage.setItem('ProductInfo', JSON.stringify(product));
                 handleUpdatePrice();
                 setShowPopup(true);
