@@ -90,7 +90,7 @@ export default function ProductInfo() {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ product_id: product.product_id, price: product.price })
+                body: JSON.stringify({ product_id: product.product_id, price: product.price, stock: product.stock })
             });
             const data = await response.json();
             if (!response.ok) {
@@ -127,6 +127,9 @@ export default function ProductInfo() {
             const orderQuantityValue = parseInt(orderQuantity);
             if (!isNaN(orderQuantityValue) && orderQuantityValue > 0) {
                 // Handle ordering logic here
+                product.stock = orderQuantity;
+                localStorage.setItem('ProductInfo', JSON.stringify(product));
+                handleUpdatePrice();
                 setShowPopup(true);
                 setPopupMessage('Order placed successfully!');
                 setChangesSaved(true);
