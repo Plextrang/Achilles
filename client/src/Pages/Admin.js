@@ -122,9 +122,15 @@ export default function Admin() {
             <div className="card-details">
               <h3 className="card-title">{product.item_name}</h3>
               <section className="card-reviews">
-                <FaStar />
-                <span className="total-reviews">4 Reviews</span> {/* Assuming this is a placeholder, you can replace it with product.reviews */}
-              </section>
+                      <FaStar />
+                      <span className="total-reviews">
+                          {product.stars == null ? (
+                              "No Reviews"
+                          ) : (
+                              `${product.stars} Stars`
+                          )}
+                      </span>
+                  </section>
               <div className="bag">
                 <FaShoppingBag />
                 <div className="price">${product.price}</div>
