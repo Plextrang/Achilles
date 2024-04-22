@@ -25,6 +25,8 @@ module.exports = async (req, res) => {
         console.log('Connected to database');
     });
 
+    const sortMethod = req.query.method === 'unitsSold' ? 'units_sold' : 'total_sales';
+
     const salesQuery = `
     SELECT 
         sp.item_name,
@@ -41,7 +43,7 @@ module.exports = async (req, res) => {
     GROUP BY 
         sp.product_id
     ORDER BY 
-        units_sold DESC;
+        ${sortMethod === 'units_sold' ? 'units_sold' : 'total_sales'} DESC;
     `;
 
     db.query(salesQuery, (err, result) => {
