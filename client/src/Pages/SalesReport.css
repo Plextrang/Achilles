@@ -76,3 +76,8 @@
   .filtered-button-section {
     margin-right: 20px;
   }
+
+  .sales-button-row button {
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }

@@ -12,18 +12,6 @@ export default function SalesReport(){
     const [selectedCategory, setSelectedCategory] = useState('Daily');
 
     useEffect(() => {
-      async function fetchSalesData() {
-        try {
-          const salesResponse = await fetch('https://cosc-3380-6au9.vercel.app/api/handlers/history/getShoeReport/');
-          if (!salesResponse.ok) {
-              throw new Error('Failed to fetch sales data');
-          }
-          const salesData = await salesResponse.json();
-          setSalesData(salesData);
-        } catch (error) {
-          console.error('Error fetching sales data:', error);
-        }
-      }
 
       async function fetchDailyData() {
         try {
@@ -38,7 +26,7 @@ export default function SalesReport(){
         }
       }
 
-      fetchSalesData();
+      fetchSalesData('unitsSold');
       fetchCustomerData();
       fetchDailyData();
       fetchFilteredData();
@@ -83,6 +71,19 @@ export default function SalesReport(){
       }
     }
 
+    async function fetchSalesData(method) {
+      try {
+        const salesResponse = await fetch(`https://cosc-3380-6au9.vercel.app/api/handlers/history/getShoeReport/?method=${method}`);
+        if (!salesResponse.ok) {
+            throw new Error('Failed to fetch sales data');
+        }
+        const salesData = await salesResponse.json();
+        setSalesData(salesData);
+      } catch (error) {
+        console.error('Error fetching sales data:', error);
+      }
+    }
+
     function formatDate(dateTime) {
       let date = new Date(dateTime);
       const options = {
@@ -106,7 +107,7 @@ export default function SalesReport(){
     function formatTime(dateTime) {
       let date = new Date(dateTime);
       const options = {
-        timeZone: 'UTC',
+        timeZone: 'America/Chicago',
         hour12: true,
         hour: 'numeric',
         minute: '2-digit'
@@ -263,6 +264,18 @@ export default function SalesReport(){
         {selectedCategory === 'All' && (
           <div className="data-table">
             <h2>Sales Data</h2>
+            <div className="sales-button-row">
+              <button type="button" onClick={() => {
+                fetchSalesData('unitsSold');
+              }}>
+                Sort by Units
+              </button>
+              <button type="button" onClick={() => {
+                fetchSalesData('totalSales');
+              }}>
+                Sort by Total Sales
+              </button>
+            </div>
             <table>
               <thead>
                 <tr>
