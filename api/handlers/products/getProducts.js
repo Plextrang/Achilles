@@ -24,7 +24,7 @@ module.exports = async (req, res) => {
       console.log('Connected to database');
     });
     // query string to select specific columns from the SHOE_PRODUCT table
-    const sql = 'SELECT product_id, item_name, price, description, color_option, size, image_filename, category_name, stars FROM SHOE_PRODUCT WHERE inactive = 0';
+    const sql = 'SELECT product_id, item_name, price, description, color_option, size, image_filename, category_name, stars, stock FROM SHOE_PRODUCT WHERE inactive = 0';
   
     // executes the SQL query using the 'db' connection
     // sql -> sql that specifies the operation you want to perform on the database

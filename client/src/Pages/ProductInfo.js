@@ -167,6 +167,7 @@ export default function ProductInfo() {
                     <div className="card-details">
                         <h3 className="card-title">{product.item_name}</h3>
                         <div className="card-description">{product.description}</div>
+                        <div className="card-description">{product.stock > 0 ? `There is ${product.stock} in stock.` : "Out of stock"}</div>
                         <div className="card-reviews">
                             <FaStar />
                             <span className="total-reviews">{averageReview.toFixed(1)}/5 &#40;{prodReviews.length} user reviews&#41;</span>
@@ -180,7 +181,7 @@ export default function ProductInfo() {
                             <input type="text" className="quantity-input" value={quantity} readOnly />
                             <button className="quantity-button" onClick={() => setQuantity(quantity + 1)}>+</button>
                         </div>
-                        <button id="add-button" onClick={handleNotLoggedIn}>Add to Cart</button>
+                        <button id="add-button" onClick={handleNotLoggedIn} disabled={product.stock < 1}>Add to Cart</button>
                     </div>
                 </div>
                 <center><h2>- Reviews -</h2></center>
@@ -211,6 +212,7 @@ export default function ProductInfo() {
                     <div className="card-details">
                         <h3 className="card-title">{product.item_name}</h3>
                         <div className="card-description">{product.description}</div>
+                        <div className="card-description">{product.stock > 0 ? `There is ${product.stock} in stock.` : "Out of stock"}</div>
                         <div className="card-reviews">
                             <FaStar />
                             <span className="total-reviews">{averageReview.toFixed(1)}/5 &#40;{prodReviews.length} user reviews&#41;</span>
@@ -224,7 +226,7 @@ export default function ProductInfo() {
                             <input type="text" className="quantity-input" value={quantity} readOnly />
                             <button className="quantity-button" onClick={() => setQuantity(quantity + 1)}>+</button>
                         </div>
-                        <button id="add-button" onClick={handleAddCart}>Add to Cart</button>
+                        <button id="add-button" onClick={handleAddCart} disabled={product.stock < 1}>Add to Cart</button>
                         {feedbackData.length > 0 && (
                             <div className="feedback-container">
                                 <h3>Feedback</h3>
@@ -277,6 +279,7 @@ export default function ProductInfo() {
                     <div className="card-details">
                         <h3 className="card-title">{product.item_name}</h3>
                         <div className="card-description">{product.description}</div>
+                        <div className="card-description">{product.stock > 0 ? `There is ${product.stock} in stock.` : "Out of stock"}</div> 
                         <div className="card-reviews">
                             <FaStar />
                             <span className="total-reviews">{averageReview.toFixed(1)}/5 &#40;{prodReviews.length} user reviews&#41;</span>
