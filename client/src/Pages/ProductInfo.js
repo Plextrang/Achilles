@@ -150,6 +150,7 @@ export default function ProductInfo() {
                 throw new Error(data.error || 'Failed to update product');
             }
             setShowPopup3(false);
+            handleDeletion();
         } 
         catch (error) {
             console.error('Error deleting shoe:', error);
@@ -169,6 +170,10 @@ export default function ProductInfo() {
     const handleNotLoggedIn = () => {
         navigate("/Login");
     };
+
+    const handleDeletion = () => {
+        navigate("/Admin");
+    }
     
     if (!isLoggedIn) {
         return (
