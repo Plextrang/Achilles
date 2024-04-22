@@ -39,7 +39,9 @@ module.exports = async (req, res) => {
     WHERE 
         sp.inactive = 0
     GROUP BY 
-        sp.product_id;
+        sp.product_id
+    ORDER BY 
+        units_sold DESC;
     `;
 
     db.query(salesQuery, (err, result) => {
