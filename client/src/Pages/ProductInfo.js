@@ -138,9 +138,18 @@ export default function ProductInfo() {
 
     const handleDeleteShoe = async (product) => { 
         try {
-            // endpoint/fetch here! no need to mess with popups
-            // product contains most (not all) of the shoe_product's attributes
-            // including product_id :)
+            const response = await fetch('https://cosc-3380-6au9.vercel.app/api/handlers/products/inactiveProduct', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ product_id: product.product_id })
+            });
+            const data = await response.json();
+            if (!response.ok) {
+                throw new Error(data.error || 'Failed to update product');
+            }
+            setShowPopup3(false);
         } 
         catch (error) {
             console.error('Error deleting shoe:', error);
