@@ -107,7 +107,7 @@ export default function SalesReport(){
     function formatTime(dateTime) {
       let date = new Date(dateTime);
       const options = {
-        timeZone: 'UTC',
+        timeZone: 'America/Chicago',
         hour12: true,
         hour: 'numeric',
         minute: '2-digit'
