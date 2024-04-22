@@ -12,6 +12,7 @@ export default function Navbar() {
     const [userType, setType] = useState("");
     const [notifications, setNotifications] = useState([]);
     const [showNotifications, setShowNotifications] = useState(false);
+    const [isLoaded, setLoaded] = useState(false);
 
     useEffect(() => {
         if (localStorage.getItem('userEmail')) {
@@ -22,6 +23,7 @@ export default function Navbar() {
         }
         if(localStorage.getItem('userType') !== undefined)
             setType(localStorage.getItem('userType'));
+        getNotifications();
     }, []);
 
     const handleLogin = () => {
@@ -38,7 +40,15 @@ export default function Navbar() {
                 .then(response => response.json())
                 .then(data => {
                     setNotifications(data);
-                    setShowNotifications(true); // Show the container
+                    if(!isLoaded)
+                    {
+                        setLoaded(true);
+                        setShowNotifications(false);
+                    }
+                    else
+                    {    
+                        setShowNotifications(true); 
+                    }
                 })
                 .catch(error => {
                     console.error('Network response was not ok', error);

@@ -7,6 +7,7 @@ import adidas_gazelle_blue_gold from '../images/adidas_gazelle_blue_gold.jpg';
 import doc_martens_jorge from '../images/doc_martens_jorge.jpg';
 import hk_crocs_clogs from '../images/hk_crocs_clogs.jpg';
 import naruto_crocs_clog from '../images/naruto_crocs_clog.jpg';
+import high_top from '../images/high_top.jpg';
 import "./ProductInfo.css"
 
 const variableMap = {
@@ -15,7 +16,8 @@ const variableMap = {
     'adidas_gazelle_blue_gold': adidas_gazelle_blue_gold,
     'doc_martens_jorge': doc_martens_jorge,
     'hk_crocs_clogs': hk_crocs_clogs,
-    'naruto_crocs_clog': naruto_crocs_clog
+    'naruto_crocs_clog': naruto_crocs_clog,
+    'high_top' : high_top
 };
 
 export default function ProductInfo() {
