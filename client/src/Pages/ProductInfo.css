@@ -67,6 +67,10 @@
     transform: scale(1.05); /* Subtle grow effect on hover */
 }
 
+#add-button:disabled {
+    background-color: #474747;
+}
+
 label {
     font-size: 18px;
     margin-right: 10px;
