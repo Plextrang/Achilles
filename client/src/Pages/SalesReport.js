@@ -9,21 +9,10 @@ export default function SalesReport(){
     const [endDate, setEndDate] = useState(null);
     const [active, setActive] = useState(true);
     const [notActive, setNotActive] = useState(true);
+    const [sortMethod, setSortMethod] = useState('unitsSold');
     const [selectedCategory, setSelectedCategory] = useState('Daily');
 
     useEffect(() => {
-      async function fetchSalesData() {
-        try {
-          const salesResponse = await fetch('https://cosc-3380-6au9.vercel.app/api/handlers/history/getShoeReport/');
-          if (!salesResponse.ok) {
-              throw new Error('Failed to fetch sales data');
-          }
-          const salesData = await salesResponse.json();
-          setSalesData(salesData);
-        } catch (error) {
-          console.error('Error fetching sales data:', error);
-        }
-      }
 
       async function fetchDailyData() {
         try {
@@ -80,6 +69,19 @@ export default function SalesReport(){
         setFilteredData(filteredData);
       } catch (error) {
         console.error('Error fetching customer data:', error);
+      }
+    }
+
+    async function fetchSalesData() {
+      try {
+        const salesResponse = await fetch(`https://cosc-3380-6au9.vercel.app/api/handlers/history/getShoeReport/?method=${sortMethod}`);
+        if (!salesResponse.ok) {
+            throw new Error('Failed to fetch sales data');
+        }
+        const salesData = await salesResponse.json();
+        setSalesData(salesData);
+      } catch (error) {
+        console.error('Error fetching sales data:', error);
       }
     }
 
@@ -263,6 +265,20 @@ export default function SalesReport(){
         {selectedCategory === 'All' && (
           <div className="data-table">
             <h2>Sales Data</h2>
+            <div className="sales-button-row">
+              <button type="button" onClick={() => {
+                setSortMethod('unitsSold');
+                fetchSalesData();
+              }}>
+                Sort by Units
+              </button>
+              <button type="button" onClick={() => {
+                setSortMethod('totalSales');
+                fetchSalesData();
+              }}>
+                Sort by Total Sales
+              </button>
+            </div>
             <table>
               <thead>
                 <tr>
