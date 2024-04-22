@@ -27,24 +27,46 @@ module.exports = async (req, res) => {
 
     const sortMethod = req.query.method === 'unitsSold' ? 'units_sold' : 'total_sales';
 
-    const salesQuery = `
-    SELECT 
-        sp.item_name,
-        sp.product_id,
-        SUM(ti.quantity) AS units_sold,
-        SUM(ti.quantity * sp.price) AS total_sales,
-        sp.stock
-    FROM 
-        shoe_product sp
-    LEFT JOIN 
-        transaction_item ti ON sp.product_id = ti.product_id
-    WHERE 
-        sp.inactive = 0
-    GROUP BY 
-        sp.product_id
-    ORDER BY 
-        ${sortMethod === 'units_sold' ? 'units_sold' : 'total_sales'} DESC;
-    `;
+    let salesQuery = ``;
+
+    if(sortMethod === 'units_sold') {
+        salesQuery = `SELECT 
+                        sp.item_name,
+                        sp.product_id,
+                        SUM(ti.quantity) AS units_sold,
+                        SUM(ti.quantity * sp.price) AS total_sales,
+                        sp.stock
+                    FROM 
+                        shoe_product sp
+                    LEFT JOIN 
+                        transaction_item ti ON sp.product_id = ti.product_id
+                    WHERE 
+                        sp.inactive = 0
+                    GROUP BY 
+                        sp.product_id
+                    ORDER BY 
+                        units_sold DESC;
+                    `;
+    }
+    else {
+        salesQuery = `SELECT 
+                        sp.item_name,
+                        sp.product_id,
+                        SUM(ti.quantity) AS units_sold,
+                        SUM(ti.quantity * sp.price) AS total_sales,
+                        sp.stock
+                    FROM 
+                        shoe_product sp
+                    LEFT JOIN 
+                        transaction_item ti ON sp.product_id = ti.product_id
+                    WHERE 
+                        sp.inactive = 0
+                    GROUP BY 
+                        sp.product_id
+                    ORDER BY 
+                        total_sales DESC;
+                    `;
+    }
 
     db.query(salesQuery, (err, result) => {
         if (err) {
